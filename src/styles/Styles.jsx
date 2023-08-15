@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const global = StyleSheet.create({
+export const theme = StyleSheet.create({
     container: {
         flex: 1,
         paddingVertical: 10,
@@ -219,7 +219,7 @@ const global = StyleSheet.create({
     }
 })
 
-const modal = StyleSheet.create({
+export const modal = StyleSheet.create({
     container: {
         flex: 1,
     },
@@ -294,6 +294,4 @@ const modal = StyleSheet.create({
     },
 });
 
-const placeHolderColorTextInput = "#161c2660"
-
-export { global, modal, placeHolderColorTextInput };
+export const placeHolderColorTextInput = "#161c2660"

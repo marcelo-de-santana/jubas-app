@@ -6,7 +6,7 @@ function HomeScreen({navigation}: PropsNativeStack) {
   return (
     <Screen>
       <ScrollView>
-        {pageData.data?.map(item => (
+        {/* {pageData.data?.map(item => (
           <View key={item.date}>
             <Text style={global.textHeader}>Dia: {item.date}</Text>
             <View style={global.blueBoxItems}>
@@ -51,7 +51,7 @@ function HomeScreen({navigation}: PropsNativeStack) {
               })}
             </View>
           </View>
-        ))}
+        ))} */}
       </ScrollView>
     </Screen>
   );
