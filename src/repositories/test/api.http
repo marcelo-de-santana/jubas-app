@@ -5,9 +5,21 @@ Content-Type: application/json
     "email": "gerente@jubas.com",
     "password": "12345678"
 }
+
+###
+POST http://127.0.0.1:8080/
+Content-Type: application/json
+
+{
+    "email": "cliente@teste.com",
+    "password": "12345678",
+    "userPermission":{
+        "id": 2 // 1, 2 ou 3
+    }
+
+}
 ###
 
 GET http://127.0.0.1:8080/login
-
 
 ###
