@@ -1,6 +1,8 @@
-import { Screen } from '@components';
+import {Screen, TextAlertError} from '@components';
 import {placeHolderColorTextInput, theme} from '@styles';
+import {useFormik} from 'formik';
 import {
+  Alert,
   Keyboard,
   Pressable,
   ScrollView,
@@ -9,35 +11,34 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {createUserFormSchema} from '@utils';
+import {createUserClient} from '@repositories';
+import {PropsNativeStack} from '@routes';
 
-export function SignUpScreen() {
+export function SignUpScreen({navigation}: PropsNativeStack) {
+  const {handleChange, handleSubmit, values, errors} = useFormik({
+    validationSchema: createUserFormSchema,
+    initialValues: {
+      email: '',
+      password: '',
+      checkPass: '',
+    },
+    onSubmit: () => sendUserForm(),
+  });
+
+  async function sendUserForm() {
+    Alert.alert('', await createUserClient(values));
+    navigation.goBack();
+  }
+
+  function handleTextInput(key: string, value: string) {
+    handleChange({target: {name: [key], value: value}});
+  }
+
   return (
     <Screen>
-      <ScrollView>
+      <View style={{flex: 1}}>
         <Pressable style={theme.horizontalMargins} onPress={Keyboard.dismiss}>
-          <Text style={theme.label}>CPF</Text>
-          <TextInput
-            style={theme.input}
-            keyboardType="decimal-pad"
-            placeholder="000.000.000-00"
-            maxLength={14}
-            editable={false}
-            placeholderTextColor={placeHolderColorTextInput}
-            // value={values.CPF}
-          />
-
-          <Text style={theme.label}>Nome Completo</Text>
-          <TextInput
-            style={theme.input}
-            keyboardType="default"
-            placeholder="Juba de Leão"
-            maxLength={50}
-            placeholderTextColor={placeHolderColorTextInput}
-            // // value={values.NAME}
-            // onChangeText={text => handleTextInput('NAME', text)}
-          />
-          {/* {errors.NAME && <TextAlert error={errors.NAME} />} */}
-
           <Text style={theme.label}>E-mail</Text>
           <TextInput
             style={theme.input}
@@ -45,10 +46,10 @@ export function SignUpScreen() {
             placeholder="jubasdeleao@exemplo.com"
             placeholderTextColor={placeHolderColorTextInput}
             maxLength={50}
-            // value={values.EMAIL}
-            // onChangeText={text => handleTextInput('EMAIL', text)}
+            value={values.email}
+            onChangeText={text => handleTextInput('email', text)}
           />
-          {/* {errors.EMAIL && <TextAlert error={errors.EMAIL} />} */}
+          {errors.email && <TextAlertError errorMessage={errors.email} />}
 
           <Text style={theme.label}>Senha</Text>
           <TextInput
@@ -58,9 +59,9 @@ export function SignUpScreen() {
             placeholderTextColor={placeHolderColorTextInput}
             maxLength={20}
             secureTextEntry={true}
-            // onChangeText={handleChange('PASSWORD')}
+            onChangeText={handleChange('password')}
           />
-          {/* {errors.PASSWORD && <TextAlert error={errors.PASSWORD} />} */}
+          {errors.password && <TextAlertError errorMessage={errors.password} />}
 
           <Text style={theme.label}>Confirmar Senha</Text>
           <TextInput
@@ -70,19 +71,18 @@ export function SignUpScreen() {
             placeholderTextColor={placeHolderColorTextInput}
             maxLength={20}
             secureTextEntry={true}
-            // onChangeText={handleChange('CHECKPASS')}
+            onChangeText={handleChange('checkPass')}
           />
-          {/* {errors.CHECKPASS && <TextAlert error={errors.CHECKPASS} />} */}
-          <View style={{marginTop: 30}}>
-            <TouchableOpacity
-              style={theme.button}
-              //   onPress={() => handleSubmit()}
-            >
-              <Text style={theme.textButton}>Confirmar</Text>
-            </TouchableOpacity>
-          </View>
+          {errors.checkPass && (
+            <TextAlertError errorMessage={errors.checkPass} />
+          )}
         </Pressable>
-      </ScrollView>
+      </View>
+      <View style={{marginTop: 30}}>
+        <TouchableOpacity style={theme.button} onPress={() => handleSubmit()}>
+          <Text style={theme.textButton}>Cadastrar-me</Text>
+        </TouchableOpacity>
+      </View>
     </Screen>
   );
 }

@@ -1,1 +1,1 @@
-export type AuthUserType = {email: string; password: string};
+export type UserType = {email: string; password: string};

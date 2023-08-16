@@ -1,2 +1,2 @@
-export * from "./authUserRepo";
+export * from "./UserRepo/authUserRepo";
 export * from "./repoTypes";

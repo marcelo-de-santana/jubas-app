@@ -14,7 +14,7 @@ export const theme = StyleSheet.create({
         marginBottom: 10,
     },
     horizontalMargins: {
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
     },
     logo: {
         backgroundColor: "#CCCED9",
