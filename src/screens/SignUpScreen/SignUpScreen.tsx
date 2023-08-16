@@ -79,7 +79,7 @@ export function SignUpScreen({navigation}: PropsNativeStack) {
         </Pressable>
       </View>
       <View style={{marginTop: 30}}>
-        <TouchableOpacity style={theme.button} onPress={() => handleSubmit()}>
+        <TouchableOpacity style={theme.blueButton} onPress={() => handleSubmit()}>
           <Text style={theme.textButton}>Cadastrar-me</Text>
         </TouchableOpacity>
       </View>

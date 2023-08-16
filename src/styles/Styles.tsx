@@ -166,7 +166,7 @@ export const theme = StyleSheet.create({
         color: '#3c4659',
         marginBottom: 10,
     },
-    button: {
+    blueButton: {
         backgroundColor: "#3c4659",
         borderRadius: 6,
         height: 40,
@@ -249,7 +249,7 @@ export const modal = StyleSheet.create({
         height: 40,
         paddingLeft: 10,
     },
-    button: {
+    blueButton: {
         backgroundColor: "#3C4659",
         borderRadius: 6,
         height: 40,

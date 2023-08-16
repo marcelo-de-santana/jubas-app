@@ -59,7 +59,7 @@ export function LoginScreen({navigation}: PropsNativeStack) {
 
           <View style={{paddingTop: 15}}>
             <TouchableOpacity
-              style={theme.button}
+              style={theme.blueButton}
               onPress={() => handleSubmit()}
             >
               <Text style={theme.textButton}>Entrar</Text>
