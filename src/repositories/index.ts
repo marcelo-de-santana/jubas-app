@@ -1,2 +1,3 @@
-export * from "./UserRepo/authUserRepo";
-export * from "./repoTypes";
+export * from './UserRepo/UserRepo';
+export * from './test/fakeApi';
+export * from './repoTypes';

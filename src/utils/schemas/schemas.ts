@@ -1,12 +1,11 @@
 import * as Yup from 'yup';
 import {vCpf, vEmail} from '../validations/regex';
 
-export function authFormSchema() {
+export function loginFormSchema() {
   return Yup.object().shape({
-    cpf: Yup.string()
-      .matches(vCpf, '*Campo obrigatório')
-      .min(14, '*Campo obrigatório')
-      .max(14, '*Campo obrigatório')
+    email: Yup.string()
+      .email('*Campo obrigatório')
+      .max(50, ({max}) => `Máximo de ${max} caracteres`)
       .required('*Campo obrigatório'),
     password: Yup.string()
       .min(8, ({min}) => `Mínimo de ${min} caracteres`)

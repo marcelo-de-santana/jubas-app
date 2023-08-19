@@ -1,3 +1,3 @@
 export * from "./Routes";
-export * from "./NativeStackNavigation";
-export * from "./typesRoute/TypeNativeStack";
+export * from "./AppStack";
+export * from "./AuthStack";

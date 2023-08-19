@@ -1,8 +1,8 @@
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {Screen} from '@components';
-import {PropsNativeStack} from '@routes';
+import { AuthStackParamList } from '@routes';
 
-function HomeScreen({navigation}: PropsNativeStack) {
+function HomeScreen() {
   return (
     <Screen>
       <ScrollView>

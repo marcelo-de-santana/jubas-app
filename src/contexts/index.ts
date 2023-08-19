@@ -1,1 +1,1 @@
-export * from "./ClientContext/ClientContext";
+export * from "./AuthContext/AuthContext";

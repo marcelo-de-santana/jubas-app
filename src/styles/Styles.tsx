@@ -15,6 +15,7 @@ export const theme = StyleSheet.create({
     },
     horizontalMargins: {
         paddingHorizontal: 20,
+        flex: 1
     },
     logo: {
         backgroundColor: "#CCCED9",
@@ -208,7 +209,7 @@ export const theme = StyleSheet.create({
         paddingVertical:10
     },
     boxFooter: {
-        height: 230,
+        flex:1,
         marginVertical: 20
     },
     footerBottom: {

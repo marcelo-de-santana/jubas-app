@@ -1,4 +1,3 @@
-import {global} from '@styles';
 import {Alert, Text, TouchableOpacity, View} from 'react-native';
 
 function Menu(navigation: any) {

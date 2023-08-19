@@ -1,5 +1,7 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NativeStackParamList} from './typesRoute/TypeNativeStack';
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import {
   LoginScreen,
   HomeScreen,
@@ -7,9 +9,18 @@ import {
   RecoveryPasswordScreen,
 } from '@screens';
 
-const NativeStack = createNativeStackNavigator<NativeStackParamList>();
+export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
 
-export function NativeStackNavigation() {
+export type AuthStackParamList = {
+  HomeScreen: undefined;
+  LoginScreen: undefined;
+  SignUpScreen: undefined;
+  RecoveryPasswordScreen: undefined;
+};
+
+const NativeStack = createNativeStackNavigator<AuthStackParamList>();
+
+export function AuthStack() {
   return (
     <NativeStack.Navigator
       screenOptions={{
