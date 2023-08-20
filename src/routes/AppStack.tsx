@@ -1,16 +1,23 @@
-import {NativeStackScreenProps, createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
-  HomeScreen,
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
+import {HomeScreen} from '@screens';
+import {EmployeeScreen} from '@screens';
 
-} from '@screens';
+export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
 
-export type NativeStackProps = NativeStackScreenProps<NativeStackParamList>;
-
-export type NativeStackParamList = {
+export type AppStackParamList = {
+  EmployeeScreen: undefined;
   HomeScreen: undefined;
+  MyAccount: undefined;
+  ScheduleManagement: undefined;
+  ServiceBookScreens: undefined;
+  ServiceCatalogScreens: undefined;
+  UsersScreens: undefined;
 };
 
-const NativeStack = createNativeStackNavigator<NativeStackParamList>();
+const NativeStack = createNativeStackNavigator<AppStackParamList>();
 
 export function AppStack() {
   return (
@@ -24,6 +31,7 @@ export function AppStack() {
       }}
       initialRouteName="HomeScreen">
       <NativeStack.Screen name="HomeScreen" component={HomeScreen} />
+      <NativeStack.Screen name="EmployeeScreen" component={EmployeeScreen} />
     </NativeStack.Navigator>
   );
 }
