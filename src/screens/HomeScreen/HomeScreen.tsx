@@ -1,6 +1,5 @@
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {Screen} from '@components';
-import { AuthStackParamList } from '@routes';
 
 function HomeScreen() {
   return (

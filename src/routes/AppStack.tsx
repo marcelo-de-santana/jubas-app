@@ -1,18 +1,13 @@
 import {NativeStackScreenProps, createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
-  LoginScreen,
   HomeScreen,
-  SignUpScreen,
-  RecoveryPasswordScreen,
+
 } from '@screens';
 
 export type NativeStackProps = NativeStackScreenProps<NativeStackParamList>;
 
 export type NativeStackParamList = {
   HomeScreen: undefined;
-  LoginScreen: undefined;
-  SignUpScreen: undefined;
-  RecoveryPasswordScreen: undefined;
 };
 
 const NativeStack = createNativeStackNavigator<NativeStackParamList>();
@@ -27,18 +22,8 @@ export function AppStack() {
         headerTintColor: '#fff',
         headerShown: false,
       }}
-      initialRouteName="RecoveryPasswordScreen">
-      <NativeStack.Screen name="LoginScreen" component={LoginScreen} />
+      initialRouteName="HomeScreen">
       <NativeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <NativeStack.Screen
-        name="RecoveryPasswordScreen"
-        component={RecoveryPasswordScreen}
-      />
-      <NativeStack.Screen
-        name="SignUpScreen"
-        component={SignUpScreen}
-        options={{headerShown: true, headerTitle: 'Cadastre-se'}}
-      />
     </NativeStack.Navigator>
   );
 }
