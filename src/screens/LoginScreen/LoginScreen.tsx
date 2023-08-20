@@ -33,9 +33,9 @@ export function LoginScreen({navigation}: AuthStackProps) {
       password: values.password,
     });
     {
-      response
-        ? navigation.navigate('RecoveryPasswordScreen')
-        : Alert.alert('', 'Usuário e/ou Senha Incorreto(s)!');
+      if (response === false) {
+        Alert.alert('', 'Usuário e/ou Senha Incorreto(s)!');
+      }
     }
   }
 

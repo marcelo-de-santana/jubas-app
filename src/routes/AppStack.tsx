@@ -27,7 +27,7 @@ export function AppStack() {
         headerTintColor: '#fff',
         headerShown: false,
       }}
-      initialRouteName="LoginScreen">
+      initialRouteName="RecoveryPasswordScreen">
       <NativeStack.Screen name="LoginScreen" component={LoginScreen} />
       <NativeStack.Screen name="HomeScreen" component={HomeScreen} />
       <NativeStack.Screen

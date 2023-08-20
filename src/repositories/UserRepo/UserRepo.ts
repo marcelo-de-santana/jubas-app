@@ -3,7 +3,7 @@ import {UserType} from '../repoTypes';
 
 const PATH = '';
 
-export async function authUser(userData: UserType){
+export async function authUser(userData: UserType) {
   try {
     return await api.post('login', userData);
   } catch (error) {

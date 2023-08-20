@@ -1,4 +1,5 @@
 import {UserType, authUser, authUserFake} from '@repositories';
+import {AxiosError} from 'axios';
 import {createContext, useContext, useState} from 'react';
 
 type AuthContextProviderProps = {
@@ -29,10 +30,14 @@ export function AuthContextProvider({children}: AuthContextProviderProps) {
 
   async function signIn(userData: UserType) {
     try {
-      setUser(await authUser(userData));
-      return true;
+      const response = await authUserFake(userData);
+      setUser(response.data);
+      setIsAuthenticated(true);
     } catch (error) {
-      return false;
+      if (error instanceof AxiosError) {
+        console.log(error);
+        return false;
+      }
     }
   }
 
