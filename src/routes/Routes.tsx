@@ -8,7 +8,7 @@ export function Routes() {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <AppStack /> : <AuthStack />}
+      {!isAuthenticated ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
