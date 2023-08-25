@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import {theme, modal} from '@styles';
 import {nameMask} from '@utils';
-import {createBarber} from '@repositories';
+import {createBarberRepo} from '@repositories';
 
-type ModalParamsType = {
+export type ModalParamsType = {
   modalParams: {
     visible: boolean;
     data: {
       name: string;
-      password: string;
+      email: string;
     };
   };
   setModalParams: React.Dispatch<
@@ -24,7 +24,7 @@ type ModalParamsType = {
       visible: boolean;
       data: {
         name: string;
-        password: string;
+        email: string;
       };
     }>
   >;
@@ -177,26 +177,34 @@ export function ModalRegisterEmployee({
 
   async function registerBarber() {
     const {data} = modalParams;
-    try {
-      const response = await createBarber(data);
-      Alert.alert('', response.data);
-      closeModal();
-    } catch (error) {
-      Alert.alert('', 'Ocorreu um erro');
-    }
+    await createBarberRepo({
+      name: data.name,
+      user: {
+        id: data.id,
+        email: data.email,
+      },
+    });
+    closeModal();
   }
 
   return (
     <Modal
       visible={modalParams.visible}
       animationType="fade"
-      transparent={false}>
+      transparent={true}>
       <View style={modal.container}>
         <Pressable style={modal.pressable} onPress={closeModal} />
         <View style={modal.boxItems}>
           <View style={modal.boxForm}>
-            <Text style={theme.textHeader}>Nome</Text>
+            <Text style={theme.textHeader}>E-mail</Text>
+            <TextInput
+              autoCapitalize="words"
+              style={modal.input}
+              value={modalParams.data.email}
+              onChangeText={text => handleTextInput('email', text)}
+            />
 
+            <Text style={theme.textHeader}>Nome</Text>
             <TextInput
               autoCapitalize="words"
               style={modal.input}
@@ -204,15 +212,6 @@ export function ModalRegisterEmployee({
               onChangeText={text => handleTextInput('name', nameMask(text))}
             />
 
-            <Text style={theme.textHeader}>Senha</Text>
-            <TextInput
-              autoCapitalize="none"
-              style={modal.input}
-              secureTextEntry={true}
-              maxLength={20}
-              value={modalParams.data.password}
-              onChangeText={text => handleTextInput('password', text)}
-            />
             <TouchableOpacity style={modal.blueButton} onPress={registerBarber}>
               <Text style={modal.textButton}>Cadastrar</Text>
             </TouchableOpacity>
