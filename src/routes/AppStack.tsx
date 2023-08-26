@@ -2,7 +2,7 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {HomeScreen} from '@screens';
+import {HomeScreen, UsersScreen} from '@screens';
 import {EmployeeScreen} from '@screens';
 
 export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
@@ -24,14 +24,21 @@ export function AppStack() {
     <NativeStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3C4659',
+          backgroundColor: '#f2f2f2',
         },
-        headerTintColor: '#fff',
+        headerShadowVisible: false,
+        headerTitleAlign: 'center',
+        headerTintColor: '#3C4659',
         headerShown: false,
       }}
       initialRouteName="HomeScreen">
       <NativeStack.Screen name="HomeScreen" component={HomeScreen} />
       <NativeStack.Screen name="EmployeeScreen" component={EmployeeScreen} />
+      <NativeStack.Screen
+        name="UsersScreens"
+        component={UsersScreen}
+        options={{title: 'Usuários', headerShown: true}}
+      />
     </NativeStack.Navigator>
   );
 }

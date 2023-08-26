@@ -1,5 +1,6 @@
 import {api} from '@services';
-import {UserType} from '../repoTypes';
+import {MinimalUserResponseDTO, UserType} from '../repoTypes';
+import {DefaultAlert} from '@components';
 
 const PATH = '';
 
@@ -26,5 +27,31 @@ export async function createUserClient(userData: UserType) {
     return 'Usuário já cadastrado!';
   } catch (error) {
     console.log(`Ocorreu um erro ${error}`);
+  }
+}
+
+export async function getAllUsersRepo() {
+  try {
+    const response = await api.get('all-users');
+    return response.data;
+  } catch (error) {
+    DefaultAlert();
+  }
+}
+
+export async function createNewUserRepo(
+  email: string,
+  password: string,
+  userPermissionId: number,
+) {
+  try {
+    const response = await api.post(PATH, {
+      email: email,
+      password: password,
+      userPermission: {id: userPermissionId},
+    });
+    return response.data.email;
+  } catch (error) {
+    DefaultAlert();
   }
 }

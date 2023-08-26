@@ -1,5 +1,15 @@
 export type UserType = {email: string; password: string};
 
+export type MinimalUserResponseDTO = {
+  id: string;
+  email: string;
+  userPermission: {
+    id: number;
+    type: string;
+  };
+};
+
+
 export type BarberResponseDTO = {
   id: string;
   name: string;
