@@ -1,6 +1,6 @@
 import {api} from '@services';
 import {MinimalUserResponseDTO, UserType} from '../repoTypes';
-import {DefaultAlert} from '@components';
+import {SuccessAlert, DefaultErroAlert} from '@components';
 
 const PATH = '';
 
@@ -35,11 +35,11 @@ export async function getAllUsersRepo() {
     const response = await api.get('all-users');
     return response.data;
   } catch (error) {
-    DefaultAlert();
+    DefaultErroAlert();
   }
 }
 
-export async function createNewUserRepo(
+export async function saveUserRepo(
   email: string,
   password: string,
   userPermissionId: number,
@@ -50,8 +50,9 @@ export async function createNewUserRepo(
       password: password,
       userPermission: {id: userPermissionId},
     });
-    return response.data.email;
+
+    SuccessAlert(`${response.data.email} gravado com sucesso!`);
   } catch (error) {
-    DefaultAlert();
+    DefaultErroAlert();
   }
 }

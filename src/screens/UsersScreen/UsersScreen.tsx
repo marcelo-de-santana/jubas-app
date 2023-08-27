@@ -1,55 +1,65 @@
 import {LoadingScreen, Screen} from '@components';
 import {MinimalUserResponseDTO, getAllUsersRepo} from '@repositories';
-import {theme} from '@styles';
 import {useEffect, useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {ModalCreateUser} from './components/ModalCreateUser';
+import {ModalScreen} from './components/ModalScreen';
+import {UserList} from './components/UserList';
+import {Form} from './components/Form';
+import {theme} from '@styles';
 
 export function UsersScreen() {
-  const [loading, setLoading] = useState(true);
+  const [createModalIsVisible, setCreateModalIsVisible] = useState(false);
+  const [alterModalIsVisible, setAlterModalIsVisible] = useState(false);
 
-  const [users, setUsers] = useState<MinimalUserResponseDTO[]>([]);
-  useEffect(() => {
-    setTimeout(() => searchUsers(), 2000);
-  }, []);
+  const [modalData, setModalData] = useState<MinimalUserResponseDTO>({
+    id: '',
+    email: '',
+    password: '',
+    userPermission: {
+      id: 3,
+      type: '',
+    },
+  });
 
-  async function searchUsers() {
-    const response = await getAllUsersRepo();
-    setUsers(response);
-    setLoading(false);
+  function handleCreateModalVisibility() {
+    setCreateModalIsVisible(!createModalIsVisible);
   }
 
-  if (loading) {
-    return <LoadingScreen />;
+  function handleAlterModalVisibility() {
+    setAlterModalIsVisible(!alterModalIsVisible);
+  }
+
+  function handleFormData(key: string, value: string) {
+    setModalData(prev => ({...prev, [key]: value}));
+  }
+
+  function openModalAlterUser(userData: MinimalUserResponseDTO) {
+    setModalData({...userData});
+    handleAlterModalVisibility();
   }
 
   return (
     <Screen>
-      <ScrollView>
-        {users ? (
-          users.map(item => {
-            const {id, email, userPermission} = item;
-            return (
-              <View key={id} style={theme.blueBoxItems}>
-                <TouchableOpacity style={theme.greyBoxItemsFlex}>
-                  <Text style={theme.darkBlueTextSmall}>{email}</Text>
-                  <Text style={theme.darkBlueTextSmall}>
-                    {userPermission.type}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            );
-          })
-        ) : (
-          <>
-            <Text style={theme.blackTextLargeCenter}>Lista Vazia</Text>
-          </>
-        )}
-      </ScrollView>
+      <UserList openModalAlterUser={openModalAlterUser} />
+      <>
+        <TouchableOpacity
+          style={theme.blueButton}
+          onPress={handleCreateModalVisibility}>
+          <Text style={theme.textButton}>Cadastrar</Text>
+        </TouchableOpacity>
+      </>
 
-    
+      <ModalScreen
+        handleVisibility={handleAlterModalVisibility}
+        visible={alterModalIsVisible}>
+        <Form formData={modalData} handleFormData={handleFormData} />
+      </ModalScreen>
 
-      <ModalCreateUser/>
+      <ModalScreen
+        handleVisibility={handleCreateModalVisibility}
+        visible={createModalIsVisible}>
+        <Form formData={modalData} handleFormData={handleFormData} />
+      </ModalScreen>
     </Screen>
   );
 }
