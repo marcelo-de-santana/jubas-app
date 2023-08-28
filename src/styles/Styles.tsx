@@ -10,6 +10,10 @@ export const theme = StyleSheet.create({
   containerMiddle: {
     height: '50%',
   },
+  containerJustifyCenter: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   boxHeader: {
     marginBottom: 10,
   },
@@ -262,7 +266,7 @@ export const modal = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     marginTop: 5,
-    width: "45%"
+    width: '45%',
   },
   whiteButton: {
     backgroundColor: '#FFF',
@@ -277,7 +281,7 @@ export const modal = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     marginVertical: 5,
-    width: "45%"
+    width: '45%',
   },
   redButton: {
     backgroundColor: 'red',
@@ -292,7 +296,7 @@ export const modal = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     marginTop: 5,
-    width:"45%"
+    width: '45%',
   },
   whiteTextButton: {
     textAlign: 'center',

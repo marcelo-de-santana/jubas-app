@@ -1,5 +1,5 @@
 import {api} from '@services';
-import {MinimalUserResponseDTO, UserType} from '../repoTypes';
+import {MinimalUserResponseDTO, UserType} from './UserRepoTypes';
 import {SuccessAlert, DefaultErroAlert} from '@components';
 
 const PATH = '';
@@ -50,7 +50,7 @@ export async function saveUserRepo(
       password: password,
       userPermission: {id: userPermissionId},
     });
-
+    console.log(response.data.email);
     SuccessAlert(`${response.data.email} gravado com sucesso!`);
   } catch (error) {
     DefaultErroAlert();

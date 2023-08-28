@@ -5,5 +5,18 @@ export function DefaultErroAlert() {
 }
 
 export function SuccessAlert(message: string) {
-  Alert.alert('', 'gravado com sucesso!');
+  Alert.alert('', message);
+}
+
+export function DecisionAlert({onPress}: {onPress: () => void}) {
+  Alert.alert('', 'Deseja prosseguir?', [
+    {
+      style: 'cancel',
+      text: 'CANCELAR',
+    },
+    {
+      text: 'SIM',
+      onPress: onPress,
+    },
+  ]);
 }

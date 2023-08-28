@@ -1,27 +1,30 @@
-import {LoadingScreen, Screen} from '@components';
-import {MinimalUserResponseDTO, getAllUsersRepo} from '@repositories';
-import {useEffect, useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {ModalScreen} from './components/ModalScreen';
+import {DarkBlueButton, Screen} from '@components';
+import {MinimalUserResponseDTO} from '@repositories';
+import {useState} from 'react';
+import {ModalScreen} from '@components';
 import {UserList} from './components/UserList';
 import {Form} from './components/Form';
-import {theme} from '@styles';
 
 export function UsersScreen() {
   const [createModalIsVisible, setCreateModalIsVisible] = useState(false);
   const [alterModalIsVisible, setAlterModalIsVisible] = useState(false);
 
   const [modalData, setModalData] = useState<MinimalUserResponseDTO>({
-    id: '',
     email: '',
     password: '',
     userPermission: {
       id: 3,
-      type: '',
     },
   });
 
   function handleCreateModalVisibility() {
+    setModalData({
+      email: '',
+      password: '',
+      userPermission: {
+        id: 3,
+      },
+    });
     setCreateModalIsVisible(!createModalIsVisible);
   }
 
@@ -41,13 +44,7 @@ export function UsersScreen() {
   return (
     <Screen>
       <UserList openModalAlterUser={openModalAlterUser} />
-      <>
-        <TouchableOpacity
-          style={theme.blueButton}
-          onPress={handleCreateModalVisibility}>
-          <Text style={theme.textButton}>Cadastrar</Text>
-        </TouchableOpacity>
-      </>
+      <DarkBlueButton onPress={handleCreateModalVisibility} title="Cadastrar" />
 
       <ModalScreen
         handleVisibility={handleAlterModalVisibility}

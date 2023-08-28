@@ -1,4 +1,5 @@
 export * from './UserRepo/UserRepo';
-export * from './test/fakeApi';
-export * from './repoTypes';
+export * from './UserRepo/UserRepoTypes';
 export * from './EmployeeRepo/EmployeeRepo';
+export * from './EmployeeRepo/EmployeeRepoType';
+export * from './test/fakeApi';

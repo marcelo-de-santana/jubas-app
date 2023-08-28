@@ -1,14 +1,8 @@
+import {DarkBlueButton, DecisionAlert} from '@components';
 import {MinimalUserResponseDTO, saveUserRepo} from '@repositories';
 import {modal, placeHolderColorTextInput} from '@styles';
 import {useState} from 'react';
-import {
-  Alert,
-  Switch,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Switch, Text, TextInput, View} from 'react-native';
 
 export type ModalUserProps = {
   children?: React.JSX.Element;
@@ -23,16 +17,7 @@ export function Form({formData, handleFormData}: ModalUserProps) {
   );
 
   function confirmSend() {
-    Alert.alert('', 'Deseja prosseguir?', [
-      {
-        style: 'cancel',
-        text: 'CANCELAR',
-      },
-      {
-        text: 'SIM',
-        onPress: sendForm,
-      },
-    ]);
+    DecisionAlert({onPress: sendForm});
 
     async function sendForm() {
       await saveUserRepo(
@@ -65,7 +50,7 @@ export function Form({formData, handleFormData}: ModalUserProps) {
           placeholderTextColor={placeHolderColorTextInput}
           maxLength={16}
           secureTextEntry={true}
-          value={formData?.password}
+          value={formData.password}
           onChangeText={text => handleFormData('password', text)}
         />
 
@@ -89,9 +74,7 @@ export function Form({formData, handleFormData}: ModalUserProps) {
           />
         </View>
 
-        <TouchableOpacity style={modal.blueButton} onPress={confirmSend}>
-          <Text style={modal.whiteTextButton}>Salvar</Text>
-        </TouchableOpacity>
+        <DarkBlueButton onPress={confirmSend} title="Salvar" />
       </View>
     </View>
   );

@@ -24,35 +24,35 @@ export function UserList({openModalAlterUser}: UserListProps) {
   }
 
   useEffect(() => {
-    setTimeout(() => searchUsers(), 2000);
+    searchUsers();
   }, []);
 
   if (loading) {
     return <LoadingScreen />;
   }
 
-  return (
-    <ScrollView>
-      {users ? (
-        users.map(userData => {
-          return (
-            <View key={userData.id} style={theme.blueBoxItems}>
-              <TouchableOpacity
-                style={theme.greyBoxItemsFlex}
-                onPress={() => openModalAlterUser(userData)}>
-                <Text style={theme.darkBlueTextSmall}>{userData.email}</Text>
-                <Text style={theme.darkBlueTextSmall}>
-                  {userData.userPermission.type}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          );
-        })
-      ) : (
-        <>
-          <Text style={theme.blackTextLargeCenter}>Lista Vazia</Text>
-        </>
-      )}
-    </ScrollView>
-  );
+  if (users.length > 0) {
+    return (
+      <ScrollView>
+        {users.map(userData => (
+          <View key={userData.id} style={theme.blueBoxItems}>
+            <TouchableOpacity
+              style={theme.greyBoxItemsFlex}
+              onPress={() => openModalAlterUser(userData)}>
+              <Text style={theme.darkBlueTextSmall}>{userData.email}</Text>
+              <Text style={theme.darkBlueTextSmall}>
+                {userData.userPermission.type}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+    );
+  } else {
+    return (
+      <View style={theme.containerJustifyCenter}>
+        <Text style={theme.blackTextLargeCenter}>Lista de Usuários Vazia</Text>
+      </View>
+    );
+  }
 }
