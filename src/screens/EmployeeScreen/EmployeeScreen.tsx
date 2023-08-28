@@ -1,7 +1,7 @@
 import {theme} from '@styles';
 import {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {ModalEmployee, ModalRegisterEmployee, Screen} from '@components';
+import {DarkBlueButton, ModalEmployee, ModalRegisterEmployee, Screen} from '@components';
 import {EmployeeList} from './components/EmployeeList';
 
 export function EmployeeScreen() {
@@ -24,11 +24,10 @@ export function EmployeeScreen() {
     <Screen>
       <EmployeeList />
 
-      <TouchableOpacity
-        style={theme.blueButton}
-        onPress={() => openModalRegister()}>
-        <Text style={theme.textButton}>Cadastrar barbeiro</Text>
-      </TouchableOpacity>
+      <DarkBlueButton 
+      title='Cadastrar'
+      onPress={openModalRegister}
+      />
       
       <ModalRegisterEmployee
         modalParams={modalParams}

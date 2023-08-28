@@ -1,36 +1,37 @@
-import {EmptyListScreen, LoadingScreen} from '@components';
+import {EmptyListScreen, ListItem, LoadingScreen} from '@components';
 import {BarberRequestDTO, getAllEmployeesRepo} from '@repositories';
-import {theme} from '@styles';
 import {useEffect, useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {FlatList} from 'react-native';
 
 export function EmployeeList() {
   const [loading, setLoading] = useState(true);
-  const [employee, setEmployee] = useState<[BarberRequestDTO] | []>([]);
+  const [employee, setEmployee] = useState<BarberRequestDTO[]>([]);
 
-  useEffect(() => {
-    getEmployees();
-    setLoading(false);
-  }, []);
+  function changeLoading() {
+    setLoading(!loading);
+  }
 
-  async function getEmployees() {
+  async function searchEmployees() {
     const response = await getAllEmployeesRepo();
     setEmployee(response);
+    changeLoading();
   }
+
+  useEffect(() => {
+    searchEmployees();
+  }, []);
 
   if (loading) {
     return <LoadingScreen />;
   }
-  if (employee.length === 0) {
-    return <EmptyListScreen title="Lista de funcionários Vazia" />;
-  }
-  return employee.map((item, index) => (
-    <View key={index}>
-      <TouchableOpacity style={theme.blueBoxItems} onPress={() => {}}>
-        <View style={theme.boxFlexRow}>
-          <Text style={theme.whiteTextMiddle}>{item.name}</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  ));
+  return (
+    <FlatList
+      data={employee}
+      keyExtractor={employeeData => employeeData.id}
+      renderItem={({item}) => <ListItem title={item.name} />}
+      ListEmptyComponent={
+        <EmptyListScreen title="Lista de Funcionários Vazia" />
+      }
+    />
+  );
 }

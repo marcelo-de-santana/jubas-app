@@ -1,4 +1,4 @@
-export type BarberResponseDTO = {
+export type BarberRequestDTO = {
   id: string;
   name: string;
   statusProfile: boolean;
@@ -11,14 +11,15 @@ export type BarberResponseDTO = {
   };
 };
 
-export type BarberRequestDTO = {
+export type BarberResponseDTO = {
   id: string;
   name: string;
   statusProfile: boolean;
   user: {
     id: string;
+    email: string;
     userPermission: {
-      id: string;
+      id: number;
       type: string;
     };
   };

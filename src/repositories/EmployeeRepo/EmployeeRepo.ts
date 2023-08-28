@@ -15,12 +15,11 @@ export async function createBarberRepo(barberData: BarberResponseDTO) {
   }
 }
 
-export async function getAllEmployeesRepo(): Promise<[BarberRequestDTO] | []> {
+export async function getAllEmployeesRepo() {
   try {
     const response = await api.get('/employee/barber');
     return response.data;
   } catch (error) {
     DefaultErroAlert();
-    return [];
   }
 }
