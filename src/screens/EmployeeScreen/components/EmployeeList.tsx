@@ -1,4 +1,4 @@
-import {LoadingScreen} from '@components';
+import {EmptyListScreen, LoadingScreen} from '@components';
 import {BarberRequestDTO, getAllEmployeesRepo} from '@repositories';
 import {theme} from '@styles';
 import {useEffect, useState} from 'react';
@@ -22,13 +22,7 @@ export function EmployeeList() {
     return <LoadingScreen />;
   }
   if (employee.length === 0) {
-    return (
-      <View style={{flex: 1 ,justifyContent:'center'}}>
-        <Text style={theme.blackTextSmallCenter}>
-          Lista de funcionários Vazia
-        </Text>
-      </View>
-    );
+    return <EmptyListScreen title="Lista de funcionários Vazia" />;
   }
   return employee.map((item, index) => (
     <View key={index}>

@@ -23,17 +23,21 @@ export function AppStack() {
   return (
     <NativeStack.Navigator
       screenOptions={{
+        headerShadowVisible: false,
+        headerShown: false,
         headerStyle: {
           backgroundColor: '#f2f2f2',
         },
-        headerShadowVisible: false,
-        headerTitleAlign: 'center',
         headerTintColor: '#3C4659',
-        headerShown: false,
+        headerTitleAlign: 'center',
       }}
       initialRouteName="HomeScreen">
       <NativeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <NativeStack.Screen name="EmployeeScreen" component={EmployeeScreen} />
+      <NativeStack.Screen
+        name="EmployeeScreen"
+        component={EmployeeScreen}
+        options={{title: 'Barbeiros', headerShown: true}}
+      />
       <NativeStack.Screen
         name="UsersScreens"
         component={UsersScreen}

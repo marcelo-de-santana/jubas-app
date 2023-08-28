@@ -2,7 +2,7 @@ import {theme} from '@styles';
 import {useEffect, useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {MinimalUserResponseDTO, getAllUsersRepo} from '@repositories';
-import {LoadingScreen} from '@components';
+import {EmptyListScreen, LoadingScreen} from '@components';
 
 type UserListProps = {
   openModalAlterUser: (userData: MinimalUserResponseDTO) => void;
@@ -31,7 +31,7 @@ export function UserList({openModalAlterUser}: UserListProps) {
     return <LoadingScreen />;
   }
 
-  if (users.length > 0) {
+  if (users) {
     return (
       <ScrollView>
         {users.map(userData => (
@@ -49,10 +49,6 @@ export function UserList({openModalAlterUser}: UserListProps) {
       </ScrollView>
     );
   } else {
-    return (
-      <View style={theme.containerJustifyCenter}>
-        <Text style={theme.blackTextLargeCenter}>Lista de Usuários Vazia</Text>
-      </View>
-    );
+    return <EmptyListScreen title="Lista de Usuários Vazia" />;
   }
 }
