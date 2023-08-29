@@ -4,7 +4,7 @@ import {Modal, Pressable, View} from 'react-native';
 export type ModalScreenProps = {
   handleVisibility: () => void;
   visible: boolean;
-  children: React.JSX.Element;
+  children?: React.JSX.Element;
 };
 
 export function ModalScreen({

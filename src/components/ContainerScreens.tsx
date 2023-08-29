@@ -7,11 +7,3 @@ interface ScreenProps {
 export function Screen({children}: ScreenProps) {
   return <SafeAreaView style={theme.container}>{children}</SafeAreaView>;
 }
-
-export function EmptyListScreen({title}: {title: string}) {
-  return (
-    <View style={theme.containerJustifyCenter}>
-      <Text style={theme.blackTextSmallCenter}>{title}</Text>
-    </View>
-  );
-}

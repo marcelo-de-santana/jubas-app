@@ -1,38 +1,56 @@
-import {theme} from '@styles';
 import {useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import {DarkBlueButton, ModalEmployee, ModalRegisterEmployee, Screen} from '@components';
+import {DarkBlueButton, ModalForm, ModalScreen, Screen} from '@components';
 import {EmployeeList} from './components/EmployeeList';
+import {createBarberRepo} from '@repositories';
 
 export function EmployeeScreen() {
-  const [modalParams, setModalParams] = useState({
-    visible: false,
-    data: {
-      name: '',
-      email: '',
-    },
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  const [modalData, setModalData] = useState({
+    name: '',
+    email: '',
+    user: {id: ''},
   });
 
-  function openModalRegister() {
-    setModalParams(prev => ({
-      ...prev,
-      visible: true,
-    }));
+  function handleFormData(key: string, value: string) {
+    setModalData(prev => ({...prev, [key]: value}));
   }
 
+  function openModalForUpdate() {
+    setModalData(prev => ({...prev}));
+    handleVisibility();
+  }
+
+  function handleVisibility() {
+    setModalIsVisible(!modalIsVisible);
+  }
+
+  async function registerBarber() {
+    await createBarberRepo({
+      name: modalData.name,
+      user: {
+        id: modalData.user.id,
+      },
+    });
+    handleVisibility();
+  }
   return (
     <Screen>
       <EmployeeList />
 
-      <DarkBlueButton 
-      title='Cadastrar'
-      onPress={openModalRegister}
-      />
-      
-      <ModalRegisterEmployee
-        modalParams={modalParams}
-        setModalParams={setModalParams}
-      />
+      <DarkBlueButton title="Cadastrar" onPress={handleVisibility} />
+
+      <ModalScreen visible={modalIsVisible} handleVisibility={handleVisibility}>
+        <ModalForm
+          formData={modalData}
+          handleFormData={handleFormData}
+          inputOptions={[
+            {label: 'name', inputProps: {placeholder: 'Digite o nome'}},
+            {label: 'email', inputProps: {placeholder: 'Digite o e-mail'}},
+          ]}>
+          <DarkBlueButton title="Salvar" onPress={handleVisibility} />
+        </ModalForm>
+      </ModalScreen>
     </Screen>
   );
 }

@@ -1,12 +1,11 @@
 export type BarberRequestDTO = {
-  id: string;
+  id?: string;
   name: string;
-  statusProfile: boolean;
+  statusProfile?: boolean;
   user: {
     id: string;
-    email: string;
   };
-  operationTime: {
+  operationTime?: {
     id: string;
   };
 };

@@ -12,3 +12,11 @@ export function ListItem({onPress, title}: ListItemProps) {
     </View>
   );
 }
+
+export function EmptyListScreen({title}: {title: string}) {
+  return (
+    <View style={theme.containerJustifyCenter}>
+      <Text style={theme.blackTextSmallCenter}>{title}</Text>
+    </View>
+  );
+}
