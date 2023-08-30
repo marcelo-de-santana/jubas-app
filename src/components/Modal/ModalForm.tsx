@@ -2,9 +2,9 @@ import {modal, placeHolderColorTextInput} from '@styles';
 import {TextInput, TextInputProps, View} from 'react-native';
 
 export type ModalFormProps = {
-  children?: React.JSX.Element;
   formData: any;
   handleFormData: (key: string, value: string) => void;
+  children?: React.ReactNode;
   inputOptions: {label: string; inputProps: TextInputProps}[];
 };
 

@@ -1,11 +1,11 @@
 import {EmptyListScreen, ListItem, LoadingScreen} from '@components';
-import {BarberRequestDTO, getAllEmployeesRepo} from '@repositories';
+import {BarberResponseDTO, getAllEmployeesRepo} from '@repositories';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
 export function EmployeeList() {
   const [loading, setLoading] = useState(true);
-  const [employee, setEmployee] = useState<BarberRequestDTO[]>([]);
+  const [employee, setEmployee] = useState<BarberResponseDTO[]>([]);
 
   function changeLoading() {
     setLoading(!loading);

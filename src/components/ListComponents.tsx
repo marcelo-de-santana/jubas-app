@@ -1,5 +1,5 @@
-import { theme } from "@styles";
-import { Text, TouchableOpacity, View } from "react-native";
+import {theme} from '@styles';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 export type ListItemProps = {onPress?: () => void; title: string | number};
 
@@ -18,5 +18,13 @@ export function EmptyListScreen({title}: {title: string}) {
     <View style={theme.containerJustifyCenter}>
       <Text style={theme.blackTextSmallCenter}>{title}</Text>
     </View>
+  );
+}
+
+export function SimpleListItem({onPress, title}: ListItemProps) {
+  return (
+    <>
+      <Text style={theme.darkBlueTextSmall}>{title}</Text>
+    </>
   );
 }

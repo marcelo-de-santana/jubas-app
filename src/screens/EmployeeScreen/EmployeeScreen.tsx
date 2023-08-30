@@ -1,7 +1,15 @@
 import {useState} from 'react';
-import {DarkBlueButton, ModalForm, ModalScreen, Screen} from '@components';
+import {
+  DarkBlueButton,
+  ModalForm,
+  ModalFormProps,
+  ModalScreen,
+  Screen,
+} from '@components';
 import {EmployeeList} from './components/EmployeeList';
 import {createBarberRepo} from '@repositories';
+import {UserList} from './components/UserList';
+import {CreateEmployeePage} from './components/CreateEmployeePage';
 
 export function EmployeeScreen() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -40,16 +48,15 @@ export function EmployeeScreen() {
 
       <DarkBlueButton title="Cadastrar" onPress={handleVisibility} />
 
-      <ModalScreen visible={modalIsVisible} handleVisibility={handleVisibility}>
-        <ModalForm
+      <ModalScreen
+        transparent={true}
+        visible={modalIsVisible}
+        handleVisibility={handleVisibility}>
+        <CreateEmployeePage
           formData={modalData}
           handleFormData={handleFormData}
-          inputOptions={[
-            {label: 'name', inputProps: {placeholder: 'Digite o nome'}},
-            {label: 'email', inputProps: {placeholder: 'Digite o e-mail'}},
-          ]}>
-          <DarkBlueButton title="Salvar" onPress={handleVisibility} />
-        </ModalForm>
+          handleVisibility={handleVisibility}
+        />
       </ModalScreen>
     </Screen>
   );

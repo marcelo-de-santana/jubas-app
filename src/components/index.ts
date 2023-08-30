@@ -3,7 +3,5 @@ export * from './Buttons';
 export * from './ContainerScreens';
 export * from './ListComponents';
 export * from './LoadingScreen';
-export * from './ModalEmployee';
-export * from './Modal/ModalFom';
-export * from './Modal/ModalScreen';
+export * from './Modal';
 export * from './TextAlertError';

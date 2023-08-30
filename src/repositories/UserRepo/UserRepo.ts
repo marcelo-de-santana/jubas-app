@@ -1,6 +1,7 @@
 import {api} from '@services';
 import {MinimalUserResponseDTO, UserType} from './UserRepoTypes';
 import {SuccessAlert, DefaultErroAlert} from '@components';
+import {number} from 'yup';
 
 const PATH = '';
 
@@ -20,7 +21,7 @@ export async function createUserClient(userData: UserType) {
       userPermission: {id: 3},
     };
   try {
-    const response = await api.post('', user);
+    const response = await api.post(PATH, user);
     if (response.status === 201) {
       return `Usuário "${response.data.email}" criado com sucesso!`;
     }
@@ -32,7 +33,7 @@ export async function createUserClient(userData: UserType) {
 
 export async function getAllUsersRepo() {
   try {
-    const response = await api.get('all-users');
+    const response = await api.get(`${PATH}/all-users`);
     return response.data;
   } catch (error) {
     DefaultErroAlert();
@@ -52,6 +53,15 @@ export async function saveUserRepo(
     });
     console.log(response.data.email);
     SuccessAlert(`${response.data.email} gravado com sucesso!`);
+  } catch (error) {
+    DefaultErroAlert();
+  }
+}
+
+export async function getAllUsersByPermissionRepo(id: number) {
+  try {
+    const respose = await api.get(`${PATH}/all-users/permission/${id}`);
+    return respose.data;
   } catch (error) {
     DefaultErroAlert();
   }

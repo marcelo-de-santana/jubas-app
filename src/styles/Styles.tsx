@@ -63,6 +63,12 @@ export const theme = StyleSheet.create({
     marginVertical: 5,
     padding: 10,
   },
+  whiteBoxItems: {
+    backgroundColor: '#fff',
+    borderRadius: 6,
+    marginVertical: 5,
+    padding: 10,
+  },
   greyBox: {
     backgroundColor: '#CCCED9',
     borderRadius: 6,
@@ -178,6 +184,13 @@ export const theme = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 5,
   },
+  whiteButton: {
+    backgroundColor: '#fff',
+    borderRadius: 6,
+    height: 40,
+    justifyContent: 'center',
+    marginTop: 5,
+  },
   inactiveButton: {
     backgroundColor: '#CCCED9',
     borderRadius: 6,
@@ -192,7 +205,12 @@ export const theme = StyleSheet.create({
     padding: 10,
     width: '30%',
   },
-  textButton: {
+  blackTextButton: {
+    textAlign: 'center',
+    color: '#000',
+    fontSize: 18,
+  },
+  whiteTextButton: {
     textAlign: 'center',
     color: '#fff',
     fontSize: 18,
