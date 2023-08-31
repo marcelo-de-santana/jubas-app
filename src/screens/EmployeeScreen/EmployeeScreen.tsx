@@ -17,7 +17,6 @@ export function EmployeeScreen() {
   const [modalData, setModalData] = useState({
     name: '',
     email: '',
-    user: {id: ''},
   });
 
   function handleFormData(key: string, value: string) {
@@ -33,15 +32,6 @@ export function EmployeeScreen() {
     setModalIsVisible(!modalIsVisible);
   }
 
-  async function registerBarber() {
-    await createBarberRepo({
-      name: modalData.name,
-      user: {
-        id: modalData.user.id,
-      },
-    });
-    handleVisibility();
-  }
   return (
     <Screen>
       <EmployeeList />

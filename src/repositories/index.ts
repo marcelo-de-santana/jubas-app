@@ -1,5 +1,3 @@
-export * from './EmployeeRepo/EmployeeRepo';
-export * from './EmployeeRepo/EmployeeRepoType';
-export * from './UserRepo/UserRepo';
-export * from './UserRepo/UserRepoTypes';
+export * from './EmployeeRepo';
+export * from './UserRepo';
 export * from './test/fakeApi';

@@ -3,7 +3,8 @@ export type BarberRequestDTO = {
   name: string;
   statusProfile?: boolean;
   user: {
-    id: string;
+    id?: string;
+    email?: string;
   };
   operationTime?: {
     id: string;

@@ -1,7 +1,6 @@
 import {api} from '@services';
 import {MinimalUserResponseDTO, UserType} from './UserRepoTypes';
 import {SuccessAlert, DefaultErroAlert} from '@components';
-import {number} from 'yup';
 
 const PATH = '';
 

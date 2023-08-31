@@ -21,11 +21,3 @@ export function WhiteButton({onPress, title}: ButtonProps) {
     </TouchableOpacity>
   );
 }
-
-export function WhiteItemButton({onPress, title}: ButtonProps) {
-  return (
-    <TouchableOpacity style={theme.whiteBoxItems} onPress={onPress}>
-      <Text style={theme.darkBlueTextSmall}>{title}</Text>
-    </TouchableOpacity>
-  );
-}

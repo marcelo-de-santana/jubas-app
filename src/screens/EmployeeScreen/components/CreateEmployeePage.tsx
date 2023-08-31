@@ -1,6 +1,8 @@
-import {DarkBlueButton, ModalForm} from '@components';
+import {DarkBlueButton, InputOptionsButton, ModalForm} from '@components';
 import {useState} from 'react';
 import {UserList} from './UserList';
+import {createBarberRepo} from '@repositories';
+import {Text, TouchableOpacity} from 'react-native';
 
 export type CreateEmployeePageProps = {
   formData: any;
@@ -13,23 +15,29 @@ export function CreateEmployeePage({
   handleFormData,
   handleVisibility,
 }: CreateEmployeePageProps) {
-  const [page, setPage] = useState(0);
-
-  function changePage(pageNumber: number) {
-    setPage(pageNumber);
+  async function registerBarber() {
+    await createBarberRepo({
+      name: formData.name,
+      user: {
+        id: formData.user.id,
+      },
+    });
+    handleVisibility();
   }
 
-  if (page === 0) {
-    return (
-      <ModalForm
-        formData={formData}
-        handleFormData={handleFormData}
-        inputOptions={[
-          {label: 'name', inputProps: {placeholder: 'Digite o nome'}},
-        ]}>
-        <DarkBlueButton title="Salvar" onPress={() => changePage(1)} />
-      </ModalForm>
-    );
-  }
-  return <UserList id={2} />;
+  function selectEmail() {}
+
+  return (
+    <ModalForm
+      formData={formData}
+      handleFormData={handleFormData}
+      inputOptions={[
+        {label: 'name', inputProps: {placeholder: 'Digite o nome'}},
+      ]}>
+      <InputOptionsButton title="Selecionar e-mail">
+        <UserList id={2} handleFormData={handleFormData} />
+      </InputOptionsButton>
+      <DarkBlueButton title="Confirmar" />
+    </ModalForm>
+  );
 }

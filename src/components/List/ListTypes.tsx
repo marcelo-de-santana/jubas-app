@@ -1,0 +1,1 @@
+export type ListItemProps = {onPress?: () => void; title: string | number};

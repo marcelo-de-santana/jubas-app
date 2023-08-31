@@ -4,11 +4,18 @@ import {
 } from '@repositories';
 import {useState} from 'react';
 import {FlatList} from 'react-native';
-import {LoadingScreenPage, ModalItems, WhiteItemButton} from '@components';
+import {
+  LoadingScreenPage,
+  DarkBlueItemButton,
+  WhiteItemButton,
+} from '@components';
 
-export type UserListProps = {id: number};
+export type UserListProps = {
+  id: number;
+  handleFormData: (key: string, value: string) => void;
+};
 
-export function UserList({id}: UserListProps) {
+export function UserList({id, handleFormData}: UserListProps) {
   const [userData, setUserData] = useState<MinimalUserResponseDTO[]>([]);
 
   async function searchData() {
@@ -16,14 +23,21 @@ export function UserList({id}: UserListProps) {
     setUserData(response);
   }
 
-  return (
-    <ModalItems>
-      <FlatList
-        data={userData}
-        keyExtractor={userData => userData.id}
-        renderItem={({item}) => <WhiteItemButton title={item.email} />}
-        ListEmptyComponent={<LoadingScreenPage searchData={searchData} />}
+  function renderItem({item}: {item: MinimalUserResponseDTO}) {
+    return (
+      <WhiteItemButton
+        title={item.email}
+        onPress={() => handleFormData('email', item.email)}
       />
-    </ModalItems>
+    );
+  }
+
+  return (
+    <FlatList
+      data={userData}
+      keyExtractor={userData => userData.id}
+      renderItem={renderItem}
+      ListEmptyComponent={<LoadingScreenPage searchData={searchData} />}
+    />
   );
 }
