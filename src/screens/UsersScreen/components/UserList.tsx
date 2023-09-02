@@ -1,54 +1,38 @@
-import {theme} from '@styles';
+import {text, theme} from '@styles';
 import {useEffect, useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {MinimalUserResponseDTO, getAllUsersRepo} from '@repositories';
-import {EmptyListScreen, LoadingScreen} from '@components';
+import {EmptyListScreen, SimpleListItem, LoadingScreen} from '@components';
 
 type UserListProps = {
   openModalAlterUser: (userData: MinimalUserResponseDTO) => void;
 };
 
 export function UserList({openModalAlterUser}: UserListProps) {
-  const [loading, setLoading] = useState(true);
-
   const [users, setUsers] = useState<MinimalUserResponseDTO[]>([]);
 
-  function changeLoading() {
-    setLoading(!loading);
+  async function searchData() {
+    setUsers(await getAllUsersRepo());
   }
 
-  async function searchUsers() {
-    const response = await getAllUsersRepo();
-    setUsers(response);
-    changeLoading();
-  }
-
-  useEffect(() => {
-    searchUsers();
-  }, []);
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  if (users) {
+  function renderItem({item}: {item: MinimalUserResponseDTO}) {
     return (
-      <ScrollView>
-        {users.map(userData => (
-          <View key={userData.id} style={theme.blueBoxItems}>
-            <TouchableOpacity
-              style={theme.greyBoxItemsFlex}
-              onPress={() => openModalAlterUser(userData)}>
-              <Text style={theme.darkBlueTextSmall}>{userData.email}</Text>
-              <Text style={theme.darkBlueTextSmall}>
-                {userData.userPermission.type}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
+      <SimpleListItem textValues={[item.email]} />
     );
-  } else {
-    return <EmptyListScreen title="Lista de Usuários Vazia" />;
   }
+
+  return (
+    <FlatList
+      data={users}
+      keyExtractor={users => users.id}
+      renderItem={renderItem}
+      ListEmptyComponent={
+        <LoadingScreen
+          searchData={searchData}
+          title="Lista de Usuários Vazia"
+        />
+      }
+    />
+  );
+
 }

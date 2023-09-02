@@ -1,4 +1,4 @@
-import {modal, placeHolderColorTextInput} from '@styles';
+import {input, modal, placeHolderColorTextInput} from '@styles';
 import {TextInput, TextInputProps, View} from 'react-native';
 
 export type ModalFormProps = {
@@ -22,7 +22,7 @@ export function ModalForm({
             key={index}
             {...option.inputProps}
             placeholderTextColor={placeHolderColorTextInput}
-            style={modal.input}
+            style={input.inputModal}
             value={formData[option.label.toLowerCase()]}
             onChangeText={text => handleFormData(option.label, text)}
           />

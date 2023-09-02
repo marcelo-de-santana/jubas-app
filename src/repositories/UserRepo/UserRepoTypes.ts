@@ -6,7 +6,7 @@ export type MinimalUserResponseDTO = {
   password: string;
   userPermission: {
     id: number;
-    type?: string;
+    type: string;
   };
 };
 
