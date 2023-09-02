@@ -6,3 +6,4 @@ export * from './List';
 export * from './Loaders';
 export * from './Modal';
 export * from './TextAlertError';
+export * from './Watch';

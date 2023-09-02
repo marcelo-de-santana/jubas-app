@@ -1,60 +1,40 @@
-import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import {Screen} from '@components';
-import {menu, theme} from '@styles';
 import {AppStackProps} from '@routes';
+import {Menu} from './components/Menu';
 
 export function HomeScreen({navigation}: AppStackProps) {
-  const {navigate} = navigation;
+  const menuOptions = [
+    {
+      title: 'Ver agenda',
+    },
+    {
+      title: 'Minha conta',
+    },
+    {
+      title: 'Gerenciar agenda',
+    },
+    {
+      title: 'Gerenciar catálogo',
+    },
+    {
+      title: 'Gerenciar barbeiros',
+      routeName: 'EmployeeScreen',
+    },
+    {
+      title: 'Gerenciar usuários',
+      routeName: 'UsersScreens',
+    },
+    {
+      title: 'Gerenciar pagamentos',
+    },
+    {
+      title: 'Minhas compras',
+    },
+  ];
+
   return (
     <Screen>
-      <View style={theme.boxFlexRow}>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => navigate('ServiceBookScreens')}>
-          <Text style={menu.textMenu}>Ver agenda</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => navigate('MyAccount')}>
-          <Text style={menu.textMenu}>Minha conta</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => navigate('ScheduleManagement')}>
-          <Text style={menu.textMenu}>Gerenciar agenda</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => navigate('ServiceCatalogScreens')}>
-          <Text style={menu.textMenu}>Gerenciar catálogo</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => navigate('EmployeeScreen')}>
-          <Text style={menu.textMenu}>Gerenciar barbeiros</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => navigate('UsersScreens')}>
-          <Text style={menu.textMenu}>Gerenciar usuários</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => Alert.alert('', 'Módulo em construção')}>
-          <Text style={menu.textMenu}>Gerenciar pagamentos</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => Alert.alert('', 'Módulo em construção')}>
-          <Text style={menu.textMenu}>Minhas compras</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={menu.boxMenu}
-          onPress={() => Alert.alert('', 'Módulo em construção')}>
-          <Text style={menu.textMenu}>Promoções</Text>
-        </TouchableOpacity>
-      </View>
+      <Menu menuOptions={menuOptions} navigate={navigation.navigate} />
     </Screen>
   );
 }

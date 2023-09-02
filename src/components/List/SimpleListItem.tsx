@@ -12,11 +12,7 @@ export function SimpleListItem({
     <TouchableOpacity style={theme.blueBoxItems} onPress={onPress}>
       {textValues ? (
         <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}>
+          style={theme.boxFlexRow}>
           {textValues.map((value, index) => (
             <Text key={index} style={text.whiteText16}>
               {value}

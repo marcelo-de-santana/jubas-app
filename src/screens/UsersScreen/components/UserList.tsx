@@ -22,6 +22,8 @@ export function UserList({openModalAlterUser}: UserListProps) {
   }
 
   return (
+
+
     <FlatList
       data={users}
       keyExtractor={users => users.id}

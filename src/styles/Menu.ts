@@ -2,15 +2,16 @@ import {StyleSheet} from 'react-native';
 
 export const menu = StyleSheet.create({
   boxMenu: {
-    backgroundColor: '#9BA7BF',
+    backgroundColor: '#CCCED9',
     borderRadius: 6,
-    height: 100,
+    height: 110,
     justifyContent: 'center',
-    margin: 5,
-    width: '45%',
+    margin: 1.5,
+    padding: 10,
+    width: 110,
   },
   textMenu: {
-    color: 'white',
+    color: '#161C26',
     textAlign: 'center',
   },
 });
