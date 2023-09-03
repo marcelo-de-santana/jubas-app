@@ -75,17 +75,6 @@ export const theme = StyleSheet.create({
     marginVertical: 5,
     padding: 10,
   },
-  switchBox: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginVertical: 5,
-  },
-  switchBoxSpaced: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 5,
-  },
   footerBox: {
     paddingBottom: 10,
   },

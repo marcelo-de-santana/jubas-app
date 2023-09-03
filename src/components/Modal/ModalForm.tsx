@@ -5,7 +5,7 @@ export type ModalFormProps = {
   formData: any;
   handleFormData: (key: string, value: string) => void;
   children?: React.ReactNode;
-  inputOptions: {label: string; inputProps: TextInputProps}[];
+  inputOptions: {label: string; inputProps?: TextInputProps}[];
 };
 
 export function ModalForm({
@@ -21,6 +21,7 @@ export function ModalForm({
           <TextInput
             key={index}
             {...option.inputProps}
+            autoCapitalize="none"
             placeholderTextColor={placeHolderColorTextInput}
             style={input.inputModal}
             value={formData[option.label.toLowerCase()]}

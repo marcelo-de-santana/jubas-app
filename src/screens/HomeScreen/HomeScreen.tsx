@@ -1,6 +1,6 @@
 import {Screen} from '@components';
 import {AppStackProps} from '@routes';
-import {Menu} from './components/Menu';
+import {Menu} from '@components';
 
 export function HomeScreen({navigation}: AppStackProps) {
   const menuOptions = [

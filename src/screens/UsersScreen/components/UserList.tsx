@@ -1,40 +1,45 @@
-import {text, theme} from '@styles';
 import {useEffect, useState} from 'react';
-import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {MinimalUserResponseDTO, getAllUsersRepo} from '@repositories';
-import {EmptyListScreen, SimpleListItem, LoadingScreen} from '@components';
+import {FlatList} from 'react-native';
+import {
+  MinimalUserResponseDTO,
+  getAllUsersByPermissionRepo,
+} from '@repositories';
+import {SimpleListItem, LoadingScreen} from '@components';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {AppStackParamList, AppStackProps} from '@routes';
 
 type UserListProps = {
-  openModalAlterUser: (userData: MinimalUserResponseDTO) => void;
+  userPermissionId: number;
+  navigation: NativeStackNavigationProp<AppStackParamList>;
 };
 
-export function UserList({openModalAlterUser}: UserListProps) {
+export function UserList({navigation, userPermissionId}: UserListProps) {
   const [users, setUsers] = useState<MinimalUserResponseDTO[]>([]);
 
+  useEffect(() => {
+    searchData();
+  }, [userPermissionId]);
+
   async function searchData() {
-    setUsers(await getAllUsersRepo());
+    setUsers(await getAllUsersByPermissionRepo(userPermissionId));
+  }
+
+  function changeScreen() {
+    navigation.navigate('UnderConstruction');
   }
 
   function renderItem({item}: {item: MinimalUserResponseDTO}) {
-    return (
-      <SimpleListItem textValues={[item.email]} />
-    );
+    return <SimpleListItem textValues={[item.email]} onPress={changeScreen} />;
   }
 
   return (
-
-
     <FlatList
       data={users}
       keyExtractor={users => users.id}
       renderItem={renderItem}
       ListEmptyComponent={
-        <LoadingScreen
-          searchData={searchData}
-          title="Lista de Usuários Vazia"
-        />
+        <LoadingScreen searchData={searchData} title="Lista Vazia" />
       }
     />
   );
-
 }

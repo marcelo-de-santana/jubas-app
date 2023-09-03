@@ -4,11 +4,7 @@ import {
 } from '@repositories';
 import {useState} from 'react';
 import {FlatList} from 'react-native';
-import {
-  LoadingScreenPage,
-  DarkBlueItemButton,
-  WhiteItemButton,
-} from '@components';
+import {LoadingScreen, WhiteItemButton} from '@components';
 
 export type UserListProps = {
   id: number;
@@ -19,8 +15,7 @@ export function UserList({id, handleFormData}: UserListProps) {
   const [userData, setUserData] = useState<MinimalUserResponseDTO[]>([]);
 
   async function searchData() {
-    const response = await getAllUsersByPermissionRepo(id);
-    setUserData(response);
+    setUserData(await getAllUsersByPermissionRepo(id));
   }
 
   function renderItem({item}: {item: MinimalUserResponseDTO}) {
@@ -37,7 +32,7 @@ export function UserList({id, handleFormData}: UserListProps) {
       data={userData}
       keyExtractor={userData => userData.id}
       renderItem={renderItem}
-      ListEmptyComponent={<LoadingScreenPage searchData={searchData} />}
+      ListEmptyComponent={<LoadingScreen searchData={searchData} />}
     />
   );
 }

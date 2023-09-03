@@ -25,20 +25,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 556,
-    height: 417,
+    height: '50%',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#000000',
-    marginBottom: 10,
+    margin: 20,
     textAlign: 'center',
   },
   description: {
-    fontSize: 18,
-    color: '#000000',
-    textAlign: 'center',
-    marginHorizontal: 20,
+    fontSize: 14,
+    margin: 10,
+    color: 'black',
+    textAlign: 'justify',
   },
 });

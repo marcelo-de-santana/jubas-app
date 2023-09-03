@@ -18,7 +18,7 @@ export function Menu({menuOptions, navigate}: MenuProps) {
             key={index}
             style={menu.boxMenu}
             onPress={() => goToScreen(option.routeName ?? 'UnderConstruction')}>
-            <Text style={menu.textMenu}>{option.title}</Text>
+            <Text style={menu.textMenuBlack}>{option.title}</Text>
           </TouchableOpacity>
         ))
       ) : (

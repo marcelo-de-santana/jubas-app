@@ -32,8 +32,21 @@ export const button = StyleSheet.create({
   whiteButton: {
     backgroundColor: '#fff',
     borderRadius: 6,
+    borderWidth: 2,
+    borderColor:'#9BA7BF',
     height: 40,
     justifyContent: 'center',
     marginTop: 5,
+  },
+  switchButton: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+  switchButtonSpaced: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 5,
   },
 });

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {
-  DarkBlueButton,
+  BlueButton,
   ModalForm,
   ModalFormProps,
   ModalScreen,
@@ -36,7 +36,7 @@ export function EmployeeScreen() {
     <Screen>
       <EmployeeList />
 
-      <DarkBlueButton title="Cadastrar" onPress={handleVisibility} />
+      <BlueButton title="Cadastrar" onPress={handleVisibility} />
 
       <ModalScreen
         transparent={true}

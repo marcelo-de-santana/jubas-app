@@ -1,4 +1,4 @@
-import {DarkBlueButton, InputOptionsButton, ModalForm} from '@components';
+import {BlueButton, InputOptionsButton, ModalForm} from '@components';
 import {useState} from 'react';
 import {UserList} from './UserList';
 import {createBarberRepo} from '@repositories';
@@ -37,7 +37,7 @@ export function CreateEmployeePage({
       <InputOptionsButton title="Selecionar e-mail">
         <UserList id={2} handleFormData={handleFormData} />
       </InputOptionsButton>
-      <DarkBlueButton title="Confirmar" />
+      <BlueButton title="Confirmar" />
     </ModalForm>
   );
 }

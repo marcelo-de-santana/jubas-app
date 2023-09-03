@@ -1,62 +1,40 @@
-import {DarkBlueButton, Screen} from '@components';
-import {MinimalUserResponseDTO} from '@repositories';
+import {MenuTab, Screen} from '@components';
 import {useState} from 'react';
-import {ModalScreen} from '@components';
+
+import {AppStackProps} from '@routes';
 import {UserList} from './components/UserList';
-import {Form} from './components/Form';
+import {RegistrationForm} from './components/RegistrationForm';
 
-export function UsersScreen() {
-  const [createModalIsVisible, setCreateModalIsVisible] = useState(false);
-  const [alterModalIsVisible, setAlterModalIsVisible] = useState(false);
+export function UsersScreen({navigation}: AppStackProps) {
+  const [indexButton, setIndexButton] = useState(3);
 
-  const [modalData, setModalData] = useState<MinimalUserResponseDTO>({
-    email: '',
-    password: '',
-    userPermission: {
-      id: 3,
+  function changeMenuButton(indexButton: number) {
+    setIndexButton(indexButton);
+  }
+
+  const menuOptions = [
+    {
+      index: 1,
+      title: 'Admin',
+      onPress: () => changeMenuButton(1),
     },
-  });
-
-  function handleCreateModalVisibility() {
-    setModalData({
-      email: '',
-      password: '',
-      userPermission: {
-        id: 3,
-      },
-    });
-    setCreateModalIsVisible(!createModalIsVisible);
-  }
-
-  function handleAlterModalVisibility() {
-    setAlterModalIsVisible(!alterModalIsVisible);
-  }
-
-  function handleFormData(key: string, value: string) {
-    setModalData(prev => ({...prev, [key]: value}));
-  }
-
-  function openModalAlterUser(userData: MinimalUserResponseDTO) {
-    setModalData({...userData});
-    handleAlterModalVisibility();
-  }
+    {
+      index: 2,
+      title: 'Barbeiros',
+      onPress: () => changeMenuButton(2),
+    },
+    {
+      index: 3,
+      title: 'Clientes',
+      onPress: () => changeMenuButton(3),
+    },
+  ];
 
   return (
     <Screen>
-      <UserList openModalAlterUser={openModalAlterUser} />
-      <DarkBlueButton onPress={handleCreateModalVisibility} title="Cadastrar" />
-
-      <ModalScreen
-        handleVisibility={handleAlterModalVisibility}
-        visible={alterModalIsVisible}>
-        <Form formData={modalData} handleFormData={handleFormData} />
-      </ModalScreen>
-
-      <ModalScreen
-        handleVisibility={handleCreateModalVisibility}
-        visible={createModalIsVisible}>
-        <Form formData={modalData} handleFormData={handleFormData} />
-      </ModalScreen>
+      <MenuTab menuOptions={menuOptions} indexButtonSelected={indexButton} />
+      <UserList userPermissionId={indexButton} navigation={navigation} />
+      <RegistrationForm />
     </Screen>
   );
 }
