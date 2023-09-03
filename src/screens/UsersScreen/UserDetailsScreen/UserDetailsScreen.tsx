@@ -1,7 +1,7 @@
 import {text} from '@styles';
 import {Text} from 'react-native';
 
-export function UserUpdateScreen() {
+export function UserDetailsScreen() {
   return (
     <>
       <Text style={text.blueTextCenter20}>

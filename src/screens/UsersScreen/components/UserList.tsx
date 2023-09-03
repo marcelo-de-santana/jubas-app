@@ -4,7 +4,7 @@ import {
   MinimalUserResponseDTO,
   getAllUsersByPermissionRepo,
 } from '@repositories';
-import {SimpleListItem, LoadingScreen, SimpleSeparator} from '@components';
+import {SimpleItem, LoadingScreen, SimpleSeparator} from '@components';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AppStackParamList, AppStackProps} from '@routes';
 
@@ -25,11 +25,11 @@ export function UserList({navigation, userPermissionId}: UserListProps) {
   }
 
   function changeScreen() {
-    navigation.navigate('UnderConstruction');
+    navigation.navigate('UserDetailsScreen');
   }
 
   function renderItem({item}: {item: MinimalUserResponseDTO}) {
-    return <SimpleListItem textValues={[item.email]} onPress={changeScreen} />;
+    return <SimpleItem textValues={[item.email]} onPress={changeScreen} />;
   }
 
   return (

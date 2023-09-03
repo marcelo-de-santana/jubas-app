@@ -22,7 +22,7 @@ export function HomeScreen({navigation}: AppStackProps) {
     },
     {
       title: 'Gerenciar usuários',
-      routeName: 'UsersScreens',
+      routeName: 'UsersScreen',
     },
     {
       title: 'Gerenciar pagamentos',

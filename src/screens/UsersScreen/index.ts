@@ -1,2 +1,2 @@
-export * from './UpdateUserScreen/UseUpdaterScreen';
+export * from './/UserDetailsScreen/UserDetailsScreen';
 export * from './UsersScreen';

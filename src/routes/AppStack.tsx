@@ -2,7 +2,12 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {HomeScreen, UnderConstruction, UsersScreen} from '@screens';
+import {
+  HomeScreen,
+  UnderConstruction,
+  UserDetailsScreen,
+  UsersScreen,
+} from '@screens';
 import {EmployeeScreen} from '@screens';
 
 export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
@@ -15,7 +20,8 @@ export type AppStackParamList = {
   ServiceBookScreens: undefined;
   ServiceCatalogScreens: undefined;
   UnderConstruction: undefined;
-  UsersScreens: undefined;
+  UsersScreen: undefined;
+  UserDetailsScreen: undefined;
 };
 
 const NativeStack = createNativeStackNavigator<AppStackParamList>();
@@ -44,9 +50,14 @@ export function AppStack() {
         options={{title: 'Barbeiros', headerShown: true}}
       />
       <NativeStack.Screen
-        name="UsersScreens"
+        name="UsersScreen"
         component={UsersScreen}
         options={{title: 'Usuários', headerShown: true}}
+      />
+      <NativeStack.Screen
+        name="UserDetailsScreen"
+        component={UserDetailsScreen}
+        options={{title: 'Detalhes', headerShown: true}}
       />
       <NativeStack.Screen
         name="UnderConstruction"
