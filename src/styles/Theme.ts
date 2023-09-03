@@ -25,20 +25,17 @@ export const theme = StyleSheet.create({
     height: 150,
     width: 120,
   },
-  boxMenu: {
-    backgroundColor: '#9BA7BF',
-    borderRadius: 6,
-    height: 60,
-    justifyContent: 'center',
-    margin: 5,
-    width: '45%',
-  },
   blueBox: {
     backgroundColor: '#9BA7BF',
     borderRadius: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     padding: 12,
+  },
+  boxItems: {
+    minHeight: 50,
+    marginHorizontal: 10,
+    justifyContent: 'center',
   },
   blueBoxItems: {
     backgroundColor: '#9BA7BF',
@@ -111,5 +108,9 @@ export const theme = StyleSheet.create({
   label: {
     color: '#161c26',
     paddingTop: 5,
+  },
+  footerLine: {
+    borderBottomWidth: 0.5,
+    borderColor: '#CCCED9',
   },
 });

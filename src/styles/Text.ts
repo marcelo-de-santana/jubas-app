@@ -38,40 +38,40 @@ export const text = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
-  blackText16: {
-    color: '#000',
-    fontSize: 16,
-  },
-  blackText18: {
-    color: '#000',
-    fontSize: 18,
-  },
-  blackText20: {
-    color: '#000',
-    fontSize: 20,
-  },
-  blackTextCenter16: {
-    color: '#000',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  blackTextCenter18: {
-    color: '#000',
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  blackTextCenter20: {
-    color: '#000',
-    fontSize: 20,
-    textAlign: 'center',
-  },
-  darkBlueText14: {
-    color: '#161c26',
+  blueText14: {
+    color: '#161C26',
     fontSize: 14,
   },
-  darkBlueTextCenter14: {
-    color: '#161c26',
+  blueTextCenter14: {
+    color: '#161C26',
     fontSize: 14,
+    textAlign: 'center',
+  },
+  blueText16: {
+    color: '#161C26',
+    fontSize: 16,
+  },
+  blueTextCenter16: {
+    color: '#161C26',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  blueText18: {
+    color: '#161C26',
+    fontSize: 18,
+  },
+  blueTextCenter18: {
+    color: '#161C26',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  blueText20: {
+    color: '#161C26',
+    fontSize: 20,
+  },
+  blueTextCenter20: {
+    color: '#161C26',
+    fontSize: 20,
     textAlign: 'center',
   },
   redText20: {
@@ -80,4 +80,4 @@ export const text = StyleSheet.create({
   },
 });
 
-export const placeHolderColorTextInput = '#161c2660';
+export const placeHolderColorTextInput = '#161C2660';

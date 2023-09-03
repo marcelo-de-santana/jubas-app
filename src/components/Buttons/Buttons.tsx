@@ -17,7 +17,7 @@ export function BlueButton({onPress, title}: ButtonProps) {
 export function WhiteButton({onPress, title}: ButtonProps) {
   return (
     <TouchableOpacity style={button.whiteButton} onPress={onPress}>
-      <Text style={text.blackTextCenter18}>{title}</Text>
+      <Text style={text.blueTextCenter18}>{title}</Text>
     </TouchableOpacity>
   );
 }

@@ -50,7 +50,6 @@ export async function saveUserRepo(
       password: password,
       userPermission: {id: userPermissionId},
     });
-    console.log(response.data.email);
     SuccessAlert(`${response.data.email} gravado com sucesso!`);
   } catch (error) {
     DefaultErroAlert();

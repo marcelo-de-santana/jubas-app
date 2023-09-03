@@ -11,6 +11,6 @@ export const loader = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#3c4659',
+    color: '#161C26',
   },
 });

@@ -1,7 +1,7 @@
 import {Alert} from 'react-native';
 
 export function DefaultErroAlert() {
-  Alert.alert('', 'Ocorreu um erro, Tente Novamente mais Tarde');
+  Alert.alert('', 'Ocorreu um erro. Tente novamente mais tarde!');
 }
 
 export function SuccessAlert(message: string) {

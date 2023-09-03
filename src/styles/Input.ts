@@ -10,7 +10,7 @@ export const input = StyleSheet.create({
     paddingLeft: 10,
   },
   inputModal: {
-    backgroundColor: '#F2F2F2',
+    backgroundColor: '#CCCED9',
     borderRadius: 6,
     borderWidth: 1,
     color: '#161C26',

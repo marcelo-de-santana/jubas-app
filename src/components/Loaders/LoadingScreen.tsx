@@ -26,7 +26,7 @@ export function LoadingScreen({title, searchData}: LoadingScreenProps) {
   if (isLoading) {
     return (
       <View style={loader.container}>
-        <ActivityIndicator color="#3c4659" size="large" />
+        <ActivityIndicator color="#161C26" size="large" />
         <Text style={loader.text}>Carregando...</Text>
       </View>
     );

@@ -2,8 +2,9 @@ import {StyleSheet} from 'react-native';
 
 export const menu = StyleSheet.create({
   boxMenu: {
-    backgroundColor: '#CCCED9',
+    borderColor: '#CCCED9',
     borderRadius: 6,
+    borderWidth: 1,
     height: 110,
     justifyContent: 'center',
     margin: 1.5,
@@ -19,8 +20,9 @@ export const menu = StyleSheet.create({
     textAlign: 'center',
   },
   boxMenuTabGrey: {
-    backgroundColor: '#CCCED9',
+    borderColor: '#CCCED9',
     borderRadius: 6,
+    borderWidth: 1,
     height: 50,
     justifyContent: 'center',
     padding: 10,

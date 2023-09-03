@@ -1,4 +1,10 @@
-import {BlueButton, ModalForm, ModalScreen, SwitchButtons} from '@components';
+import {
+  BlueButton,
+  DecisionAlert,
+  ModalForm,
+  ModalScreen,
+  SwitchButtons,
+} from '@components';
 import {useState} from 'react';
 import {theme} from '@styles';
 import {saveUserRepo} from '@repositories';
@@ -25,8 +31,12 @@ export function RegistrationForm() {
     setUserPermission(Number(value));
   }
 
-  async function sendForm() {
-    await saveUserRepo(formData.email, formData.password, userPermission);
+  function confirmSend() {
+    DecisionAlert({onPress: sendForm});
+
+    async function sendForm() {
+      await saveUserRepo(formData.email, formData.password, userPermission);
+    }
   }
 
   return (
@@ -63,7 +73,7 @@ export function RegistrationForm() {
             switchValue={userPermission}
             changeSwitchValue={changeSwitchValue}
           />
-          <BlueButton title="Confirmar" onPress={sendForm} />
+          <BlueButton title="Confirmar" onPress={confirmSend} />
         </ModalForm>
       </ModalScreen>
     </>

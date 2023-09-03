@@ -19,8 +19,10 @@ export function SwitchButtons({
     <View style={style}>
       {switchOptions.map((option, index) => (
         <View key={index} style={button.switchButtonSpaced}>
-          <Text style={text.darkBlueText14}>{option.title}</Text>
+          <Text style={text.blueText14}>{option.title}</Text>
           <Switch
+            trackColor={{true: '#9BA7BF', false: '#CCCED9'}}
+            thumbColor={switchValue === option.index ? '#161C26' : '#CCCED9'}
             value={switchValue === option.index}
             onChange={() => changeSwitchValue(option.index)}
           />

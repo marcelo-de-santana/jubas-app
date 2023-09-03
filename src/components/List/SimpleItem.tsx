@@ -2,19 +2,18 @@ import {text, theme} from '@styles';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {ListItemProps} from './ListTypes';
 
-export function SimpleListItem({
+export function SimpleItem({
   children,
   onPress,
-  title,
   textValues,
 }: ListItemProps) {
   return (
-    <TouchableOpacity style={theme.blueBoxItems} onPress={onPress}>
+    <TouchableOpacity style={theme.boxItems} onPress={onPress}>
       {textValues ? (
         <View
           style={theme.boxFlexRow}>
           {textValues.map((value, index) => (
-            <Text key={index} style={text.whiteText16}>
+            <Text key={index} style={text.blueText14}>
               {value}
             </Text>
           ))}

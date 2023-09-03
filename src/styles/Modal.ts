@@ -15,7 +15,7 @@ export const modal = StyleSheet.create({
     paddingBottom: 8,
   },
   boxForm: {
-    backgroundColor: '#CCCED9',
+    backgroundColor: '#F2F2F2',
     borderRadius: 6,
     padding: 10,
     marginBottom: 10,

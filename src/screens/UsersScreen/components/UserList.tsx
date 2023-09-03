@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {
   MinimalUserResponseDTO,
   getAllUsersByPermissionRepo,
 } from '@repositories';
-import {SimpleListItem, LoadingScreen} from '@components';
+import {SimpleListItem, LoadingScreen, SimpleSeparator} from '@components';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AppStackParamList, AppStackProps} from '@routes';
 
@@ -37,6 +37,7 @@ export function UserList({navigation, userPermissionId}: UserListProps) {
       data={users}
       keyExtractor={users => users.id}
       renderItem={renderItem}
+      ItemSeparatorComponent={SimpleSeparator}
       ListEmptyComponent={
         <LoadingScreen searchData={searchData} title="Lista Vazia" />
       }
