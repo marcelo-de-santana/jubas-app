@@ -1,12 +1,12 @@
 import {useEffect, useState} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList} from 'react-native';
 import {
   MinimalUserResponseDTO,
   getAllUsersByPermissionRepo,
 } from '@repositories';
 import {SimpleItem, LoadingScreen, SimpleSeparator} from '@components';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {AppStackParamList, AppStackProps} from '@routes';
+import {AppStackParamList} from '@routes';
 
 type UserListProps = {
   userPermissionId: number;
@@ -24,12 +24,17 @@ export function UserList({navigation, userPermissionId}: UserListProps) {
     setUsers(await getAllUsersByPermissionRepo(userPermissionId));
   }
 
-  function changeScreen() {
-    navigation.navigate('UserDetailsScreen');
+  function changeScreen(userId: string) {
+    navigation.navigate('UserDetailsScreen', {userId: userId});
   }
 
   function renderItem({item}: {item: MinimalUserResponseDTO}) {
-    return <SimpleItem textValues={[item.email]} onPress={changeScreen} />;
+    return (
+      <SimpleItem
+        textValues={[item.email]}
+        onPress={() => changeScreen(item.id)}
+      />
+    );
   }
 
   return (

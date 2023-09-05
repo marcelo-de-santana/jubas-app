@@ -21,7 +21,7 @@ export type AppStackParamList = {
   ServiceCatalogScreens: undefined;
   UnderConstruction: undefined;
   UsersScreen: undefined;
-  UserDetailsScreen: undefined;
+  UserDetailsScreen: {userId: string};
 };
 
 const NativeStack = createNativeStackNavigator<AppStackParamList>();
