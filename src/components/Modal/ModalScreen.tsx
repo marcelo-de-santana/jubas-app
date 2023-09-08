@@ -1,21 +1,26 @@
 import {modal} from '@styles';
-import {Modal, Pressable, View} from 'react-native';
+import {Modal, ModalProps, Pressable, StatusBar, View} from 'react-native';
+import {StatusBarComponent} from '../StatusBar';
 
-export type ModalScreenProps = {
+export type ModalScreenProps = ModalProps & {
   children?: React.JSX.Element;
   handleVisibility: () => void;
-  transparent?: boolean;
-  visible: boolean;
 };
 
 export function ModalScreen({
   children,
   handleVisibility,
-  transparent,
-  visible,
+  ...props
 }: ModalScreenProps) {
   return (
-    <Modal animationType="fade" visible={visible} transparent={transparent}>
+    <Modal
+      {...props}
+      animationType={props?.animationType ?? 'fade'}
+      transparent={props?.transparent ?? true}>
+      <StatusBarComponent
+        barStyle={'light-content'}
+        backgroundColor={'#00000078'}
+      />
       <View style={modal.container}>
         <Pressable style={modal.pressable} onPress={handleVisibility} />
         {children}

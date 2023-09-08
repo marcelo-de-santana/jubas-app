@@ -6,7 +6,7 @@ const PATH = '';
 
 export async function authUser(userData: UserType) {
   try {
-    return await api.post('login', userData);
+    return await api.post(PATH, userData);
   } catch (error) {
     throw error;
   }
@@ -20,7 +20,7 @@ export async function createUserClient(userData: UserType) {
       userPermission: {id: 3},
     };
   try {
-    const response = await api.post(PATH, user);
+    const response = await api.post(`${PATH}/register`, user);
     if (response.status === 201) {
       return `Usuário "${response.data.email}" criado com sucesso!`;
     }
@@ -30,7 +30,7 @@ export async function createUserClient(userData: UserType) {
   }
 }
 
-export async function getAllUsersRepo() {
+export async function getAllUsers() {
   try {
     const response = await api.get(`${PATH}/all-users`);
     return response.data;
@@ -39,7 +39,7 @@ export async function getAllUsersRepo() {
   }
 }
 
-export async function saveUserRepo(
+export async function saveUser(
   email: string,
   password: string,
   userPermissionId: number,
@@ -56,7 +56,7 @@ export async function saveUserRepo(
   }
 }
 
-export async function getAllUsersByPermissionRepo(id: number) {
+export async function getAllUsersByPermission(id: number) {
   try {
     const respose = await api.get(`${PATH}/all-users/permission/${id}`);
     return respose.data;

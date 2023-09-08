@@ -1,5 +1,6 @@
-import {SafeAreaView, StatusBar} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {theme} from '@styles';
+import {StatusBarComponent} from './StatusBar';
 
 interface ScreenProps {
   children: React.ReactNode;
@@ -11,8 +12,4 @@ export function Screen({children}: ScreenProps) {
       {children}
     </SafeAreaView>
   );
-}
-
-function StatusBarComponent() {
-  return <StatusBar backgroundColor={'#F2F2F2'} barStyle={'dark-content'} />;
 }

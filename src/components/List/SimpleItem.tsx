@@ -19,7 +19,7 @@ export function SimpleItem({
           ))}
         </View>
       ) : (
-        ''
+        <></>
       )}
       {children}
     </TouchableOpacity>

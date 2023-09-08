@@ -7,7 +7,7 @@ import {
 } from '@components';
 import {useState} from 'react';
 import {theme} from '@styles';
-import {saveUserRepo} from '@repositories';
+import {saveUser} from '@repositories';
 
 export function RegistrationForm() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -35,7 +35,7 @@ export function RegistrationForm() {
     DecisionAlert({onPress: sendForm});
 
     async function sendForm() {
-      await saveUserRepo(formData.email, formData.password, userPermission);
+      await saveUser(formData.email, formData.password, userPermission);
     }
   }
 
@@ -43,7 +43,6 @@ export function RegistrationForm() {
     <>
       <BlueButton title="Cadastrar" onPress={handleVisibility} />
       <ModalScreen
-        transparent={true}
         visible={modalIsVisible}
         handleVisibility={handleVisibility}>
         <ModalForm

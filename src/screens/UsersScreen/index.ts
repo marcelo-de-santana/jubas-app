@@ -1,2 +1,2 @@
-export * from './/UserDetailsScreen/UserDetailsScreen';
+export * from './UserProfileScreen/UserProfileScreen';
 export * from './UsersScreen';

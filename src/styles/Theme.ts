@@ -37,6 +37,18 @@ export const theme = StyleSheet.create({
     marginHorizontal: 10,
     justifyContent: 'center',
   },
+  boxItemsPT: {
+    minHeight: 50,
+    marginHorizontal: 10,
+    paddingTop: 10,
+    justifyContent: 'center',
+  },
+  boxItemsFlexRow: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 10,
+  },
   blueBoxItems: {
     backgroundColor: '#9BA7BF',
     borderRadius: 6,

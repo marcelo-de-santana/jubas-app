@@ -1,9 +1,6 @@
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
-import {
-  MinimalUserResponseDTO,
-  getAllUsersByPermissionRepo,
-} from '@repositories';
+import {MinimalUserResponseDTO, getAllUsersByPermission} from '@repositories';
 import {SimpleItem, LoadingScreen, SimpleSeparator} from '@components';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AppStackParamList} from '@routes';
@@ -21,18 +18,20 @@ export function UserList({navigation, userPermissionId}: UserListProps) {
   }, [userPermissionId]);
 
   async function searchData() {
-    setUsers(await getAllUsersByPermissionRepo(userPermissionId));
+    setUsers(await getAllUsersByPermission(userPermissionId));
   }
 
-  function changeScreen(userId: string) {
-    navigation.navigate('UserDetailsScreen', {userId: userId});
+  function changeScreen(userId: string, userEmail: string) {
+    navigation.navigate('UserProfileScreen', {
+      user: {id: userId, email: userEmail},
+    });
   }
 
   function renderItem({item}: {item: MinimalUserResponseDTO}) {
     return (
       <SimpleItem
         textValues={[item.email]}
-        onPress={() => changeScreen(item.id)}
+        onPress={() => changeScreen(item.id, item.email)}
       />
     );
   }

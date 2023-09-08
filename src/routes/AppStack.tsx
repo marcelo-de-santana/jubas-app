@@ -5,12 +5,10 @@ import {
 import {
   HomeScreen,
   UnderConstruction,
-  UserDetailsScreen,
+  UserProfileScreen,
   UsersScreen,
 } from '@screens';
 import {EmployeeScreen} from '@screens';
-
-export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
 
 export type AppStackParamList = {
   EmployeeScreen: undefined;
@@ -21,7 +19,7 @@ export type AppStackParamList = {
   ServiceCatalogScreens: undefined;
   UnderConstruction: undefined;
   UsersScreen: undefined;
-  UserDetailsScreen: {userId: string};
+  UserProfileScreen: {user: {id: string; email: string}};
 };
 
 const NativeStack = createNativeStackNavigator<AppStackParamList>();
@@ -55,8 +53,8 @@ export function AppStack() {
         options={{title: 'Usuários', headerShown: true}}
       />
       <NativeStack.Screen
-        name="UserDetailsScreen"
-        component={UserDetailsScreen}
+        name="UserProfileScreen"
+        component={UserProfileScreen}
         options={{title: 'Detalhes', headerShown: true}}
       />
       <NativeStack.Screen
