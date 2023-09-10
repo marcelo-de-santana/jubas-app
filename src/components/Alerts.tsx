@@ -8,8 +8,13 @@ export function SuccessAlert(message: string) {
   Alert.alert('', message);
 }
 
-export function DecisionAlert({onPress}: {onPress: () => void}) {
-  Alert.alert('', 'Deseja prosseguir?', [
+type DecisionAlertProp = {
+  message?: string;
+  onPress: () => void;
+};
+
+export function DecisionAlert({message, onPress}: DecisionAlertProp) {
+  Alert.alert('', message ?? 'Deseja prosseguir?', [
     {
       style: 'cancel',
       text: 'CANCELAR',

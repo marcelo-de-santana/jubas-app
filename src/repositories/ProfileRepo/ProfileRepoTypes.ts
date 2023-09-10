@@ -4,3 +4,14 @@ export type MinimaProfilelResponseDTO = {
   cpf: number;
   statusProfile: boolean;
 };
+
+export type ProfileRequestDTO = {
+  id: string;
+  name: string;
+  cpf: number;
+  statusProfile: boolean;
+  user: {
+    id: string;
+    email: string;
+  };
+};

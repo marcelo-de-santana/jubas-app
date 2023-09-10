@@ -2,30 +2,22 @@ import {input, modal, placeHolderColorTextInput} from '@styles';
 import {TextInput, TextInputProps, View} from 'react-native';
 
 export type ModalFormProps = {
-  formData: any;
-  handleFormData: (key: string, value: string) => void;
   children?: React.ReactNode;
-  inputOptions: {label: string; inputProps?: TextInputProps}[];
+  inputProps: TextInputProps[];
 };
-
-export function ModalForm({
-  children,
-  formData,
-  handleFormData,
-  inputOptions,
-}: ModalFormProps) {
+export function ModalForm({children, inputProps}: ModalFormProps) {
   return (
     <View style={modal.boxItems}>
       <View style={modal.boxForm}>
-        {inputOptions.map((option, index) => (
+        {inputProps.map((prop, index) => (
           <TextInput
             key={index}
-            {...option.inputProps}
-            autoCapitalize="none"
-            placeholderTextColor={placeHolderColorTextInput}
+            {...prop}
+            autoCapitalize={prop?.autoCapitalize ?? 'none'}
+            placeholderTextColor={
+              prop?.placeholderTextColor ?? placeHolderColorTextInput
+            }
             style={input.inputModal}
-            value={formData[option.label.toLowerCase()]}
-            onChangeText={text => handleFormData(option.label, text)}
           />
         ))}
         {children}

@@ -42,35 +42,48 @@ export function RegistrationForm() {
   return (
     <>
       <BlueButton title="Cadastrar" onPress={handleVisibility} />
-      <ModalScreen
-        visible={modalIsVisible}
-        handleVisibility={handleVisibility}>
+      <ModalScreen visible={modalIsVisible} handleVisibility={handleVisibility}>
         <ModalForm
-          formData={formData}
-          handleFormData={handleFormData}
-          inputOptions={[
+          inputProps={[
             {
-              label: 'email',
-              inputProps: {placeholder: 'E-mail', maxLength: 50},
+              value: formData.email,
+              onChangeText: text => handleFormData('email', text),
+              placeholder: 'E-mail',
+              maxLength: 50,
             },
             {
-              label: 'password',
-              inputProps: {
-                maxLength: 16,
-                placeholder: 'Senha',
-                secureTextEntry: true,
-              },
+              value: formData.password,
+              onChangeText: text => handleFormData('password', text),
+              placeholder: 'Senha',
+              maxLength: 16,
+              secureTextEntry: true,
             },
           ]}>
           <SwitchButtons
             style={theme.boxFlexRow}
             switchOptions={[
-              {title: 'ADMIN', index: 1},
-              {title: 'BARBEIRO', index: 2},
-              {title: 'CLIENTE', index: 3},
+              {
+                title: 'ADMIN',
+                switchProps: {
+                  onValueChange: () => changeSwitchValue(1),
+                  value: userPermission === 1,
+                },
+              },
+              {
+                title: 'BARBEIRO',
+                switchProps: {
+                  onValueChange: () => changeSwitchValue(2),
+                  value: userPermission === 2,
+                },
+              },
+              {
+                title: 'CLIENTE',
+                switchProps: {
+                  onValueChange: () => changeSwitchValue(3),
+                  value: userPermission === 3,
+                },
+              },
             ]}
-            switchValue={userPermission}
-            changeSwitchValue={changeSwitchValue}
           />
           <BlueButton title="Confirmar" onPress={confirmSend} />
         </ModalForm>

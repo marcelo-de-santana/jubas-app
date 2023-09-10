@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 
 const initialValues = {
   isVisible: false,
@@ -12,15 +12,14 @@ type ModalContextType = {
 
 const ModalContext = createContext<ModalContextType>(initialValues);
 
-type ModalContextProviderProps = {
+type ModalProviderProps = {
   children?: React.ReactNode;
 };
 
-export function ModalProvider({children}: ModalContextProviderProps) {
+export function ModalProvider({children}: ModalProviderProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   function handleVisibility() {
-    console.log(isVisible);
     setIsVisible(!isVisible);
   }
   return (
