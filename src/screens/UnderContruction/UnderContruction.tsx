@@ -18,12 +18,8 @@ export function UnderConstruction() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
   image: {
-    height: "40%",
+    height: '40%',
     width: 'auto',
   },
   title: {

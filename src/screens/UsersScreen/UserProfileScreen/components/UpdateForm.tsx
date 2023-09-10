@@ -5,22 +5,31 @@ import {
   ModalScreen,
   SwitchButtons,
 } from '@components';
-import {useModalContext} from '@contexts';
 import {ProfileRequestDTO, updateProfile} from '@repositories';
 import {theme} from '@styles';
 import {cpfMask} from '@utils';
 
 type UpdateFormProps = {
-  goBack(): void;
   formData: ProfileRequestDTO;
   setFormData: React.Dispatch<React.SetStateAction<ProfileRequestDTO>>;
+  isVisible: boolean;
+  handleVisibility: () => void;
+  goBack(): void;
 };
 
-export function UpdateForm({goBack, formData, setFormData}: UpdateFormProps) {
-  const {isVisible, handleVisibility} = useModalContext();
-
+export function UpdateForm({
+  formData,
+  setFormData,
+  isVisible,
+  handleVisibility,
+  goBack,
+}: UpdateFormProps) {
   function handleFormData(key: string, value: string | number | boolean) {
     setFormData(prev => ({...prev, [key]: value}));
+  }
+
+  function handleUserOfFormData(key: string, value: string | number | boolean) {
+    setFormData(prev => ({...prev, user: {...prev.user, [key]: value}}));
   }
 
   function confirmSend() {
@@ -42,7 +51,7 @@ export function UpdateForm({goBack, formData, setFormData}: UpdateFormProps) {
           {
             placeholder: 'E-mail',
             value: formData.user.email,
-            onChangeText: text => handleFormData('email', text),
+            onChangeText: text => handleUserOfFormData('email', text),
           },
           {
             placeholder: 'Nome',

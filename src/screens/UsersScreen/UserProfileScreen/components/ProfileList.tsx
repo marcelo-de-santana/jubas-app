@@ -6,34 +6,24 @@ import {
   getAllProfilesByUserId,
 } from '@repositories';
 import {useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
-import {UpdateForm} from './UpdateForm';
+import {FlatList} from 'react-native';
 import {cpfMask} from '@utils';
 
 type ProfileListProps = {
-  children?: React.ReactNode;
-  goBack(): void;
-  params: Readonly<{
-    user: {
-      id: string;
-      email: string;
-    };
-  }>;
+  handleVisibility: () => void;
+  user: {
+    id: string;
+    email: string;
+  };
+  setFormData: React.Dispatch<React.SetStateAction<ProfileRequestDTO>>;
 };
 
-export function ProfileList({children, goBack, params}: ProfileListProps) {
-  const {user} = params;
+export function ProfileList({
+  handleVisibility,
+  user,
+  setFormData,
+}: ProfileListProps) {
   const [profiles, setProfiles] = useState<MinimaProfilelResponseDTO[]>([]);
-
-  const initialValues = {
-    id: '',
-    name: '',
-    cpf: 0,
-    statusProfile: false,
-    user,
-  };
-  const [formData, setFormData] = useState<ProfileRequestDTO>(initialValues);
-  const {handleVisibility} = useModalContext();
 
   async function searchData() {
     setProfiles(await getAllProfilesByUserId(user.id));
@@ -58,24 +48,17 @@ export function ProfileList({children, goBack, params}: ProfileListProps) {
   }
 
   return (
-    <>
-      <FlatList
-        keyExtractor={profile => profile.id}
-        data={profiles}
-        renderItem={renderItem}
-        ItemSeparatorComponent={SimpleSeparator}
-        ListEmptyComponent={
-          <LoadingScreen
-            searchData={searchData}
-            title="Nenhum perfil cadastrado"
-          />
-        }
-      />
-      <UpdateForm
-        goBack={goBack}
-        formData={formData}
-        setFormData={setFormData}
-      />
-    </>
+    <FlatList
+      keyExtractor={profile => profile.id}
+      data={profiles}
+      renderItem={renderItem}
+      ItemSeparatorComponent={SimpleSeparator}
+      ListEmptyComponent={
+        <LoadingScreen
+          searchData={searchData}
+          title="Nenhum perfil cadastrado"
+        />
+      }
+    />
   );
 }
