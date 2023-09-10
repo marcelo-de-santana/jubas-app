@@ -6,9 +6,7 @@ export function UnderConstruction() {
     <Screen>
       <Text style={styles.title}>Essa página está em construção</Text>
       <Image
-        source={{
-          uri: 'https://i.pinimg.com/originals/ce/d2/d0/ced2d0cc1832708a6a1ee95df0e285a1.gif',
-        }}
+        source={require('../../assets/images/app-em-construcao.gif')}
         style={styles.image}
       />
       <Text style={styles.description}>
@@ -25,7 +23,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: '50%',
+    height: "40%",
+    width: 'auto',
   },
   title: {
     fontSize: 20,
