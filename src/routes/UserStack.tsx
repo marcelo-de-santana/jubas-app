@@ -1,8 +1,14 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProfileRequestDTO, UserRequestDTO, UserResponseDTO} from '@repositories';
+import {
+  MinimalUserRequestDTO,
+  ProfileRequestDTO,
+  UserRequestDTO,
+  UserResponseDTO,
+} from '@repositories';
 import {
   UserCreateScreen,
   UserListScreen,
+  UserProfileCreateScreen,
   UserProfileScreen,
   UserProfileUpdateScreen,
   UserUpdateScreen,
@@ -13,7 +19,7 @@ export type UserStackParamList = {
   UserCreateScreen: undefined;
   UserUpdateScreen: {user: UserRequestDTO};
   UserProfileScreen: {user: UserRequestDTO};
-  UserProfileCreateScreen: undefined;
+  UserProfileCreateScreen: {user: MinimalUserRequestDTO};
   UserProfileUpdateScreen: {
     profile: ProfileRequestDTO;
   };
@@ -40,6 +46,15 @@ export function UserStack() {
         options={{title: 'Usuários', headerShown: true}}
       />
       <NativeStack.Screen
+        name="UserProfileScreen"
+        component={UserProfileScreen}
+        options={{
+          title: 'Detalhes',
+          headerShown: true,
+          animation: 'slide_from_right',
+        }}
+      />
+      <NativeStack.Screen
         name="UserCreateScreen"
         component={UserCreateScreen}
         options={{
@@ -55,18 +70,18 @@ export function UserStack() {
           presentation: 'transparentModal',
         }}
       />
-      <NativeStack.Screen
-        name="UserProfileScreen"
-        component={UserProfileScreen}
-        options={{
-          title: 'Detalhes',
-          headerShown: true,
-          animation: 'slide_from_right',
-        }}
-      />
+
       <NativeStack.Screen
         name="UserProfileUpdateScreen"
         component={UserProfileUpdateScreen}
+        options={{
+          animation: 'fade_from_bottom',
+          presentation: 'transparentModal',
+        }}
+      />
+      <NativeStack.Screen
+        name="UserProfileCreateScreen"
+        component={UserProfileCreateScreen}
         options={{
           title: 'Detalhes',
           animation: 'fade_from_bottom',

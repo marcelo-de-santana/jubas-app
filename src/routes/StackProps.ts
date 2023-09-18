@@ -20,3 +20,8 @@ export type UserUpdateScreenProps = NativeStackScreenProps<
   UserStackParamList,
   'UserUpdateScreen'
 >;
+
+export type UserProfileCreateScreenProps = NativeStackScreenProps<
+  UserStackParamList,
+  'UserProfileCreateScreen'
+>;

@@ -39,10 +39,14 @@ export function AppStack() {
         component={EmployeeScreen}
         options={{title: 'Barbeiros', headerShown: true}}
       />
-      <NativeStack.Screen name="UserStack" component={UserStack}/>
+      <NativeStack.Screen
+        name="UserStack"
+        component={UserStack}
+        />
       <NativeStack.Screen
         name="UnderConstruction"
         component={UnderConstruction}
+        options={{animation: 'fade_from_bottom'}}
       />
     </NativeStack.Navigator>
   );

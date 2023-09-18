@@ -18,7 +18,16 @@ export async function updateProfile(profile: ProfileRequestDTO) {
   try {
     const request = {...profile, cpf: removeCpfMask(String(profile.cpf))};
     const response = await api.put(PATH, request);
-    SuccessAlert(`Usuário: ${response.data.name} atualizado com sucesso!`);
+    SuccessAlert(`Perfil: ${response.data.name} atualizado com sucesso.`);
+  } catch (error) {
+    DefaultErroAlert();
+  }
+}
+
+export async function createProfile(profile: ProfileRequestDTO) {
+  try {
+    const response = await api.post(PATH, profile);
+    SuccessAlert(`Perfil: ${response.data.name} criado com sucesso.`);
   } catch (error) {
     DefaultErroAlert();
   }

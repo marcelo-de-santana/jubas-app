@@ -8,11 +8,7 @@ export type MinimalUserResponseDTO = {
 export type MinimalUserRequestDTO = {
   id?: string;
   email: string;
-  password: string;
-  userPermission: {
-    id: number;
-    type?: string;
-  };
+  password?: string;
 };
 
 export type UserResponseDTO = {
@@ -30,6 +26,6 @@ export type UserRequestDTO = {
   password?: string;
   userPermission: {
     id: number;
-    type: string;
+    type?: string;
   };
 };
