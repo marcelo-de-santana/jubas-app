@@ -8,7 +8,7 @@ export type MinimaProfilelResponseDTO = {
 };
 
 export interface ProfileRequestDTO {
-  id: string;
+  id?: string;
   name: string;
   cpf: number;
   statusProfile: boolean;

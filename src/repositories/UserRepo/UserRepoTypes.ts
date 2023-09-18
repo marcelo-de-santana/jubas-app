@@ -21,7 +21,7 @@ export type UserResponseDTO = {
 };
 
 export type UserRequestDTO = {
-  id: string;
+  id?: string;
   email: string;
   password?: string;
   userPermission: {

@@ -1,6 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   MinimalUserRequestDTO,
+  MinimalUserResponseDTO,
   ProfileRequestDTO,
   UserRequestDTO,
   UserResponseDTO,
@@ -17,9 +18,9 @@ import {
 export type UserStackParamList = {
   UserListScreen: undefined;
   UserCreateScreen: undefined;
-  UserUpdateScreen: {user: UserRequestDTO};
-  UserProfileScreen: {user: UserRequestDTO};
-  UserProfileCreateScreen: {user: MinimalUserRequestDTO};
+  UserUpdateScreen: {user: UserResponseDTO};
+  UserProfileScreen: {user: UserResponseDTO};
+  UserProfileCreateScreen: {user: MinimalUserResponseDTO};
   UserProfileUpdateScreen: {
     profile: ProfileRequestDTO;
   };

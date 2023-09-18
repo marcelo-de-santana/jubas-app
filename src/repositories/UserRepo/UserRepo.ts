@@ -1,5 +1,6 @@
 import {api} from '@services';
 import {
+  MinimalUserRequestDTO,
   MinimalUserResponseDTO,
   UserRequestDTO,
   UserResponseDTO,
@@ -44,19 +45,10 @@ export async function getAllUsers() {
   }
 }
 
-export async function saveUser(
-  email: string,
-  password: string,
-  userPermissionId: number,
-) {
+export async function createUser(user: UserRequestDTO) {
   try {
-    const response = await api.post(`${PATH}/register`, {
-      email: email,
-      password: password,
-      userPermission: {id: userPermissionId},
-    });
+    const response = await api.post(`${PATH}/register`, user);
     SuccessAlert(`${response.data.email} gravado com sucesso!`);
-    return true;
   } catch (error) {
     DefaultErroAlert();
   }

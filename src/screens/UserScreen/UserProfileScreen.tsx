@@ -35,7 +35,7 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
     return (
       <ListItem
         onPress={() =>
-          navigation.navigate('UserUpdateScreen', {user: {...user}})
+          navigation.navigate('UserUpdateScreen', route.params)
         }
         title={`Usuário: ${user.email}`}
         textValues={[`Nível: ${user.userPermission.id}`]}
@@ -81,7 +81,9 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
 
       <ButtonIcon
         color="#3C4659"
-        onPress={() => navigation.navigate('UserProfileCreateScreen')}>
+        onPress={() =>
+          navigation.navigate('UserProfileCreateScreen', route.params)
+        }>
         <Icon name="AddCircleIcon" color="#F2F2F2" size={40} />
       </ButtonIcon>
     </Screen>

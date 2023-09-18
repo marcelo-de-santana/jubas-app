@@ -9,7 +9,6 @@ export function UserProfileCreateScreen({
   route,
 }: UserProfileCreateScreenProps) {
   const [profile, setProfile] = useState({
-    id: '',
     name: '',
     cpf: '',
     statusProfile: false,

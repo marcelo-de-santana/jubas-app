@@ -1,43 +1,34 @@
 import {BlueButton, DecisionAlert, SwitchButtons, FormModal} from '@components';
 import {useState} from 'react';
 import {theme} from '@styles';
-import {saveUser} from '@repositories';
+import {createUser} from '@repositories';
 import {UserScreenProps} from '@routes';
 
 export function UserCreateScreen({navigation}: UserScreenProps) {
-  const [modalIsVisible, setModalIsVisible] = useState(false);
-
-  const [formData, setFormData] = useState({
+  const [user, setUser] = useState({
     email: '',
     password: '',
+    userPermission: {
+      id: 3,
+    },
   });
 
-  const [userPermission, setUserPermission] = useState(3);
-
-  function handleVisibility() {
-    setModalIsVisible(!modalIsVisible);
+  function handleUserState(key: string, value: string) {
+    setUser(prev => ({...prev, [key]: value}));
   }
 
-  function handleFormData(key: string, value: string) {
-    setFormData(prev => ({...prev, [key]: value}));
-  }
-
-  function changeSwitchValue(value: number | string) {
-    setUserPermission(Number(value));
+  function handleUserPermissionIdState(value: number) {
+    setUser(prev => ({
+      ...prev,
+      userPermission: {...prev.userPermission, id: value},
+    }));
   }
 
   function confirmSend() {
     DecisionAlert({onPress: sendForm});
-
     async function sendForm() {
-      const response = await saveUser(
-        formData.email,
-        formData.password,
-        userPermission,
-      );
-      if (response) {
-        handleVisibility;
-      }
+      await createUser(user);
+      navigation.goBack();
     }
   }
 
@@ -46,14 +37,14 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
       onPressToClose={() => navigation.goBack()}
       inputProps={[
         {
-          value: formData.email,
-          onChangeText: text => handleFormData('email', text),
+          value: user.email,
+          onChangeText: text => handleUserState('email', text),
           placeholder: 'E-mail',
           maxLength: 50,
         },
         {
-          value: formData.password,
-          onChangeText: text => handleFormData('password', text),
+          value: user.password,
+          onChangeText: text => handleUserState('password', text),
           placeholder: 'Senha',
           maxLength: 16,
           secureTextEntry: true,
@@ -65,22 +56,22 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
           {
             title: 'ADMIN',
             switchProps: {
-              onValueChange: () => changeSwitchValue(1),
-              value: userPermission === 1,
+              onValueChange: () => handleUserPermissionIdState(1),
+              value: user.userPermission.id === 1,
             },
           },
           {
             title: 'BARBEIRO',
             switchProps: {
-              onValueChange: () => changeSwitchValue(2),
-              value: userPermission === 2,
+              onValueChange: () => handleUserPermissionIdState(2),
+              value: user.userPermission.id === 2,
             },
           },
           {
             title: 'CLIENTE',
             switchProps: {
-              onValueChange: () => changeSwitchValue(3),
-              value: userPermission === 3,
+              onValueChange: () => handleUserPermissionIdState(3),
+              value: user.userPermission.id === 3,
             },
           },
         ]}
