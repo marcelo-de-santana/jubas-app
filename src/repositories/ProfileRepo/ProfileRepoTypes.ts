@@ -15,3 +15,11 @@ export type ProfileRequestDTO = {
     email: string;
   };
 };
+
+
+export type MinimalProfileRequestDTO = {
+  id: string;
+  name: string;
+  cpf: number;
+  statusProfile: boolean;
+};

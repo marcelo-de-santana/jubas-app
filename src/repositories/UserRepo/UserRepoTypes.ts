@@ -3,11 +3,6 @@ export type UserType = {email: string; password: string};
 export type MinimalUserResponseDTO = {
   id: string;
   email: string;
-  password: string;
-  userPermission: {
-    id: number;
-    type: string;
-  };
 };
 
 export type MinimalUserRequestDTO = {
@@ -17,5 +12,24 @@ export type MinimalUserRequestDTO = {
   userPermission: {
     id: number;
     type?: string;
+  };
+};
+
+export type UserResponseDTO = {
+  id: string;
+  email: string;
+  userPermission: {
+    id: number;
+    type: string;
+  };
+};
+
+export type UserRequestDTO = {
+  id: string;
+  email: string;
+  password?: string;
+  userPermission: {
+    id: number;
+    type: string;
   };
 };

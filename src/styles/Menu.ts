@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const menu = StyleSheet.create({
   boxMenu: {
     borderColor: '#CCCED9',
-    borderRadius: 6,
+    borderRadius: 10,
     borderWidth: 1,
     justifyContent: 'center',
     marginVertical: '1%',
@@ -21,7 +21,7 @@ export const menu = StyleSheet.create({
   },
   boxMenuTabGrey: {
     borderColor: '#CCCED9',
-    borderRadius: 6,
+    borderRadius: 10,
     borderWidth: 1,
     height: 50,
     justifyContent: 'center',
@@ -30,7 +30,7 @@ export const menu = StyleSheet.create({
   },
   boxMenuTabBlue: {
     backgroundColor: '#3C4659',
-    borderRadius: 6,
+    borderRadius: 10,
     height: 50,
     justifyContent: 'center',
     padding: 10,

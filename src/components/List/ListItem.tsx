@@ -1,6 +1,12 @@
 import {text, theme} from '@styles';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {ListItemProps} from './ListTypes';
+
+export type ListItemProps = {
+  children?: React.ReactNode;
+  onPress?: () => void;
+  title?: string | number;
+  textValues?: string[];
+};
 
 export function ListItem({
   children,

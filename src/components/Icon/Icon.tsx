@@ -1,11 +1,11 @@
 import {Pressable} from 'react-native';
-import {AddIcon} from '../../assets/icons/AddIcont';
+import {AddCircleIcon} from '../../assets/icons/AddCircleIcont';
 
 export interface IconProps {
   name: IconName;
   color?: string;
   size?: number;
-  OnPress?: () => void;
+  onPress?: () => void;
 }
 
 export interface IconBase {
@@ -13,12 +13,12 @@ export interface IconBase {
   color?: string;
 }
 
-export function Icon({name, color, size, OnPress}: IconProps) {
+export function Icon({name, color, size, onPress}: IconProps) {
   const SVGIcon = iconRegistry[name];
 
-  if (OnPress) {
+  if (onPress) {
     return (
-      <Pressable hitSlop={10} onPress={OnPress}>
+      <Pressable hitSlop={10} onPress={onPress}>
         <SVGIcon color={color} size={size} />;
       </Pressable>
     );
@@ -28,7 +28,7 @@ export function Icon({name, color, size, OnPress}: IconProps) {
 }
 
 const iconRegistry = {
-  addIcon: AddIcon,
+  AddCircleIcon: AddCircleIcon,
 };
 
 type IconType = typeof iconRegistry;

@@ -1,5 +1,10 @@
 import {api} from '@services';
-import {MinimalUserResponseDTO, UserType} from './UserRepoTypes';
+import {
+  MinimalUserResponseDTO,
+  UserRequestDTO,
+  UserResponseDTO,
+  UserType,
+} from './UserRepoTypes';
 import {SuccessAlert, DefaultErroAlert} from '@components';
 
 const PATH = '';
@@ -45,12 +50,13 @@ export async function saveUser(
   userPermissionId: number,
 ) {
   try {
-    const response = await api.post(PATH, {
+    const response = await api.post(`${PATH}/register`, {
       email: email,
       password: password,
       userPermission: {id: userPermissionId},
     });
     SuccessAlert(`${response.data.email} gravado com sucesso!`);
+    return true;
   } catch (error) {
     DefaultErroAlert();
   }
@@ -60,6 +66,15 @@ export async function getAllUsersByPermission(id: number) {
   try {
     const respose = await api.get(`${PATH}/all-users/permission/${id}`);
     return respose.data;
+  } catch (error) {
+    DefaultErroAlert();
+  }
+}
+
+export async function updateUser(user: UserRequestDTO) {
+  try {
+    const response = await api.put(`${PATH}`, user);
+    SuccessAlert(`${response.data.email}  atualizado com sucesso!`);
   } catch (error) {
     DefaultErroAlert();
   }
