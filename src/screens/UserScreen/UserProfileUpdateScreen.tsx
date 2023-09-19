@@ -1,20 +1,25 @@
-import {BlueButton, DecisionAlert, FormModal, SwitchButtons} from '@components';
 import {
-  ProfileRequestDTO,
-  updateProfile,
-} from '@repositories';
+  BlueButton,
+  ButtonIcon,
+  ButtonIconOpacity,
+  ButtonOpacity,
+  DecisionAlert,
+  FormModal,
+  Icon,
+  SwitchButtons,
+} from '@components';
+import {ProfileRequestDTO, deleteProfile, updateProfile} from '@repositories';
 import {UserProfileUpdateScreenProps} from '@routes';
-import {theme} from '@styles';
+import {text, theme} from '@styles';
 import {cpfMask} from '@utils';
 import {useState} from 'react';
+import {Pressable, Text, TouchableOpacity, View} from 'react-native';
 
 export function UserProfileUpdateScreen({
   navigation,
   route,
 }: UserProfileUpdateScreenProps) {
-  const [profile, setProfile] = useState<ProfileRequestDTO>(
-    route.params.profile,
-  );
+  const [profile, setProfile] = useState(route.params.profile);
 
   function handleProfile(key: string, value: string | number | boolean) {
     setProfile(prev => ({...prev, [key]: value}));
@@ -31,6 +36,17 @@ export function UserProfileUpdateScreen({
     });
     async function sendForm() {
       await updateProfile(profile);
+      navigation.goBack();
+    }
+  }
+
+  function confirmDeletion() {
+    DecisionAlert({
+      message: 'Deseja excluir o perfil?',
+      onPress: sendDeletion,
+    });
+    async function sendDeletion() {
+      await deleteProfile(profile.id);
       navigation.goBack();
     }
   }
@@ -69,7 +85,14 @@ export function UserProfileUpdateScreen({
           },
         ]}
       />
-      <BlueButton title="Salvar" onPress={confirmSend} />
+      <View style={theme.boxFlexRow}>
+        <ButtonOpacity onPress={confirmSend}>
+          <Text style={text.whiteTextCenter18}>Salvar</Text>
+        </ButtonOpacity>
+        <ButtonIconOpacity onPress={confirmDeletion}>
+          <Icon name="TrashIcon" color="#F2F2F2" size={30} />
+        </ButtonIconOpacity>
+      </View>
     </FormModal>
   );
 }

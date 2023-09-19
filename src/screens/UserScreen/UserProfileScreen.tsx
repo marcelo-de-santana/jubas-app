@@ -10,7 +10,7 @@ import {
 } from '@components';
 import {useEffect, useState} from 'react';
 import {MinimaProfilelResponseDTO, getAllProfilesByUserId} from '@repositories';
-import {FlatList} from 'react-native';
+import {FlatList, Pressable} from 'react-native';
 import {cpfMask} from '@utils';
 
 export function UserProfileScreen({navigation, route}: UserProfileProps) {
@@ -34,9 +34,7 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
   function ListHeaderComponent() {
     return (
       <ListItem
-        onPress={() =>
-          navigation.navigate('UserUpdateScreen', route.params)
-        }
+        onPress={() => navigation.navigate('UserUpdateScreen', route.params)}
         title={`Usuário: ${user.email}`}
         textValues={[`Nível: ${user.userPermission.id}`]}
       />

@@ -1,6 +1,5 @@
-import {BlueButton, InputOptionsButton, ModalForm} from '@components';
+import {BlueButton, ModalForm} from '@components';
 import {useState} from 'react';
-import {UserList} from './UserList';
 import {createBarberRepo} from '@repositories';
 import {Text, TouchableOpacity} from 'react-native';
 

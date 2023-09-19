@@ -5,7 +5,7 @@ import {theme} from '@styles';
 import {useState} from 'react';
 
 export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
-  const [user, setUser] = useState(route.params.user);
+  const [user, setUser] = useState({password: '', ...route.params.user});
 
   function handleUserState(key: string, value: string) {
     setUser(prev => ({...prev, [key]: value}));

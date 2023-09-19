@@ -22,11 +22,12 @@ export function UserProfileCreateScreen({
   function confirmSend() {
     DecisionAlert({onPress: sendForm});
     function sendForm() {
-      const request = {
+      const requestProfile = {
         ...profile,
         cpf: Number(removeCpfMask(profile.cpf)),
       };
-      createProfile(request);
+      createProfile(requestProfile);
+      navigation.goBack()
     }
   }
 

@@ -1,4 +1,4 @@
-export * from './EmployeeScreen/EmployeeScreen';
+export * from './EmployeeScreen';
 export * from './HomeScreen/HomeScreen';
 export * from './LoginScreen/LoginScreen';
 export * from './SignUpScreen/SignUpScreen';

@@ -1,10 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, UnderConstruction} from '@screens';
-import {EmployeeScreen} from '@screens';
 import {UserStack} from './UserStack';
+import {EmployeeStack} from './EmployeeStack';
 
 export type AppStackParamList = {
-  EmployeeScreen: undefined;
+  EmployeeStack: undefined;
   HomeScreen: undefined;
   MyAccount: undefined;
   ScheduleManagement: undefined;
@@ -34,15 +34,8 @@ export function AppStack() {
         component={HomeScreen}
         options={{title: 'Jubas Barber', headerShown: true}}
       />
-      <NativeStack.Screen
-        name="EmployeeScreen"
-        component={EmployeeScreen}
-        options={{title: 'Barbeiros', headerShown: true}}
-      />
-      <NativeStack.Screen
-        name="UserStack"
-        component={UserStack}
-        />
+      <NativeStack.Screen name="EmployeeStack" component={EmployeeStack} />
+      <NativeStack.Screen name="UserStack" component={UserStack} />
       <NativeStack.Screen
         name="UnderConstruction"
         component={UnderConstruction}

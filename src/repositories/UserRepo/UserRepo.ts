@@ -1,9 +1,6 @@
 import {api} from '@services';
 import {
-  MinimalUserRequestDTO,
-  MinimalUserResponseDTO,
   UserRequestDTO,
-  UserResponseDTO,
   UserType,
 } from './UserRepoTypes';
 import {SuccessAlert, DefaultErroAlert} from '@components';

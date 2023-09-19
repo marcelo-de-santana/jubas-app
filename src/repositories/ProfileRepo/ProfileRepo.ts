@@ -32,3 +32,12 @@ export async function createProfile(profile: ProfileRequestDTO) {
     DefaultErroAlert();
   }
 }
+
+export async function deleteProfile(userId: string){
+  try {
+    const response = await api.delete(`${PATH}/${userId}`);
+    SuccessAlert(`Perfil: ${response.data.name} excluído com sucesso.`);
+  } catch (error) {
+    DefaultErroAlert()
+  }
+}

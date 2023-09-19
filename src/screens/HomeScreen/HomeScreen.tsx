@@ -18,7 +18,7 @@ export function HomeScreen({navigation}: AppStackProps) {
     },
     {
       title: 'Gerenciar barbeiros',
-      routeName: 'UnderConstruction',
+      routeName: 'EmployeeList',
     },
     {
       title: 'Gerenciar usuários',

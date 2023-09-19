@@ -1,4 +1,4 @@
-import {MinimalUserRequestDTO} from '../UserRepo';
+import {MinimalUserRequestDTO, MinimalUserResponseDTO} from '../UserRepo';
 
 export type MinimaProfilelResponseDTO = {
   id: string;
@@ -21,3 +21,11 @@ export type MinimalProfileRequestDTO = {
   cpf: number;
   statusProfile: boolean;
 };
+
+export interface ProfileResponseDTO {
+  id: string;
+  name: string;
+  cpf: number;
+  statusProfile: boolean;
+  user: MinimalUserResponseDTO;
+}

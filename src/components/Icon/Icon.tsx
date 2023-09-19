@@ -1,5 +1,6 @@
 import {Pressable} from 'react-native';
 import {AddCircleIcon} from '../../assets/icons/AddCircleIcont';
+import {TrashIcon} from '../../assets/icons/Trash';
 
 export interface IconProps {
   name: IconName;
@@ -29,6 +30,7 @@ export function Icon({name, color, size, onPress}: IconProps) {
 
 const iconRegistry = {
   AddCircleIcon: AddCircleIcon,
+  TrashIcon: TrashIcon
 };
 
 type IconType = typeof iconRegistry;
