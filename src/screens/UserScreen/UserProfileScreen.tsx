@@ -58,10 +58,6 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
     );
   }
 
-  function ListEmptyComponent() {
-    return <EmptyListScreen title="Nenhum perfil cadastrado" />;
-  }
-
   if (isVisible) {
     return <LoadingScreen />;
   }
@@ -74,7 +70,9 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
         ListHeaderComponent={ListHeaderComponent}
         renderItem={renderItem}
         ItemSeparatorComponent={SimpleSeparator}
-        ListEmptyComponent={ListEmptyComponent}
+        ListEmptyComponent={EmptyListScreen({
+          title: 'Nenhum perfil cadastrado',
+        })}
       />
 
       <ButtonIcon

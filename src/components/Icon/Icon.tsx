@@ -1,5 +1,10 @@
 import {Pressable} from 'react-native';
-import {AddCircleIcon} from '../../assets/icons/AddCircleIcont';
+import {AddCircleIcon} from '../../assets/icons/AddCircleIcon';
+import {ChevronLeftIcon} from '../../assets/icons/ChevronLeftIcon';
+import {ChevronRightIcon} from '../../assets/icons/ChevronRightIcon';
+import {EditIcon} from '../../assets/icons/EditIcon';
+import {ToggleOffIcon} from '../../assets/icons/ToggleOffIcon';
+import {ToggleOnIcon} from '../../assets/icons/ToggleOnIcon';
 import {TrashIcon} from '../../assets/icons/Trash';
 
 export interface IconProps {
@@ -30,7 +35,12 @@ export function Icon({name, color, size, onPress}: IconProps) {
 
 const iconRegistry = {
   AddCircleIcon: AddCircleIcon,
-  TrashIcon: TrashIcon
+  ChevronLeftIcon: ChevronLeftIcon,
+  ChevronRightIcon: ChevronRightIcon,
+  EditIcon: EditIcon,
+  ToggleOffIcon: ToggleOffIcon,
+  ToggleOnIcon: ToggleOnIcon,
+  TrashIcon: TrashIcon,
 };
 
 type IconType = typeof iconRegistry;

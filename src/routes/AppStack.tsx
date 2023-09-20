@@ -27,12 +27,17 @@ export function AppStack() {
         },
         headerTintColor: '#3C4659',
         headerTitleAlign: 'center',
+        statusBarColor: '#f2f2f2',
+        statusBarStyle: 'dark',
       }}
       initialRouteName="HomeScreen">
       <NativeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{title: 'Jubas Barber', headerShown: true}}
+        options={{
+          title: 'Jubas Barber',
+          headerShown: true,
+        }}
       />
       <NativeStack.Screen name="EmployeeStack" component={EmployeeStack} />
       <NativeStack.Screen name="UserStack" component={UserStack} />

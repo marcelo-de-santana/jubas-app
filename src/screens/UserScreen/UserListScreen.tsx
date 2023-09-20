@@ -61,6 +61,15 @@ export function UserListScreen({navigation}: UserScreenProps) {
     });
   }
 
+  function ListHeaderComponent() {
+    return (
+      <MenuTab
+        menuOptions={menuOptions}
+        indexButtonSelected={userPermissionId}
+      />
+    );
+  }
+
   function renderItem({item}: {item: UserResponseDTO}) {
     return (
       <SimpleItem
@@ -70,27 +79,19 @@ export function UserListScreen({navigation}: UserScreenProps) {
     );
   }
 
-  function ListEmptyComponent() {
-    return <EmptyListScreen title="Lista Vazia" />;
-  }
-
   if (isLoading) {
     return <LoadingScreen />;
   }
 
   return (
     <Screen>
-      <MenuTab
-        menuOptions={menuOptions}
-        indexButtonSelected={userPermissionId}
-      />
-
       <FlatList
         data={users}
         keyExtractor={users => users.id}
         renderItem={renderItem}
+        ListHeaderComponent={ListHeaderComponent}
         ItemSeparatorComponent={SimpleSeparator}
-        ListEmptyComponent={ListEmptyComponent}
+        ListEmptyComponent={EmptyListScreen({title: 'Nenhum usuário listado.'})}
       />
 
       <ButtonIcon

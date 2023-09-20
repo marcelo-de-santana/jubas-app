@@ -1,6 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppStackParamList} from './AppStack';
 import {UserStackParamList} from './UserStack';
+import {EmployeeStackParamList} from './EmployeeStack';
 
 export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
 
@@ -24,4 +25,12 @@ export type UserUpdateScreenProps = NativeStackScreenProps<
 export type UserProfileCreateScreenProps = NativeStackScreenProps<
   UserStackParamList,
   'UserProfileCreateScreen'
+>;
+
+export type EmployeeScreenProps =
+  NativeStackScreenProps<EmployeeStackParamList>;
+
+export type EmployeeTimeListScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeTimeListScreen'
 >;

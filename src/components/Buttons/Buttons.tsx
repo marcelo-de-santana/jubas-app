@@ -30,7 +30,7 @@ export function ButtonIcon({
 }: {
   color?: string;
   children: React.ReactNode;
-  onPress: () => void;
+  onPress?: () => void;
 }) {
   return (
     <TouchableOpacity

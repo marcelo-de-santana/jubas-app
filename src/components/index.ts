@@ -7,6 +7,5 @@ export * from './List';
 export * from './Loaders';
 export * from './Menus';
 export * from './Modal';
-export * from './StatusBar';
 export * from './TextAlertError';
 export * from './Watch';

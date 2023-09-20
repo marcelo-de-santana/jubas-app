@@ -17,8 +17,8 @@ export function HomeScreen({navigation}: AppStackProps) {
       title: 'Gerenciar catálogo',
     },
     {
-      title: 'Gerenciar barbeiros',
-      routeName: 'EmployeeList',
+      title: 'Meus funcionários',
+      routeName: 'EmployeeStack',
     },
     {
       title: 'Gerenciar usuários',

@@ -7,7 +7,7 @@ const PATH = '/profile';
 
 export async function getAllProfilesByUserId(userId: string) {
   try {
-    const response = await api.get(`${PATH}/${userId}`);
+    const response = await api.get(`${PATH}/user/${userId}`);
     return response.data;
   } catch (error) {
     DefaultErroAlert();
@@ -33,11 +33,24 @@ export async function createProfile(profile: ProfileRequestDTO) {
   }
 }
 
-export async function deleteProfile(userId: string){
+export async function deleteProfile(userId: string) {
   try {
     const response = await api.delete(`${PATH}/${userId}`);
     SuccessAlert(`Perfil: ${response.data.name} excluído com sucesso.`);
   } catch (error) {
-    DefaultErroAlert()
+    DefaultErroAlert();
+  }
+}
+
+export async function getAllProfilesByUserPermissionId(
+  userPermissionId: number,
+) {
+  try {
+    const response = await api.get(
+      `${PATH}/user/permission/${userPermissionId}`,
+    );
+    return response.data;
+  } catch (error) {
+    DefaultErroAlert();
   }
 }
