@@ -1,16 +1,18 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   EmployeeListScreen,
-  EmployeeServiceListScreen,
+  EmployeeDetailsScreen,
+  EmployeeProfileScreen,
   EmployeeTimeListScreen,
 } from '@screens';
 
-import {MinimaProfilelResponseDTO} from '@repositories';
+import {EmployeeResponseDTO, MinimaProfilelResponseDTO} from '@repositories';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
-  EmployeeServiceListScreen: undefined;
-  EmployeeTimeListScreen: {profile: MinimaProfilelResponseDTO};
+  EmployeeDetailsScreen: {employee: EmployeeResponseDTO};
+  EmployeeProfileScreen: {profile: MinimaProfilelResponseDTO};
+  EmployeeTimeListScreen: undefined;
 };
 
 const NativeStack = createNativeStackNavigator<EmployeeStackParamList>();
@@ -33,22 +35,25 @@ export function EmployeeStack() {
         options={{headerTitle: 'Funcionários', headerShown: true}}
       />
       <NativeStack.Screen
-        name="EmployeeServiceListScreen"
-        component={EmployeeServiceListScreen}
-        options={{
-          headerTitle: 'Serviços',
+        name="EmployeeDetailsScreen"
+        component={EmployeeDetailsScreen}
+        options={({route}) => ({
+          headerTitle: route.params.employee.profile.name,
           headerShown: true,
           animation: 'slide_from_right',
+        })}
+      />
+      <NativeStack.Screen
+        name="EmployeeProfileScreen"
+        component={EmployeeProfileScreen}
+        options={{
+          animation: 'fade_from_bottom',
+          presentation: 'transparentModal',
         }}
       />
       <NativeStack.Screen
         name="EmployeeTimeListScreen"
         component={EmployeeTimeListScreen}
-        options={({route}) => ({
-          headerTitle: route.params.profile.name,
-          headerShown: true,
-          animation: 'slide_from_right',
-        })}
       />
     </NativeStack.Navigator>
   );

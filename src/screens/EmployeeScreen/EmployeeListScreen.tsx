@@ -1,28 +1,23 @@
 import {
-  ButtonIcon,
-  ButtonIconOpacity,
   EmptyListScreen,
   Icon,
   ListItem,
   LoadingScreen,
-  LoadingView,
   Screen,
-  SimpleItem,
   SimpleSeparator,
 } from '@components';
 import {
-  BarberResponseDTO,
+  EmployeeResponseDTO,
   MinimaProfilelResponseDTO,
-  getAllEmployeesRepo,
-  getAllProfilesByUserPermissionId,
+  getAllEmployees,
 } from '@repositories';
 import {EmployeeScreenProps} from '@routes';
 import {text, theme} from '@styles';
 import {useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity} from 'react-native';
+import {FlatList} from 'react-native';
 
 export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
-  const [employees, setEmployees] = useState<MinimaProfilelResponseDTO[]>([]);
+  const [employees, setEmployees] = useState<EmployeeResponseDTO[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -31,20 +26,26 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
 
   async function searchData() {
     setLoading(true);
-    setEmployees(await getAllProfilesByUserPermissionId(2));
+    setEmployees(await getAllEmployees());
     setLoading(false);
   }
 
-  function renderItem({item}: {item: MinimaProfilelResponseDTO}) {
+  function renderItem({item}: {item: EmployeeResponseDTO}) {
     return (
-      <TouchableOpacity
-        style={[theme.boxItemsFlexRow]}
-        onPress={() =>
-          navigation.navigate('EmployeeTimeListScreen', {profile: {...item}})
-        }>
-        <Text style={text.blueText14}>{[item.name]}</Text>
-        <Icon name="ChevronRightIcon" />
-      </TouchableOpacity>
+      <ListItem
+        onPress={() => navigation.navigate('EmployeeDetailsScreen', {employee: {...item}})}
+        title={item.profile.name}
+        textValues={
+          item.operationTime?.startTime
+            ? [
+                `Entrada\n${item.operationTime.startTime}`,
+                `I. Intervalo\n${item.operationTime.startInterval}`,
+                `F. Intervalo\n${item.operationTime.endInterval}`,
+                `Saída\n${item.operationTime.endTime}`,
+              ]
+            : ['Não possui horários cadastrados.']
+        }
+      />
     );
   }
 
@@ -56,7 +57,7 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
     <Screen>
       <FlatList
         data={employees}
-        keyExtractor={employeeData => employeeData.id}
+        keyExtractor={item => item.id}
         renderItem={renderItem}
         ItemSeparatorComponent={SimpleSeparator}
         ListEmptyComponent={EmptyListScreen({

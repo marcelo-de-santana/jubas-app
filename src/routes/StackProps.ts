@@ -30,7 +30,12 @@ export type UserProfileCreateScreenProps = NativeStackScreenProps<
 export type EmployeeScreenProps =
   NativeStackScreenProps<EmployeeStackParamList>;
 
-export type EmployeeTimeListScreenProps = NativeStackScreenProps<
+export type EmployeeDetailsScreenProps = NativeStackScreenProps<
   EmployeeStackParamList,
-  'EmployeeTimeListScreen'
+  'EmployeeDetailsScreen'
+>;
+
+export type EmployeeProfileScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeProfileScreen'
 >;

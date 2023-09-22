@@ -1,23 +1,21 @@
 import {api} from '@services';
-import {BarberRequestDTO} from './EmployeeRepoType';
-import {DefaultErroAlert} from '@components';
-import {Alert} from 'react-native';
+import {EmployeeRequestDTO} from './EmployeeRepoType';
+import {DefaultErroAlert, SuccessAlert} from '@components';
 
-const PATH = 'employee/barber';
+const PATH = '/employee';
 
-export async function createBarberRepo(barberData: BarberRequestDTO) {
+export async function registerEmployee(employee: EmployeeRequestDTO) {
   try {
-    const response = await api.post(PATH, barberData);
-    Alert.alert('', response.data);
+    const response = await api.post(PATH, employee);
+    SuccessAlert(response.data);
   } catch (error) {
     DefaultErroAlert();
-    return;
   }
 }
 
-export async function getAllEmployeesRepo() {
+export async function getAllEmployees() {
   try {
-    const response = await api.get('/employee/barber');
+    const response = await api.get(PATH);
     return response.data;
   } catch (error) {
     DefaultErroAlert();
