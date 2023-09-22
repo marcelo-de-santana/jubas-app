@@ -1,7 +1,6 @@
 import {Icon, ListItem, Screen, SimpleSeparator} from '@components';
 import {EmployeeDetailsScreenProps} from '@routes';
-import {text, theme} from '@styles';
-import {Text, View} from 'react-native';
+import {cpfMask} from '@utils';
 
 export function EmployeeDetailsScreen({
   navigation,
@@ -19,10 +18,12 @@ export function EmployeeDetailsScreen({
   return (
     <Screen>
       <ListItem
-        onPress={() => navigation.navigate('EmployeeProfileScreen', {profile})}
+        onPress={() =>
+          navigation.navigate('EmployeeProfileUpdateScreen', {profile})
+        }
         title={'Dados pessoais'}
         textValues={[
-          `CPF: ${profile.cpf ?? 'Não cadastrado'}`,
+          `CPF: ${profile.cpf ? cpfMask(profile.cpf) : 'Não cadastrado'}`,
           <IconProfile />,
         ]}
       />
@@ -30,6 +31,7 @@ export function EmployeeDetailsScreen({
       <SimpleSeparator />
 
       <ListItem
+        onPress={() => navigation.navigate('EmployeeTimeListScreen')}
         title={'Horários'}
         textValues={
           operationTime?.startTime

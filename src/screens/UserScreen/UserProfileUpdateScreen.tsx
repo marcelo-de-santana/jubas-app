@@ -1,6 +1,4 @@
 import {
-  BlueButton,
-  ButtonIcon,
   ButtonIconOpacity,
   ButtonOpacity,
   DecisionAlert,
@@ -8,12 +6,12 @@ import {
   Icon,
   SwitchButtons,
 } from '@components';
-import {ProfileRequestDTO, deleteProfile, updateProfile} from '@repositories';
+import {deleteProfile, updateUserAndProfile} from '@repositories';
 import {UserProfileUpdateScreenProps} from '@routes';
 import {text, theme} from '@styles';
-import {cpfMask} from '@utils';
+import {cpfMask, removeCpfMask} from '@utils';
 import {useState} from 'react';
-import {Pressable, Text, TouchableOpacity, View} from 'react-native';
+import {Text, View} from 'react-native';
 
 export function UserProfileUpdateScreen({
   navigation,
@@ -35,7 +33,11 @@ export function UserProfileUpdateScreen({
       onPress: sendForm,
     });
     async function sendForm() {
-      await updateProfile(profile);
+      const formattedProfile = {
+        ...profile,
+        cpf: removeCpfMask(profile.cpf),
+      };
+      await updateUserAndProfile(formattedProfile);
       navigation.goBack();
     }
   }
@@ -68,7 +70,7 @@ export function UserProfileUpdateScreen({
         {
           placeholder: 'CPF',
           maxLength: 14,
-          value: cpfMask(String(profile.cpf)),
+          value: cpfMask(profile.cpf),
           onChangeText: text => handleProfile('cpf', text),
         },
       ]}>

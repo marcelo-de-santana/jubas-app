@@ -1,4 +1,5 @@
-export function cpfMask(value: string) {
+export function cpfMask(value: string | number) {
+  value = String(value);
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{3})(\d)/, '$1.$2');
   value = value.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
@@ -7,9 +8,10 @@ export function cpfMask(value: string) {
   return value;
 }
 
-export function removeCpfMask(value: string) {
+export function removeCpfMask(value: string | number) {
+  value = String(value);
   value = value.replace(/[.-]/g, '');
-  return value;
+  return Number(value);
 }
 
 export function nameMask(value: string) {

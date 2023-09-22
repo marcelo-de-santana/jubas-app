@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   EmployeeListScreen,
   EmployeeDetailsScreen,
-  EmployeeProfileScreen,
+  EmployeeProfileUpdateScreen,
   EmployeeTimeListScreen,
 } from '@screens';
 
@@ -11,7 +11,7 @@ import {EmployeeResponseDTO, MinimaProfilelResponseDTO} from '@repositories';
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
   EmployeeDetailsScreen: {employee: EmployeeResponseDTO};
-  EmployeeProfileScreen: {profile: MinimaProfilelResponseDTO};
+  EmployeeProfileUpdateScreen: {profile: MinimaProfilelResponseDTO};
   EmployeeTimeListScreen: undefined;
 };
 
@@ -44,8 +44,8 @@ export function EmployeeStack() {
         })}
       />
       <NativeStack.Screen
-        name="EmployeeProfileScreen"
-        component={EmployeeProfileScreen}
+        name="EmployeeProfileUpdateScreen"
+        component={EmployeeProfileUpdateScreen}
         options={{
           animation: 'fade_from_bottom',
           presentation: 'transparentModal',

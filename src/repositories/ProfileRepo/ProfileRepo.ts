@@ -1,6 +1,6 @@
 import {DefaultErroAlert, SuccessAlert} from '@components';
 import {api} from '@services';
-import {ProfileRequestDTO} from './ProfileRepoTypes';
+import {MinimalProfileRequestDTO, ProfileRequestDTO} from './ProfileRepoTypes';
 import {removeCpfMask} from '@utils';
 
 const PATH = '/profile';
@@ -14,10 +14,9 @@ export async function getAllProfilesByUserId(userId: string) {
   }
 }
 
-export async function updateProfile(profile: ProfileRequestDTO) {
+export async function updateUserAndProfile(profile: ProfileRequestDTO) {
   try {
-    const request = {...profile, cpf: removeCpfMask(String(profile.cpf))};
-    const response = await api.put(PATH, request);
+    const response = await api.put(`${PATH}/user`, profile);
     SuccessAlert(`Perfil: ${response.data.name} atualizado com sucesso.`);
   } catch (error) {
     DefaultErroAlert();
@@ -50,6 +49,15 @@ export async function getAllProfilesByUserPermissionId(
       `${PATH}/user/permission/${userPermissionId}`,
     );
     return response.data;
+  } catch (error) {
+    DefaultErroAlert();
+  }
+}
+
+export async function updateProfile(profile: MinimalProfileRequestDTO) {
+  try {
+    const response = await api.put(PATH, profile);
+    SuccessAlert(`Perfil: ${response.data.name} atualizado com sucesso.`);
   } catch (error) {
     DefaultErroAlert();
   }

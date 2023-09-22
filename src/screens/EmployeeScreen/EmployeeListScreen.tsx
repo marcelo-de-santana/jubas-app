@@ -1,28 +1,24 @@
 import {
   EmptyListScreen,
-  Icon,
   ListItem,
   LoadingScreen,
   Screen,
   SimpleSeparator,
 } from '@components';
-import {
-  EmployeeResponseDTO,
-  MinimaProfilelResponseDTO,
-  getAllEmployees,
-} from '@repositories';
+import {EmployeeResponseDTO, getAllEmployees} from '@repositories';
 import {EmployeeScreenProps} from '@routes';
-import {text, theme} from '@styles';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
 export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
   const [employees, setEmployees] = useState<EmployeeResponseDTO[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    searchData();
-  }, []);
+    navigation.addListener('focus', () => {
+      searchData();
+    });
+  }, [navigation]);
 
   async function searchData() {
     setLoading(true);
@@ -33,7 +29,9 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
   function renderItem({item}: {item: EmployeeResponseDTO}) {
     return (
       <ListItem
-        onPress={() => navigation.navigate('EmployeeDetailsScreen', {employee: {...item}})}
+        onPress={() =>
+          navigation.navigate('EmployeeDetailsScreen', {employee: {...item}})
+        }
         title={item.profile.name}
         textValues={
           item.operationTime?.startTime

@@ -1,4 +1,4 @@
 export * from './EmployeeListScreen';
 export * from './EmployeeDetailsScreen';
-export * from './EmployeeProfileScreen';
+export * from './EmployeeProfileUpdateScreen';
 export * from './EmployeeTimeListScreen';
