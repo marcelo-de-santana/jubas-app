@@ -1,12 +1,12 @@
 import {
-  ButtonIcon,
-  EmptyListScreen,
+  ButtonOpacity,
+  EmptyListComponent,
   Icon,
   LoadingScreen,
   MenuTab,
   Screen,
-  SimpleItem,
-  SimpleSeparator,
+  ViewSeparator,
+  TouchableItem,
 } from '@components';
 import {useCallback, useState} from 'react';
 
@@ -72,33 +72,36 @@ export function UserListScreen({navigation}: UserScreenProps) {
 
   function renderItem({item}: {item: UserResponseDTO}) {
     return (
-      <SimpleItem
-        textValues={[item.email]}
+      <TouchableItem
         onPress={() => changeScreen({...item})}
+        textValues={[item.email]}
       />
     );
   }
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
   return (
     <Screen>
-      <FlatList
-        data={users}
-        keyExtractor={users => users.id}
-        renderItem={renderItem}
-        ListHeaderComponent={ListHeaderComponent}
-        ItemSeparatorComponent={SimpleSeparator}
-        ListEmptyComponent={EmptyListScreen({title: 'Nenhum usuário listado.'})}
-      />
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <FlatList
+          data={users}
+          keyExtractor={users => users.id}
+          renderItem={renderItem}
+          ListHeaderComponent={ListHeaderComponent}
+          ItemSeparatorComponent={ViewSeparator}
+          ListEmptyComponent={EmptyListComponent({
+            title: 'Nenhum usuário listado.',
+          })}
+        />
+      )}
 
-      <ButtonIcon
-        color="#3C4659"
+      <ButtonOpacity
+        type="square-right"
+        color="steel-blue"
         onPress={() => navigation.navigate('UserCreateScreen')}>
-        <Icon name="AddCircleIcon" color="#F2F2F2" size={40} />
-      </ButtonIcon>
+        <Icon name="AddCircleIcon" color="white" size={40} />
+      </ButtonOpacity>
     </Screen>
   );
 }

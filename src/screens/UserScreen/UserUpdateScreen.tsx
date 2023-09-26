@@ -1,7 +1,13 @@
-import {BlueButton, DecisionAlert, FormModal, SwitchButtons} from '@components';
+import {
+  ButtonOpacity,
+  DecisionAlert,
+  FormModal,
+  SwitchForm,
+  TextComponent,
+} from '@components';
 import {updateUser} from '@repositories';
 import {UserUpdateScreenProps} from '@routes';
-import {theme} from '@styles';
+import {theme, themeRegistry} from '@styles';
 import {useState} from 'react';
 
 export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
@@ -28,7 +34,7 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
 
   return (
     <FormModal
-      onPressToClose={() => navigation.goBack()}
+      pressableProps={{onPress: () => navigation.goBack()}}
       inputProps={[
         {
           placeholder: 'E-mail',
@@ -42,8 +48,8 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
           onChangeText: text => handleUserState('password', text),
         },
       ]}>
-      <SwitchButtons
-        style={theme.boxFlexRow}
+      <SwitchForm
+        style={themeRegistry['box-flex-row']}
         switchOptions={[
           {
             title: 'ADMIN',
@@ -68,7 +74,11 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
           },
         ]}
       />
-      <BlueButton title="Salvar" onPress={confirmSend} />
+      <ButtonOpacity onPress={confirmSend}>
+        <TextComponent color="white" size="L">
+          Salvar
+        </TextComponent>
+      </ButtonOpacity>
     </FormModal>
   );
 }

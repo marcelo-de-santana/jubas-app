@@ -47,6 +47,12 @@ export const text = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
+  blueTextCenter14W20: {
+    color: '#161C26',
+    fontSize: 14,
+    textAlign: 'center',
+    width: '20%',
+  },
   blueText16: {
     color: '#161C26',
     fontSize: 16,
@@ -80,4 +86,20 @@ export const text = StyleSheet.create({
   },
 });
 
-export const placeHolderColorTextInput = '#161C2660';
+export const fontSizeRegistry = {
+  XS: 12,
+  S: 14,
+  M: 16,
+  L: 18,
+  XL: 20,
+};
+
+export type FontSizeName = keyof typeof fontSizeRegistry;
+
+export type textAlignType =
+  | 'auto'
+  | 'left'
+  | 'right'
+  | 'center'
+  | 'justify'
+  | undefined;

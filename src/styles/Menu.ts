@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
+import { colorRegistry } from './Colors';
 
-export const menu = StyleSheet.create({
-  boxMenu: {
-    borderColor: '#CCCED9',
+export const registryMenu = StyleSheet.create({
+  box: {
     borderRadius: 10,
     borderWidth: 1,
     justifyContent: 'center',
@@ -11,30 +11,19 @@ export const menu = StyleSheet.create({
     paddingHorizontal: 10,
     width: '32%',
   },
-  textMenuBlack: {
-    color: '#161C26',
-    textAlign: 'center',
-  },
-  textMenuWhite: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  boxMenuTabGrey: {
-    borderColor: '#CCCED9',
+  'box-tab': {
     borderRadius: 10,
+    height: 50,
+    justifyContent: 'center',
+    padding: 10,
+    width: '32%',
+  },
+  'tab-style-lavender-gray': {
+    borderColor: colorRegistry['lavender-gray'],
     borderWidth: 1,
-    height: 50,
-    justifyContent: 'center',
-    padding: 10,
-    width: '32%',
   },
-  boxMenuTabBlue: {
-    backgroundColor: '#3C4659',
-    borderRadius: 10,
-    height: 50,
-    justifyContent: 'center',
-    padding: 10,
-    width: '32%',
+  'tab-style-steel-blue': {
+    backgroundColor: colorRegistry['steel-blue'],
     marginBottom: 5,
   },
   boxFlexRowMb: {
@@ -44,3 +33,5 @@ export const menu = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+export type MenuName = keyof typeof registryMenu;

@@ -1,4 +1,10 @@
-import {BlueButton, DecisionAlert, FormModal, SwitchButtons} from '@components';
+import {
+  ButtonOpacity,
+  DecisionAlert,
+  FormModal,
+  SwitchForm,
+  TextComponent,
+} from '@components';
 import {createProfile} from '@repositories';
 import {UserProfileCreateScreenProps} from '@routes';
 import {cpfMask, removeCpfMask} from '@utils';
@@ -27,13 +33,13 @@ export function UserProfileCreateScreen({
         cpf: Number(removeCpfMask(profile.cpf)),
       };
       createProfile(requestProfile);
-      navigation.goBack()
+      navigation.goBack();
     }
   }
 
   return (
     <FormModal
-      onPressToClose={() => navigation.goBack()}
+      pressableProps={{onPress: () => navigation.goBack()}}
       inputProps={[
         {
           placeholder: 'Nome',
@@ -47,7 +53,7 @@ export function UserProfileCreateScreen({
           onChangeText: text => handleProfileState('cpf', text),
         },
       ]}>
-      <SwitchButtons
+      <SwitchForm
         switchOptions={[
           {
             title: 'Status',
@@ -59,7 +65,11 @@ export function UserProfileCreateScreen({
           },
         ]}
       />
-      <BlueButton title="Salvar" onPress={confirmSend} />
+      <ButtonOpacity onPress={confirmSend}>
+        <TextComponent color="white" size="L">
+          Salvar
+        </TextComponent>
+      </ButtonOpacity>
     </FormModal>
   );
 }

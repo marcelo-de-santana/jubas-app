@@ -1,4 +1,5 @@
 import {MinimaProfilelResponseDTO} from '../ProfileRepo';
+import {WorkingHoursResponseDTO} from '../WorkingHoursRepo';
 
 export type EmployeeRequestDTO = {
   id?: string;
@@ -8,7 +9,7 @@ export type EmployeeRequestDTO = {
     id?: string;
     email?: string;
   };
-  operationTime?: {
+  workingHours?: {
     id: string;
   };
 };
@@ -16,12 +17,6 @@ export type EmployeeRequestDTO = {
 export type EmployeeResponseDTO = {
   id: string;
   profile: MinimaProfilelResponseDTO;
-  operationTime: {
-    id: number;
-    startTime: string;
-    startInterval: string;
-    endInterval: string;
-    endTime: string;
-  };
+  workingHours: WorkingHoursResponseDTO;
   services: [] | [{id: string; name: string; timeDuration?: string}];
 };

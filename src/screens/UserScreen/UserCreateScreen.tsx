@@ -1,6 +1,12 @@
-import {BlueButton, DecisionAlert, SwitchButtons, FormModal} from '@components';
+import {
+  DecisionAlert,
+  FormModal,
+  ButtonOpacity,
+  TextComponent,
+  SwitchForm,
+} from '@components';
 import {useState} from 'react';
-import {theme} from '@styles';
+import {themeRegistry} from '@styles';
 import {createUser} from '@repositories';
 import {UserScreenProps} from '@routes';
 
@@ -34,7 +40,7 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
 
   return (
     <FormModal
-      onPressToClose={() => navigation.goBack()}
+      pressableProps={{onPress: () => navigation.goBack()}}
       inputProps={[
         {
           value: user.email,
@@ -50,8 +56,8 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
           secureTextEntry: true,
         },
       ]}>
-      <SwitchButtons
-        style={theme.boxFlexRow}
+      <SwitchForm
+        style={themeRegistry['box-flex-row']}
         switchOptions={[
           {
             title: 'ADMIN',
@@ -76,7 +82,11 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
           },
         ]}
       />
-      <BlueButton title="Confirmar" onPress={confirmSend} />
+      <ButtonOpacity onPress={confirmSend}>
+        <TextComponent size="L" color="white">
+          Confirmar
+        </TextComponent>
+      </ButtonOpacity>
     </FormModal>
   );
 }

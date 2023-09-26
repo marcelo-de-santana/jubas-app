@@ -49,6 +49,22 @@ export const theme = StyleSheet.create({
     flexWrap: 'wrap',
     padding: 10,
   },
+  boxFlexRowList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 10,
+    marginVertical: 5,
+  },
+  boxFlexRowListGrey: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderRadius: 6,
+    backgroundColor: '#CCCED9',
+    marginVertical: 5,
+  },
   blueBoxItems: {
     backgroundColor: '#9BA7BF',
     borderRadius: 6,
@@ -126,3 +142,55 @@ export const theme = StyleSheet.create({
     borderColor: '#CCCED9',
   },
 });
+
+export const themeRegistry = StyleSheet.create({
+  container: {flex: 1},
+  'box-flex-row': {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  'box-flex-row-list': {
+    borderRadius: 6,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 10,
+    marginVertical: 5,
+  },
+  'box-modal-form': {
+    borderRadius: 6,
+    padding: 10,
+  },
+  'box-switch': {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  'box-items': {
+    minHeight: 50,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+  },
+  'box-items-header': {
+    minHeight: 50,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    paddingTop: 10,
+  },
+  'line-items': {
+    alignItems: 'center',
+    flexDirection: 'row',
+    minHeight: 50,
+    paddingHorizontal: 10,
+  },
+  'input-modal': {
+    borderRadius: 6,
+    borderWidth: 1,
+    height: 40,
+    marginVertical: 5,
+    paddingHorizontal: 10,
+  },
+});
+
+export type ThemeName = keyof typeof themeRegistry;

@@ -1,2 +1,2 @@
 export * from './LoadingScreen';
-export * from './LoadingView';
+export * from './LoadingIndicator';

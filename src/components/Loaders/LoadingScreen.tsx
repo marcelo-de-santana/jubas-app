@@ -1,10 +1,13 @@
+import {ColorName, colorRegistry, fontSizeRegistry} from '@styles';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 
-export function LoadingScreen() {
+export function LoadingScreen({color = 'midnight-blue'}: {color?: ColorName}) {
   return (
     <View style={styles.container}>
-      <ActivityIndicator color="#161C26" size="large" />
-      <Text style={styles.text}>Carregando...</Text>
+      <ActivityIndicator color={color} size="large" />
+      <Text style={[styles.text, {color: colorRegistry[color]}]}>
+        Carregando...
+      </Text>
     </View>
   );
 }
@@ -18,8 +21,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10,
-    fontSize: 16,
     fontWeight: 'bold',
-    color: '#161C26',
+    fontSize: fontSizeRegistry['M'],
   },
 });

@@ -1,5 +1,6 @@
-import {menu, theme} from '@styles';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {registryMenu} from '@styles';
+import {TouchableOpacity, View} from 'react-native';
+import {TextComponent} from '../Texts';
 
 type MenuProps = {
   menuOptions: {index?: number; title: string; onPress?: () => void}[];
@@ -8,26 +9,24 @@ type MenuProps = {
 
 export function MenuTab({menuOptions, indexButtonSelected}: MenuProps) {
   return (
-    <View style={menu.boxFlexRowMb}>
+    <View style={registryMenu.boxFlexRowMb}>
       {menuOptions ? (
         menuOptions.map((option, index) => {
-          const boxColor =
+          const tabStyle =
             indexButtonSelected === option.index
-              ? 'boxMenuTabBlue'
-              : 'boxMenuTabGrey';
+              ? 'tab-style-steel-blue'
+              : 'tab-style-lavender-gray';
           const textColor =
-            indexButtonSelected === option.index
-              ? 'textMenuWhite'
-              : 'textMenuBlack';
+            indexButtonSelected === option.index ? 'white' : 'midnight-blue';
           const disable = indexButtonSelected === option.index;
 
           return (
             <TouchableOpacity
               key={index}
-              style={menu[boxColor]}
+              style={[registryMenu['box-tab'], registryMenu[tabStyle]]}
               onPress={option.onPress}
               disabled={disable}>
-              <Text style={menu[textColor]}>{option.title}</Text>
+              <TextComponent color={textColor}>{option.title}</TextComponent>
             </TouchableOpacity>
           );
         })

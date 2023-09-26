@@ -1,17 +1,18 @@
 import {UserProfileProps} from '@routes';
 import {
-  ButtonIcon,
-  EmptyListScreen,
+  ButtonOpacity,
+  EmptyListComponent,
   Icon,
-  ListItem,
   LoadingScreen,
   Screen,
-  SimpleSeparator,
+  TouchableItem,
+  ViewSeparator,
 } from '@components';
 import {useEffect, useState} from 'react';
 import {MinimaProfilelResponseDTO, getAllProfilesByUserId} from '@repositories';
-import {FlatList, Pressable} from 'react-native';
+import {FlatList} from 'react-native';
 import {cpfMask} from '@utils';
+import {themeRegistry} from '@styles';
 
 export function UserProfileScreen({navigation, route}: UserProfileProps) {
   const {user} = route.params;
@@ -33,28 +34,42 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
 
   function ListHeaderComponent() {
     return (
-      <ListItem
-        onPress={() => navigation.navigate('UserUpdateScreen', route.params)}
-        title={`Usuário: ${user.email}`}
-        textValues={[`Nível: ${user.userPermission.id}`]}
-      />
+      <>
+        <TouchableItem
+          type="box-items-header"
+          onPress={() => navigation.navigate('UserUpdateScreen', route.params)}
+          textProps={{align: 'justify'}}
+          textValues={[`Usuário: ${user.email}`]}>
+          <TouchableItem
+            textValues={[`Nível: ${user.userPermission.id}`]}
+            disabled
+          />
+        </TouchableItem>
+        <ViewSeparator />
+      </>
     );
   }
 
   function renderItem({item}: {item: MinimaProfilelResponseDTO}) {
     return (
-      <ListItem
-        title={item.name}
+      <TouchableItem
+        type="box-items-header"
+        textValues={[item.name]}
+        textProps={{align: 'justify'}}
         onPress={() =>
           navigation.navigate('UserProfileUpdateScreen', {
             profile: {...item, user: {...user}},
           })
-        }
-        textValues={[
-          `CPF: ${cpfMask(String(item.cpf))}`,
-          `Status: ${item.statusProfile ? 'ATIVO' : 'INATIVO'}`,
-        ]}
-      />
+        }>
+        <TouchableItem
+          type="box-flex-row-list"
+          textValues={[
+            `CPF: ${cpfMask(String(item.cpf))}`,
+            `Status: ${item.statusProfile ? 'ATIVO' : 'INATIVO'}`,
+          ]}
+          disabled
+        />
+      </TouchableItem>
     );
   }
 
@@ -69,19 +84,20 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
         data={profiles}
         ListHeaderComponent={ListHeaderComponent}
         renderItem={renderItem}
-        ItemSeparatorComponent={SimpleSeparator}
-        ListEmptyComponent={EmptyListScreen({
+        ItemSeparatorComponent={ViewSeparator}
+        ListEmptyComponent={EmptyListComponent({
           title: 'Nenhum perfil cadastrado',
         })}
       />
 
-      <ButtonIcon
-        color="#3C4659"
+      <ButtonOpacity
+        color="steel-blue"
+        type="square-right"
         onPress={() =>
           navigation.navigate('UserProfileCreateScreen', route.params)
         }>
-        <Icon name="AddCircleIcon" color="#F2F2F2" size={40} />
-      </ButtonIcon>
+        <Icon name="AddCircleIcon" color="white" size={40} />
+      </ButtonOpacity>
     </Screen>
   );
 }

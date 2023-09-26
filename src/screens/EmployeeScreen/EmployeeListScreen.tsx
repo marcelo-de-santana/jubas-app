@@ -1,12 +1,15 @@
 import {
-  EmptyListScreen,
-  ListItem,
+  ButtonOpacity,
+  EmptyListComponent,
+  Icon,
   LoadingScreen,
   Screen,
-  SimpleSeparator,
+  TouchableItem,
+  ViewSeparator,
 } from '@components';
 import {EmployeeResponseDTO, getAllEmployees} from '@repositories';
 import {EmployeeScreenProps} from '@routes';
+import {themeRegistry} from '@styles';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
@@ -28,22 +31,28 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
 
   function renderItem({item}: {item: EmployeeResponseDTO}) {
     return (
-      <ListItem
+      <TouchableItem
+        style={[themeRegistry['box-items'], {paddingTop: 10}]}
+        textValues={[item.profile.name]}
+        textProps={{align: 'justify'}}
         onPress={() =>
           navigation.navigate('EmployeeDetailsScreen', {employee: {...item}})
-        }
-        title={item.profile.name}
-        textValues={
-          item.operationTime?.startTime
-            ? [
-                `Entrada\n${item.operationTime.startTime}`,
-                `I. Intervalo\n${item.operationTime.startInterval}`,
-                `F. Intervalo\n${item.operationTime.endInterval}`,
-                `Saída\n${item.operationTime.endTime}`,
-              ]
-            : ['Não possui horários cadastrados.']
-        }
-      />
+        }>
+        <TouchableItem
+          disabled
+          type="box-flex-row-list"
+          textValues={
+            item.workingHours?.startTime
+              ? [
+                  `Entrada\n${item.workingHours.startTime}`,
+                  `I. Intervalo\n${item.workingHours.startInterval}`,
+                  `F. Intervalo\n${item.workingHours.endInterval}`,
+                  `Saída\n${item.workingHours.endTime}`,
+                ]
+              : ['Não possui horários cadastrados.']
+          }
+        />
+      </TouchableItem>
     );
   }
 
@@ -57,11 +66,16 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
         data={employees}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        ItemSeparatorComponent={SimpleSeparator}
-        ListEmptyComponent={EmptyListScreen({
+        ItemSeparatorComponent={ViewSeparator}
+        ListEmptyComponent={EmptyListComponent({
           title: 'Nenhum funcionário listado',
         })}
       />
+      <ButtonOpacity
+        type="square-right"
+        onPress={() => navigation.navigate('EmployeeProfileCreateScreen')}>
+        <Icon name="AddCircleIcon" color="white" size={40} />
+      </ButtonOpacity>
     </Screen>
   );
 }

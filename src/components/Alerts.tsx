@@ -4,7 +4,11 @@ export function DefaultErroAlert() {
   Alert.alert('', 'Ocorreu um erro. Tente novamente mais tarde!');
 }
 
-export function SuccessAlert(message: string) {
+export function SuccessAlert({
+  message = 'Operação bem sucedida!',
+}: {
+  message: string;
+}) {
   Alert.alert('', message);
 }
 
@@ -13,8 +17,11 @@ type DecisionAlertProp = {
   onPress: () => void;
 };
 
-export function DecisionAlert({message, onPress}: DecisionAlertProp) {
-  Alert.alert('', message ?? 'Deseja prosseguir?', [
+export function DecisionAlert({
+  message = 'Deseja prosseguir?',
+  onPress,
+}: DecisionAlertProp) {
+  Alert.alert('', message, [
     {
       style: 'cancel',
       text: 'CANCELAR',

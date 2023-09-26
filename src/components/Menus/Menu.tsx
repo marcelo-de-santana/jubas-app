@@ -1,4 +1,4 @@
-import {menu, theme} from '@styles';
+import {colorRegistry, registryMenu, themeRegistry} from '@styles';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 type MenuProps = {
@@ -11,19 +11,23 @@ export function Menu({menuOptions, navigate}: MenuProps) {
     navigate(routeName);
   }
   return (
-    <View style={theme.boxFlexRow}>
-      {menuOptions ? (
-        menuOptions.map((option, index) => (
-          <TouchableOpacity
-            key={index}
-            style={menu.boxMenu}
-            onPress={() => goToScreen(option.routeName ?? 'UnderConstruction')}>
-            <Text style={menu.textMenuBlack}>{option.title}</Text>
-          </TouchableOpacity>
-        ))
-      ) : (
-        <></>
-      )}
+    <View style={themeRegistry['box-flex-row']}>
+      {menuOptions?.map((option, index) => (
+        <TouchableOpacity
+          key={index}
+          style={[
+            registryMenu['box'],
+            {borderColor: colorRegistry['lavender-gray']},
+          ]}
+          onPress={() => goToScreen(option.routeName ?? 'UnderConstruction')}>
+          <Text
+            style={[
+              {color: colorRegistry['midnight-blue'], textAlign: 'center'},
+            ]}>
+            {option.title}
+          </Text>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 }

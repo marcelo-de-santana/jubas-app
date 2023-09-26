@@ -1,4 +1,10 @@
-import {BlueButton, DecisionAlert, FormModal, SwitchButtons} from '@components';
+import {
+  ButtonOpacity,
+  DecisionAlert,
+  FormModal,
+  SwitchForm,
+  TextComponent,
+} from '@components';
 import {updateProfile} from '@repositories';
 import {EmployeeProfileUpdateScreenProps} from '@routes';
 import {cpfMask, removeCpfMask} from '@utils';
@@ -24,7 +30,7 @@ export function EmployeeProfileUpdateScreen({
 
   return (
     <FormModal
-      onPressToClose={() => navigation.goBack()}
+      pressableProps={{onPress: () => navigation.goBack()}}
       inputProps={[
         {
           placeholder: 'Nome',
@@ -39,7 +45,7 @@ export function EmployeeProfileUpdateScreen({
           maxLength: 14,
         },
       ]}>
-      <SwitchButtons
+      <SwitchForm
         switchOptions={[
           {
             title: 'Status',
@@ -51,7 +57,11 @@ export function EmployeeProfileUpdateScreen({
           },
         ]}
       />
-      <BlueButton title="Salvar" onPress={confirmSend} />
+      <ButtonOpacity type="send" onPress={confirmSend}>
+        <TextComponent color="white" size="L">
+          Salvar
+        </TextComponent>
+      </ButtonOpacity>
     </FormModal>
   );
 }

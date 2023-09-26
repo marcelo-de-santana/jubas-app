@@ -1,17 +1,17 @@
 import {
-  ButtonIconOpacity,
   ButtonOpacity,
   DecisionAlert,
   FormModal,
   Icon,
-  SwitchButtons,
+  SwitchForm,
+  TextComponent,
 } from '@components';
 import {deleteProfile, updateUserAndProfile} from '@repositories';
 import {UserProfileUpdateScreenProps} from '@routes';
-import {text, theme} from '@styles';
+import {theme} from '@styles';
 import {cpfMask, removeCpfMask} from '@utils';
 import {useState} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 
 export function UserProfileUpdateScreen({
   navigation,
@@ -55,7 +55,7 @@ export function UserProfileUpdateScreen({
 
   return (
     <FormModal
-      onPressToClose={() => navigation.goBack()}
+      pressableProps={{onPress: () => navigation.goBack()}}
       inputProps={[
         {
           placeholder: 'E-mail',
@@ -74,8 +74,8 @@ export function UserProfileUpdateScreen({
           onChangeText: text => handleProfile('cpf', text),
         },
       ]}>
-      <SwitchButtons
-        style={theme.boxItems}
+      <SwitchForm
+        style={{paddingVertical: 10, paddingHorizontal: 5}}
         switchOptions={[
           {
             title: 'Status',
@@ -88,12 +88,14 @@ export function UserProfileUpdateScreen({
         ]}
       />
       <View style={theme.boxFlexRow}>
-        <ButtonOpacity onPress={confirmSend}>
-          <Text style={text.whiteTextCenter18}>Salvar</Text>
+        <ButtonOpacity type="send-flex" onPress={confirmSend}>
+          <TextComponent color="white" size="L">
+            Salvar
+          </TextComponent>
         </ButtonOpacity>
-        <ButtonIconOpacity onPress={confirmDeletion}>
-          <Icon name="TrashIcon" color="#F2F2F2" size={30} />
-        </ButtonIconOpacity>
+        <ButtonOpacity type="small" color="red" onPress={confirmDeletion}>
+          <Icon name="TrashIcon" color="white" size={30} />
+        </ButtonOpacity>
       </View>
     </FormModal>
   );

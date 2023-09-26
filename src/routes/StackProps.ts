@@ -39,3 +39,23 @@ export type EmployeeProfileUpdateScreenProps = NativeStackScreenProps<
   EmployeeStackParamList,
   'EmployeeProfileUpdateScreen'
 >;
+
+export type EmployeeServicesListScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeServicesListScreen'
+>;
+
+export type EmployeeTimeListScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeTimeListScreen'
+>;
+
+export type EmployeeTimeCreateScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeTimeCreateScreen'
+>;
+
+export type EmployeeProfileCreateScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeProfileCreateScreen'
+>;
