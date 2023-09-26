@@ -24,8 +24,8 @@ export type UserRequestDTO = {
   id?: string;
   email: string;
   password?: string;
-  userPermission: {
-    id: number;
+  userPermission?: {
+    id?: number;
     type?: string;
   };
 };

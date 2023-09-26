@@ -23,7 +23,6 @@ export function SwitchForm({
         <View key={index} style={[themeRegistry[type]]}>
           <TextComponent {...textProps}>{option?.title}</TextComponent>
           <Switch
-            {...option.switchProps}
             trackColor={{
               true: colorRegistry['blue-gray'],
               false: colorRegistry['lavender-gray'],
@@ -33,6 +32,7 @@ export function SwitchForm({
                 ? colorRegistry['midnight-blue']
                 : colorRegistry['lavender-gray']
             }
+            {...option.switchProps}
           />
         </View>
       ))}

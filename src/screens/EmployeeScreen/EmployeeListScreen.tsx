@@ -71,11 +71,6 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
           title: 'Nenhum funcionário listado',
         })}
       />
-      <ButtonOpacity
-        type="square-right"
-        onPress={() => navigation.navigate('EmployeeProfileCreateScreen')}>
-        <Icon name="AddCircleIcon" color="white" size={40} />
-      </ButtonOpacity>
     </Screen>
   );
 }

@@ -1,7 +1,8 @@
 import {
   ButtonOpacity,
   DecisionAlert,
-  FormModal,
+  ViewModal,
+  InputForm,
   SwitchForm,
   TextComponent,
 } from '@components';
@@ -38,38 +39,39 @@ export function UserProfileCreateScreen({
   }
 
   return (
-    <FormModal
-      pressableProps={{onPress: () => navigation.goBack()}}
-      inputProps={[
-        {
-          placeholder: 'Nome',
-          value: profile.name,
-          onChangeText: text => handleProfileState('name', text),
-        },
-        {
-          placeholder: 'CPF',
-          maxLength: 14,
-          value: cpfMask(profile.cpf),
-          onChangeText: text => handleProfileState('cpf', text),
-        },
-      ]}>
-      <SwitchForm
-        switchOptions={[
+    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
+      <InputForm
+        inputProps={[
           {
-            title: 'Status',
-            switchProps: {
-              value: profile.statusProfile,
-              onChange: () =>
-                handleProfileState('statusProfile', !profile.statusProfile),
-            },
+            placeholder: 'Nome',
+            value: profile.name,
+            onChangeText: text => handleProfileState('name', text),
           },
-        ]}
-      />
-      <ButtonOpacity onPress={confirmSend}>
-        <TextComponent color="white" size="L">
-          Salvar
-        </TextComponent>
-      </ButtonOpacity>
-    </FormModal>
+          {
+            placeholder: 'CPF',
+            maxLength: 14,
+            value: cpfMask(profile.cpf),
+            onChangeText: text => handleProfileState('cpf', text),
+          },
+        ]}>
+        <SwitchForm
+          switchOptions={[
+            {
+              title: 'Status',
+              switchProps: {
+                value: profile.statusProfile,
+                onChange: () =>
+                  handleProfileState('statusProfile', !profile.statusProfile),
+              },
+            },
+          ]}
+        />
+        <ButtonOpacity onPress={confirmSend}>
+          <TextComponent color="white" size="L">
+            Salvar
+          </TextComponent>
+        </ButtonOpacity>
+      </InputForm>
+    </ViewModal>
   );
 }

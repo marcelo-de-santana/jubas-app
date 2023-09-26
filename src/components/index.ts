@@ -7,4 +7,5 @@ export * from './List';
 export * from './Loaders';
 export * from './Menus';
 export * from './Texts';
+export * from './ViewModal';
 export * from './Watch';

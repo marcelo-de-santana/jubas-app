@@ -1,7 +1,8 @@
 import {
   ButtonOpacity,
   DecisionAlert,
-  FormModal,
+  ViewModal,
+  InputForm,
   Icon,
   SwitchForm,
   TextComponent,
@@ -54,49 +55,50 @@ export function UserProfileUpdateScreen({
   }
 
   return (
-    <FormModal
-      pressableProps={{onPress: () => navigation.goBack()}}
-      inputProps={[
-        {
-          placeholder: 'E-mail',
-          value: profile.user.email,
-          onChangeText: text => handleUserProfile('email', text),
-        },
-        {
-          placeholder: 'Nome',
-          value: profile.name,
-          onChangeText: text => handleProfile('name', text),
-        },
-        {
-          placeholder: 'CPF',
-          maxLength: 14,
-          value: cpfMask(profile.cpf),
-          onChangeText: text => handleProfile('cpf', text),
-        },
-      ]}>
-      <SwitchForm
-        style={{paddingVertical: 10, paddingHorizontal: 5}}
-        switchOptions={[
+    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
+      <InputForm
+        inputProps={[
           {
-            title: 'Status',
-            switchProps: {
-              value: profile.statusProfile,
-              onValueChange: () =>
-                handleProfile('statusProfile', !profile.statusProfile),
-            },
+            placeholder: 'E-mail',
+            value: profile.user.email,
+            onChangeText: text => handleUserProfile('email', text),
           },
-        ]}
-      />
-      <View style={theme.boxFlexRow}>
-        <ButtonOpacity type="send-flex" onPress={confirmSend}>
-          <TextComponent color="white" size="L">
-            Salvar
-          </TextComponent>
-        </ButtonOpacity>
-        <ButtonOpacity type="small" color="red" onPress={confirmDeletion}>
-          <Icon name="TrashIcon" color="white" size={30} />
-        </ButtonOpacity>
-      </View>
-    </FormModal>
+          {
+            placeholder: 'Nome',
+            value: profile.name,
+            onChangeText: text => handleProfile('name', text),
+          },
+          {
+            placeholder: 'CPF',
+            maxLength: 14,
+            value: cpfMask(profile.cpf),
+            onChangeText: text => handleProfile('cpf', text),
+          },
+        ]}>
+        <SwitchForm
+          style={{paddingVertical: 10, paddingHorizontal: 5}}
+          switchOptions={[
+            {
+              title: 'Status',
+              switchProps: {
+                value: profile.statusProfile,
+                onValueChange: () =>
+                  handleProfile('statusProfile', !profile.statusProfile),
+              },
+            },
+          ]}
+        />
+        <View style={theme.boxFlexRow}>
+          <ButtonOpacity type="send-flex" onPress={confirmSend}>
+            <TextComponent color="white" size="L">
+              Salvar
+            </TextComponent>
+          </ButtonOpacity>
+          <ButtonOpacity type="small" color="red" onPress={confirmDeletion}>
+            <Icon name="TrashIcon" color="white" size={30} />
+          </ButtonOpacity>
+        </View>
+      </InputForm>
+    </ViewModal>
   );
 }

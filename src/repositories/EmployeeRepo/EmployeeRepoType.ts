@@ -1,14 +1,12 @@
-import {MinimaProfilelResponseDTO} from '../ProfileRepo';
+import {MinimaProfilelResponseDTO, MinimalProfileRequestDTO} from '../ProfileRepo';
+import {UserRequestDTO} from '../UserRepo';
 import {WorkingHoursResponseDTO} from '../WorkingHoursRepo';
 
 export type EmployeeRequestDTO = {
   id?: string;
   name: string;
   statusProfile?: boolean;
-  user: {
-    id?: string;
-    email?: string;
-  };
+  profile: MinimalProfileRequestDTO;
   workingHours?: {
     id: string;
   };

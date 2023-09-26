@@ -1,9 +1,10 @@
 import {
   ButtonOpacity,
   DecisionAlert,
-  FormModal,
+  InputForm,
   SwitchForm,
   TextComponent,
+  ViewModal,
 } from '@components';
 import {updateProfile} from '@repositories';
 import {EmployeeProfileUpdateScreenProps} from '@routes';
@@ -29,39 +30,40 @@ export function EmployeeProfileUpdateScreen({
   }
 
   return (
-    <FormModal
-      pressableProps={{onPress: () => navigation.goBack()}}
-      inputProps={[
-        {
-          placeholder: 'Nome',
-          value: profile.name,
-          onChangeText: text => handleProfileState('name', text),
-        },
-        {
-          placeholder: 'CPF',
-          value: cpfMask(profile.cpf),
-          onChangeText: text => handleProfileState('cpf', text),
-          keyboardType: 'numeric',
-          maxLength: 14,
-        },
-      ]}>
-      <SwitchForm
-        switchOptions={[
+    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
+      <InputForm
+        inputProps={[
           {
-            title: 'Status',
-            switchProps: {
-              value: profile.statusProfile,
-              onChange: () =>
-                handleProfileState('statusProfile', !profile.statusProfile),
-            },
+            placeholder: 'Nome',
+            value: profile.name,
+            onChangeText: text => handleProfileState('name', text),
           },
-        ]}
-      />
-      <ButtonOpacity type="send" onPress={confirmSend}>
-        <TextComponent color="white" size="L">
-          Salvar
-        </TextComponent>
-      </ButtonOpacity>
-    </FormModal>
+          {
+            placeholder: 'CPF',
+            value: cpfMask(profile.cpf),
+            onChangeText: text => handleProfileState('cpf', text),
+            keyboardType: 'numeric',
+            maxLength: 14,
+          },
+        ]}>
+        <SwitchForm
+          switchOptions={[
+            {
+              title: 'Status',
+              switchProps: {
+                value: profile.statusProfile,
+                onChange: () =>
+                  handleProfileState('statusProfile', !profile.statusProfile),
+              },
+            },
+          ]}
+        />
+        <ButtonOpacity type="send" onPress={confirmSend}>
+          <TextComponent color="white" size="L">
+            Salvar
+          </TextComponent>
+        </ButtonOpacity>
+      </InputForm>
+    </ViewModal>
   );
 }

@@ -58,7 +58,7 @@ export const button = StyleSheet.create({
 });
 
 export const buttonRegistry = StyleSheet.create({
-  'active': {
+  active: {
     borderRadius: 6,
     marginVertical: 5,
     padding: 10,
@@ -76,7 +76,7 @@ export const buttonRegistry = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
   },
-  'switch': {
+  switch: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -99,6 +99,12 @@ export const buttonRegistry = StyleSheet.create({
     position: 'absolute',
     right: 20,
     bottom: 20,
+  },
+  'square-inline': {
+    justifyContent: 'center',
+    width: '20%',
+    borderRadius: 6,
+    minHeight: 40,
   },
 });
 

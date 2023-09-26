@@ -1,9 +1,10 @@
 import {
   DecisionAlert,
-  FormModal,
   ButtonOpacity,
   TextComponent,
   SwitchForm,
+  ViewModal,
+  InputForm,
 } from '@components';
 import {useState} from 'react';
 import {themeRegistry} from '@styles';
@@ -39,54 +40,55 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
   }
 
   return (
-    <FormModal
-      pressableProps={{onPress: () => navigation.goBack()}}
-      inputProps={[
-        {
-          value: user.email,
-          onChangeText: text => handleUserState('email', text),
-          placeholder: 'E-mail',
-          maxLength: 50,
-        },
-        {
-          value: user.password,
-          onChangeText: text => handleUserState('password', text),
-          placeholder: 'Senha',
-          maxLength: 16,
-          secureTextEntry: true,
-        },
-      ]}>
-      <SwitchForm
-        style={themeRegistry['box-flex-row']}
-        switchOptions={[
+    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
+      <InputForm
+        inputProps={[
           {
-            title: 'ADMIN',
-            switchProps: {
-              onValueChange: () => handleUserPermissionIdState(1),
-              value: user.userPermission.id === 1,
-            },
+            value: user.email,
+            onChangeText: text => handleUserState('email', text),
+            placeholder: 'E-mail',
+            maxLength: 50,
           },
           {
-            title: 'BARBEIRO',
-            switchProps: {
-              onValueChange: () => handleUserPermissionIdState(2),
-              value: user.userPermission.id === 2,
-            },
+            value: user.password,
+            onChangeText: text => handleUserState('password', text),
+            placeholder: 'Senha',
+            maxLength: 16,
+            secureTextEntry: true,
           },
-          {
-            title: 'CLIENTE',
-            switchProps: {
-              onValueChange: () => handleUserPermissionIdState(3),
-              value: user.userPermission.id === 3,
+        ]}>
+        <SwitchForm
+          style={themeRegistry['box-flex-row']}
+          switchOptions={[
+            {
+              title: 'ADMIN',
+              switchProps: {
+                onValueChange: () => handleUserPermissionIdState(1),
+                value: user.userPermission.id === 1,
+              },
             },
-          },
-        ]}
-      />
-      <ButtonOpacity onPress={confirmSend}>
-        <TextComponent size="L" color="white">
-          Confirmar
-        </TextComponent>
-      </ButtonOpacity>
-    </FormModal>
+            {
+              title: 'BARBEIRO',
+              switchProps: {
+                onValueChange: () => handleUserPermissionIdState(2),
+                value: user.userPermission.id === 2,
+              },
+            },
+            {
+              title: 'CLIENTE',
+              switchProps: {
+                onValueChange: () => handleUserPermissionIdState(3),
+                value: user.userPermission.id === 3,
+              },
+            },
+          ]}
+        />
+        <ButtonOpacity onPress={confirmSend}>
+          <TextComponent size="L" color="white">
+            Confirmar
+          </TextComponent>
+        </ButtonOpacity>
+      </InputForm>
+    </ViewModal>
   );
 }

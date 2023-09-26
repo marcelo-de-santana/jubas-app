@@ -1,7 +1,8 @@
 import {
   ButtonOpacity,
   DecisionAlert,
-  FormModal,
+  ViewModal,
+  InputForm,
   SwitchForm,
   TextComponent,
 } from '@components';
@@ -33,52 +34,53 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
   }
 
   return (
-    <FormModal
-      pressableProps={{onPress: () => navigation.goBack()}}
-      inputProps={[
-        {
-          placeholder: 'E-mail',
-          value: user.email,
-          onChangeText: text => handleUserState('email', text),
-        },
-        {
-          placeholder: 'Senha (Opcional)',
-          value: user?.password,
-          secureTextEntry: true,
-          onChangeText: text => handleUserState('password', text),
-        },
-      ]}>
-      <SwitchForm
-        style={themeRegistry['box-flex-row']}
-        switchOptions={[
+    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
+      <InputForm
+        inputProps={[
           {
-            title: 'ADMIN',
-            switchProps: {
-              value: user.userPermission.id === 1,
-              onChange: () => handleUserPermissionState('id', 1),
-            },
+            placeholder: 'E-mail',
+            value: user.email,
+            onChangeText: text => handleUserState('email', text),
           },
           {
-            title: 'BARBER',
-            switchProps: {
-              value: user.userPermission.id === 2,
-              onChange: () => handleUserPermissionState('id', 2),
-            },
+            placeholder: 'Senha (Opcional)',
+            value: user?.password,
+            secureTextEntry: true,
+            onChangeText: text => handleUserState('password', text),
           },
-          {
-            title: 'CLIENT',
-            switchProps: {
-              value: user.userPermission.id === 3,
-              onChange: () => handleUserPermissionState('id', 3),
+        ]}>
+        <SwitchForm
+          style={themeRegistry['box-flex-row']}
+          switchOptions={[
+            {
+              title: 'ADMIN',
+              switchProps: {
+                value: user.userPermission.id === 1,
+                onChange: () => handleUserPermissionState('id', 1),
+              },
             },
-          },
-        ]}
-      />
-      <ButtonOpacity onPress={confirmSend}>
-        <TextComponent color="white" size="L">
-          Salvar
-        </TextComponent>
-      </ButtonOpacity>
-    </FormModal>
+            {
+              title: 'BARBER',
+              switchProps: {
+                value: user.userPermission.id === 2,
+                onChange: () => handleUserPermissionState('id', 2),
+              },
+            },
+            {
+              title: 'CLIENT',
+              switchProps: {
+                value: user.userPermission.id === 3,
+                onChange: () => handleUserPermissionState('id', 3),
+              },
+            },
+          ]}
+        />
+        <ButtonOpacity onPress={confirmSend}>
+          <TextComponent color="white" size="L">
+            Salvar
+          </TextComponent>
+        </ButtonOpacity>
+      </InputForm>
+    </ViewModal>
   );
 }

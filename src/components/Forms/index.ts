@@ -1,2 +1,2 @@
-export * from './FormModal';
+export * from './InputForm';
 export * from './SwitchForm';

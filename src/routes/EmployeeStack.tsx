@@ -6,7 +6,6 @@ import {
   EmployeeTimeListScreen,
   EmployeeTimeCreateScreen,
   EmployeeServicesListScreen,
-  EmployeeProfileCreateScreen,
 } from '@screens';
 
 import {EmployeeResponseDTO, MinimaProfilelResponseDTO} from '@repositories';
@@ -14,7 +13,6 @@ import {EmployeeResponseDTO, MinimaProfilelResponseDTO} from '@repositories';
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
   EmployeeDetailsScreen: {employee: EmployeeResponseDTO};
-  EmployeeProfileCreateScreen: undefined;
   EmployeeProfileUpdateScreen: {profile: MinimaProfilelResponseDTO};
   EmployeeTimeCreateScreen: undefined;
   EmployeeTimeListScreen: {employee: EmployeeResponseDTO};
@@ -48,14 +46,6 @@ export function EmployeeStack() {
           headerShown: true,
           animation: 'slide_from_right',
         })}
-      />
-      <NativeStack.Screen
-        name="EmployeeProfileCreateScreen"
-        component={EmployeeProfileCreateScreen}
-        options={{
-          animation: 'fade_from_bottom',
-          presentation: 'transparentModal',
-        }}
       />
       <NativeStack.Screen
         name="EmployeeProfileUpdateScreen"

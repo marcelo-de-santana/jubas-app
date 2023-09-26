@@ -54,8 +54,3 @@ export type EmployeeTimeCreateScreenProps = NativeStackScreenProps<
   EmployeeStackParamList,
   'EmployeeTimeCreateScreen'
 >;
-
-export type EmployeeProfileCreateScreenProps = NativeStackScreenProps<
-  EmployeeStackParamList,
-  'EmployeeProfileCreateScreen'
->;

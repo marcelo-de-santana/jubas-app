@@ -1,7 +1,7 @@
 import {ButtonName, buttonRegistry, ColorName, colorRegistry} from '@styles';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
-interface ButtonOpacityProps extends TouchableOpacityProps {
+export interface ButtonOpacityProps extends TouchableOpacityProps {
   color?: ColorName;
   type?: ButtonName;
   children?: React.ReactNode;
