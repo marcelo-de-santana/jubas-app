@@ -102,7 +102,6 @@ export const buttonRegistry = StyleSheet.create({
   },
   'square-inline': {
     justifyContent: 'center',
-    width: '20%',
     borderRadius: 6,
     minHeight: 40,
   },

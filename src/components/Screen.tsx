@@ -1,7 +1,7 @@
-import {DimensionValue, SafeAreaView} from 'react-native';
+import {DimensionValue, SafeAreaView, ViewProps} from 'react-native';
 import {ColorName, ThemeName, colorRegistry, themeRegistry} from '@styles';
 
-interface ScreenProps {
+interface ScreenProps extends ViewProps {
   children: React.ReactNode;
   type?: ThemeName;
   color?: ColorName;
@@ -12,6 +12,7 @@ export function Screen({
   type = 'container',
   color = 'light-gray',
   padding = 10,
+  ...props
 }: ScreenProps) {
   return (
     <SafeAreaView
@@ -21,7 +22,8 @@ export function Screen({
           backgroundColor: colorRegistry[color],
           padding: padding,
         },
-      ]}>
+      ]}
+      {...props}>
       {children}
     </SafeAreaView>
   );

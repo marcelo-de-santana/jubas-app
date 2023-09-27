@@ -47,3 +47,36 @@ export function fullTimeMask(value: string) {
   value = value.replace(/(\d{2}:\d{2})(\d)/, '$1:$2');
   return value;
 }
+
+export function timestampToTimeFormat({time = 1695783600000}: {time?: number}) {
+  let date = new Date(Number(time));
+  let timeFormatted = date.toLocaleString('pt-BR', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  return timeFormatted;
+}
+
+export function timeToTimestamp({time = '00:00'}: {time?: string}) {
+  const [hours, minutes] = time.split(':').map(Number);
+
+  if (
+    isNaN(hours) ||
+    isNaN(minutes) ||
+    hours < 0 ||
+    hours > 23 ||
+    minutes < 0 ||
+    minutes > 59
+  ) {
+    throw new Error('Hora inválida.');
+  }
+
+  const timestamp = new Date();
+  timestamp.setHours(hours);
+  timestamp.setMinutes(minutes);
+  timestamp.setSeconds(0);
+  timestamp.setMilliseconds(0);
+
+  return timestamp;
+}
