@@ -1,26 +1,20 @@
 import {Alert} from 'react-native';
 
-export function DefaultErroAlert() {
-  Alert.alert('', 'Ocorreu um erro. Tente novamente mais tarde!');
-}
+type AlertProps = {
+  message?: string;
+  onPress?: () => void;
+};
 
-export function SuccessAlert({
-  message = 'Operação bem sucedida!',
-}: {
-  message: string;
-}) {
+export function AlertComponent({
+  message = 'Ocorreu um erro. Tente novamente mais tarde!',
+}: AlertProps) {
   Alert.alert('', message);
 }
-
-type DecisionAlertProp = {
-  message?: string;
-  onPress: () => void;
-};
 
 export function DecisionAlert({
   message = 'Deseja prosseguir?',
   onPress,
-}: DecisionAlertProp) {
+}: AlertProps) {
   Alert.alert('', message, [
     {
       style: 'cancel',

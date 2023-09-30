@@ -1,5 +1,6 @@
 import {
   ButtonOpacity,
+  DecisionAlert,
   Icon,
   LoadingScreen,
   Screen,
@@ -7,7 +8,11 @@ import {
   TouchableComponent,
   ViewSeparator,
 } from '@components';
-import {WorkingHoursResponseDTO, getAllWorkingHours} from '@repositories';
+import {
+  WorkingHoursResponseDTO,
+  getAllWorkingHours,
+  updateEmployeeWorkingHour,
+} from '@repositories';
 import {EmployeeTimeListScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
@@ -26,8 +31,10 @@ export function EmployeeTimeListScreen({
   >([]);
 
   useEffect(() => {
-    searchData();
-  }, []);
+    navigation.addListener('focus', () => {
+      searchData();
+    });
+  }, [navigation]);
 
   async function searchData() {
     setIsLoading(true);
@@ -46,6 +53,7 @@ export function EmployeeTimeListScreen({
 
     return (
       <ListTime
+        onPress={() => updateEmployeeWorkingHour(employee.id, item.id)}
         color={touchableStyle}
         disabled={touchableDisable}
         textValues={[
@@ -93,14 +101,16 @@ interface ListTimeProps {
   color?: 'lavender-gray' | 'light-gray';
   textValues?: string[];
   disabled: boolean;
+  onPress?: () => void;
 }
 
-function ListTime({color, textValues, disabled}: ListTimeProps) {
+function ListTime({color, textValues, disabled, onPress}: ListTimeProps) {
   return (
     <TouchableComponent
       color={color}
       type="box-flex-row-list"
-      disabled={disabled}>
+      disabled={disabled}
+      onPress={onPress}>
       {textValues?.map((item, index) => (
         <View key={index} style={{width: '20%', justifyContent: 'center'}}>
           <TextComponent color="steel-blue" align="center" size="S">

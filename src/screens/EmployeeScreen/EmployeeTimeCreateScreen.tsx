@@ -62,6 +62,7 @@ export function EmployeeTimeCreateScreen({
     });
     async function sendForm() {
       await createNewWorkingHour(workingHours);
+      navigation.goBack();
     }
   }
 
@@ -94,7 +95,6 @@ export function EmployeeTimeCreateScreen({
               {
                 width: '23%',
                 backgroundColor: colorRegistry['lavender-gray'],
-                borderWidth: 1,
               },
             ]}
             onPress={value.onPress}>

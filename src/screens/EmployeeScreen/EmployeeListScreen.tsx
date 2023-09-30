@@ -7,14 +7,14 @@ import {
   TouchableItem,
   ViewSeparator,
 } from '@components';
-import {EmployeeResponseDTO, getAllEmployees} from '@repositories';
+import {EmployeeResponseDTO, ProfileResponseDTO, getAllEmployees, getAllProfilesByUserPermissionId} from '@repositories';
 import {EmployeeScreenProps} from '@routes';
 import {themeRegistry} from '@styles';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
 export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
-  const [employees, setEmployees] = useState<EmployeeResponseDTO[]>([]);
+  const [profiles, setProfiles] = useState<ProfileResponseDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,34 +25,20 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
 
   async function searchData() {
     setLoading(true);
-    setEmployees(await getAllEmployees());
+    setProfiles(await getAllProfilesByUserPermissionId(2));
     setLoading(false);
   }
 
-  function renderItem({item}: {item: EmployeeResponseDTO}) {
+  function renderItem({item}: {item: ProfileResponseDTO}) {
     return (
       <TouchableItem
-        style={[themeRegistry['box-items'], {paddingTop: 10}]}
-        textValues={[item.profile.name]}
+        type="box-items"
+        textValues={[item.name]}
         textProps={{align: 'justify'}}
         onPress={() =>
-          navigation.navigate('EmployeeDetailsScreen', {employee: {...item}})
-        }>
-        <TouchableItem
-          disabled
-          type="box-flex-row-list"
-          textValues={
-            item.workingHours?.startTime
-              ? [
-                  `Entrada\n${item.workingHours.startTime}`,
-                  `I. Intervalo\n${item.workingHours.startInterval}`,
-                  `F. Intervalo\n${item.workingHours.endInterval}`,
-                  `Saída\n${item.workingHours.endTime}`,
-                ]
-              : ['Não possui horários cadastrados.']
-          }
-        />
-      </TouchableItem>
+          navigation.navigate('EmployeeDetailsScreen', {profile: {...item}})
+        }
+      />
     );
   }
 
@@ -63,7 +49,7 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
   return (
     <Screen>
       <FlatList
-        data={employees}
+        data={profiles}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         ItemSeparatorComponent={ViewSeparator}

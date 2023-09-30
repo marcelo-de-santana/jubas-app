@@ -8,11 +8,11 @@ import {
   EmployeeServicesListScreen,
 } from '@screens';
 
-import {EmployeeResponseDTO, MinimaProfilelResponseDTO} from '@repositories';
+import {EmployeeResponseDTO, MinimaProfilelResponseDTO, ProfileResponseDTO} from '@repositories';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
-  EmployeeDetailsScreen: {employee: EmployeeResponseDTO};
+  EmployeeDetailsScreen: {profile: ProfileResponseDTO};
   EmployeeProfileUpdateScreen: {profile: MinimaProfilelResponseDTO};
   EmployeeTimeCreateScreen: undefined;
   EmployeeTimeListScreen: {employee: EmployeeResponseDTO};
@@ -42,7 +42,7 @@ export function EmployeeStack() {
         name="EmployeeDetailsScreen"
         component={EmployeeDetailsScreen}
         options={({route}) => ({
-          headerTitle: route.params.employee.profile.name,
+          headerTitle: route.params.profile.name,
           headerShown: true,
           animation: 'slide_from_right',
         })}
