@@ -9,7 +9,7 @@ const PATH = '/employee';
 export async function registerEmployee(profile: MinimaProfilelResponseDTO) {
   try {
     const response = await api.post(PATH, profile);
-    AlertComponent({message: response.data});
+    return response.data;
   } catch (error) {
     AlertComponent({});
   }
@@ -42,9 +42,7 @@ export async function updateEmployeeWorkingHour(
   workingHourId: number,
 ) {
   try {
-    await api.patch(`${PATH}/${employeeId}/working-hours`, {
-      workingHours: {id: workingHourId},
-    });
+    await api.patch(`${PATH}/${employeeId}/working-hours`, {id: workingHourId});
     AlertComponent({message: 'Horário atribuído.'});
   } catch (error) {
     AlertComponent({});

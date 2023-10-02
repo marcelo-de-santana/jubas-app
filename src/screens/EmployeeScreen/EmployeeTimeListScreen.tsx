@@ -1,6 +1,5 @@
 import {
   ButtonOpacity,
-  DecisionAlert,
   Icon,
   LoadingScreen,
   Screen,
@@ -42,18 +41,23 @@ export function EmployeeTimeListScreen({
     setIsLoading(false);
   }
 
+  async function selectWorkingHour(workingHourId: number) {
+    await updateEmployeeWorkingHour(employee.id, workingHourId);
+    navigation.goBack();
+  }
+
   function renderItem({item}: {item: WorkingHoursResponseDTO}) {
     let touchableStyle: ColorName = 'light-gray';
     let touchableDisable = false;
 
-    if (item.id === workingHours.id) {
+    if (item.id === workingHours?.id) {
       touchableStyle = 'lavender-gray';
       touchableDisable = true;
     }
 
     return (
       <ListTime
-        onPress={() => updateEmployeeWorkingHour(employee.id, item.id)}
+        onPress={() => selectWorkingHour(item.id)}
         color={touchableStyle}
         disabled={touchableDisable}
         textValues={[

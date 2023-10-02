@@ -1,15 +1,15 @@
 import {
-  ButtonOpacity,
   EmptyListComponent,
-  Icon,
   LoadingScreen,
   Screen,
   TouchableItem,
   ViewSeparator,
 } from '@components';
-import {EmployeeResponseDTO, ProfileResponseDTO, getAllEmployees, getAllProfilesByUserPermissionId} from '@repositories';
+import {
+  ProfileResponseDTO,
+  getAllProfilesByUserPermissionId,
+} from '@repositories';
 import {EmployeeScreenProps} from '@routes';
-import {themeRegistry} from '@styles';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 

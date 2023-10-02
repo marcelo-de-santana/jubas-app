@@ -1,6 +1,5 @@
 import {
   DecisionAlert,
-  EmptyListComponent,
   Icon,
   LoadingScreen,
   Screen,
@@ -23,11 +22,13 @@ export function EmployeeDetailsScreen({
 }: EmployeeDetailsScreenProps) {
   const {profile} = route.params;
   const [isLoading, setLoading] = useState(true);
-  const [employee, setEmployee] = useState<EmployeeResponseDTO | boolean>();
+  const [employee, setEmployee] = useState<EmployeeResponseDTO>();
 
   useEffect(() => {
-    searchEmployee();
-  }, []);
+    navigation.addListener('focus', () => {
+      searchEmployee();
+    });
+  }, [navigation]);
 
   async function searchEmployee() {
     setLoading(true);
@@ -35,13 +36,12 @@ export function EmployeeDetailsScreen({
     setLoading(false);
   }
 
-  async function sendForm() {
-    await registerEmployee(profile);
-    navigation.goBack();
+  async function sendRegistration() {
+    setEmployee(await registerEmployee(profile));
   }
 
   function IconProfile() {
-    if (profile.statusProfile) {
+    if (employee?.profile.statusProfile) {
       return <Icon name="ToggleOnIcon" color="light-green" />;
     }
     return <Icon name="ToggleOffIcon" color="red" />;
@@ -51,10 +51,11 @@ export function EmployeeDetailsScreen({
     return <LoadingScreen />;
   }
 
-  if (employee === false) {
+  if (!employee) {
     return DecisionAlert({
       message: 'Funcionário ainda não cadastrado. Deseja inseri-lo agora?',
-      onPress: sendForm,
+      onPress: sendRegistration,
+      cancelButton: () => navigation.goBack(),
     });
   }
 
@@ -65,12 +66,18 @@ export function EmployeeDetailsScreen({
         textValues={['Dados pessoais']}
         textProps={{align: 'justify'}}
         onPress={() =>
-          navigation.navigate('EmployeeProfileUpdateScreen', {profile})
+          navigation.navigate('EmployeeProfileUpdateScreen', {
+            profile: {...employee.profile},
+          })
         }>
         <TouchableItem
           type="box-flex-row-list"
           textValues={[
-            `CPF: ${profile.cpf ? cpfMask(profile.cpf) : 'Não cadastrado'}`,
+            `CPF: ${
+              employee?.profile.cpf
+                ? cpfMask(employee.profile.cpf)
+                : 'Não cadastrado'
+            }`,
             <IconProfile />,
           ]}
           disabled
@@ -90,12 +97,12 @@ export function EmployeeDetailsScreen({
           disabled
           type="box-flex-row-list"
           textValues={
-            employee?.workingHours?.startTime
+            employee?.workingHours?.id
               ? [
-                  `Entrada\n${employee?.workingHours?.startTime}`,
-                  `I. Intervalo\n${employee?.workingHours?.startInterval}`,
-                  `F. Intervalo\n${employee?.workingHours?.endInterval}`,
-                  `Saída\n${employee?.workingHours?.endTime}`,
+                  `Entrada\n${employee?.workingHours.startTime}`,
+                  `I. Intervalo\n${employee?.workingHours.startInterval}`,
+                  `F. Intervalo\n${employee?.workingHours.endInterval}`,
+                  `Saída\n${employee?.workingHours.endTime}`,
                 ]
               : ['Não possui horários cadastrados.']
           }
@@ -115,7 +122,7 @@ export function EmployeeDetailsScreen({
           disabled
           type="box-flex-row-list"
           textValues={
-            employee?.services.length > 0
+            employee?.services?.length > 0
               ? ['Implementar Lógica']
               : ['Nenhum serviço atribuído.']
           }

@@ -3,6 +3,7 @@ import {Alert} from 'react-native';
 type AlertProps = {
   message?: string;
   onPress?: () => void;
+  cancelButton?: () => void;
 };
 
 export function AlertComponent({
@@ -14,11 +15,13 @@ export function AlertComponent({
 export function DecisionAlert({
   message = 'Deseja prosseguir?',
   onPress,
+  cancelButton,
 }: AlertProps) {
   Alert.alert('', message, [
     {
       style: 'cancel',
       text: 'CANCELAR',
+      onPress: cancelButton,
     },
     {
       text: 'SIM',

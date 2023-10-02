@@ -25,7 +25,7 @@ export function EmployeeProfileUpdateScreen({
     DecisionAlert({message: 'Deseja salvar as alterações?', onPress: sendForm});
     async function sendForm() {
       await updateProfile({...profile, cpf: removeCpfMask(profile.cpf)});
-      navigation.popToTop();
+      navigation.goBack();
     }
   }
 

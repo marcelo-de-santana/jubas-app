@@ -61,7 +61,7 @@ export async function getAllProfilesByUserPermissionId(
 
 export async function updateProfile(profile: MinimalProfileRequestDTO) {
   try {
-    const response = await api.put(PATH, profile);
+    const response = await api.patch(`${PATH}/${profile.id}`, profile);
     AlertComponent({
       message: `Perfil: ${response.data.name} atualizado com sucesso.`,
     });

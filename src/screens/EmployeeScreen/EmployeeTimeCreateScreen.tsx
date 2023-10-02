@@ -1,10 +1,7 @@
 import {
   ButtonOpacity,
-  ButtonOpacityProps,
   DecisionAlert,
-  Screen,
   TextComponent,
-  TextComponentProps,
   ViewModal,
 } from '@components';
 import {EmployeeTimeCreateScreenProps} from '@routes';
