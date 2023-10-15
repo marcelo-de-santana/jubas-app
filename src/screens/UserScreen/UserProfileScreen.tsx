@@ -1,6 +1,6 @@
 import {UserProfileProps} from '@routes';
 import {
-  ButtonOpacity,
+  Button,
   EmptyListComponent,
   Icon,
   LoadingScreen,
@@ -9,15 +9,14 @@ import {
   ViewSeparator,
 } from '@components';
 import {useEffect, useState} from 'react';
-import {MinimaProfilelResponseDTO, getAllProfilesByUserId} from '@repositories';
+import {ProfileResponseDTO, getAllProfilesByUserId} from '@repositories';
 import {FlatList} from 'react-native';
 import {cpfMask} from '@utils';
-import {themeRegistry} from '@styles';
 
 export function UserProfileScreen({navigation, route}: UserProfileProps) {
-  const {user} = route.params;
+  const {id, email, userPermission} = route.params.user;
 
-  const [profiles, setProfiles] = useState<MinimaProfilelResponseDTO[]>([]);
+  const [profiles, setProfiles] = useState<ProfileResponseDTO[]>([]);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
 
   async function searchData() {
     setIsVisible(true);
-    setProfiles(await getAllProfilesByUserId(user.id));
+    setProfiles(await getAllProfilesByUserId(id));
     setIsVisible(false);
   }
 
@@ -39,9 +38,9 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
           type="box-items-header"
           onPress={() => navigation.navigate('UserUpdateScreen', route.params)}
           textProps={{align: 'justify'}}
-          textValues={[`Usuário: ${user.email}`]}>
+          textValues={[`Usuário: ${email}`]}>
           <TouchableItem
-            textValues={[`Nível: ${user.userPermission.id}`]}
+            textValues={[`Nível: ${userPermission.id}`]}
             disabled
           />
         </TouchableItem>
@@ -50,7 +49,7 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
     );
   }
 
-  function renderItem({item}: {item: MinimaProfilelResponseDTO}) {
+  function renderItem({item}: {item: ProfileResponseDTO}) {
     return (
       <TouchableItem
         type="box-items-header"
@@ -58,13 +57,14 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
         textProps={{align: 'justify'}}
         onPress={() =>
           navigation.navigate('UserProfileUpdateScreen', {
-            profile: {...item, user: {...user}},
+            userId: id,
+            profile: {...item},
           })
         }>
         <TouchableItem
           type="box-flex-row-list"
           textValues={[
-            `CPF: ${cpfMask(String(item.cpf))}`,
+            `CPF: ${cpfMask(item.cpf)}`,
             `Status: ${item.statusProfile ? 'ATIVO' : 'INATIVO'}`,
           ]}
           disabled
@@ -90,14 +90,14 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
         })}
       />
 
-      <ButtonOpacity
+      <Button
         color="steel-blue"
         type="square-right"
         onPress={() =>
-          navigation.navigate('UserProfileCreateScreen', route.params)
+          navigation.navigate('UserProfileCreateScreen', {userId: id})
         }>
-        <Icon name="AddCircleIcon" color="white" size={40} />
-      </ButtonOpacity>
+        <Icon name="AddIcon" color="white" size={35} />
+      </Button>
     </Screen>
   );
 }

@@ -1,5 +1,5 @@
 import {
-  ButtonOpacity,
+  Button,
   DecisionAlert,
   ViewModal,
   InputForm,
@@ -7,7 +7,7 @@ import {
   SwitchForm,
   TextComponent,
 } from '@components';
-import {deleteProfile, updateUserAndProfile} from '@repositories';
+import {deleteProfile, updateProfileAndUser} from '@repositories';
 import {UserProfileUpdateScreenProps} from '@routes';
 import {theme} from '@styles';
 import {cpfMask, removeCpfMask} from '@utils';
@@ -18,51 +18,52 @@ export function UserProfileUpdateScreen({
   navigation,
   route,
 }: UserProfileUpdateScreenProps) {
-  const [profile, setProfile] = useState(route.params.profile);
+  const {params} = route;
+  const [profile, setProfile] = useState(params.profile);
 
   function handleProfile(key: string, value: string | number | boolean) {
     setProfile(prev => ({...prev, [key]: value}));
   }
 
-  function handleUserProfile(key: string, value: string) {
-    setProfile(prev => ({...prev, user: {...prev.user, [key]: value}}));
+  async function sendToUpdate() {
+    const {id, cpf, name, statusProfile} = {
+      ...profile,
+      cpf: removeCpfMask(profile.cpf),
+    };
+    await updateProfileAndUser({
+      profileId: id,
+      name,
+      cpf,
+      statusProfile,
+      userId: params.userId,
+    });
+    navigation.goBack();
   }
 
-  function confirmSend() {
+  async function sendToDelete() {
+    await deleteProfile(profile.id);
+    navigation.goBack();
+  }
+
+  /** Alert Components */
+  function askAboutUpdate() {
     DecisionAlert({
       message: 'Deseja salvar as alterações?',
-      onPress: sendForm,
+      onPress: sendToUpdate,
     });
-    async function sendForm() {
-      const formattedProfile = {
-        ...profile,
-        cpf: removeCpfMask(profile.cpf),
-      };
-      await updateUserAndProfile(formattedProfile);
-      navigation.goBack();
-    }
   }
 
-  function confirmDeletion() {
+  function askAboutDeletion() {
     DecisionAlert({
       message: 'Deseja excluir o perfil?',
-      onPress: sendDeletion,
+      onPress: sendToDelete,
     });
-    async function sendDeletion() {
-      await deleteProfile(profile.id);
-      navigation.goBack();
-    }
   }
 
   return (
     <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
       <InputForm
         inputProps={[
-          {
-            placeholder: 'E-mail',
-            value: profile.user.email,
-            onChangeText: text => handleUserProfile('email', text),
-          },
           {
             placeholder: 'Nome',
             value: profile.name,
@@ -89,14 +90,14 @@ export function UserProfileUpdateScreen({
           ]}
         />
         <View style={theme.boxFlexRow}>
-          <ButtonOpacity type="send-flex" onPress={confirmSend}>
+          <Button type="send-flex" onPress={askAboutUpdate}>
             <TextComponent color="white" size="L">
               Salvar
             </TextComponent>
-          </ButtonOpacity>
-          <ButtonOpacity type="small" color="red" onPress={confirmDeletion}>
+          </Button>
+          <Button type="small" color="red" onPress={askAboutDeletion}>
             <Icon name="TrashIcon" color="white" size={30} />
-          </ButtonOpacity>
+          </Button>
         </View>
       </InputForm>
     </ViewModal>

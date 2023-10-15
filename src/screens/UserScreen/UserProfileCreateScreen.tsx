@@ -1,5 +1,5 @@
 import {
-  ButtonOpacity,
+  Button,
   DecisionAlert,
   ViewModal,
   InputForm,
@@ -26,16 +26,17 @@ export function UserProfileCreateScreen({
     setProfile(prev => ({...prev, [key]: value}));
   }
 
-  function confirmSend() {
-    DecisionAlert({onPress: sendForm});
-    function sendForm() {
-      const requestProfile = {
-        ...profile,
-        cpf: Number(removeCpfMask(profile.cpf)),
-      };
-      createProfile(requestProfile);
-      navigation.goBack();
-    }
+  async function sendToCreate() {
+    const requestProfile = {
+      ...profile,
+      cpf: removeCpfMask(profile.cpf),
+    };
+    await createProfile(requestProfile);
+    navigation.goBack();
+  }
+
+  function askAboutCreate() {
+    DecisionAlert({onPress: sendToCreate});
   }
 
   return (
@@ -66,11 +67,11 @@ export function UserProfileCreateScreen({
             },
           ]}
         />
-        <ButtonOpacity onPress={confirmSend}>
+        <Button onPress={askAboutCreate}>
           <TextComponent color="white" size="L">
             Salvar
           </TextComponent>
-        </ButtonOpacity>
+        </Button>
       </InputForm>
     </ViewModal>
   );

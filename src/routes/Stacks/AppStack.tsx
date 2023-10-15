@@ -2,16 +2,19 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, UnderConstruction} from '@screens';
 import {UserStack} from './UserStack';
 import {EmployeeStack} from './EmployeeStack';
+import {colorRegistry} from '@styles';
+import {BusinessManagementStack} from './BusinessManagementStack';
 
 export type AppStackParamList = {
+  BusinessManagementStack: undefined;
   EmployeeStack: undefined;
   HomeScreen: undefined;
-  MyAccount: undefined;
-  ScheduleManagement: undefined;
-  ServiceBookScreens: undefined;
-  ServiceCatalogScreens: undefined;
   UnderConstruction: undefined;
   UserStack: undefined;
+  // MyAccount: undefined;
+  // ScheduleManagement: undefined;
+  // ServiceBookScreens: undefined;
+  // ServiceCatalogScreens: undefined;
 };
 
 const NativeStack = createNativeStackNavigator<AppStackParamList>();
@@ -19,18 +22,19 @@ const NativeStack = createNativeStackNavigator<AppStackParamList>();
 export function AppStack() {
   return (
     <NativeStack.Navigator
+      initialRouteName="HomeScreen"
       screenOptions={{
+        animation: 'fade_from_bottom',
         headerShadowVisible: false,
         headerShown: false,
         headerStyle: {
-          backgroundColor: '#f2f2f2',
+          backgroundColor: colorRegistry['light-gray'],
         },
-        headerTintColor: '#3C4659',
+        headerTintColor: colorRegistry['steel-blue'],
         headerTitleAlign: 'center',
-        statusBarColor: '#f2f2f2',
+        statusBarColor: colorRegistry['light-gray'],
         statusBarStyle: 'dark',
-      }}
-      initialRouteName="HomeScreen">
+      }}>
       <NativeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -39,12 +43,15 @@ export function AppStack() {
           headerShown: true,
         }}
       />
+      <NativeStack.Screen
+        name="BusinessManagementStack"
+        component={BusinessManagementStack}
+      />
       <NativeStack.Screen name="EmployeeStack" component={EmployeeStack} />
       <NativeStack.Screen name="UserStack" component={UserStack} />
       <NativeStack.Screen
         name="UnderConstruction"
         component={UnderConstruction}
-        options={{animation: 'fade_from_bottom'}}
       />
     </NativeStack.Navigator>
   );

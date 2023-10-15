@@ -1,5 +1,5 @@
 import {Pressable} from 'react-native';
-import {AddCircleIcon} from '../../assets/icons/AddCircleIcon';
+import {AddIcon} from '../../assets/icons/AddIcon';
 import {ChevronLeftIcon} from '../../assets/icons/ChevronLeftIcon';
 import {ChevronRightIcon} from '../../assets/icons/ChevronRightIcon';
 import {EditIcon} from '../../assets/icons/EditIcon';
@@ -35,7 +35,7 @@ export function Icon({name, color = 'steel-blue', size, onPress}: IconProps) {
 }
 
 const iconRegistry = {
-  AddCircleIcon: AddCircleIcon,
+  AddIcon: AddIcon,
   ChevronLeftIcon: ChevronLeftIcon,
   ChevronRightIcon: ChevronRightIcon,
   EditIcon: EditIcon,
@@ -45,4 +45,4 @@ const iconRegistry = {
 };
 
 type IconType = typeof iconRegistry;
-type IconName = keyof IconType;
+export type IconName = keyof IconType;

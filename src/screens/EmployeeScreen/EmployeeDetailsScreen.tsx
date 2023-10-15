@@ -1,16 +1,11 @@
 import {
-  DecisionAlert,
-  Icon,
+  IconStatus,
   LoadingScreen,
   Screen,
   TouchableItem,
   ViewSeparator,
 } from '@components';
-import {
-  EmployeeResponseDTO,
-  getEmployeeByProfileId,
-  registerEmployee,
-} from '@repositories';
+import {EmployeeResponseDTO, getEmployeeByProfileId} from '@repositories';
 import {EmployeeDetailsScreenProps} from '@routes';
 import {themeRegistry} from '@styles';
 import {cpfMask} from '@utils';
@@ -20,7 +15,6 @@ export function EmployeeDetailsScreen({
   navigation,
   route,
 }: EmployeeDetailsScreenProps) {
-  const {profile} = route.params;
   const [isLoading, setLoading] = useState(true);
   const [employee, setEmployee] = useState<EmployeeResponseDTO>();
 
@@ -32,102 +26,87 @@ export function EmployeeDetailsScreen({
 
   async function searchEmployee() {
     setLoading(true);
-    setEmployee(await getEmployeeByProfileId(profile.id));
+    setEmployee(await getEmployeeByProfileId(route.params.profile.id));
     setLoading(false);
   }
 
-  async function sendRegistration() {
-    setEmployee(await registerEmployee(profile));
+  interface BoxComponetProps {
+    textHeader: string;
+    onPress: () => void;
+    textValues: (string | React.JSX.Element)[];
   }
 
-  function IconProfile() {
-    if (employee?.profile.statusProfile) {
-      return <Icon name="ToggleOnIcon" color="light-green" />;
-    }
-    return <Icon name="ToggleOffIcon" color="red" />;
-  }
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
-
-  if (!employee) {
-    return DecisionAlert({
-      message: 'Funcionário ainda não cadastrado. Deseja inseri-lo agora?',
-      onPress: sendRegistration,
-      cancelButton: () => navigation.goBack(),
-    });
-  }
-
-  return (
-    <Screen>
+  function BoxComponent({textHeader, onPress, textValues}: BoxComponetProps) {
+    return (
       <TouchableItem
+        textValues={[textHeader]}
+        onPress={onPress}
         style={[themeRegistry['box-items'], {paddingTop: 10}]}
-        textValues={['Dados pessoais']}
-        textProps={{align: 'justify'}}
-        onPress={() =>
-          navigation.navigate('EmployeeProfileUpdateScreen', {
-            profile: {...employee.profile},
-          })
-        }>
+        textProps={{align: 'justify'}}>
         <TouchableItem
           type="box-flex-row-list"
-          textValues={[
-            `CPF: ${
-              employee?.profile.cpf
-                ? cpfMask(employee.profile.cpf)
-                : 'Não cadastrado'
-            }`,
-            <IconProfile />,
-          ]}
+          textValues={textValues}
           disabled
         />
+        <ViewSeparator />
       </TouchableItem>
+    );
+  }
 
-      <ViewSeparator />
+  if (isLoading) return <LoadingScreen />;
 
-      <TouchableItem
-        style={[themeRegistry['box-items'], {paddingTop: 10}]}
-        textValues={['Horários']}
-        textProps={{align: 'justify'}}
-        onPress={() =>
-          navigation.navigate('EmployeeTimeListScreen', {employee})
-        }>
-        <TouchableItem
-          disabled
-          type="box-flex-row-list"
+  if (employee) {
+    const {id, profile, services, workingHours} = employee;
+    return (
+      <Screen>
+        <BoxComponent
+          textHeader="Dados pessoais"
+          textValues={[
+            `CPF: ${profile.cpf ? cpfMask(profile.cpf) : 'Não cadastrado'}`,
+            <IconStatus status={profile.statusProfile} />,
+          ]}
+          onPress={() =>
+            navigation.navigate('EmployeeProfileUpdateScreen', {
+              profile,
+            })
+          }
+        />
+
+        <BoxComponent
+          textHeader="Horários"
           textValues={
-            employee?.workingHours?.id
+            workingHours?.id
               ? [
-                  `Entrada\n${employee?.workingHours.startTime}`,
-                  `I. Intervalo\n${employee?.workingHours.startInterval}`,
-                  `F. Intervalo\n${employee?.workingHours.endInterval}`,
-                  `Saída\n${employee?.workingHours.endTime}`,
+                  `Entrada\n${workingHours.startTime}`,
+                  `I. Intervalo\n${workingHours.startInterval}`,
+                  `F. Intervalo\n${workingHours.endInterval}`,
+                  `Saída\n${workingHours.endTime}`,
                 ]
               : ['Não possui horários cadastrados.']
           }
+          onPress={() =>
+            navigation.navigate('EmployeeTimeListScreen', {
+              employeeId: id,
+              workingHours,
+            })
+          }
         />
-      </TouchableItem>
 
-      <ViewSeparator />
-
-      <TouchableItem
-        style={[themeRegistry['box-items'], {paddingTop: 10}]}
-        textValues={['Serviços']}
-        textProps={{align: 'justify'}}
-        onPress={() =>
-          navigation.navigate('EmployeeServicesListScreen', {employee})
-        }>
-        <TouchableItem
-          disabled
-          type="box-flex-row-list"
+        <BoxComponent
+          textHeader="Serviços"
           textValues={
             employee?.services?.length > 0
               ? ['Implementar Lógica']
               : ['Nenhum serviço atribuído.']
           }
+          onPress={() =>
+            navigation.navigate('EmployeeServicesListScreen', {
+              employeeId: id,
+              services,
+            })
+          }
         />
-      </TouchableItem>
-    </Screen>
-  );
+      </Screen>
+    );
+  }
 }

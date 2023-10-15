@@ -1,7 +1,7 @@
 import {AlertComponent} from '@components';
 import {api} from '@services';
 import {WorkingHoursRequestDTO} from './WorkingHoursTypes';
-import {AxiosError} from 'axios';
+import {isAxiosError} from 'axios';
 
 const PATH = '/working-hours';
 
@@ -21,12 +21,8 @@ export async function createNewWorkingHour(
     await api.post(PATH, workingHour);
     AlertComponent({message: 'Novo horário criado com sucesso.'});
   } catch (error) {
-    AlertComponent({});
-    if (error instanceof AxiosError) {
-      if (error.status === 401) {
-        AlertComponent({message: 'Horários já cadastrados.'});
-      }
+    if (isAxiosError(error) && error.response?.status === 401) {
+      AlertComponent({message: 'Horários já cadastrados.'});
     }
-    AlertComponent({});
   }
 }

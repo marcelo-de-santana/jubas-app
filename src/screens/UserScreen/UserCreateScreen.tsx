@@ -1,6 +1,6 @@
 import {
   DecisionAlert,
-  ButtonOpacity,
+  Button,
   TextComponent,
   SwitchForm,
   ViewModal,
@@ -15,28 +15,20 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
   const [user, setUser] = useState({
     email: '',
     password: '',
-    userPermission: {
-      id: 3,
-    },
+    userPermissionId: 3,
   });
 
-  function handleUserState(key: string, value: string) {
+  function handleUserState(key: string, value: string | number) {
     setUser(prev => ({...prev, [key]: value}));
   }
 
-  function handleUserPermissionIdState(value: number) {
-    setUser(prev => ({
-      ...prev,
-      userPermission: {...prev.userPermission, id: value},
-    }));
+  async function sendToCreate() {
+    await createUser(user);
+    navigation.goBack();
   }
 
-  function confirmSend() {
-    DecisionAlert({onPress: sendForm});
-    async function sendForm() {
-      await createUser(user);
-      navigation.goBack();
-    }
+  function askAboutCreate() {
+    DecisionAlert({onPress: sendToCreate});
   }
 
   return (
@@ -63,31 +55,31 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
             {
               title: 'ADMIN',
               switchProps: {
-                onValueChange: () => handleUserPermissionIdState(1),
-                value: user.userPermission.id === 1,
+                onValueChange: () => handleUserState('userPermissionId', 1),
+                value: user.userPermissionId === 1,
               },
             },
             {
               title: 'BARBEIRO',
               switchProps: {
-                onValueChange: () => handleUserPermissionIdState(2),
-                value: user.userPermission.id === 2,
+                onValueChange: () => handleUserState('userPermissionId', 2),
+                value: user.userPermissionId === 2,
               },
             },
             {
               title: 'CLIENTE',
               switchProps: {
-                onValueChange: () => handleUserPermissionIdState(3),
-                value: user.userPermission.id === 3,
+                onValueChange: () => handleUserState('userPermissionId', 3),
+                value: user.userPermissionId === 3,
               },
             },
           ]}
         />
-        <ButtonOpacity onPress={confirmSend}>
+        <Button onPress={askAboutCreate}>
           <TextComponent size="L" color="white">
             Confirmar
           </TextComponent>
-        </ButtonOpacity>
+        </Button>
       </InputForm>
     </ViewModal>
   );

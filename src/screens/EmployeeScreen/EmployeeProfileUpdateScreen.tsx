@@ -1,5 +1,5 @@
 import {
-  ButtonOpacity,
+  Button,
   DecisionAlert,
   InputForm,
   SwitchForm,
@@ -21,12 +21,17 @@ export function EmployeeProfileUpdateScreen({
     setProfile(prev => ({...prev, [key]: value}));
   }
 
-  function confirmSend() {
-    DecisionAlert({message: 'Deseja salvar as alterações?', onPress: sendForm});
-    async function sendForm() {
-      await updateProfile({...profile, cpf: removeCpfMask(profile.cpf)});
-      navigation.goBack();
-    }
+  async function sendToUpdate() {
+    const formattedProfile = {...profile, cpf: removeCpfMask(profile.cpf)};
+    await updateProfile(formattedProfile);
+    navigation.goBack();
+  }
+
+  function askAboutUpdate() {
+    DecisionAlert({
+      message: 'Deseja salvar as alterações?',
+      onPress: sendToUpdate,
+    });
   }
 
   return (
@@ -58,11 +63,11 @@ export function EmployeeProfileUpdateScreen({
             },
           ]}
         />
-        <ButtonOpacity type="send" onPress={confirmSend}>
+        <Button type="send" onPress={askAboutUpdate}>
           <TextComponent color="white" size="L">
             Salvar
           </TextComponent>
-        </ButtonOpacity>
+        </Button>
       </InputForm>
     </ViewModal>
   );

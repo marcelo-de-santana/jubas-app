@@ -1,2 +1,2 @@
 export * from './UserRepo';
-export * from './UserRepoTypes';
+export * from './UserTypes';

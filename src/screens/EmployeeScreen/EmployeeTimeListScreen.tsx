@@ -1,6 +1,4 @@
 import {
-  ButtonOpacity,
-  Icon,
   LoadingScreen,
   Screen,
   TextComponent,
@@ -10,19 +8,43 @@ import {
 import {
   WorkingHoursResponseDTO,
   getAllWorkingHours,
-  updateEmployeeWorkingHour,
+  updateEmployee,
 } from '@repositories';
 import {EmployeeTimeListScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import {ColorName} from '@styles';
 
+interface ListTimeProps {
+  color?: 'lavender-gray' | 'light-gray';
+  textValues?: string[];
+  disabled: boolean;
+  onPress?: () => void;
+}
+
+function ListTime({color, textValues, disabled, onPress}: ListTimeProps) {
+  return (
+    <TouchableComponent
+      color={color}
+      type="box-flex-row-list"
+      disabled={disabled}
+      onPress={onPress}>
+      {textValues?.map((item, index) => (
+        <View key={index} style={{width: '20%', justifyContent: 'center'}}>
+          <TextComponent color="steel-blue" align="center" size="S">
+            {item}
+          </TextComponent>
+        </View>
+      ))}
+    </TouchableComponent>
+  );
+}
+
 export function EmployeeTimeListScreen({
   navigation,
   route,
 }: EmployeeTimeListScreenProps) {
-  const {employee} = route.params;
-  const {workingHours} = employee;
+  const {employeeId, workingHours} = route.params;
 
   const [isLoading, setIsLoading] = useState(true);
   const [workingHoursData, setWorkingHoursData] = useState<
@@ -41,8 +63,8 @@ export function EmployeeTimeListScreen({
     setIsLoading(false);
   }
 
-  async function selectWorkingHour(workingHourId: number) {
-    await updateEmployeeWorkingHour(employee.id, workingHourId);
+  async function selectWorkingHour(workingHoursId: number) {
+    await updateEmployee({employeeId, workingHoursId});
     navigation.goBack();
   }
 
@@ -92,36 +114,6 @@ export function EmployeeTimeListScreen({
         ItemSeparatorComponent={ViewSeparator}
         renderItem={renderItem}
       />
-      <ButtonOpacity
-        type="square-right"
-        onPress={() => navigation.navigate('EmployeeTimeCreateScreen')}>
-        <Icon name="AddCircleIcon" size={40} color="white" />
-      </ButtonOpacity>
     </Screen>
-  );
-}
-
-interface ListTimeProps {
-  color?: 'lavender-gray' | 'light-gray';
-  textValues?: string[];
-  disabled: boolean;
-  onPress?: () => void;
-}
-
-function ListTime({color, textValues, disabled, onPress}: ListTimeProps) {
-  return (
-    <TouchableComponent
-      color={color}
-      type="box-flex-row-list"
-      disabled={disabled}
-      onPress={onPress}>
-      {textValues?.map((item, index) => (
-        <View key={index} style={{width: '20%', justifyContent: 'center'}}>
-          <TextComponent color="steel-blue" align="center" size="S">
-            {item}
-          </TextComponent>
-        </View>
-      ))}
-    </TouchableComponent>
   );
 }

@@ -1,10 +1,5 @@
-import {
-  ButtonOpacity,
-  DecisionAlert,
-  TextComponent,
-  ViewModal,
-} from '@components';
-import {EmployeeTimeCreateScreenProps} from '@routes';
+import {Button, DecisionAlert, TextComponent, ViewModal} from '@components';
+import {} from '@routes';
 import {buttonRegistry, colorRegistry, themeRegistry} from '@styles';
 import {useState} from 'react';
 import {View} from 'react-native';
@@ -14,9 +9,7 @@ import {WorkingHoursRequestDTO, createNewWorkingHour} from '@repositories';
 
 type WorkingHoursKeys = keyof WorkingHoursRequestDTO;
 
-export function EmployeeTimeCreateScreen({
-  navigation,
-}: EmployeeTimeCreateScreenProps) {
+export function WorkingHoursCreateScreen({navigation}) {
   const [isDateTimePickerVisible, setDateTimePickerVisibility] =
     useState(false);
   const [workingHourKey, setWorkingHourKey] =
@@ -36,6 +29,7 @@ export function EmployeeTimeCreateScreen({
   function closeWatch() {
     setDateTimePickerVisibility(false);
   }
+
   function onChangeDateTimePicker(event: any, selectedTime: any) {
     if (event.type === 'dismissed') {
       closeWatch();
@@ -85,7 +79,7 @@ export function EmployeeTimeCreateScreen({
     return (
       <View style={[themeRegistry['box-flex-row'], {margin: 10}]}>
         {values?.map((value, index) => (
-          <ButtonOpacity
+          <Button
             key={index}
             style={[
               buttonRegistry['square-inline'],
@@ -96,7 +90,7 @@ export function EmployeeTimeCreateScreen({
             ]}
             onPress={value.onPress}>
             <TextComponent color="midnight-blue">{value.text}</TextComponent>
-          </ButtonOpacity>
+          </Button>
         ))}
       </View>
     );
@@ -152,11 +146,11 @@ export function EmployeeTimeCreateScreen({
           />
         )}
 
-        <ButtonOpacity onPress={confirmSend}>
+        <Button onPress={confirmSend}>
           <TextComponent size="L" color="white">
             Salvar
           </TextComponent>
-        </ButtonOpacity>
+        </Button>
       </View>
     </ViewModal>
   );

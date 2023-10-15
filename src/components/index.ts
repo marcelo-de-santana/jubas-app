@@ -2,7 +2,7 @@ export * from './Alerts';
 export * from './Buttons';
 export * from './Forms';
 export * from './Screen';
-export * from './Icon/Icon';
+export * from './Icons';
 export * from './List';
 export * from './Loaders';
 export * from './Menus';

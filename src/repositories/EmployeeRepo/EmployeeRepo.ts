@@ -1,18 +1,12 @@
 import {api} from '@services';
-import {EmployeeRequestDTO} from './EmployeeRepoType';
-import {AlertComponent} from '@components';
-import {AxiosError} from 'axios';
-import {MinimaProfilelResponseDTO} from '../ProfileRepo';
+import {AlertComponent, DecisionAlert} from '@components';
+import {EmployeeUpdateRequestDTO} from './EmployeeType';
 
 const PATH = '/employee';
 
-export async function registerEmployee(profile: MinimaProfilelResponseDTO) {
-  try {
-    const response = await api.post(PATH, profile);
-    return response.data;
-  } catch (error) {
-    AlertComponent({});
-  }
+export async function registerEmployeeByProfileId(id: string) {
+  const response = await api.post(PATH, {profileId: id});
+  return response.data;
 }
 
 export async function getEmployeeByProfileId(id: string) {
@@ -20,31 +14,21 @@ export async function getEmployeeByProfileId(id: string) {
     const response = await api.get(`${PATH}/profile/${id}`);
     return response.data;
   } catch (error) {
-    AlertComponent({});
+    DecisionAlert({
+      message: 'Funcionário ainda não cadastrado. Deseja inseri-lo agora?',
+      onPress: () => registerEmployeeByProfileId(id),
+    });
   }
 }
 
-export async function getAllEmployees() {
-  try {
-    const response = await api.get(PATH);
-    return response.data;
-  } catch (error) {
-    if (error instanceof AxiosError)
-      if (error.status === 404) {
-        return false;
-      }
-    AlertComponent({});
-  }
-}
-
-export async function updateEmployeeWorkingHour(
-  employeeId: string,
-  workingHourId: number,
-) {
-  try {
-    await api.patch(`${PATH}/${employeeId}/working-hours`, {id: workingHourId});
-    AlertComponent({message: 'Horário atribuído.'});
-  } catch (error) {
-    AlertComponent({});
-  }
+export async function updateEmployee({
+  employeeId,
+  profileId,
+  workingHoursId,
+}: EmployeeUpdateRequestDTO) {
+  await api.patch(`${PATH}/${employeeId}`, {
+    profileId: profileId,
+    workingHourId: workingHoursId,
+  });
+  AlertComponent({message: 'Dados atualizados.'});
 }

@@ -1,5 +1,5 @@
 import {
-  ButtonOpacity,
+  Button,
   DecisionAlert,
   ViewModal,
   InputForm,
@@ -8,7 +8,7 @@ import {
 } from '@components';
 import {updateUser} from '@repositories';
 import {UserUpdateScreenProps} from '@routes';
-import {theme, themeRegistry} from '@styles';
+import {themeRegistry} from '@styles';
 import {useState} from 'react';
 
 export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
@@ -25,12 +25,19 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
     }));
   }
 
-  function confirmSend() {
-    DecisionAlert({onPress: sendForm});
-    async function sendForm() {
-      await updateUser(user);
-      navigation.popToTop();
-    }
+  async function sendToUpdate() {
+    const {id, email, password, userPermission} = user;
+    await updateUser({
+      userId: id,
+      email,
+      password,
+      userPermissionId: userPermission.id,
+    });
+    navigation.popToTop();
+  }
+
+  function askAboutUpdate() {
+    DecisionAlert({onPress: sendToUpdate});
   }
 
   return (
@@ -75,11 +82,11 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
             },
           ]}
         />
-        <ButtonOpacity onPress={confirmSend}>
+        <Button onPress={askAboutUpdate}>
           <TextComponent color="white" size="L">
             Salvar
           </TextComponent>
-        </ButtonOpacity>
+        </Button>
       </InputForm>
     </ViewModal>
   );

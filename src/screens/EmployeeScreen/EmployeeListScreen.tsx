@@ -14,8 +14,8 @@ import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
 export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
-  const [profiles, setProfiles] = useState<ProfileResponseDTO[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [profiles, setProfiles] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -42,9 +42,7 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
     );
   }
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Screen>

@@ -8,10 +8,9 @@ export function cpfMask(value: string | number) {
   return value;
 }
 
-export function removeCpfMask(value: string | number) {
-  value = String(value);
-  value = value.replace(/[.-]/g, '');
-  return Number(value);
+export function removeCpfMask(value: string) {
+  if (value === null) return '';
+  return value.replace(/[.-]/g, '');
 }
 
 export function nameMask(value: string) {

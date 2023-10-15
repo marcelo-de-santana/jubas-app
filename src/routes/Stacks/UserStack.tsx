@@ -12,14 +12,16 @@ import {
   UserProfileUpdateScreen,
   UserUpdateScreen,
 } from '@screens';
+import {colorRegistry} from '@styles';
 
 export type UserStackParamList = {
   UserListScreen: undefined;
   UserCreateScreen: undefined;
   UserUpdateScreen: {user: UserResponseDTO};
   UserProfileScreen: {user: UserResponseDTO};
-  UserProfileCreateScreen: {user: MinimalUserResponseDTO};
+  UserProfileCreateScreen: {userId: string};
   UserProfileUpdateScreen: {
+    userId: string;
     profile: ProfileResponseDTO;
   };
 };
@@ -29,16 +31,17 @@ const NativeStack = createNativeStackNavigator<UserStackParamList>();
 export function UserStack() {
   return (
     <NativeStack.Navigator
+      initialRouteName="UserListScreen"
       screenOptions={{
+        animation: 'fade_from_bottom',
         headerShadowVisible: false,
         headerShown: false,
         headerStyle: {
-          backgroundColor: '#f2f2f2',
+          backgroundColor: colorRegistry['light-gray'],
         },
-        headerTintColor: '#3C4659',
+        headerTintColor: colorRegistry['steel-blue'],
         headerTitleAlign: 'center',
-      }}
-      initialRouteName="UserListScreen">
+      }}>
       <NativeStack.Screen
         name="UserListScreen"
         component={UserListScreen}
@@ -50,14 +53,12 @@ export function UserStack() {
         options={{
           title: 'Detalhes',
           headerShown: true,
-          animation: 'slide_from_right',
         }}
       />
       <NativeStack.Screen
         name="UserCreateScreen"
         component={UserCreateScreen}
         options={{
-          animation: 'fade_from_bottom',
           presentation: 'transparentModal',
         }}
       />
@@ -65,16 +66,13 @@ export function UserStack() {
         name="UserUpdateScreen"
         component={UserUpdateScreen}
         options={{
-          animation: 'fade_from_bottom',
           presentation: 'transparentModal',
         }}
       />
-
       <NativeStack.Screen
         name="UserProfileUpdateScreen"
         component={UserProfileUpdateScreen}
         options={{
-          animation: 'fade_from_bottom',
           presentation: 'transparentModal',
         }}
       />
@@ -83,7 +81,6 @@ export function UserStack() {
         component={UserProfileCreateScreen}
         options={{
           title: 'Detalhes',
-          animation: 'fade_from_bottom',
           presentation: 'transparentModal',
         }}
       />

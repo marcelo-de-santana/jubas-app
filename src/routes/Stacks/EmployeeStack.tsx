@@ -4,19 +4,24 @@ import {
   EmployeeDetailsScreen,
   EmployeeProfileUpdateScreen,
   EmployeeTimeListScreen,
-  EmployeeTimeCreateScreen,
   EmployeeServicesListScreen,
 } from '@screens';
 
-import {EmployeeResponseDTO, MinimaProfilelResponseDTO, ProfileResponseDTO} from '@repositories';
+import {ProfileResponseDTO, WorkingHoursResponseDTO} from '@repositories';
+import {colorRegistry} from '@styles';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
   EmployeeDetailsScreen: {profile: ProfileResponseDTO};
-  EmployeeProfileUpdateScreen: {profile: MinimaProfilelResponseDTO};
-  EmployeeTimeCreateScreen: undefined;
-  EmployeeTimeListScreen: {employee: EmployeeResponseDTO};
-  EmployeeServicesListScreen: {employee: EmployeeResponseDTO};
+  EmployeeProfileUpdateScreen: {profile: ProfileResponseDTO};
+  EmployeeTimeListScreen: {
+    employeeId: string;
+    workingHours: WorkingHoursResponseDTO;
+  };
+  EmployeeServicesListScreen: {
+    employeeId: string;
+    services: any;
+  };
 };
 
 const NativeStack = createNativeStackNavigator<EmployeeStackParamList>();
@@ -25,18 +30,22 @@ export function EmployeeStack() {
   return (
     <NativeStack.Navigator
       screenOptions={{
+        animation: 'fade_from_bottom',
         headerShadowVisible: false,
         headerShown: false,
         headerStyle: {
-          backgroundColor: '#f2f2f2',
+          backgroundColor: colorRegistry['light-gray'],
         },
-        headerTintColor: '#3C4659',
+        headerTintColor: colorRegistry['steel-blue'],
         headerTitleAlign: 'center',
       }}>
       <NativeStack.Screen
         name="EmployeeListScreen"
         component={EmployeeListScreen}
-        options={{headerTitle: 'Funcionários', headerShown: true}}
+        options={{
+          headerTitle: 'Funcionários',
+          headerShown: true,
+        }}
       />
       <NativeStack.Screen
         name="EmployeeDetailsScreen"
@@ -44,22 +53,12 @@ export function EmployeeStack() {
         options={({route}) => ({
           headerTitle: route.params.profile.name,
           headerShown: true,
-          animation: 'slide_from_right',
         })}
       />
       <NativeStack.Screen
         name="EmployeeProfileUpdateScreen"
         component={EmployeeProfileUpdateScreen}
         options={{
-          animation: 'fade_from_bottom',
-          presentation: 'transparentModal',
-        }}
-      />
-      <NativeStack.Screen
-        name="EmployeeTimeCreateScreen"
-        component={EmployeeTimeCreateScreen}
-        options={{
-          animation: 'fade_from_bottom',
           presentation: 'transparentModal',
         }}
       />
@@ -68,13 +67,16 @@ export function EmployeeStack() {
         component={EmployeeTimeListScreen}
         options={{
           headerTitle: 'Horários',
-          animation: 'slide_from_right',
           headerShown: true,
         }}
       />
       <NativeStack.Screen
         name="EmployeeServicesListScreen"
         component={EmployeeServicesListScreen}
+        options={{
+          headerTitle: 'Serviços',
+          headerShown: true,
+        }}
       />
     </NativeStack.Navigator>
   );

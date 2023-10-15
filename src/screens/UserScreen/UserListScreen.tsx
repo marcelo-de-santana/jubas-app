@@ -1,5 +1,4 @@
 import {
-  ButtonOpacity,
   EmptyListComponent,
   Icon,
   LoadingScreen,
@@ -7,6 +6,7 @@ import {
   Screen,
   ViewSeparator,
   TouchableItem,
+  Button,
 } from '@components';
 import {useCallback, useState} from 'react';
 
@@ -96,12 +96,12 @@ export function UserListScreen({navigation}: UserScreenProps) {
         />
       )}
 
-      <ButtonOpacity
+      <Button
         type="square-right"
         color="steel-blue"
         onPress={() => navigation.navigate('UserCreateScreen')}>
-        <Icon name="AddCircleIcon" color="white" size={40} />
-      </ButtonOpacity>
+        <Icon name="AddIcon" color="white" size={35} />
+      </Button>
     </Screen>
   );
 }

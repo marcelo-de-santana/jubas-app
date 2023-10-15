@@ -14,7 +14,8 @@ export function HomeScreen({navigation}: AppStackProps) {
       title: 'Gerenciar agenda',
     },
     {
-      title: 'Gerenciar catálogo',
+      title: 'Gerenciar negócio',
+      routeName: 'BusinessManagementStack',
     },
     {
       title: 'Meus funcionários',

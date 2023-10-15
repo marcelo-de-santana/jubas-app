@@ -95,10 +95,10 @@ export const buttonRegistry = StyleSheet.create({
   },
   'square-right': {
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     position: 'absolute',
-    right: 20,
-    bottom: 20,
+    right: 15,
+    bottom: 15,
   },
   'square-inline': {
     justifyContent: 'center',

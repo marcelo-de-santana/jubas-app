@@ -1,2 +1,2 @@
 export * from './EmployeeRepo';
-export * from './EmployeeRepoType';
+export * from './EmployeeType';
