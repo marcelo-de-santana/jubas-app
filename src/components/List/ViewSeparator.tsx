@@ -1,4 +1,4 @@
-import {ColorName, colorRegistry, theme, themeRegistry} from '@styles';
+import {ColorName, colorRegistry} from '@styles';
 import {View, ViewProps} from 'react-native';
 
 interface ViewSeparatorProps extends ViewProps {

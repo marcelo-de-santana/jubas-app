@@ -1,6 +1,6 @@
 import {registryMenu} from '@styles';
 import {TouchableOpacity, View} from 'react-native';
-import {TextComponent} from '../Texts';
+import {Text} from '../Texts';
 
 type MenuProps = {
   menuOptions: {index?: number; title: string; onPress?: () => void}[];
@@ -26,7 +26,7 @@ export function MenuTab({menuOptions, indexButtonSelected}: MenuProps) {
               style={[registryMenu['box-tab'], registryMenu[tabStyle]]}
               onPress={option.onPress}
               disabled={disable}>
-              <TextComponent color={textColor}>{option.title}</TextComponent>
+              <Text color={textColor}>{option.title}</Text>
             </TouchableOpacity>
           );
         })

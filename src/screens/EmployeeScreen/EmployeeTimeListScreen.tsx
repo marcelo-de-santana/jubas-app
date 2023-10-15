@@ -1,8 +1,8 @@
 import {
   LoadingScreen,
   Screen,
-  TextComponent,
-  TouchableComponent,
+  Text,
+  Touchable,
   ViewSeparator,
 } from '@components';
 import {
@@ -24,19 +24,19 @@ interface ListTimeProps {
 
 function ListTime({color, textValues, disabled, onPress}: ListTimeProps) {
   return (
-    <TouchableComponent
+    <Touchable
       color={color}
       type="box-flex-row-list"
       disabled={disabled}
       onPress={onPress}>
       {textValues?.map((item, index) => (
         <View key={index} style={{width: '20%', justifyContent: 'center'}}>
-          <TextComponent color="steel-blue" align="center" size="S">
+          <Text color="steel-blue" align="center" size="S">
             {item}
-          </TextComponent>
+          </Text>
         </View>
       ))}
-    </TouchableComponent>
+    </Touchable>
   );
 }
 
@@ -92,9 +92,7 @@ export function EmployeeTimeListScreen({
     );
   }
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Screen>

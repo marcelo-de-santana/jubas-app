@@ -1,10 +1,10 @@
 import {
   Button,
-  DecisionAlert,
+  Alert,
   ViewModal,
   InputForm,
   SwitchForm,
-  TextComponent,
+  Text,
 } from '@components';
 import {updateUser} from '@repositories';
 import {UserUpdateScreenProps} from '@routes';
@@ -37,7 +37,7 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
   }
 
   function askAboutUpdate() {
-    DecisionAlert({onPress: sendToUpdate});
+    Alert({type: 'decision', onPress: sendToUpdate});
   }
 
   return (
@@ -83,9 +83,9 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
           ]}
         />
         <Button onPress={askAboutUpdate}>
-          <TextComponent color="white" size="L">
+          <Text color="white" size="L">
             Salvar
-          </TextComponent>
+          </Text>
         </Button>
       </InputForm>
     </ViewModal>

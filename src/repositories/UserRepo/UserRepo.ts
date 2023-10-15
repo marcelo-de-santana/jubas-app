@@ -4,7 +4,7 @@ import {
   UserToCreateRequestDTO,
   UserToUpdateRequestDTO,
 } from './UserTypes';
-import {AlertComponent} from '@components';
+import {Alert} from '@components';
 import {isAxiosError} from 'axios';
 
 const PATH = '/user';
@@ -27,13 +27,13 @@ export async function createUser(userToCreate: UserToCreateRequestDTO) {
   try {
     const response = await api.post(`${PATH}/register`, userToCreate);
     if (response.status === 201) {
-      AlertComponent({
+      Alert({
         message: `Usuário "${response.data.email}" criado com sucesso!`,
       });
     }
   } catch (error) {
     if (isAxiosError(error) && error.response?.status === 401) {
-      AlertComponent({message: 'Usuário já cadastrado!'});
+      Alert({message: 'Usuário já cadastrado!'});
     }
   }
 }
@@ -49,7 +49,7 @@ export async function updateUser({
     password,
     userPermissionId,
   });
-  AlertComponent({
+  Alert({
     message: `${response.data.email}  atualizado com sucesso!`,
   });
 }

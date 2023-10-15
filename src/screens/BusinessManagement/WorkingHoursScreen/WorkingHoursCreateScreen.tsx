@@ -1,5 +1,5 @@
-import {Button, DecisionAlert, TextComponent, ViewModal} from '@components';
-import {} from '@routes';
+import {Button, Alert, Text, ViewModal} from '@components';
+import {BusinessManagementScreenProps} from '@routes';
 import {buttonRegistry, colorRegistry, themeRegistry} from '@styles';
 import {useState} from 'react';
 import {View} from 'react-native';
@@ -9,7 +9,9 @@ import {WorkingHoursRequestDTO, createNewWorkingHour} from '@repositories';
 
 type WorkingHoursKeys = keyof WorkingHoursRequestDTO;
 
-export function WorkingHoursCreateScreen({navigation}) {
+export function WorkingHoursCreateScreen({
+  navigation,
+}: BusinessManagementScreenProps) {
   const [isDateTimePickerVisible, setDateTimePickerVisibility] =
     useState(false);
   const [workingHourKey, setWorkingHourKey] =
@@ -46,15 +48,16 @@ export function WorkingHoursCreateScreen({navigation}) {
     }
   }
 
-  function confirmSend() {
-    DecisionAlert({
+  async function sendToCreate() {
+    await createNewWorkingHour(workingHours);
+    navigation.goBack();
+  }
+
+  function askAboutCreate() {
+    Alert({
       message: 'Deseja cadastrar os horários?',
-      onPress: sendForm,
+      onPress: sendToCreate,
     });
-    async function sendForm() {
-      await createNewWorkingHour(workingHours);
-      navigation.goBack();
-    }
   }
 
   function LineTexts({textValues}: {textValues: string[]}) {
@@ -64,7 +67,7 @@ export function WorkingHoursCreateScreen({navigation}) {
           <View
             key={index}
             style={[buttonRegistry['square-inline'], {width: '23%'}]}>
-            <TextComponent color="midnight-blue">{value}</TextComponent>
+            <Text color="midnight-blue">{value}</Text>
           </View>
         ))}
       </View>
@@ -89,7 +92,7 @@ export function WorkingHoursCreateScreen({navigation}) {
               },
             ]}
             onPress={value.onPress}>
-            <TextComponent color="midnight-blue">{value.text}</TextComponent>
+            <Text color="midnight-blue">{value.text}</Text>
           </Button>
         ))}
       </View>
@@ -146,10 +149,10 @@ export function WorkingHoursCreateScreen({navigation}) {
           />
         )}
 
-        <Button onPress={confirmSend}>
-          <TextComponent size="L" color="white">
+        <Button onPress={askAboutCreate}>
+          <Text size="L" color="white">
             Salvar
-          </TextComponent>
+          </Text>
         </Button>
       </View>
     </ViewModal>

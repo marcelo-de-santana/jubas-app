@@ -1,7 +1,7 @@
 import {
-  DecisionAlert,
+  Alert,
   Button,
-  TextComponent,
+  Text,
   SwitchForm,
   ViewModal,
   InputForm,
@@ -28,7 +28,7 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
   }
 
   function askAboutCreate() {
-    DecisionAlert({onPress: sendToCreate});
+    Alert({type: 'decision', onPress: sendToCreate});
   }
 
   return (
@@ -76,9 +76,9 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
           ]}
         />
         <Button onPress={askAboutCreate}>
-          <TextComponent size="L" color="white">
+          <Text size="L" color="white">
             Confirmar
-          </TextComponent>
+          </Text>
         </Button>
       </InputForm>
     </ViewModal>

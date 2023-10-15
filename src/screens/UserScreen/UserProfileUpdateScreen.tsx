@@ -1,11 +1,11 @@
 import {
   Button,
-  DecisionAlert,
+  Alert,
   ViewModal,
   InputForm,
   Icon,
   SwitchForm,
-  TextComponent,
+  Text,
 } from '@components';
 import {deleteProfile, updateProfileAndUser} from '@repositories';
 import {UserProfileUpdateScreenProps} from '@routes';
@@ -47,14 +47,16 @@ export function UserProfileUpdateScreen({
 
   /** Alert Components */
   function askAboutUpdate() {
-    DecisionAlert({
+    Alert({
+      type: 'decision',
       message: 'Deseja salvar as alterações?',
       onPress: sendToUpdate,
     });
   }
 
   function askAboutDeletion() {
-    DecisionAlert({
+    Alert({
+      type: 'decision',
       message: 'Deseja excluir o perfil?',
       onPress: sendToDelete,
     });
@@ -91,9 +93,9 @@ export function UserProfileUpdateScreen({
         />
         <View style={theme.boxFlexRow}>
           <Button type="send-flex" onPress={askAboutUpdate}>
-            <TextComponent color="white" size="L">
+            <Text color="white" size="L">
               Salvar
-            </TextComponent>
+            </Text>
           </Button>
           <Button type="small" color="red" onPress={askAboutDeletion}>
             <Icon name="TrashIcon" color="white" size={30} />

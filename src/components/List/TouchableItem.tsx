@@ -1,12 +1,9 @@
-import {
-  TouchableComponent,
-  TouchableComponentProps,
-} from './TouchableComponent';
-import {TextComponent, TextComponentProps} from '../Texts';
+import {Touchable, TouchableProps} from './Touchable';
+import {Text, TextProps} from '../Texts';
 
-interface SimpleTouchableItemProps extends TouchableComponentProps {
+interface TouchableItemProps extends TouchableProps {
   children?: React.ReactNode;
-  textProps?: TextComponentProps;
+  textProps?: TextProps;
   textValues?: (string | React.JSX.Element)[];
 }
 
@@ -15,15 +12,15 @@ export function TouchableItem({
   textProps,
   textValues,
   ...props
-}: SimpleTouchableItemProps) {
+}: TouchableItemProps) {
   return (
-    <TouchableComponent type="line-items" {...props}>
+    <Touchable type="line-items" {...props}>
       {textValues?.map((value, index) => (
-        <TextComponent key={index} size="S" {...textProps}>
+        <Text key={index} size="S" {...textProps}>
           {value}
-        </TextComponent>
+        </Text>
       ))}
       {children}
-    </TouchableComponent>
+    </Touchable>
   );
 }

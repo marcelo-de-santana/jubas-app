@@ -1,8 +1,8 @@
-import {AlertComponent} from '@components';
+import {Alert} from '@components';
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://192.168.1.16:8080/',
+  baseURL: 'https://jubas-backend.onrender.com/',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -14,7 +14,7 @@ export const interceptor = api.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 500) {
-      AlertComponent({});
+      Alert();
     }
     return Promise.reject(error);
   },

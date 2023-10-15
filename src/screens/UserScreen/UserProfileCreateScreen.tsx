@@ -1,10 +1,10 @@
 import {
   Button,
-  DecisionAlert,
+  Alert,
   ViewModal,
   InputForm,
   SwitchForm,
-  TextComponent,
+  Text,
 } from '@components';
 import {createProfile} from '@repositories';
 import {UserProfileCreateScreenProps} from '@routes';
@@ -36,7 +36,7 @@ export function UserProfileCreateScreen({
   }
 
   function askAboutCreate() {
-    DecisionAlert({onPress: sendToCreate});
+    Alert({type: 'decision', onPress: sendToCreate});
   }
 
   return (
@@ -68,9 +68,9 @@ export function UserProfileCreateScreen({
           ]}
         />
         <Button onPress={askAboutCreate}>
-          <TextComponent color="white" size="L">
+          <Text color="white" size="L">
             Salvar
-          </TextComponent>
+          </Text>
         </Button>
       </InputForm>
     </ViewModal>

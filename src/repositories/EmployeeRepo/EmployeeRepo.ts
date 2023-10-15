@@ -1,5 +1,5 @@
 import {api} from '@services';
-import {AlertComponent, DecisionAlert} from '@components';
+import {Alert} from '@components';
 import {EmployeeUpdateRequestDTO} from './EmployeeType';
 
 const PATH = '/employee';
@@ -14,7 +14,8 @@ export async function getEmployeeByProfileId(id: string) {
     const response = await api.get(`${PATH}/profile/${id}`);
     return response.data;
   } catch (error) {
-    DecisionAlert({
+    Alert({
+      type: 'decision',
       message: 'Funcionário ainda não cadastrado. Deseja inseri-lo agora?',
       onPress: () => registerEmployeeByProfileId(id),
     });
@@ -30,5 +31,5 @@ export async function updateEmployee({
     profileId: profileId,
     workingHourId: workingHoursId,
   });
-  AlertComponent({message: 'Dados atualizados.'});
+  Alert({message: 'Dados atualizados.'});
 }

@@ -1,6 +1,6 @@
 import {colorRegistry, fontSizeRegistry} from '@styles';
 import {View} from 'react-native';
-import {TextComponent} from '../Texts';
+import {Text} from '../Texts';
 
 interface EmptyListComponentProps {
   title?: string;
@@ -13,7 +13,7 @@ export function EmptyListComponent({
 }: EmptyListComponentProps) {
   return (
     <View style={{flex: 1, justifyContent: 'center', height: height}}>
-      <TextComponent
+      <Text
         style={[
           {
             fontSize: fontSizeRegistry['M'],
@@ -22,7 +22,7 @@ export function EmptyListComponent({
           },
         ]}>
         {title}
-      </TextComponent>
+      </Text>
     </View>
   );
 }

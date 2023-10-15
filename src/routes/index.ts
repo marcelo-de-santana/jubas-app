@@ -1,3 +1,3 @@
 export * from './Routes';
 export * from './Stacks';
-export * from './StackProps';
+export * from './Props';

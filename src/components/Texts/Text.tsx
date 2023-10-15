@@ -5,24 +5,24 @@ import {
   fontSizeRegistry,
   textAlignType,
 } from '@styles';
-import {Text, TextProps} from 'react-native';
+import {Text as TextRN, TextProps as TextPropsRN} from 'react-native';
 
-export interface TextComponentProps extends TextProps {
+export interface TextProps extends TextPropsRN {
   children?: React.ReactNode;
   align?: textAlignType;
   color?: ColorName;
   size?: FontSizeName;
 }
 
-export function TextComponent({
+export function Text({
   children,
   align = 'center',
   color = 'steel-blue',
   size = 'S',
   ...props
-}: TextComponentProps) {
+}: TextProps) {
   return (
-    <Text
+    <TextRN
       {...props}
       style={{
         color: colorRegistry[color],
@@ -30,6 +30,6 @@ export function TextComponent({
         textAlign: align,
       }}>
       {children}
-    </Text>
+    </TextRN>
   );
 }

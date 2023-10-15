@@ -1,4 +1,4 @@
-import {AlertComponent} from '@components';
+import {Alert} from '@components';
 import {api} from '@services';
 import {
   ProfileToCreateRequestDTO,
@@ -22,7 +22,7 @@ export async function getAllProfilesByUserId(userId: string) {
 
 export async function createProfile(profile: ProfileToCreateRequestDTO) {
   const response = await api.post(PATH, profile);
-  AlertComponent({
+  Alert({
     message: `Perfil: ${response.data.name} criado com sucesso.`,
   });
 }
@@ -40,7 +40,7 @@ export async function updateProfileAndUser({
     statusProfile,
     userId,
   });
-  AlertComponent({
+  Alert({
     message: `Perfil: ${response.data.name} atualizado com sucesso.`,
   });
 }
@@ -49,14 +49,14 @@ export async function updateProfile(
   profile: ProfileToPartiallyUpdateRequestDTO,
 ) {
   const response = await api.patch(`${PATH}/${profile.id}`, profile);
-  AlertComponent({
+  Alert({
     message: `Perfil: ${response.data.name} atualizado com sucesso.`,
   });
 }
 
 export async function deleteProfile(id: string) {
   const response = await api.delete(`${PATH}/${id}`);
-  AlertComponent({
+  Alert({
     message: `Perfil: ${response.data.name} excluído com sucesso.`,
   });
 }

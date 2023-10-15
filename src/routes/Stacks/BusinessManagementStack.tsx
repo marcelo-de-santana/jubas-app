@@ -1,10 +1,17 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {DashboardScreen, WorkingHoursCreateScreen} from '@screens';
+import {
+  CategoryListScreen,
+  DashboardScreen,
+  WorkingHoursCreateScreen,
+  WorkingHoursListScreen,
+} from '@screens';
 import {colorRegistry} from '@styles';
 
 export type BusinessManagementParamList = {
+  CategoryListScreen: undefined;
   DashboardScreen: undefined;
   WorkingHoursCreateScreen: undefined;
+  WorkingHoursListScreen: undefined;
 };
 
 export function BusinessManagementStack() {
@@ -26,12 +33,29 @@ export function BusinessManagementStack() {
       <NativeStack.Screen
         name="DashboardScreen"
         component={DashboardScreen}
-        options={{headerShown: true}}
+        options={{headerShown: true, headerTitle: 'Dashboard'}}
+      />
+      <NativeStack.Screen
+        name="CategoryListScreen"
+        component={CategoryListScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Categorias',
+        }}
       />
       <NativeStack.Screen
         name="WorkingHoursCreateScreen"
         component={WorkingHoursCreateScreen}
         options={{presentation: 'transparentModal'}}
+      />
+      <NativeStack.Screen
+        name="WorkingHoursListScreen"
+        component={WorkingHoursListScreen}
+        options={{
+          headerShown: true,
+          headerTitle: 'Horários',
+          presentation: 'transparentModal',
+        }}
       />
     </NativeStack.Navigator>
   );

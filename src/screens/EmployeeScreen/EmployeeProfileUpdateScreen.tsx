@@ -1,9 +1,9 @@
 import {
   Button,
-  DecisionAlert,
+  Alert,
   InputForm,
   SwitchForm,
-  TextComponent,
+  Text,
   ViewModal,
 } from '@components';
 import {updateProfile} from '@repositories';
@@ -28,7 +28,7 @@ export function EmployeeProfileUpdateScreen({
   }
 
   function askAboutUpdate() {
-    DecisionAlert({
+    Alert({
       message: 'Deseja salvar as alterações?',
       onPress: sendToUpdate,
     });
@@ -64,9 +64,9 @@ export function EmployeeProfileUpdateScreen({
           ]}
         />
         <Button type="send" onPress={askAboutUpdate}>
-          <TextComponent color="white" size="L">
+          <Text color="white" size="L">
             Salvar
-          </TextComponent>
+          </Text>
         </Button>
       </InputForm>
     </ViewModal>

@@ -1,1 +1,1 @@
-export * from './TextComponent';
+export * from './Text';
