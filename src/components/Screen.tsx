@@ -1,4 +1,4 @@
-import {DimensionValue, SafeAreaView, ViewProps} from 'react-native';
+import {DimensionValue, View, ViewProps} from 'react-native';
 import {ColorName, ThemeName, colorRegistry, themeRegistry} from '@styles';
 
 interface ScreenProps extends ViewProps {
@@ -15,7 +15,7 @@ export function Screen({
   ...props
 }: ScreenProps) {
   return (
-    <SafeAreaView
+    <View
       style={[
         themeRegistry[type],
         {
@@ -25,6 +25,6 @@ export function Screen({
       ]}
       {...props}>
       {children}
-    </SafeAreaView>
+    </View>
   );
 }
