@@ -1,10 +1,9 @@
 import {
   Alert,
-  Button,
-  Text,
   SwitchForm,
   ViewModal,
   InputForm,
+  ButtonComponent,
 } from '@components';
 import {useState} from 'react';
 import {themeRegistry} from '@styles';
@@ -75,11 +74,11 @@ export function UserCreateScreen({navigation}: UserScreenProps) {
             },
           ]}
         />
-        <Button onPress={askAboutCreate}>
-          <Text size="L" color="white">
-            Confirmar
-          </Text>
-        </Button>
+        <ButtonComponent
+          type="save"
+          message="Salvar"
+          onPress={askAboutCreate}
+        />
       </InputForm>
     </ViewModal>
   );

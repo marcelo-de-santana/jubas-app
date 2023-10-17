@@ -6,36 +6,41 @@ export function HomeScreen({navigation}: AppStackProps) {
   const menuOptions = [
     {
       title: 'Ver agenda',
+      route: () => navigation.navigate('UnderConstruction'),
     },
     {
       title: 'Minha conta',
+      route: () => navigation.navigate('UnderConstruction'),
     },
     {
       title: 'Gerenciar agenda',
+      route: () => navigation.navigate('UnderConstruction'),
     },
     {
       title: 'Gerenciar negócio',
-      routeName: 'BusinessManagementStack',
+      route: () => navigation.navigate('BusinessManagementStack'),
     },
     {
       title: 'Meus funcionários',
-      routeName: 'EmployeeStack',
+      route: () => navigation.navigate('EmployeeStack'),
     },
     {
       title: 'Gerenciar usuários',
-      routeName: 'UserStack',
+      route: () => navigation.navigate('UserStack'),
     },
     {
       title: 'Gerenciar pagamentos',
+      route: () => navigation.navigate('UnderConstruction'),
     },
     {
       title: 'Minhas compras',
+      route: () => navigation.navigate('UnderConstruction'),
     },
   ];
 
   return (
     <Screen>
-      <Menu menuOptions={menuOptions} navigate={navigation.navigate} />
+      <Menu menuOptions={menuOptions} />
     </Screen>
   );
 }

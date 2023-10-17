@@ -1,8 +1,7 @@
 import {UserProfileProps} from '@routes';
 import {
-  Button,
+  ButtonComponent,
   EmptyListComponent,
-  Icon,
   LoadingScreen,
   Screen,
   TouchableItem,
@@ -90,14 +89,12 @@ export function UserProfileScreen({navigation, route}: UserProfileProps) {
         })}
       />
 
-      <Button
-        color="steel-blue"
-        type="square-right"
+      <ButtonComponent
+        type="add"
         onPress={() =>
           navigation.navigate('UserProfileCreateScreen', {userId: id})
-        }>
-        <Icon name="AddIcon" color="white" size={35} />
-      </Button>
+        }
+      />
     </Screen>
   );
 }

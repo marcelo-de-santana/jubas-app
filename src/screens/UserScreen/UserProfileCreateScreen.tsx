@@ -1,10 +1,9 @@
 import {
-  Button,
   Alert,
   ViewModal,
   InputForm,
   SwitchForm,
-  Text,
+  ButtonComponent,
 } from '@components';
 import {createProfile} from '@repositories';
 import {UserProfileCreateScreenProps} from '@routes';
@@ -67,11 +66,11 @@ export function UserProfileCreateScreen({
             },
           ]}
         />
-        <Button onPress={askAboutCreate}>
-          <Text color="white" size="L">
-            Salvar
-          </Text>
-        </Button>
+        <ButtonComponent
+          type="save"
+          message="Salvar"
+          onPress={askAboutCreate}
+        />
       </InputForm>
     </ViewModal>
   );

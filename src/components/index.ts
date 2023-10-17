@@ -1,4 +1,4 @@
-export * from './Alerts';
+export * from './Alert';
 export * from './Buttons';
 export * from './Forms';
 export * from './Screen';
@@ -6,6 +6,6 @@ export * from './Icons';
 export * from './List';
 export * from './Loaders';
 export * from './Menus';
-export * from './Texts';
+export * from './Text';
 export * from './ViewModal';
 export * from './Watch';

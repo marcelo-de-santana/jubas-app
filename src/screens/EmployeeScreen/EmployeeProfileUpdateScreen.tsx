@@ -1,10 +1,9 @@
 import {
-  Button,
   Alert,
   InputForm,
   SwitchForm,
-  Text,
   ViewModal,
+  ButtonComponent,
 } from '@components';
 import {updateProfile} from '@repositories';
 import {EmployeeProfileUpdateScreenProps} from '@routes';
@@ -63,11 +62,11 @@ export function EmployeeProfileUpdateScreen({
             },
           ]}
         />
-        <Button type="send" onPress={askAboutUpdate}>
-          <Text color="white" size="L">
-            Salvar
-          </Text>
-        </Button>
+        <ButtonComponent
+          type="save"
+          message="Salvar"
+          onPress={askAboutUpdate}
+        />
       </InputForm>
     </ViewModal>
   );

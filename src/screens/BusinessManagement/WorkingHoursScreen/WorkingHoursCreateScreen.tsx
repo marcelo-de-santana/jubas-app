@@ -1,4 +1,4 @@
-import {Button, Alert, Text, ViewModal} from '@components';
+import {Button, Alert, Text, ViewModal, ButtonComponent} from '@components';
 import {BusinessManagementScreenProps} from '@routes';
 import {buttonRegistry, colorRegistry, themeRegistry} from '@styles';
 import {useState} from 'react';
@@ -149,11 +149,11 @@ export function WorkingHoursCreateScreen({
           />
         )}
 
-        <Button onPress={askAboutCreate}>
-          <Text size="L" color="white">
-            Salvar
-          </Text>
-        </Button>
+        <ButtonComponent
+          type="save"
+          message="Salvar"
+          onPress={askAboutCreate}
+        />
       </View>
     </ViewModal>
   );

@@ -1,6 +1,6 @@
 import {colorRegistry, fontSizeRegistry} from '@styles';
 import {View} from 'react-native';
-import {Text} from '../Texts';
+import {Text} from '../Text';
 
 interface EmptyListComponentProps {
   title?: string;

@@ -87,7 +87,7 @@ export const buttonRegistry = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 5,
   },
-  small: {
+  'square-small': {
     padding: 5,
     borderRadius: 6,
     marginHorizontal: 5,

@@ -1,6 +1,6 @@
 import {registryMenu} from '@styles';
 import {TouchableOpacity, View} from 'react-native';
-import {Text} from '../Texts';
+import {Text} from '../Text';
 
 type MenuProps = {
   menuOptions: {index?: number; title: string; onPress?: () => void}[];

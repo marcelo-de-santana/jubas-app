@@ -1,6 +1,6 @@
 import {ThemeName, colorRegistry, themeRegistry} from '@styles';
 import {Switch, SwitchProps, View, ViewProps} from 'react-native';
-import {Text, TextProps} from '../Texts';
+import {Text, TextProps} from '../Text';
 
 interface SwitchFormProps extends ViewProps {
   type?: ThemeName;

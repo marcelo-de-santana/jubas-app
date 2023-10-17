@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonComponent,
   EmptyListComponent,
   Icon,
   LoadingScreen,
@@ -76,16 +77,6 @@ export function WorkingHoursListScreen({
     return <EmptyListComponent title="Nenhum horário cadastrado" />;
   }
 
-  function ButtonToCreateScreen() {
-    return (
-      <Button
-        type="square-right"
-        onPress={() => navigation.navigate('WorkingHoursCreateScreen')}>
-        <Icon name="AddIcon" size={35} color="white" />
-      </Button>
-    );
-  }
-
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -99,7 +90,10 @@ export function WorkingHoursListScreen({
         renderItem={renderItem}
         ListEmptyComponent={ListEmptyComponent}
       />
-      <ButtonToCreateScreen />
+      <ButtonComponent
+        type="add"
+        onPress={() => navigation.navigate('WorkingHoursCreateScreen')}
+      />
     </Screen>
   );
 }

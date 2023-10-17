@@ -1,5 +1,5 @@
 import {Touchable, TouchableProps} from './Touchable';
-import {Text, TextProps} from '../Texts';
+import {Text, TextProps} from '../Text';
 
 interface TouchableItemProps extends TouchableProps {
   children?: React.ReactNode;

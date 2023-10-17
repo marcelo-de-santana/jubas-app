@@ -1,12 +1,11 @@
 import {
   EmptyListComponent,
-  Icon,
   LoadingScreen,
   MenuTab,
   Screen,
   ViewSeparator,
   TouchableItem,
-  Button,
+  ButtonComponent,
 } from '@components';
 import {useCallback, useState} from 'react';
 
@@ -96,12 +95,10 @@ export function UserListScreen({navigation}: UserScreenProps) {
         />
       )}
 
-      <Button
-        type="square-right"
-        color="steel-blue"
-        onPress={() => navigation.navigate('UserCreateScreen')}>
-        <Icon name="AddIcon" color="white" size={35} />
-      </Button>
+      <ButtonComponent
+        type="add"
+        onPress={() => navigation.navigate('UserCreateScreen')}
+      />
     </Screen>
   );
 }

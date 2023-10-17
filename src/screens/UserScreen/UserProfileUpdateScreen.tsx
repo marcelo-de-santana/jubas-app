@@ -3,9 +3,9 @@ import {
   Alert,
   ViewModal,
   InputForm,
-  Icon,
   SwitchForm,
   Text,
+  ButtonComponent,
 } from '@components';
 import {deleteProfile, updateProfileAndUser} from '@repositories';
 import {UserProfileUpdateScreenProps} from '@routes';
@@ -92,14 +92,8 @@ export function UserProfileUpdateScreen({
           ]}
         />
         <View style={theme.boxFlexRow}>
-          <Button type="send-flex" onPress={askAboutUpdate}>
-            <Text color="white" size="L">
-              Salvar
-            </Text>
-          </Button>
-          <Button type="small" color="red" onPress={askAboutDeletion}>
-            <Icon name="TrashIcon" color="white" size={30} />
-          </Button>
+          <ButtonComponent type="save-flex" message='Salvar' onPress={askAboutUpdate} />
+          <ButtonComponent type="trash" onPress={askAboutDeletion} />
         </View>
       </InputForm>
     </ViewModal>
