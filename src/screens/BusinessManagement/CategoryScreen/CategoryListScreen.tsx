@@ -17,8 +17,10 @@ export function CategoryListScreen({
   const [category, setCategory] = useState<CategoryResponseDTO[]>([]);
 
   useEffect(() => {
-    searchData();
-  }, []);
+    navigation.addListener('focus', () => {
+      searchData();
+    });
+  }, [navigation]);
 
   async function searchData() {
     setLoading(true);
@@ -27,7 +29,14 @@ export function CategoryListScreen({
   }
 
   function renderItem({item}: {item: CategoryResponseDTO}) {
-    return <TouchableItem textValues={[item.name]} />;
+    return (
+      <TouchableItem
+        textValues={[item.name]}
+        onPress={() =>
+          navigation.navigate('CategoryUpdateScreen', {category: item})
+        }
+      />
+    );
   }
 
   function ListEmptyComponent() {
@@ -44,7 +53,8 @@ export function CategoryListScreen({
         renderItem={renderItem}
         ListEmptyComponent={ListEmptyComponent}
       />
-      <ButtonComponent type='add'
+      <ButtonComponent
+        type="add"
         onPress={() => navigation.navigate('CategoryCreateScreen')}
       />
     </Screen>

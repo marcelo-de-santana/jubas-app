@@ -48,7 +48,6 @@ export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
     <Screen>
       <FlatList
         data={profiles}
-        keyExtractor={item => item.id}
         renderItem={renderItem}
         ItemSeparatorComponent={ViewSeparator}
         ListEmptyComponent={EmptyListComponent({
