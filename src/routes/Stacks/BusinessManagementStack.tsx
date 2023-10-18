@@ -5,6 +5,8 @@ import {
   CategoryListScreen,
   CategoryUpdateScreen,
   DashboardScreen,
+  SpecialtyCreateScreen,
+  SpecialtyListScreen,
   WorkingHoursCreateScreen,
   WorkingHoursListScreen,
 } from '@screens';
@@ -15,6 +17,8 @@ export type BusinessManagementParamList = {
   CategoryListScreen: undefined;
   CategoryUpdateScreen: {category: CategoryResponseDTO};
   DashboardScreen: undefined;
+  SpecialtyCreateScreen: undefined;
+  SpecialtyListScreen: undefined;
   WorkingHoursCreateScreen: undefined;
   WorkingHoursListScreen: undefined;
 };
@@ -59,7 +63,19 @@ export function BusinessManagementStack() {
         name="CategoryUpdateScreen"
         component={CategoryUpdateScreen}
       />
-
+      <NativeStack.Screen
+        name="SpecialtyCreateScreen"
+        component={SpecialtyCreateScreen}
+        options={{
+          headerShown: true,
+          headerTitle: '',
+        }}
+      />
+      <NativeStack.Screen
+        name="SpecialtyListScreen"
+        component={SpecialtyListScreen}
+        options={{headerShown: true, headerTitle: 'Especialidades'}}
+      />
       <NativeStack.Screen
         name="WorkingHoursCreateScreen"
         component={WorkingHoursCreateScreen}

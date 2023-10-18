@@ -11,7 +11,11 @@ export function DashboardScreen({navigation}: BusinessManagementScreenProps) {
             route: () => navigation.navigate('WorkingHoursListScreen'),
           },
           {
-            title: 'Categorias e Serviços',
+            title: 'Especialidades',
+            route: () => navigation.navigate('SpecialtyListScreen'),
+          },
+          {
+            title: 'Categorias',
             route: () => navigation.navigate('CategoryListScreen'),
           },
         ]}

@@ -4,6 +4,7 @@ import {
   LoadingScreen,
   Screen,
   TouchableItem,
+  ViewSeparator,
 } from '@components';
 import {CategoryResponseDTO, getAllCategories} from '@repositories';
 import {BusinessManagementScreenProps} from '@routes';
@@ -49,8 +50,8 @@ export function CategoryListScreen({
     <Screen>
       <FlatList
         data={category}
-        keyExtractor={item => item.name}
         renderItem={renderItem}
+        ItemSeparatorComponent={ViewSeparator}
         ListEmptyComponent={ListEmptyComponent}
       />
       <ButtonComponent
