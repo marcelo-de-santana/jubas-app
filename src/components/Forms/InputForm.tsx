@@ -1,4 +1,4 @@
-import {ColorName, ThemeName, colorRegistry, themeRegistry} from '@styles';
+import {ColorName, ThemeName, colorRegistry, theme} from '@styles';
 import {TextInput, TextInputProps, View, ViewProps} from 'react-native';
 
 interface InputFormProps {
@@ -18,7 +18,7 @@ export function InputForm({
 }: InputFormProps) {
   return (
     <View
-      style={[themeRegistry[type], {backgroundColor: colorRegistry[color]}]}
+      style={[theme[type], {backgroundColor: colorRegistry[color]}]}
       {...viewProps}>
       {inputProps?.map((prop, index) => (
         <TextInput
@@ -26,7 +26,7 @@ export function InputForm({
           autoCapitalize="none"
           placeholderTextColor={colorRegistry['midnight-blue-transparent']}
           style={[
-            themeRegistry['input-modal'],
+            theme['input-modal'],
             {
               backgroundColor: colorRegistry['lavender-gray'],
               color: colorRegistry['midnight-blue'],

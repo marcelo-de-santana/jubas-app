@@ -1,48 +1,55 @@
-import {UserType, authUser, authUserFake} from '@repositories';
-import {AxiosError} from 'axios';
+import {
+  UserResponseDTO,
+  UserToAuthenticatedRequestDTO,
+  authUser,
+} from '@repositories';
 import {createContext, useContext, useState} from 'react';
 
+const defaultUser = {
+  id: '',
+  email: '',
+  userPermission: {
+    id: 3,
+    type: 'Client',
+  },
+};
+
 type AuthContextProviderProps = {
-  children: any;
+  children: React.ReactNode;
 };
 
-type AuthUser = {
-  id: string;
-  email: string;
-  userPermission: object;
+type AuthContextType = {
+  isAuthenticated: boolean;
+  signIn: (user: UserToAuthenticatedRequestDTO) => void;
+  singOut: () => void;
+  user: UserResponseDTO;
 };
 
-type AuthContextType =
-  | {
-      loading: boolean;
-      isAuthenticated: boolean;
-      user: AuthUser | null;
-      signIn(userData: UserType): void;
-    }
-  | undefined;
-
-const AuthContext = createContext<AuthContextType>(undefined);
+export const AuthContext = createContext<AuthContextType>({
+  isAuthenticated: false,
+  signIn: () => {},
+  singOut: () => {},
+  user: defaultUser,
+});
 
 export function AuthContextProvider({children}: AuthContextProviderProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [isAuthenticated, setAuthentication] = useState(false);
+  const [user, setUser] = useState<UserResponseDTO>(defaultUser);
 
-  async function signIn(userData: UserType) {
-    try {
-      const response = await authUserFake(userData);
+  async function signIn(user: UserToAuthenticatedRequestDTO) {
+    const response = await authUser(user);
+    if (response?.data) {
       setUser(response.data);
-      setIsAuthenticated(true);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-        return false;
-      }
+      setAuthentication(true);
     }
   }
 
+  function singOut() {
+    setAuthentication(false);
+  }
+
   return (
-    <AuthContext.Provider value={{loading, isAuthenticated, user, signIn}}>
+    <AuthContext.Provider value={{isAuthenticated, signIn, singOut, user}}>
       {children}
     </AuthContext.Provider>
   );

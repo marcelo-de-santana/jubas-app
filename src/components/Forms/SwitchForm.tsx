@@ -1,4 +1,4 @@
-import {ThemeName, colorRegistry, themeRegistry} from '@styles';
+import {ThemeName, colorRegistry, theme} from '@styles';
 import {Switch, SwitchProps, View, ViewProps} from 'react-native';
 import {Text, TextProps} from '../Text';
 
@@ -20,7 +20,7 @@ export function SwitchForm({
   return (
     <View {...props}>
       {switchOptions?.map((option, index) => (
-        <View key={index} style={[themeRegistry[type]]}>
+        <View key={index} style={[theme[type]]}>
           <Text {...textProps}>{option?.title}</Text>
           <Switch
             trackColor={{

@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import {vCpf, vEmail} from '../validations/regex';
 
-export function loginFormSchema() {
+export function signInValidationSchema() {
   return Yup.object().shape({
     email: Yup.string()
       .email('*Campo obrigatório')

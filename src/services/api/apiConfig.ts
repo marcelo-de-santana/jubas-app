@@ -15,7 +15,7 @@ export const interceptor = api.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 500) {
-      Alert();
+      Alert({type: 'alert'});
     }
     return Promise.reject(error);
   },

@@ -1,4 +1,4 @@
-import {colorRegistry, registryMenu, themeRegistry} from '@styles';
+import {colorRegistry, registryMenu, theme} from '@styles';
 import {TouchableOpacity, View} from 'react-native';
 import {Text} from '../Text';
 
@@ -8,7 +8,7 @@ type MenuProps = {
 
 export function Menu({menuOptions}: MenuProps) {
   return (
-    <View style={themeRegistry['box-flex-row']}>
+    <View style={theme['box-flex-row']}>
       {menuOptions?.map((option, index) => (
         <TouchableOpacity
           key={index}

@@ -1,12 +1,12 @@
 import {Alert as AlertRN} from 'react-native';
 
 interface AlertProps {
-  type?: 'alert' | 'decision';
+  type: 'alert' | 'decision';
   message?: undefined | string;
   onPress?: () => void;
 }
 
-export function Alert({type = 'alert', message, onPress}: AlertProps = {}) {
+export function Alert({type, message, onPress}: AlertProps) {
   if (type === 'alert') {
     if (!message) message = 'Ocorreu um erro. Tente novamente mais tarde!';
     AlertRN.alert('', message);

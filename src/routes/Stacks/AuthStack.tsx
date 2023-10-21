@@ -3,17 +3,18 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {
-  LoginScreen,
+  SignInScreen,
   HomeScreen,
   SignUpScreen,
   RecoveryPasswordScreen,
 } from '@screens';
+import {colorRegistry} from '@styles';
 
 export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
 
 export type AuthStackParamList = {
   HomeScreen: undefined;
-  LoginScreen: undefined;
+  SignInScreen: undefined;
   SignUpScreen: undefined;
   RecoveryPasswordScreen: undefined;
 };
@@ -24,14 +25,19 @@ export function AuthStack() {
   return (
     <NativeStack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: '#3C4659',
-        },
-        headerTintColor: '#fff',
+        animation: 'fade_from_bottom',
+        headerShadowVisible: false,
         headerShown: false,
+        headerStyle: {
+          backgroundColor: colorRegistry['light-gray'],
+        },
+        headerTintColor: colorRegistry['steel-blue'],
+        headerTitleAlign: 'center',
+        statusBarColor: colorRegistry['light-gray'],
+        statusBarStyle: 'dark',
       }}
-      initialRouteName="LoginScreen">
-      <NativeStack.Screen name="LoginScreen" component={LoginScreen} />
+      initialRouteName="SignInScreen">
+      <NativeStack.Screen name="SignInScreen" component={SignInScreen} />
       <NativeStack.Screen name="HomeScreen" component={HomeScreen} />
       <NativeStack.Screen
         name="RecoveryPasswordScreen"

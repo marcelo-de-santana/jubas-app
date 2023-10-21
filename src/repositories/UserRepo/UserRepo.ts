@@ -20,7 +20,13 @@ export async function getAllUsersByPermission(id: number) {
 }
 
 export async function authUser(userToAuth: UserToAuthenticatedRequestDTO) {
-  return await api.post(`${PATH}/login`, userToAuth);
+  try {
+    return await api.post(`${PATH}/login`, userToAuth);
+  } catch (error) {
+    if (isAxiosError(error) && error.response?.status === 401) {
+      Alert({type: 'alert', message: 'Usuário e/ou Senha Incorreto(s).'});
+    }
+  }
 }
 
 export async function createUser(userToCreate: UserToCreateRequestDTO) {
@@ -28,12 +34,16 @@ export async function createUser(userToCreate: UserToCreateRequestDTO) {
     const response = await api.post(`${PATH}/register`, userToCreate);
     if (response.status === 201) {
       Alert({
+        type: 'alert',
         message: `Usuário "${response.data.email}" criado com sucesso!`,
       });
     }
   } catch (error) {
     if (isAxiosError(error) && error.response?.status === 401) {
-      Alert({message: 'Usuário já cadastrado!'});
+      Alert({
+        type: 'alert',
+        message: 'Usuário já cadastrado!',
+      });
     }
   }
 }
@@ -50,6 +60,7 @@ export async function updateUser({
     userPermissionId,
   });
   Alert({
+    type: 'alert',
     message: `${response.data.email}  atualizado com sucesso!`,
   });
 }

@@ -3,13 +3,13 @@ import {
   FontSizeName,
   colorRegistry,
   fontSizeRegistry,
-  textAlignType,
+  fontAlignType,
 } from '@styles';
 import {Text as TextRN, TextProps as TextPropsRN} from 'react-native';
 
 export interface TextProps extends TextPropsRN {
   children?: React.ReactNode;
-  align?: textAlignType;
+  align?: fontAlignType;
   color?: ColorName;
   size?: FontSizeName;
 }

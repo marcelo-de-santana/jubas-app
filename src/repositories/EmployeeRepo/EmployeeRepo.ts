@@ -31,5 +31,5 @@ export async function updateEmployee({
     profileId: profileId,
     workingHourId: workingHoursId,
   });
-  Alert({message: 'Dados atualizados.'});
+  Alert({type: 'alert', message: 'Dados atualizados.'});
 }

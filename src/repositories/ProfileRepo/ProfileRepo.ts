@@ -23,6 +23,7 @@ export async function getAllProfilesByUserId(userId: string) {
 export async function createProfile(profile: ProfileToCreateRequestDTO) {
   const response = await api.post(PATH, profile);
   Alert({
+    type: 'alert',
     message: `Perfil: ${response.data.name} criado com sucesso.`,
   });
 }
@@ -41,6 +42,7 @@ export async function updateProfileAndUser({
     userId,
   });
   Alert({
+    type: 'alert',
     message: `Perfil: ${response.data.name} atualizado com sucesso.`,
   });
 }
@@ -50,6 +52,7 @@ export async function updateProfile(
 ) {
   const response = await api.patch(`${PATH}/${profile.id}`, profile);
   Alert({
+    type: 'alert',
     message: `Perfil: ${response.data.name} atualizado com sucesso.`,
   });
 }
@@ -57,6 +60,7 @@ export async function updateProfile(
 export async function deleteProfile(id: string) {
   const response = await api.delete(`${PATH}/${id}`);
   Alert({
+    type: 'alert',
     message: `Perfil: ${response.data.name} excluído com sucesso.`,
   });
 }

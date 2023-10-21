@@ -1,4 +1,4 @@
-import {ColorName, ThemeName, colorRegistry, themeRegistry} from '@styles';
+import {ColorName, ThemeName, colorRegistry, theme} from '@styles';
 import {Pressable, PressableProps, SafeAreaView, ViewProps} from 'react-native';
 
 interface ViewModalProps {
@@ -18,9 +18,9 @@ export function ViewModal({
 }: ViewModalProps) {
   return (
     <SafeAreaView
-      style={[themeRegistry[type], {backgroundColor: colorRegistry[color]}]}
+      style={[theme[type], {backgroundColor: colorRegistry[color]}]}
       {...viewProps}>
-      <Pressable style={[themeRegistry['container']]} {...pressableProps} />
+      <Pressable style={[theme['container']]} {...pressableProps} />
       {children}
     </SafeAreaView>
   );

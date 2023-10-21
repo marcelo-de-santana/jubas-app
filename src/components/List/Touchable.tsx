@@ -1,4 +1,4 @@
-import {ColorName, ThemeName, colorRegistry, themeRegistry} from '@styles';
+import {ColorName, ThemeName, colorRegistry, theme} from '@styles';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
 export interface TouchableProps extends TouchableOpacityProps {
@@ -15,7 +15,7 @@ export function Touchable({
 }: TouchableProps) {
   return (
     <TouchableOpacity
-      style={[themeRegistry[type], {backgroundColor: colorRegistry[color]}]}
+      style={[theme[type], {backgroundColor: colorRegistry[color]}]}
       {...props}>
       {children}
     </TouchableOpacity>
