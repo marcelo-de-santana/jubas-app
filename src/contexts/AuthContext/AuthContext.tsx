@@ -2,7 +2,7 @@ import {
   UserResponseDTO,
   UserToAuthenticatedRequestDTO,
   authUser,
-} from '@repositories';
+} from '@domain';
 import {createContext, useContext, useState} from 'react';
 
 const defaultUser = {

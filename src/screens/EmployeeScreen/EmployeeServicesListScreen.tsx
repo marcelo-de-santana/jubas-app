@@ -1,5 +1,5 @@
 import {LoadingScreen, Screen, TouchableItem} from '@components';
-import {getAllCategories} from '@repositories';
+import {getAllCategories} from '@domain';
 import {EmployeeServicesListScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';

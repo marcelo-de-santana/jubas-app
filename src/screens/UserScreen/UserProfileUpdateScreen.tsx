@@ -1,15 +1,17 @@
 import {
   Button,
   Alert,
-  ViewModal,
+  Modal,
   InputForm,
   SwitchForm,
   Text,
   ButtonComponent,
+  TextInput,
+  Screen,
 } from '@components';
-import {deleteProfile, updateProfileAndUser} from '@repositories';
+import {deleteProfile, updateProfileAndUser} from '@domain';
 import {UserProfileUpdateScreenProps} from '@routes';
-import {theme} from '@styles';
+import {themeRegistry} from '@styles';
 import {cpfMask, removeCpfMask} from '@utils';
 import {useState} from 'react';
 import {View} from 'react-native';
@@ -63,39 +65,37 @@ export function UserProfileUpdateScreen({
   }
 
   return (
-    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
-      <InputForm
-        inputProps={[
-          {
-            placeholder: 'Nome',
-            value: profile.name,
-            onChangeText: text => handleProfile('name', text),
-          },
-          {
-            placeholder: 'CPF',
-            maxLength: 14,
-            value: cpfMask(profile.cpf),
-            onChangeText: text => handleProfile('cpf', text),
-          },
-        ]}>
-        <SwitchForm
-          style={{paddingVertical: 10, paddingHorizontal: 5}}
-          switchOptions={[
-            {
-              title: 'Status',
-              switchProps: {
-                value: profile.statusProfile,
-                onValueChange: () =>
-                  handleProfile('statusProfile', !profile.statusProfile),
-              },
-            },
-          ]}
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
+        <TextInput
+          placeholder="Nome"
+          value={profile.name}
+          onChangeText={text => handleProfile('name', text)}
         />
-        <View style={theme.boxFlexRow}>
-          <ButtonComponent type="save-flex" message='Salvar' onPress={askAboutUpdate} />
+        <TextInput
+          placeholder="CPF"
+          maxLength={14}
+          value={cpfMask(profile.cpf)}
+          onChangeText={text => handleProfile('cpf', text)}
+        />
+        <View style={{marginVertical: 10}}>
+          <SwitchForm
+            title="Status"
+            value={profile.statusProfile}
+            onValueChange={() =>
+              handleProfile('statusProfile', !profile.statusProfile)
+            }
+          />
+        </View>
+        <View style={themeRegistry['box-flex-row']}>
+          <ButtonComponent
+            type="save-flex"
+            text="Salvar"
+            onPress={askAboutUpdate}
+          />
           <ButtonComponent type="trash" onPress={askAboutDeletion} />
         </View>
-      </InputForm>
-    </ViewModal>
+      </Modal>
+    </Screen>
   );
 }

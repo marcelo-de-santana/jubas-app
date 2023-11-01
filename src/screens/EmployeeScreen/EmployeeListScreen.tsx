@@ -8,7 +8,7 @@ import {
 import {
   ProfileResponseDTO,
   getAllProfilesByUserPermissionId,
-} from '@repositories';
+} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';

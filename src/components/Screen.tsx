@@ -1,5 +1,5 @@
 import {DimensionValue, View, ViewProps} from 'react-native';
-import {ColorName, ThemeName, colorRegistry, theme} from '@styles';
+import {ColorName, ThemeName, colorRegistry, themeRegistry} from '@styles';
 
 interface ScreenProps extends ViewProps {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export function Screen({
   return (
     <View
       style={[
-        theme[type],
+        themeRegistry[type],
         {
           backgroundColor: colorRegistry[color],
           padding: padding,

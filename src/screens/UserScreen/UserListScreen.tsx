@@ -1,18 +1,20 @@
 import {
   EmptyListComponent,
   LoadingScreen,
-  MenuTab,
   Screen,
   ViewSeparator,
   TouchableItem,
   ButtonComponent,
+  Button,
+  Text,
 } from '@components';
 import {useCallback, useState} from 'react';
 
 import {UserScreenProps} from '@routes';
-import {UserResponseDTO, getAllUsersByPermission} from '@repositories';
-import {FlatList} from 'react-native';
+import {UserResponseDTO, getAllUsersByPermission} from '@domain';
+import {FlatList, View} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
+import {themeRegistry} from '@styles';
 
 export function UserListScreen({navigation}: UserScreenProps) {
   const [userPermissionId, setUserPermissionId] = useState(3);
@@ -24,23 +26,51 @@ export function UserListScreen({navigation}: UserScreenProps) {
     setUserPermissionId(indexButton);
   }
 
-  const menuOptions = [
-    {
-      index: 1,
-      title: 'Admin',
-      onPress: () => changeMenuButton(1),
-    },
-    {
-      index: 2,
-      title: 'Funcionários',
-      onPress: () => changeMenuButton(2),
-    },
-    {
-      index: 3,
-      title: 'Clientes',
-      onPress: () => changeMenuButton(3),
-    },
-  ];
+  interface ButtonTabProps {
+    index: boolean;
+    text: string;
+    onPress: () => void;
+  }
+
+  function ButtonTab({index, text, onPress}: ButtonTabProps) {
+    if (index) {
+      return (
+        <Button type="menu-tab-steel-blue" color="steel-blue" disabled>
+          <Text color="white">{text}</Text>
+        </Button>
+      );
+    }
+    return (
+      <Button
+        type="menu-tab-lavender-gray"
+        color="light-gray"
+        onPress={onPress}>
+        <Text color='steel-blue'>{text}</Text>
+      </Button>
+    );
+  }
+
+  function MenuTab() {
+    return (
+      <View style={themeRegistry['box-flex-row']}>
+        <ButtonTab
+          index={userPermissionId === 1}
+          text="Admin"
+          onPress={() => changeMenuButton(1)}
+        />
+        <ButtonTab
+          index={userPermissionId === 2}
+          text="Barbeiros"
+          onPress={() => changeMenuButton(2)}
+        />
+        <ButtonTab
+          index={userPermissionId === 3}
+          text="Clientes"
+          onPress={() => changeMenuButton(3)}
+        />
+      </View>
+    );
+  }
 
   useFocusEffect(
     useCallback(() => {
@@ -61,12 +91,7 @@ export function UserListScreen({navigation}: UserScreenProps) {
   }
 
   function ListHeaderComponent() {
-    return (
-      <MenuTab
-        menuOptions={menuOptions}
-        indexButtonSelected={userPermissionId}
-      />
-    );
+    return <MenuTab />;
   }
 
   function renderItem({item}: {item: UserResponseDTO}) {

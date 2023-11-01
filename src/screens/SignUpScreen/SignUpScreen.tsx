@@ -1,18 +1,9 @@
-import {Screen, TextAlertError} from '@components';
-import {placeHolderColorTextInput, theme} from '@styles';
+import {ButtonComponent, Screen, Text, TextInput} from '@components';
 import {useFormik} from 'formik';
-import {
-  Alert,
-  Keyboard,
-  Pressable,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Keyboard, Pressable, ScrollView} from 'react-native';
 import {createUserFormSchema} from '@utils';
-import {createUserClient} from '@repositories';
 import {AuthStackProps} from '@routes';
+import {createUser} from '@domain';
 
 export function SignUpScreen({navigation}: AuthStackProps) {
   const {handleChange, handleSubmit, values, errors} = useFormik({
@@ -22,12 +13,18 @@ export function SignUpScreen({navigation}: AuthStackProps) {
       password: '',
       checkPass: '',
     },
-    onSubmit: () => sendUserForm(),
+    onSubmit: sendUserForm,
   });
 
   async function sendUserForm() {
-    Alert.alert('', await createUserClient(values));
-    navigation.goBack();
+    const userCreated = await createUser({
+      email: values.email,
+      password: values.password,
+      userPermissionId: 3,
+    });
+    if (userCreated) {
+      navigation.goBack();
+    }
   }
 
   function handleTextInput(key: string, value: string) {
@@ -36,52 +33,47 @@ export function SignUpScreen({navigation}: AuthStackProps) {
 
   return (
     <Screen>
-      <Pressable style={theme.horizontalMargins} onPress={Keyboard.dismiss}>
-        <Text style={theme.label}>E-mail</Text>
-        <TextInput
-          style={theme.input}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          placeholder="jubasdeleao@exemplo.com"
-          placeholderTextColor={placeHolderColorTextInput}
-          maxLength={50}
-          value={values.email}
-          onChangeText={text => handleTextInput('email', text)}
-        />
-        {errors.email && <TextAlertError errorMessage={errors.email} />}
+      <ScrollView>
+        <Pressable onPress={Keyboard.dismiss}>
+          <Text align="left">E-mail</Text>
+          <TextInput
+            placeholder="jubasdeleao@exemplo.com"
+            maxLength={50}
+            value={values.email}
+            onChangeText={text => handleTextInput('email', text)}
+          />
+          <Text align="justify" color="red" size="XS">
+            {errors.email && errors.email}
+          </Text>
 
-        <Text style={theme.label}>Senha</Text>
-        <TextInput
-          style={theme.input}
-          autoCapitalize="none"
-          keyboardType="default"
-          placeholder="********"
-          placeholderTextColor={placeHolderColorTextInput}
-          maxLength={20}
-          secureTextEntry={true}
-          onChangeText={handleChange('password')}
-        />
-        {errors.password && <TextAlertError errorMessage={errors.password} />}
+          <Text align="left">Senha</Text>
+          <TextInput
+            placeholder="********"
+            maxLength={20}
+            secureTextEntry={true}
+            onChangeText={handleChange('password')}
+          />
+          <Text align="justify" color="red" size="XS">
+            {errors.password && errors.password}
+          </Text>
 
-        <Text style={theme.label}>Confirmar Senha</Text>
-        <TextInput
-          style={theme.input}
-          keyboardType="default"
-          placeholder="********"
-          placeholderTextColor={placeHolderColorTextInput}
-          maxLength={20}
-          secureTextEntry={true}
-          onChangeText={handleChange('checkPass')}
-        />
-        {errors.checkPass && <TextAlertError errorMessage={errors.checkPass} />}
-      </Pressable>
-      <View style={{marginTop: 30}}>
-        <TouchableOpacity
-          style={theme.blueButton}
-          onPress={() => handleSubmit()}>
-          <Text style={theme.textButton}>Cadastrar-me</Text>
-        </TouchableOpacity>
-      </View>
+          <Text align="left">Confirmar Senha</Text>
+          <TextInput
+            placeholder="********"
+            maxLength={20}
+            secureTextEntry={true}
+            onChangeText={handleChange('checkPass')}
+          />
+          <Text align="justify" color="red" size="XS">
+            {errors.checkPass && errors.checkPass}
+          </Text>
+          <ButtonComponent
+            type="save"
+            text="Cadastrar-me"
+            onPress={() => handleSubmit()}
+          />
+        </Pressable>
+      </ScrollView>
     </Screen>
   );
 }

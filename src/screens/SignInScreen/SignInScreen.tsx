@@ -1,9 +1,4 @@
-import {
-  ButtonComponent,
-  Screen,
-  Text,
-  TextInput,
-} from '@components';
+import {ButtonComponent, Screen, Text, TextInput} from '@components';
 import {colorRegistry} from '@styles';
 import {
   Dimensions,
@@ -20,7 +15,7 @@ import {signInValidationSchema} from '@utils';
 import {useFormik} from 'formik';
 import {useAuthContext} from '@contexts';
 
-const boxHeight = Dimensions.get('screen').height * 0.25;
+const boxHeight = Dimensions.get('screen').height * 0.3;
 
 export function SignInScreen({navigation}: AuthStackProps) {
   const {signIn} = useAuthContext();
@@ -90,11 +85,10 @@ export function SignInScreen({navigation}: AuthStackProps) {
               onBlur={handleBlur('email')}
               value={values.email}
             />
-            {touched.email && errors.email && (
-              <Text align="justify" color="red" size="XS">
-                {errors.email}
-              </Text>
-            )}
+            <Text align="justify" color="red" size="XS">
+              {touched.email && errors.email && errors.email}
+            </Text>
+
             <Text align="left">Digite seu senha</Text>
             <TextInput
               secureTextEntry={true}
@@ -104,15 +98,12 @@ export function SignInScreen({navigation}: AuthStackProps) {
               onBlur={handleBlur('password')}
               value={values.password}
             />
-            {touched.password && errors.password && (
-              <Text align="justify" color="red" size="XS">
-                {errors.password}
-              </Text>
-            )}
-
+            <Text align="justify" color="red" size="XS">
+              {touched.password && errors.password && errors.password}
+            </Text>
             <ButtonComponent
               type="save"
-              message="Entrar"
+              text="Entrar"
               onPress={() => handleSubmit()}
             />
           </View>
@@ -125,7 +116,7 @@ export function SignInScreen({navigation}: AuthStackProps) {
 const styles = StyleSheet.create({
   'header-box': {
     height: boxHeight,
-    marginVertical: 20,
+    justifyContent: 'center',
   },
   'brand-logo': {
     alignSelf: 'center',
@@ -138,9 +129,8 @@ const styles = StyleSheet.create({
     height: boxHeight,
   },
   'footer-box': {
-    flexDirection: 'column',
     height: boxHeight,
     justifyContent: 'space-between',
-    marginVertical: 20,
+    marginTop: 10,
   },
 });

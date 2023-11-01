@@ -3,7 +3,7 @@ import {
   MinimalUserResponseDTO,
   ProfileResponseDTO,
   UserResponseDTO,
-} from '@repositories';
+} from '@domain';
 import {
   UserCreateScreen,
   UserListScreen,

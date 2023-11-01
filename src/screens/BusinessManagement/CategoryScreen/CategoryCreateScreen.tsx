@@ -1,5 +1,5 @@
-import {Alert, ButtonComponent, InputForm, ViewModal} from '@components';
-import {createCategory} from '@repositories';
+import {Alert, ButtonComponent, Modal, Screen, TextInput} from '@components';
+import {createCategory} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
 import {useState} from 'react';
 
@@ -22,21 +22,15 @@ export function CategoryCreateScreen({
   }
 
   return (
-    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
-      <InputForm
-        inputProps={[
-          {
-            placeholder: 'Nome da categoria',
-            value: categoryName,
-            onChangeText: text => setCategoryName(text),
-          },
-        ]}>
-        <ButtonComponent
-          type="save"
-          message="Salvar"
-          onPress={askAboutCreate}
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
+        <TextInput
+          placeholder="Nome da categoria"
+          value={categoryName}
+          onChangeText={text => setCategoryName(text)}
         />
-      </InputForm>
-    </ViewModal>
+        <ButtonComponent type="save" text="Salvar" onPress={askAboutCreate} />
+      </Modal>
+    </Screen>
   );
 }

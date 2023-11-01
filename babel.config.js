@@ -11,7 +11,7 @@ module.exports = {
           '@config': './src/config',
           '@contexts': './src/contexts',
           '@domain': './src/domain',
-          '@repositories': './src/repositories',
+          '@infra': './src/infra',
           '@routes': './src/routes',
           '@screens': './src/screens',
           '@services': './src/services',

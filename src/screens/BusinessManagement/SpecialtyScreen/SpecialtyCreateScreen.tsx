@@ -2,10 +2,12 @@ import {
   Alert,
   ButtonComponent,
   EmptyListComponent,
-  InputForm,
+  LoadingIndicator,
   LoadingScreen,
+  Modal,
   Screen,
   Text,
+  TextInput,
   TouchableItem,
   ViewSeparator,
 } from '@components';
@@ -13,7 +15,7 @@ import {
   CategoryResponseDTO,
   createSpecialty,
   getAllCategories,
-} from '@repositories';
+} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
 import {ColorName} from '@styles';
 import {useEffect, useState} from 'react';
@@ -44,8 +46,6 @@ export function SpecialtyCreateScreen({
     });
     navigation.goBack();
   }
-
-  if (isLoading) return <LoadingScreen />;
 
   function ListHeaderComponent() {
     return <Text>Selecione uma categoria</Text>;
@@ -79,30 +79,34 @@ export function SpecialtyCreateScreen({
   }
 
   return (
-    <Screen>
-      <FlatList
-        data={category}
-        ListHeaderComponent={ListHeaderComponent}
-        renderItem={renderItem}
-        ItemSeparatorComponent={ViewSeparator}
-        ListEmptyComponent={ListEmptyComponent}
-      />
-      {categoryOption !== 0 && (
-        <InputForm
-          inputProps={[
-            {
-              placeholder: 'Nome da especialidade',
-              value: specialty,
-              onChangeText: text => setSpecialty(text),
-            },
-          ]}>
-          <ButtonComponent
-            type="save"
-            message="Salvar"
-            onPress={askAboutCreate}
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
+        {isLoading ? (
+          <LoadingIndicator />
+        ) : (
+          <FlatList
+            data={category}
+            ListHeaderComponent={ListHeaderComponent}
+            renderItem={renderItem}
+            ItemSeparatorComponent={ViewSeparator}
+            ListEmptyComponent={ListEmptyComponent}
           />
-        </InputForm>
-      )}
+        )}
+        {categoryOption !== 0 && (
+          <>
+            <TextInput
+              placeholder="Nome da especialidade"
+              value={specialty}
+              onChangeText={text => setSpecialty(text)}
+            />
+            <ButtonComponent
+              type="save"
+              text="Salvar"
+              onPress={askAboutCreate}
+            />
+          </>
+        )}
+      </Modal>
     </Screen>
   );
 }

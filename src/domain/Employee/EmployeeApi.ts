@@ -1,6 +1,6 @@
 import {api} from '@services';
 import {Alert} from '@components';
-import {EmployeeUpdateRequestDTO} from './EmployeeType';
+import {EmployeeUpdateRequestDTO} from './EmployeeTypes';
 
 const PATH = '/employee';
 

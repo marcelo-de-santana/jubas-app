@@ -1,4 +1,4 @@
-import {CategoryResponseDTO} from '../CategoryRepo';
+import {CategoryResponseDTO} from '../Category';
 
 export interface SpecialtyResponseDTO {
   id: string;

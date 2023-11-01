@@ -1,14 +1,16 @@
 import {
   Alert,
-  ViewModal,
+  Modal,
   InputForm,
   SwitchForm,
   ButtonComponent,
+  Screen,
 } from '@components';
-import {updateUser} from '@repositories';
+import {updateUser} from '@domain';
 import {UserUpdateScreenProps} from '@routes';
 import {themeRegistry} from '@styles';
 import {useState} from 'react';
+import {View} from 'react-native';
 
 export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
   const [user, setUser] = useState({password: '', ...route.params.user});
@@ -40,53 +42,43 @@ export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
   }
 
   return (
-    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
-      <InputForm
-        inputProps={[
-          {
-            placeholder: 'E-mail',
-            value: user.email,
-            onChangeText: text => handleUserState('email', text),
-          },
-          {
-            placeholder: 'Senha (Opcional)',
-            value: user?.password,
-            secureTextEntry: true,
-            onChangeText: text => handleUserState('password', text),
-          },
-        ]}>
-        <SwitchForm
-          style={themeRegistry['box-flex-row']}
-          switchOptions={[
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
+        <InputForm
+          inputProps={[
             {
-              title: 'ADMIN',
-              switchProps: {
-                value: user.userPermission.id === 1,
-                onChange: () => handleUserPermissionState('id', 1),
-              },
+              placeholder: 'E-mail',
+              value: user.email,
+              onChangeText: text => handleUserState('email', text),
             },
             {
-              title: 'BARBER',
-              switchProps: {
-                value: user.userPermission.id === 2,
-                onChange: () => handleUserPermissionState('id', 2),
-              },
+              placeholder: 'Senha (Opcional)',
+              value: user?.password,
+              secureTextEntry: true,
+              onChangeText: text => handleUserState('password', text),
             },
-            {
-              title: 'CLIENT',
-              switchProps: {
-                value: user.userPermission.id === 3,
-                onChange: () => handleUserPermissionState('id', 3),
-              },
-            },
-          ]}
-        />
-        <ButtonComponent
-          type="save"
-          message="Salvar"
-          onPress={askAboutUpdate}
-        />
-      </InputForm>
-    </ViewModal>
+          ]}>
+          <View style={themeRegistry['box-flex-row']}>
+            <SwitchForm
+              title="ADMIN"
+              value={user.userPermission.id === 1}
+              onValueChange={() => handleUserPermissionState('id', 1)}
+            />
+            <SwitchForm
+              title="BARBER"
+              value={user.userPermission.id === 2}
+              onValueChange={() => handleUserPermissionState('id', 2)}
+            />
+            <SwitchForm
+              title="CLIENT"
+              value={user.userPermission.id === 3}
+              onValueChange={() => handleUserPermissionState('id', 3)}
+            />
+          </View>
+
+          <ButtonComponent type="save" text="Salvar" onPress={askAboutUpdate} />
+        </InputForm>
+      </Modal>
+    </Screen>
   );
 }

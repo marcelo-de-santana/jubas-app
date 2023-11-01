@@ -35,14 +35,15 @@ export async function createUser(userToCreate: UserToCreateRequestDTO) {
     if (response.status === 201) {
       Alert({
         type: 'alert',
-        message: `Usuário "${response.data.email}" criado com sucesso!`,
+        message: `Usuário "${response.data.email}" criado com sucesso.`,
       });
+      return true;
     }
   } catch (error) {
     if (isAxiosError(error) && error.response?.status === 401) {
       Alert({
         type: 'alert',
-        message: 'Usuário já cadastrado!',
+        message: 'Usuário já cadastrado.',
       });
     }
   }

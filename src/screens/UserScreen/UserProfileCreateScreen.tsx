@@ -1,11 +1,13 @@
 import {
   Alert,
-  ViewModal,
+  Modal,
   InputForm,
   SwitchForm,
   ButtonComponent,
+  Screen,
+  TextInput,
 } from '@components';
-import {createProfile} from '@repositories';
+import {createProfile} from '@domain';
 import {UserProfileCreateScreenProps} from '@routes';
 import {cpfMask, removeCpfMask} from '@utils';
 import {useState} from 'react';
@@ -39,39 +41,28 @@ export function UserProfileCreateScreen({
   }
 
   return (
-    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
-      <InputForm
-        inputProps={[
-          {
-            placeholder: 'Nome',
-            value: profile.name,
-            onChangeText: text => handleProfileState('name', text),
-          },
-          {
-            placeholder: 'CPF',
-            maxLength: 14,
-            value: cpfMask(profile.cpf),
-            onChangeText: text => handleProfileState('cpf', text),
-          },
-        ]}>
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
+        <TextInput
+          placeholder="Nome"
+          value={profile.name}
+          onChangeText={text => handleProfileState('name', text)}
+        />
+        <TextInput
+          placeholder="CPF"
+          maxLength={14}
+          value={cpfMask(profile.cpf)}
+          onChangeText={text => handleProfileState('cpf', text)}
+        />
         <SwitchForm
-          switchOptions={[
-            {
-              title: 'Status',
-              switchProps: {
-                value: profile.statusProfile,
-                onChange: () =>
-                  handleProfileState('statusProfile', !profile.statusProfile),
-              },
-            },
-          ]}
+          title="Status"
+          value={profile.statusProfile}
+          onValueChange={() =>
+            handleProfileState('statusProfile', !profile.statusProfile)
+          }
         />
-        <ButtonComponent
-          type="save"
-          message="Salvar"
-          onPress={askAboutCreate}
-        />
-      </InputForm>
-    </ViewModal>
+        <ButtonComponent type="save" text="Salvar" onPress={askAboutCreate} />
+      </Modal>
+    </Screen>
   );
 }

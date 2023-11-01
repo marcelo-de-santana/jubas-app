@@ -8,7 +8,7 @@ import {
   ViewSeparator,
 } from '@components';
 import {useEffect, useState} from 'react';
-import {ProfileResponseDTO, getAllProfilesByUserId} from '@repositories';
+import {ProfileResponseDTO, getAllProfilesByUserId} from '@domain';
 import {FlatList} from 'react-native';
 import {cpfMask} from '@utils';
 

@@ -1,11 +1,11 @@
-import {Button, Alert, Text, ViewModal, ButtonComponent} from '@components';
+import {Button, Alert, Text, Screen, ButtonComponent, Modal} from '@components';
 import {BusinessManagementScreenProps} from '@routes';
-import {buttonRegistry, colorRegistry, themeRegistry} from '@styles';
+import {buttonRegistry, themeRegistry} from '@styles';
 import {useState} from 'react';
 import {View} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {timestampToTimeFormat, timeToTimestamp} from '@utils';
-import {WorkingHoursRequestDTO, createNewWorkingHour} from '@repositories';
+import {WorkingHoursRequestDTO, createNewWorkingHour} from '@domain';
 
 type WorkingHoursKeys = keyof WorkingHoursRequestDTO;
 
@@ -55,6 +55,7 @@ export function WorkingHoursCreateScreen({
 
   function askAboutCreate() {
     Alert({
+      type: 'decision',
       message: 'Deseja cadastrar os horários?',
       onPress: sendToCreate,
     });
@@ -62,11 +63,11 @@ export function WorkingHoursCreateScreen({
 
   function LineTexts({textValues}: {textValues: string[]}) {
     return (
-      <View style={[themeRegistry['box-flex-row'], {margin: 10}]}>
+      <View style={[themeRegistry['box-flex-row']]}>
         {textValues?.map((value, index) => (
           <View
             key={index}
-            style={[buttonRegistry['square-inline'], {width: '23%'}]}>
+            style={[buttonRegistry['square-inline-one-fifth-wide']]}>
             <Text color="midnight-blue">{value}</Text>
           </View>
         ))}
@@ -80,17 +81,12 @@ export function WorkingHoursCreateScreen({
     values?: {text?: string; onPress?: () => void}[];
   }) {
     return (
-      <View style={[themeRegistry['box-flex-row'], {margin: 10}]}>
+      <View style={[themeRegistry['box-flex-row']]}>
         {values?.map((value, index) => (
           <Button
+            type="square-inline-one-fifth-wide"
+            color="lavender-gray"
             key={index}
-            style={[
-              buttonRegistry['square-inline'],
-              {
-                width: '23%',
-                backgroundColor: colorRegistry['lavender-gray'],
-              },
-            ]}
             onPress={value.onPress}>
             <Text color="midnight-blue">{value.text}</Text>
           </Button>
@@ -100,12 +96,8 @@ export function WorkingHoursCreateScreen({
   }
 
   return (
-    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
-      <View
-        style={[
-          themeRegistry['box-modal-form'],
-          {backgroundColor: colorRegistry['light-gray']},
-        ]}>
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
         <LineTexts
           textValues={[
             'Entrada',
@@ -149,12 +141,8 @@ export function WorkingHoursCreateScreen({
           />
         )}
 
-        <ButtonComponent
-          type="save"
-          message="Salvar"
-          onPress={askAboutCreate}
-        />
-      </View>
-    </ViewModal>
+        <ButtonComponent type="save" text="Salvar" onPress={askAboutCreate} />
+      </Modal>
+    </Screen>
   );
 }

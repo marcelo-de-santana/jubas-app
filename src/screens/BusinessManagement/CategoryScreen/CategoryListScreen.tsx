@@ -6,7 +6,7 @@ import {
   TouchableItem,
   ViewSeparator,
 } from '@components';
-import {CategoryResponseDTO, getAllCategories} from '@repositories';
+import {CategoryResponseDTO, useCategoryCreate, useCategoryList} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
@@ -14,20 +14,13 @@ import {FlatList} from 'react-native';
 export function CategoryListScreen({
   navigation,
 }: BusinessManagementScreenProps) {
-  const [isLoading, setLoading] = useState(false);
-  const [category, setCategory] = useState<CategoryResponseDTO[]>([]);
+  const {categoryList, isLoading, refresh} = useCategoryList();
 
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-      searchData();
-    });
-  }, [navigation]);
-
-  async function searchData() {
-    setLoading(true);
-    setCategory(await getAllCategories());
-    setLoading(false);
-  }
+  // useEffect(() => {
+  //   navigation.addListener('focus', () => {
+  //     searchData();
+  //   });
+  // }, [navigation]);
 
   function renderItem({item}: {item: CategoryResponseDTO}) {
     return (
@@ -49,7 +42,7 @@ export function CategoryListScreen({
   return (
     <Screen>
       <FlatList
-        data={category}
+        data={categoryList}
         renderItem={renderItem}
         ItemSeparatorComponent={ViewSeparator}
         ListEmptyComponent={ListEmptyComponent}

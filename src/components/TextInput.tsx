@@ -1,4 +1,4 @@
-import {colorRegistry, theme} from '@styles';
+import {colorRegistry, themeRegistry} from '@styles';
 import {
   TextInput as TextInputRN,
   TextInputProps as TextInputPropsRN,
@@ -8,13 +8,13 @@ interface TextInputProp extends TextInputPropsRN {
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
 }
 
-export function TextInput({autoCapitalize, ...props}: TextInputProp) {
+export function TextInput({autoCapitalize = 'none', ...props}: TextInputProp) {
   return (
     <TextInputRN
       autoCapitalize={autoCapitalize}
       placeholderTextColor={colorRegistry['midnight-blue-transparent']}
       style={[
-        theme['input-modal'],
+        themeRegistry['input-modal'],
         {
           backgroundColor: colorRegistry['lavender-gray'],
           color: colorRegistry['midnight-blue'],

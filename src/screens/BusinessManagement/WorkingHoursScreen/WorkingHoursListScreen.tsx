@@ -7,7 +7,7 @@ import {
   Touchable,
   ViewSeparator,
 } from '@components';
-import {WorkingHoursResponseDTO, getAllWorkingHours} from '@repositories';
+import {WorkingHoursResponseDTO, getAllWorkingHours} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';

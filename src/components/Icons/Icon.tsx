@@ -2,6 +2,7 @@ import {Pressable} from 'react-native';
 import {AddIcon} from '../../assets/icons/AddIcon';
 import {ChevronLeftIcon} from '../../assets/icons/ChevronLeftIcon';
 import {ChevronRightIcon} from '../../assets/icons/ChevronRightIcon';
+import {CloseIcon} from '../../assets/icons/CloseIcon';
 import {EditIcon} from '../../assets/icons/EditIcon';
 import {ToggleOffIcon} from '../../assets/icons/ToggleOffIcon';
 import {ToggleOnIcon} from '../../assets/icons/ToggleOnIcon';
@@ -26,7 +27,7 @@ export function Icon({name, color = 'steel-blue', size, onPress}: IconProps) {
   if (onPress) {
     return (
       <Pressable hitSlop={10} onPress={onPress}>
-        <SVGIcon color={colorRegistry[color]} size={size} />;
+        <SVGIcon color={colorRegistry[color]} size={size} />
       </Pressable>
     );
   }
@@ -38,6 +39,7 @@ const iconRegistry = {
   AddIcon: AddIcon,
   ChevronLeftIcon: ChevronLeftIcon,
   ChevronRightIcon: ChevronRightIcon,
+  CloseIcon: CloseIcon,
   EditIcon: EditIcon,
   ToggleOffIcon: ToggleOffIcon,
   ToggleOnIcon: ToggleOnIcon,

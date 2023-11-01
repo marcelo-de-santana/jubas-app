@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CategoryResponseDTO} from '@repositories';
+import {CategoryResponseDTO} from '@domain';
 import {
   CategoryCreateScreen,
   CategoryListScreen,
@@ -67,8 +67,7 @@ export function BusinessManagementStack() {
         name="SpecialtyCreateScreen"
         component={SpecialtyCreateScreen}
         options={{
-          headerShown: true,
-          headerTitle: '',
+          presentation:'transparentModal'
         }}
       />
       <NativeStack.Screen

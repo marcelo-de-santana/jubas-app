@@ -5,7 +5,7 @@ import {
   TouchableItem,
   ViewSeparator,
 } from '@components';
-import {EmployeeResponseDTO, getEmployeeByProfileId} from '@repositories';
+import {EmployeeResponseDTO, getEmployeeByProfileId} from '@domain';
 import {EmployeeDetailsScreenProps} from '@routes';
 import {themeRegistry} from '@styles';
 import {cpfMask} from '@utils';

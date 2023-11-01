@@ -9,7 +9,7 @@ import {
   WorkingHoursResponseDTO,
   getAllWorkingHours,
   updateEmployee,
-} from '@repositories';
+} from '@domain';
 import {EmployeeTimeListScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';

@@ -7,7 +7,7 @@ import {
   EmployeeServicesListScreen,
 } from '@screens';
 
-import {ProfileResponseDTO, WorkingHoursResponseDTO} from '@repositories';
+import {ProfileResponseDTO, WorkingHoursResponseDTO} from '@domain';
 import {colorRegistry} from '@styles';
 
 export type EmployeeStackParamList = {

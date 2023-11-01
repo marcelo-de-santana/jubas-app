@@ -1,5 +1,5 @@
-import {Alert, ButtonComponent, InputForm, ViewModal} from '@components';
-import {updateCategory} from '@repositories';
+import {Alert, ButtonComponent, Modal, Screen, TextInput} from '@components';
+import {updateCategory} from '@domain';
 import {CategoryUpdateScreenProps} from '@routes';
 import {useState} from 'react';
 
@@ -27,21 +27,15 @@ export function CategoryUpdateScreen({
   }
 
   return (
-    <ViewModal pressableProps={{onPress: () => navigation.goBack()}}>
-      <InputForm
-        inputProps={[
-          {
-            placeholder: 'Nome da categoria',
-            value: category.name,
-            onChangeText: text => handleState('name', text),
-          },
-        ]}>
-        <ButtonComponent
-          type="save"
-          message="Salvar"
-          onPress={askAboutUpdate}
+    <Screen color="black-transparent">
+      <Modal onPress={() => navigation.goBack()}>
+        <TextInput
+          placeholder="Nome da categoria"
+          value={category.name}
+          onChangeText={text => handleState('name', text)}
         />
-      </InputForm>
-    </ViewModal>
+        <ButtonComponent type="save" text="Salvar" onPress={askAboutUpdate} />
+      </Modal>
+    </Screen>
   );
 }

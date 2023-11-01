@@ -1,41 +1,25 @@
-import {ThemeName, colorRegistry, theme} from '@styles';
-import {Switch, SwitchProps, View, ViewProps} from 'react-native';
-import {Text, TextProps} from '../Text';
+import {themeRegistry} from '@styles';
+import {View} from 'react-native';
+import {Text} from '../Text';
+import {Switch} from '../Switch';
 
-interface SwitchFormProps extends ViewProps {
-  type?: ThemeName;
-  textProps?: TextProps;
-  switchOptions: {
-    title?: string;
-    switchProps?: SwitchProps;
-  }[];
+interface SwitchFormProps {
+  type?: 'box-switch' | 'box-flex-row';
+  title: string;
+  value: boolean;
+  onValueChange: () => void;
 }
 
 export function SwitchForm({
-  switchOptions = [],
   type = 'box-switch',
-  textProps,
-  ...props
+  title,
+  value,
+  onValueChange,
 }: SwitchFormProps) {
   return (
-    <View {...props}>
-      {switchOptions?.map((option, index) => (
-        <View key={index} style={[theme[type]]}>
-          <Text {...textProps}>{option?.title}</Text>
-          <Switch
-            trackColor={{
-              true: colorRegistry['blue-gray'],
-              false: colorRegistry['lavender-gray'],
-            }}
-            thumbColor={
-              option.switchProps?.value
-                ? colorRegistry['midnight-blue']
-                : colorRegistry['lavender-gray']
-            }
-            {...option.switchProps}
-          />
-        </View>
-      ))}
+    <View style={[themeRegistry[type]]}>
+      <Text>{title}</Text>
+      <Switch value={value} onValueChange={onValueChange} />
     </View>
   );
 }

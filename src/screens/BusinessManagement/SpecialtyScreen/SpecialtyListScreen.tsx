@@ -5,7 +5,7 @@ import {
   Screen,
   TouchableItem,
 } from '@components';
-import {SpecialtyResponseDTO, getAllSpecialties} from '@repositories';
+import {SpecialtyResponseDTO, getAllSpecialties} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
@@ -14,7 +14,7 @@ export function SpecialtyListScreen({
   navigation,
 }: BusinessManagementScreenProps) {
   const [isLoading, setLoading] = useState(false);
-  const [specialty, setSpecialty] = useState();
+  const [specialty, setSpecialty] = useState([]);
 
   useEffect(() => {
     searchData();

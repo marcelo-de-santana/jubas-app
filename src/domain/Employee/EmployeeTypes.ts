@@ -1,8 +1,8 @@
-import {ProfileRequestDTO, ProfileResponseDTO} from '../ProfileRepo';
+import {ProfileRequestDTO, ProfileResponseDTO} from '../Profile';
 import {
   WorkingHoursRequestDTO,
   WorkingHoursResponseDTO,
-} from '../WorkingHoursRepo';
+} from '../WorkingHours';
 
 export interface EmployeeRequestDTO {
   id?: string;
