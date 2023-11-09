@@ -3,7 +3,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {SignInScreen, SignUpScreen, RecoveryPasswordScreen} from '@screens';
-import {defaultThemeOptions} from '@styles';
+import {defaultOptions} from '../Types/screenOptions';
 
 export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
 
@@ -18,18 +18,22 @@ const NativeStack = createNativeStackNavigator<AuthStackParamList>();
 export function AuthStack() {
   return (
     <NativeStack.Navigator
-      screenOptions={defaultThemeOptions}
+      screenOptions={defaultOptions}
       initialRouteName="SignInScreen">
-      <NativeStack.Screen name="SignInScreen" component={SignInScreen} />
+      <NativeStack.Screen
+        name="SignInScreen"
+        component={SignInScreen}
+        options={{headerShown: false}}
+      />
       <NativeStack.Screen
         name="RecoveryPasswordScreen"
         component={RecoveryPasswordScreen}
-        options={{headerShown: true, headerTitle: 'Recuperar Senha'}}
+        options={{headerTitle: 'Recuperar Senha'}}
       />
       <NativeStack.Screen
         name="SignUpScreen"
         component={SignUpScreen}
-        options={{headerShown: true, headerTitle: 'Cadastre-se'}}
+        options={{headerTitle: 'Cadastre-se'}}
       />
     </NativeStack.Navigator>
   );

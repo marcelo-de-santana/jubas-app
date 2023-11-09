@@ -1,26 +1,25 @@
 import {BoxItem, EmptyList, Screen} from '@components';
 import {useWorkingHoursList} from '@domain';
-import {EmployeeServicesListScreenProps} from '@routes';
+import {EmployeeScreenProps} from '@routes';
 import {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
-export function EmployeeServicesListScreen({}: EmployeeServicesListScreenProps) {
+export function EmployeeServicesListScreen({
+  navigation,
+}: EmployeeScreenProps<'EmployeeServicesListScreen'>) {
   const {data, isLoading, status} = useWorkingHoursList();
 
   useEffect(() => {}, []);
 
   return (
     <Screen>
-      <FlatList
+      {/* <FlatList
         data={[]}
-        renderItem={({item}) => (
-          <BoxItem label={item.name} onPress={() => {}} />
-        )}
         contentContainerStyle={{
           flex: data?.length !== 0 ? 1 : undefined,
         }}
         ListEmptyComponent={EmptyList}
-      />
+      /> */}
     </Screen>
   );
 }

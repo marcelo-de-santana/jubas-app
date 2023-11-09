@@ -11,7 +11,7 @@ import {
   useEmployeeUpdate,
   useWorkingHoursList,
 } from '@domain';
-import {EmployeeTimeListScreenProps} from '@routes';
+import {EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {flatListStyle} from '@styles';
@@ -19,8 +19,8 @@ import {flatListStyle} from '@styles';
 export function EmployeeTimeListScreen({
   navigation,
   route,
-}: EmployeeTimeListScreenProps) {
-  const {employeeId, workingHour} = route.params;
+}: EmployeeScreenProps<'EmployeeTimeListScreen'>) {
+  const {employeeId, workingHourId} = route.params;
   const useWorkingHous = useWorkingHoursList();
   const useEmployee = useEmployeeUpdate();
   const loading = useEmployee.isLoading || useWorkingHous.isLoading;
@@ -63,7 +63,7 @@ export function EmployeeTimeListScreen({
     return (
       <WorkinhHoursLine
         item={item}
-        workingHourId={workingHour?.id}
+        workingHourId={workingHourId}
         onPress={choiceWorkingHourk}
       />
     );

@@ -8,8 +8,8 @@ import {
   EmployeeServicesListScreen,
 } from '@screens';
 
-import {ProfileResponse, WorkingHoursResponse} from '@domain';
-import {defaultThemeOptions} from '@styles';
+import {ProfileResponse} from '@domain';
+import {defaultOptions} from '../Types/screenOptions';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
@@ -18,7 +18,7 @@ export type EmployeeStackParamList = {
   EmployeeProfileUpdateScreen: {profile?: ProfileResponse};
   EmployeeTimeListScreen: {
     employeeId?: string;
-    workingHour?: WorkingHoursResponse;
+    workingHourId?: number;
   };
   EmployeeServicesListScreen: {
     employeeId?: string;
@@ -30,13 +30,12 @@ const NativeStack = createNativeStackNavigator<EmployeeStackParamList>();
 
 export function EmployeeStack() {
   return (
-    <NativeStack.Navigator screenOptions={defaultThemeOptions}>
+    <NativeStack.Navigator screenOptions={defaultOptions}>
       <NativeStack.Screen
         name="EmployeeListScreen"
         component={EmployeeListScreen}
         options={{
           headerTitle: 'Funcionários',
-          headerShown: true,
         }}
       />
       <NativeStack.Screen
@@ -44,7 +43,6 @@ export function EmployeeStack() {
         component={EmployeeDetailsScreen}
         options={({route}) => ({
           headerTitle: route.params.profile.name,
-          headerShown: true,
         })}
       />
       <NativeStack.Screen
@@ -52,13 +50,13 @@ export function EmployeeStack() {
         component={EmployeeCreateScreen}
         options={{
           headerTitle: 'Novo funcionário',
-          headerShown: true,
         }}
       />
       <NativeStack.Screen
         name="EmployeeProfileUpdateScreen"
         component={EmployeeProfileUpdateScreen}
         options={{
+          headerShown: false,
           presentation: 'transparentModal',
         }}
       />
@@ -67,7 +65,6 @@ export function EmployeeStack() {
         component={EmployeeTimeListScreen}
         options={{
           headerTitle: 'Horários',
-          headerShown: true,
         }}
       />
       <NativeStack.Screen
@@ -75,7 +72,6 @@ export function EmployeeStack() {
         component={EmployeeServicesListScreen}
         options={{
           headerTitle: 'Serviços',
-          headerShown: true,
         }}
       />
     </NativeStack.Navigator>

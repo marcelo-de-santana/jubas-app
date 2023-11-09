@@ -5,7 +5,9 @@ import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
-export function EmployeeListScreen({navigation}: EmployeeScreenProps) {
+export function EmployeeListScreen({
+  navigation,
+}: EmployeeScreenProps<'EmployeeListScreen'>) {
   const {data, isLoading, isError, refetch} = useProfileListByPermission();
 
   useEffect(() => {

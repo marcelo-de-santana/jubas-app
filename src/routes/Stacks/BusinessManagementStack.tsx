@@ -1,5 +1,5 @@
+import {CategoryResponse} from '@domain';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CategoryResponseDTO} from '@domain';
 import {
   CategoryCreateScreen,
   CategoryListScreen,
@@ -10,12 +10,12 @@ import {
   WorkingHoursCreateScreen,
   WorkingHoursListScreen,
 } from '@screens';
-import {colorRegistry} from '@styles';
+import {defaultOptions} from '../Types/screenOptions';
 
 export type BusinessManagementParamList = {
   CategoryCreateScreen: undefined;
   CategoryListScreen: undefined;
-  CategoryUpdateScreen: {category: CategoryResponseDTO};
+  CategoryUpdateScreen: {category: CategoryResponse};
   DashboardScreen: undefined;
   SpecialtyCreateScreen: undefined;
   SpecialtyListScreen: undefined;
@@ -29,16 +29,7 @@ export function BusinessManagementStack() {
   return (
     <NativeStack.Navigator
       initialRouteName="DashboardScreen"
-      screenOptions={{
-        animation: 'fade_from_bottom',
-        headerShadowVisible: false,
-        headerShown: false,
-        headerStyle: {
-          backgroundColor: colorRegistry['light-gray'],
-        },
-        headerTintColor: colorRegistry['steel-blue'],
-        headerTitleAlign: 'center',
-      }}>
+      screenOptions={defaultOptions}>
       <NativeStack.Screen
         name="DashboardScreen"
         component={DashboardScreen}
@@ -67,7 +58,7 @@ export function BusinessManagementStack() {
         name="SpecialtyCreateScreen"
         component={SpecialtyCreateScreen}
         options={{
-          presentation:'transparentModal'
+          presentation: 'transparentModal',
         }}
       />
       <NativeStack.Screen

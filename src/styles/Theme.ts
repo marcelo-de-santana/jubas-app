@@ -36,19 +36,6 @@ export const themeRegistry = StyleSheet.create({
 
 export type ThemeName = keyof typeof themeRegistry;
 
-export const defaultThemeOptions: NativeStackNavigationOptions = {
-  animation: 'fade_from_bottom',
-  headerShadowVisible: false,
-  headerShown: false,
-  headerStyle: {
-    backgroundColor: colorRegistry['light-gray'],
-  },
-  headerTintColor: colorRegistry['steel-blue'],
-  headerTitleAlign: 'center',
-  statusBarColor: colorRegistry['light-gray'],
-  statusBarStyle: 'dark',
-};
-
 export function flatListStyle(data: any = []): ViewStyle {
   return {
     flex: data?.length === 0 ? 1 : undefined,

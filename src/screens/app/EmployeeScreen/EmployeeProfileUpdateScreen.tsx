@@ -9,13 +9,13 @@ import {
 } from '@components';
 import {useProfileUpdate} from '@domain';
 import {useForm} from '@hooks';
-import {EmployeeProfileUpdateScreenProps} from '@routes';
+import {EmployeeScreenProps} from '@routes';
 import {schemas} from '@utils';
 
 export function EmployeeProfileUpdateScreen({
   navigation,
   route,
-}: EmployeeProfileUpdateScreenProps) {
+}: EmployeeScreenProps<'EmployeeProfileUpdateScreen'>) {
   const {profile} = route.params;
   const initalValues = profile?.id
     ? {...profile}

@@ -10,7 +10,7 @@ import {
   useEmployeeCreate,
   useWorkingHoursList,
 } from '@domain';
-import {EmployeeCreateScreenProps} from '@routes';
+import {EmployeeScreenProps} from '@routes';
 import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
@@ -18,7 +18,7 @@ import {FlatList, ListRenderItemInfo} from 'react-native';
 export function EmployeeCreateScreen({
   navigation,
   route,
-}: EmployeeCreateScreenProps) {
+}: EmployeeScreenProps<'EmployeeCreateScreen'>) {
   const useWorkingHours = useWorkingHoursList();
   const useEmployee = useEmployeeCreate();
 

@@ -2,8 +2,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, UnderConstruction} from '@screens';
 import {UserStack} from './UserStack';
 import {EmployeeStack} from './EmployeeStack';
-import {defaultThemeOptions} from '@styles';
 import {BusinessManagementStack} from './BusinessManagementStack';
+import {defaultOptions} from '../Types/screenOptions';
 
 export type AppStackParamList = {
   BusinessManagementStack: undefined;
@@ -23,7 +23,7 @@ export function AppStack() {
   return (
     <NativeStack.Navigator
       initialRouteName="HomeScreen"
-      screenOptions={defaultThemeOptions}>
+      screenOptions={defaultOptions}>
       <NativeStack.Screen
         name="HomeScreen"
         component={HomeScreen}

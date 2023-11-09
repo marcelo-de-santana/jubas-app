@@ -1,6 +1,6 @@
 import {BoxDetails, Icon, Screen, StatusScreen, Text} from '@components';
 import {useEmplyeeFindByProfile} from '@domain';
-import {EmployeeDetailsScreenProps} from '@routes';
+import {EmployeeScreenProps} from '@routes';
 import {mask} from '@utils';
 import {useEffect} from 'react';
 import {View} from 'react-native';
@@ -8,7 +8,7 @@ import {View} from 'react-native';
 export function EmployeeDetailsScreen({
   navigation,
   route,
-}: EmployeeDetailsScreenProps) {
+}: EmployeeScreenProps<'EmployeeDetailsScreen'>) {
   const {fetchData, status, isLoading, employee} = useEmplyeeFindByProfile();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export function EmployeeDetailsScreen({
   function navigateToTimeListScreen() {
     navigation.navigate('EmployeeTimeListScreen', {
       employeeId: employee?.id,
-      workingHour: employee?.workingHour,
+      workingHourId: employee?.workingHour.id,
     });
   }
 
