@@ -12,8 +12,8 @@ async function findByProfileId(profileId: string) {
 
 async function update(
   employeeId: string,
-  profileId: string,
-  workingHourId: number,
+  profileId?: string | null,
+  workingHourId?: number | null,
 ) {
   return await api.patch(`${PATH}/${employeeId}`, {
     profileId,

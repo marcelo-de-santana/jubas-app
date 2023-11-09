@@ -4,8 +4,8 @@ import {EmployeeResponse} from '../employeeTypes';
 
 interface EmployeeRequestToUpdate {
   employeeId: string;
-  profileId: string;
-  workingHourId: number;
+  profileId: string | null;
+  workingHourId: number | null;
 }
 
 export function useEmployeeUpdate() {

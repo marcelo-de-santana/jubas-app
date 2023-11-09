@@ -30,7 +30,8 @@ const NativeStack = createNativeStackNavigator<EmployeeStackParamList>();
 
 export function EmployeeStack() {
   return (
-    <NativeStack.Navigator screenOptions={defaultOptions}>
+    <NativeStack.Navigator
+      screenOptions={{...defaultOptions, headerShown: true}}>
       <NativeStack.Screen
         name="EmployeeListScreen"
         component={EmployeeListScreen}

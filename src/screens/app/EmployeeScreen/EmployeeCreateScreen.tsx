@@ -2,6 +2,7 @@ import {
   EmptyList,
   Screen,
   Separator,
+  StatusScreen,
   WorkinhHoursHeader,
   WorkinhHoursLine,
 } from '@components';
@@ -11,7 +12,7 @@ import {
   useWorkingHoursList,
 } from '@domain';
 import {EmployeeScreenProps} from '@routes';
-import {flatListStyle} from '@styles';
+import {AlertStatusType, flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
@@ -19,6 +20,9 @@ export function EmployeeCreateScreen({
   navigation,
   route,
 }: EmployeeScreenProps<'EmployeeCreateScreen'>) {
+  const $customStatus: AlertStatusType = {
+    201: {type: 'success', message: 'Funcionário cadastrado com sucesso.'},
+  };
   const useWorkingHours = useWorkingHoursList();
   const useEmployee = useEmployeeCreate();
 
@@ -33,8 +37,10 @@ export function EmployeeCreateScreen({
     });
   }
 
-  if (useEmployee.status === 201) {
-    navigation.goBack();
+  function navigateToEmployeeDetailsScreen() {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
   }
 
   function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
@@ -43,6 +49,12 @@ export function EmployeeCreateScreen({
 
   return (
     <Screen>
+      <StatusScreen
+        loading={useEmployee.isLoading}
+        status={useEmployee.status}
+        customStatus={$customStatus}
+        successAction={navigateToEmployeeDetailsScreen}
+      />
       <FlatList
         data={useWorkingHours.data}
         renderItem={renderItem}
@@ -51,7 +63,7 @@ export function EmployeeCreateScreen({
         ListHeaderComponent={<WorkinhHoursHeader />}
         ListEmptyComponent={
           <EmptyList
-            loading={!useWorkingHours.isLoading}
+            loading={useWorkingHours.isLoading}
             error={useWorkingHours.isError}
             title="Lista Vazia."
             refetch={useWorkingHours.fetchData}

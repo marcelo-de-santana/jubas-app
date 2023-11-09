@@ -4,7 +4,7 @@ import {colorRegistry} from '@styles';
 export const defaultOptions: NativeStackNavigationOptions = {
   animation: 'fade_from_bottom',
   headerShadowVisible: false,
-  headerShown: true,
+  headerShown: false,
   headerStyle: {
     backgroundColor: colorRegistry['light-gray'],
   },

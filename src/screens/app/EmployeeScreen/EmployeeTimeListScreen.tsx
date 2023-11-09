@@ -23,15 +23,6 @@ export function EmployeeTimeListScreen({
   const {employeeId, workingHourId} = route.params;
   const useWorkingHous = useWorkingHoursList();
   const useEmployee = useEmployeeUpdate();
-  const loading = useEmployee.isLoading || useWorkingHous.isLoading;
-
-  //EVENT MANAGER RESPONSE STATUS
-  const status =
-    useWorkingHous.status === 200
-      ? useEmployee.status !== null
-        ? useEmployee.status
-        : useWorkingHous.status
-      : useWorkingHous.status;
 
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -42,15 +33,9 @@ export function EmployeeTimeListScreen({
   function choiceWorkingHourk(workingHourId: number) {
     useEmployee.update({
       employeeId: employeeId ?? '',
-      profileId: '',
+      profileId: null,
       workingHourId,
     });
-  }
-
-  function verifySendUpdateRequestSuccessFull() {
-    if (useEmployee.status === 200) {
-      navigateToEmployeeDetailsScreen();
-    }
   }
 
   function navigateToEmployeeDetailsScreen() {
@@ -72,9 +57,9 @@ export function EmployeeTimeListScreen({
   return (
     <Screen>
       <StatusScreen
-        loading={loading}
-        status={status}
-        successAction={verifySendUpdateRequestSuccessFull}
+        loading={useEmployee.isLoading}
+        status={useEmployee.status}
+        successAction={navigateToEmployeeDetailsScreen}
       />
       <FlatList
         data={useWorkingHous.data}
@@ -82,7 +67,14 @@ export function EmployeeTimeListScreen({
         ListHeaderComponent={WorkinhHoursHeader}
         ItemSeparatorComponent={Separator}
         renderItem={renderItem}
-        ListEmptyComponent={<EmptyList title="Nenhum horário cadastrado." />}
+        ListEmptyComponent={
+          <EmptyList
+            loading={useWorkingHous.isLoading}
+            error={useWorkingHous.isError}
+            title="Nenhum horário cadastrado."
+            refetch={useWorkingHous.fetchData}
+          />
+        }
       />
     </Screen>
   );
