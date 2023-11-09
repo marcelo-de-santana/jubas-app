@@ -1,7 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
+import {StyleSheet, ViewStyle} from 'react-native';
+
+import {colorRegistry} from './Colors';
 
 export const themeRegistry = StyleSheet.create({
-  container: {flex: 1},
   'box-flex-row': {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -15,24 +17,8 @@ export const themeRegistry = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
   },
-  'box-modal-form': {
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    padding: 10,
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  'box-switch': {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   'box-items': {
     minHeight: 50,
-    paddingHorizontal: 10,
-    justifyContent: 'center',
   },
   'box-items-header': {
     minHeight: 50,
@@ -46,13 +32,25 @@ export const themeRegistry = StyleSheet.create({
     minHeight: 50,
     paddingHorizontal: 10,
   },
-  'input-modal': {
-    borderRadius: 6,
-    borderWidth: 1,
-    height: 40,
-    marginVertical: 5,
-    paddingHorizontal: 10,
-  },
 });
 
 export type ThemeName = keyof typeof themeRegistry;
+
+export const defaultThemeOptions: NativeStackNavigationOptions = {
+  animation: 'fade_from_bottom',
+  headerShadowVisible: false,
+  headerShown: false,
+  headerStyle: {
+    backgroundColor: colorRegistry['light-gray'],
+  },
+  headerTintColor: colorRegistry['steel-blue'],
+  headerTitleAlign: 'center',
+  statusBarColor: colorRegistry['light-gray'],
+  statusBarStyle: 'dark',
+};
+
+export function flatListStyle(data: any = []): ViewStyle {
+  return {
+    flex: data?.length === 0 ? 1 : undefined,
+  };
+}

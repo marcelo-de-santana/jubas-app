@@ -3,29 +3,18 @@ export interface MinimalUserResponseDTO {
   email: string;
 }
 
-export interface UserResponseDTO {
+export interface UserToUpdateRequestDTO {
+  userId: string;
+  email?: string;
+  password?: string;
+  userPermissionId?: number;
+}
+
+export interface UserResponse {
   id: string;
   email: string;
   userPermission: {
     id: number;
     type: string;
   };
-}
-
-export interface UserToCreateRequestDTO {
-  email: string;
-  password: string;
-  userPermissionId: number;
-}
-
-export interface UserToAuthenticatedRequestDTO {
-  email: string;
-  password: string;
-}
-
-export interface UserToUpdateRequestDTO {
-  userId: string;
-  email?: string;
-  password?: string;
-  userPermissionId?: number;
 }

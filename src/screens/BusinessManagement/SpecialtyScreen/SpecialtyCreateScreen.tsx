@@ -1,21 +1,5 @@
-import {
-  Alert,
-  ButtonComponent,
-  EmptyListComponent,
-  LoadingIndicator,
-  LoadingScreen,
-  Modal,
-  Screen,
-  Text,
-  TextInput,
-  TouchableItem,
-  ViewSeparator,
-} from '@components';
-import {
-  CategoryResponseDTO,
-  createSpecialty,
-  getAllCategories,
-} from '@domain';
+import {Alert, BoxItem, EmptyList, Modal, Screen, Text, TextInput} from '@components';
+import {useSpecialtyCreate} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
 import {ColorName} from '@styles';
 import {useEffect, useState} from 'react';
@@ -24,25 +8,13 @@ import {FlatList} from 'react-native';
 export function SpecialtyCreateScreen({
   navigation,
 }: BusinessManagementScreenProps) {
-  const [isLoading, setLoading] = useState(false);
-  const [category, setCategory] = useState([]);
+  const {data, create} = useSpecialtyCreate();
   const [categoryOption, setCategoryOption] = useState(0);
-  const [specialty, setSpecialty] = useState('');
 
-  useEffect(() => {
-    searchData();
-  }, []);
-
-  async function searchData() {
-    setLoading(true);
-    setCategory(await getAllCategories());
-    setLoading(false);
-  }
-
-  async function sendToCreate() {
-    await createSpecialty({
+  function sendToCreate() {
+    create({
       categoryId: categoryOption,
-      specialtyName: specialty,
+      specialtyName: data?.name,
     });
     navigation.goBack();
   }
@@ -57,7 +29,7 @@ export function SpecialtyCreateScreen({
       color = 'lavender-gray';
     }
     return (
-      <TouchableItem
+      <BoxItem
         color={color}
         type="box-flex-row-list"
         onPress={() => setCategoryOption(item.id)}
@@ -75,7 +47,6 @@ export function SpecialtyCreateScreen({
   }
 
   function ListEmptyComponent() {
-    return <EmptyListComponent title="Nenhuma categoria disponível." />;
   }
 
   return (

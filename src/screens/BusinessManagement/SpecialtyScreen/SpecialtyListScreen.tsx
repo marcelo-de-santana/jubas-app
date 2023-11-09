@@ -1,50 +1,38 @@
-import {
-  ButtonComponent,
-  EmptyListComponent,
-  LoadingScreen,
-  Screen,
-  TouchableItem,
-} from '@components';
-import {SpecialtyResponseDTO, getAllSpecialties} from '@domain';
+import {BoxItem, EmptyList, Icon, Screen, Separator} from '@components';
+import {SpecialtyResponse, useSpecialtyList} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
-import {useEffect, useState} from 'react';
+import {flatListStyle} from '@styles';
+import {useEffect} from 'react';
 import {FlatList} from 'react-native';
 
 export function SpecialtyListScreen({
   navigation,
 }: BusinessManagementScreenProps) {
-  const [isLoading, setLoading] = useState(false);
-  const [specialty, setSpecialty] = useState([]);
+  const {data, getList} = useSpecialtyList();
+
+  function renderItem({item}: {item: SpecialtyResponse}) {
+    return <BoxItem style={{paddingVertical: 20}} label="teste de valores" />;
+  }
 
   useEffect(() => {
-    searchData();
+    getList();
   }, []);
-
-  async function searchData() {
-    setLoading(true);
-    setSpecialty(await getAllSpecialties());
-    setLoading(false);
-  }
-
-  if (isLoading) return <LoadingScreen />;
-
-  function renderItem({item}: {item: SpecialtyResponseDTO}) {
-    return <TouchableItem textValues={['teste de valores']} />;
-  }
-
-  function ListEmptyComponent() {
-    return <EmptyListComponent title="Lista vazia." />;
-  }
 
   return (
     <Screen>
       <FlatList
-        data={specialty}
+        data={data}
         renderItem={renderItem}
-        ListEmptyComponent={ListEmptyComponent}
+        contentContainerStyle={flatListStyle(data)}
+        ItemSeparatorComponent={Separator}
+        ListEmptyComponent={<EmptyList title="Lista vazia." />}
       />
-      <ButtonComponent
-        type="add"
+      <Icon
+        name="AddIcon"
+        type="floating"
+        backgroundColor="steel-blue"
+        size={35}
+        color="light-gray"
         onPress={() => navigation.navigate('SpecialtyCreateScreen')}
       />
     </Screen>

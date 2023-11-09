@@ -9,7 +9,7 @@ export const colorRegistry = {
   'light-gray': '#F2F2F2',
   'light-green': '#225522',
   white: '#FFFFFF',
-  red: '#992200',
+  red: '#EA3838',
 };
 
 export type ColorType = typeof colorRegistry;

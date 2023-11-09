@@ -4,4 +4,3 @@ export * from './Profile';
 export * from './Specialty';
 export * from './User';
 export * from './WorkingHours';
-export * from './test';

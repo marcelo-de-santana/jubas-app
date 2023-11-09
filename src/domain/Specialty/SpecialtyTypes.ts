@@ -1,13 +1,10 @@
-import {CategoryResponseDTO} from '../Category';
+import {CategoryResponse} from '../Category';
 
-export interface SpecialtyResponseDTO {
+export interface SpecialtyResponse {
   id: string;
   name: string;
   timeDuration: string;
-  category: CategoryResponseDTO;
+  category: CategoryResponse;
 }
 
-export interface SpecialtyToCreateRequestDTO {
-  categoryId: number;
-  specialtyName: string;
-}
+

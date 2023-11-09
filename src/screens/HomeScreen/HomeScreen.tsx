@@ -1,72 +1,76 @@
-import {ButtonComponent, Screen} from '@components';
+import {Button, Screen} from '@components';
 import {AppStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
 import {View} from 'react-native';
-import {themeRegistry} from '@styles';
+import {buttonStyle} from '@styles';
 
 export function HomeScreen({navigation}: AppStackProps) {
   const {user} = useAuthContext();
   const {userPermission} = user;
 
-  function ClientModules() {
-    return (
-      <>
-        <ButtonComponent
-          type="menu"
-          text="Ver agenda"
-          onPress={() => navigation.navigate('UnderConstruction')}
-        />
-        <ButtonComponent
-          type="menu"
-          text="Minhas compras"
-          onPress={() => navigation.navigate('BusinessManagementStack')}
-        />
-        <ButtonComponent
-          type="menu"
-          text="Minha conta"
-          onPress={() => navigation.navigate('UnderConstruction')}
-        />
-      </>
-    );
+  function navigateToUnderConstruction() {
+    navigation.navigate('UnderConstruction');
   }
 
-  function AdminModules() {
-    return (
-      <>
-        <ButtonComponent
-          type="menu"
-          text="Gerenciar agenda"
-          onPress={() => navigation.navigate('UnderConstruction')}
-        />
-        <ButtonComponent
-          type="menu"
-          text="Meus funcionários"
-          onPress={() => navigation.navigate('EmployeeStack')}
-        />
-        <ButtonComponent
-          type="menu"
-          text="Gerenciar negócio"
-          onPress={() => navigation.navigate('BusinessManagementStack')}
-        />
-        <ButtonComponent
-          type="menu"
-          text="Gerenciar usuários"
-          onPress={() => navigation.navigate('UserStack')}
-        />
-        <ButtonComponent
-          type="menu"
-          text="Gerenciar pagamentos"
-          onPress={() => navigation.navigate('UnderConstruction')}
-        />
-      </>
-    );
+  function navigateToBusinessManagementStack() {
+    navigation.navigate('BusinessManagementStack');
+  }
+
+  function navigateToEmployeeStack() {
+    navigation.navigate('EmployeeStack');
+  }
+
+  function navigateToUserStack() {
+    navigation.navigate('UserStack');
   }
 
   return (
-    <Screen>
-      <View style={themeRegistry['box-flex-row']}>
-        <ClientModules />
-        {userPermission.id !== 1 && <AdminModules />}
+    <Screen style={{padding: 10}}>
+      <View style={buttonStyle['view-box']}>
+        <Button
+          type="box"
+          text="Ver agenda"
+          onPress={navigateToUnderConstruction}
+        />
+        <Button
+          type="box"
+          text="Minhas compras"
+          onPress={navigateToBusinessManagementStack}
+        />
+        <Button
+          type="box"
+          text="Minha conta"
+          onPress={navigateToUnderConstruction}
+        />
+        {userPermission.id !== 1 && (
+          <>
+            <Button
+              type="box"
+              text="Gerenciar agenda"
+              onPress={navigateToUnderConstruction}
+            />
+            <Button
+              type="box"
+              text="Meus funcionários"
+              onPress={navigateToEmployeeStack}
+            />
+            <Button
+              type="box"
+              text="Gerenciar negócio"
+              onPress={navigateToBusinessManagementStack}
+            />
+            <Button
+              type="box"
+              text="Gerenciar usuários"
+              onPress={navigateToUserStack}
+            />
+            <Button
+              type="box"
+              text="Gerenciar pagamentos"
+              onPress={navigateToUnderConstruction}
+            />
+          </>
+        )}
       </View>
     </Screen>
   );

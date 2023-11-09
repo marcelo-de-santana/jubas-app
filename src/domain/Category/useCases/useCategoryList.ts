@@ -1,21 +1,8 @@
-import {useEffect} from 'react';
-import {categoryApi} from '@domain';
-import {useApiFetchState} from '@infra';
+import {useFetchApi} from '@hooks';
+import {categoryApi} from '../categoryApi';
 
 export function useCategoryList() {
-  const {data, fetchData, isError, isLoading, status} = useApiFetchState({
+  return useFetchApi({
     apiFn: categoryApi.getList,
   });
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return {
-    categoryList: data,
-    isLoading,
-    isError,
-    status,
-    refresh: fetchData,
-  };
 }

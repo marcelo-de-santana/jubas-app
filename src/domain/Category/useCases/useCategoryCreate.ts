@@ -1,6 +1,6 @@
-import {categoryApi} from '@domain';
-import {useApiFetchState} from '@infra';
+import {useFetchApi} from '@hooks';
+import {categoryApi} from '../categoryApi';
 
 export function useCategoryCreate(name: string) {
-  return useApiFetchState({apiFn: () => categoryApi.create(name)});
+  return useFetchApi({apiFn: () => categoryApi.create(name)});
 }

@@ -1,9 +1,9 @@
-export interface CategoryResponseDTO {
+export interface CategoryResponse {
   id: number;
   name: string;
 }
 
-export interface CategoryToUpdateRequestDTO {
+export interface CategoryToUpdateRequest {
   id: number;
   name: string;
 }

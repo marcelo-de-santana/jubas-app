@@ -1,4 +1,4 @@
-export function cpfMask(value: string | number) {
+function cpf(value: string | number) {
   value = String(value);
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{3})(\d)/, '$1.$2');
@@ -8,17 +8,17 @@ export function cpfMask(value: string | number) {
   return value;
 }
 
-export function removeCpfMask(value: string) {
+function removeCpf(value: string) {
   if (value === null) return '';
   return value.replace(/[.-]/g, '');
 }
 
-export function nameMask(value: string) {
+function name(value: string) {
   value = value.replace(/^\d{0}[0-9]/, '');
   return value;
 }
 
-export function dateMask(value: string) {
+function date(value: string) {
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{2})(\d)/, '$1/$2');
   value = value.replace(/(\d{2})\/(\d{2})(\d)$/, '$1/$2/$3');
@@ -26,28 +26,28 @@ export function dateMask(value: string) {
   return value;
 }
 
-function phoneMask(value: string) {
+function phone(value: string) {
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{2})(\d)/, '($1)$2');
   value = value.replace(/(\d{4})(\d{1,4})$/, '$1-$2');
   return value;
 }
 
-function timeMask(value: string) {
+function time(value: string) {
   value = value.replace(/\D/, '');
   value = value.replace(/\d([2][4]|[3-9][0-9][0-9][0-9])/, '00:00');
   value = value.replace(/([0][0-9]|[1][0-9]|[2][0-3])([0-5][0-9])/, '$1:$2');
   return value;
 }
 
-export function fullTimeMask(value: string) {
+function fullTime(value: string) {
   value = value.replace(/\D/g, '');
   value = value.replace(/(\d{2})(\d{1})/, '$1:$2');
   value = value.replace(/(\d{2}:\d{2})(\d)/, '$1:$2');
   return value;
 }
 
-export function timestampToTimeFormat({time = 1695783600000}: {time?: number}) {
+function timestampToTimeFormat({time = 1695783600000}: {time?: number}) {
   let date = new Date(Number(time));
   let timeFormatted = date.toLocaleString('pt-BR', {
     hour: '2-digit',
@@ -57,7 +57,7 @@ export function timestampToTimeFormat({time = 1695783600000}: {time?: number}) {
   return timeFormatted;
 }
 
-export function timeToTimestamp({time = '00:00'}: {time?: string}) {
+function timeToTimestamp({time = '00:00'}: {time?: string}) {
   const [hours, minutes] = time.split(':').map(Number);
 
   if (
@@ -79,3 +79,15 @@ export function timeToTimestamp({time = '00:00'}: {time?: string}) {
 
   return timestamp;
 }
+
+export const mask = {
+  cpf,
+  date,
+  fullTime,
+  name,
+  phone,
+  removeCpf,
+  time,
+  timeToTimestamp,
+  timestampToTimeFormat,
+};

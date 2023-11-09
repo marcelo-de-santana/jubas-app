@@ -1,2 +1,1 @@
-export * from './LoadingScreen';
-export * from './LoadingIndicator';
+export * from './Loader';

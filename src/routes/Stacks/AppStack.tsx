@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, UnderConstruction} from '@screens';
 import {UserStack} from './UserStack';
 import {EmployeeStack} from './EmployeeStack';
-import {colorRegistry} from '@styles';
+import {defaultThemeOptions} from '@styles';
 import {BusinessManagementStack} from './BusinessManagementStack';
 
 export type AppStackParamList = {
@@ -23,18 +23,7 @@ export function AppStack() {
   return (
     <NativeStack.Navigator
       initialRouteName="HomeScreen"
-      screenOptions={{
-        animation: 'fade_from_bottom',
-        headerShadowVisible: false,
-        headerShown: false,
-        headerStyle: {
-          backgroundColor: colorRegistry['light-gray'],
-        },
-        headerTintColor: colorRegistry['steel-blue'],
-        headerTitleAlign: 'center',
-        statusBarColor: colorRegistry['light-gray'],
-        statusBarStyle: 'dark',
-      }}>
+      screenOptions={defaultThemeOptions}>
       <NativeStack.Screen
         name="HomeScreen"
         component={HomeScreen}

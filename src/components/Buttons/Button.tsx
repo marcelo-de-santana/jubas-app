@@ -1,23 +1,48 @@
-import {ButtonName, buttonRegistry, ColorName, colorRegistry} from '@styles';
-import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {Pressable, PressableProps, ViewStyle} from 'react-native';
+import {ButtonStyleName, ColorName, buttonStyle, colorRegistry} from '@styles';
+import {Text, TextProps} from '../Text';
+import {ActivityIndicator} from '../ActivityIndicator';
 
-export interface ButtonProps extends TouchableOpacityProps {
-  color?: ColorName;
-  type: ButtonName;
-  children?: React.ReactNode;
+export interface ButtonProps {
+  type?: ButtonStyleName;
+  backgroundColor?: ColorName;
+  style?: ViewStyle;
+  loading?: boolean;
+  disabled?: boolean;
+  onPress?: () => void;
+  text?: string;
+  textProps?: TextProps;
 }
 
 export function Button({
-  color = 'steel-blue',
   type,
-  children,
-  ...props
+  backgroundColor,
+  style,
+  loading,
+  disabled,
+  onPress,
+  text,
+  textProps,
 }: ButtonProps) {
+  const $buttonType = type && buttonStyle[type];
+  const $buttonStyle = {
+    backgroundColor: backgroundColor && colorRegistry[backgroundColor],
+    ...style,
+  };
+  const disable = disabled || loading;
+
   return (
-    <TouchableOpacity
-      style={[buttonRegistry[type], {backgroundColor: colorRegistry[color]}]}
-      {...props}>
-      {children}
-    </TouchableOpacity>
+    <Pressable
+      style={[$buttonType, $buttonStyle]}
+      onPress={onPress}
+      disabled={disable}>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <Text align="center" {...textProps}>
+          {text}
+        </Text>
+      )}
+    </Pressable>
   );
 }

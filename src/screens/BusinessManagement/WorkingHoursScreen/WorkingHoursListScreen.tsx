@@ -1,96 +1,77 @@
-import {
-  ButtonComponent,
-  EmptyListComponent,
-  LoadingScreen,
-  Screen,
-  Text,
-  Touchable,
-  ViewSeparator,
-} from '@components';
-import {WorkingHoursResponseDTO, getAllWorkingHours} from '@domain';
+import {BoxFourItems, Icon, EmptyList, Screen, Separator} from '@components';
+import {WorkingHoursResponse, useWorkingHoursList} from '@domain';
 import {BusinessManagementScreenProps} from '@routes';
-import {useEffect, useState} from 'react';
+import {flatListStyle} from '@styles';
+import {useEffect} from 'react';
 import {FlatList, View} from 'react-native';
-
-interface ListTimeProps {
-  textValues: string[];
-}
-
-function ListTime({textValues}: ListTimeProps) {
-  return (
-    <Touchable type="box-flex-row-list" color="light-gray" disabled>
-      {textValues?.map((item, index) => (
-        <View key={index} style={{width: '20%', justifyContent: 'center'}}>
-          <Text color="steel-blue" align="center" size="S">
-            {item}
-          </Text>
-        </View>
-      ))}
-    </Touchable>
-  );
-}
 
 export function WorkingHoursListScreen({
   navigation,
 }: BusinessManagementScreenProps) {
-  const [isLoading, setLoading] = useState(true);
-  const [workingHours, setWorkingHours] = useState<WorkingHoursResponseDTO[]>(
-    [],
-  );
+  const {data, isLoading, isError, fetchData} = useWorkingHoursList();
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      searchData();
+      fetchData();
     });
   }, [navigation]);
-
-  async function searchData() {
-    setLoading(true);
-    setWorkingHours(await getAllWorkingHours());
-    setLoading(false);
+  function navigateToWorkingHoursCreateScreen() {
+    navigation.navigate('WorkingHoursCreateScreen');
   }
+  const listHeader = [
+    'Entrada',
+    'Início\nIntervalo',
+    'Fim\nIntervalo',
+    'Saída',
+  ];
 
-  function ListHeaderComponent() {
+  const Header = <BoxFourItems textValues={listHeader} />;
+  const EmptyComponent = (
+    <EmptyList
+      loading={isLoading}
+      error={isError}
+      title="Nenhum horário cadastrado"
+      refetch={fetchData}
+    />
+  );
+
+  function renderItem({item}: {item: WorkingHoursResponse}) {
+    const listTime = [
+      item.startTime,
+      item.startInterval,
+      item.endInterval,
+      item.endTime,
+    ];
+
     return (
-      <ListTime
-        textValues={['Entrada', 'Início\nIntervalo', 'Fim\nIntervalo', 'Saída']}
-      />
+      <View style={{marginVertical: 10}}>
+        <BoxFourItems
+          style={{padding: 10}}
+          textValues={listTime}
+          disabled="box"
+          onPress={() => {}}
+        />
+      </View>
     );
-  }
-
-  function renderItem({item}: {item: WorkingHoursResponseDTO}) {
-    return (
-      <ListTime
-        textValues={[
-          item.startTime,
-          item.startInterval,
-          item.endInterval,
-          item.endTime,
-        ]}
-      />
-    );
-  }
-
-  function ListEmptyComponent() {
-    return <EmptyListComponent title="Nenhum horário cadastrado" />;
-  }
-
-  if (isLoading) {
-    return <LoadingScreen />;
   }
 
   return (
     <Screen>
       <FlatList
-        data={workingHours}
-        ListHeaderComponent={ListHeaderComponent}
-        ItemSeparatorComponent={ViewSeparator}
+        data={data}
+        ListHeaderComponent={Header}
+        ListEmptyComponent={EmptyComponent}
+        ItemSeparatorComponent={Separator}
         renderItem={renderItem}
-        ListEmptyComponent={ListEmptyComponent}
+        contentContainerStyle={flatListStyle(data)}
       />
-      <ButtonComponent
-        type="add"
-        onPress={() => navigation.navigate('WorkingHoursCreateScreen')}
+      <Icon
+        name="AddIcon"
+        type="floating"
+        color="light-gray"
+        backgroundColor="steel-blue"
+        size={35}
+        onPress={navigateToWorkingHoursCreateScreen}
       />
     </Screen>
   );

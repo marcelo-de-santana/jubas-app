@@ -1,13 +1,16 @@
-import {Pressable} from 'react-native';
-import {AddIcon} from '../../assets/icons/AddIcon';
-import {ChevronLeftIcon} from '../../assets/icons/ChevronLeftIcon';
-import {ChevronRightIcon} from '../../assets/icons/ChevronRightIcon';
-import {CloseIcon} from '../../assets/icons/CloseIcon';
-import {EditIcon} from '../../assets/icons/EditIcon';
-import {ToggleOffIcon} from '../../assets/icons/ToggleOffIcon';
-import {ToggleOnIcon} from '../../assets/icons/ToggleOnIcon';
-import {TrashIcon} from '../../assets/icons/TrashIcon';
-import {ColorName, colorRegistry} from '@styles';
+import {Pressable, PressableProps, ViewStyle} from 'react-native';
+import {
+  AddIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  CloseIcon,
+  EditIcon,
+  LockIcon,
+  PersonIcon,
+  TrashIcon,
+} from '@assets';
+import {ButtonStyleName, ColorName, buttonStyle, colorRegistry} from '@styles';
 
 export interface IconBase {
   size?: number;
@@ -19,14 +22,30 @@ export interface IconProps {
   color?: ColorName;
   size?: number;
   onPress?: () => void;
+  type?: ButtonStyleName;
+  backgroundColor?: ColorName;
+  style?: ViewStyle;
 }
 
-export function Icon({name, color = 'steel-blue', size, onPress}: IconProps) {
+export function Icon({
+  name,
+  color = 'steel-blue',
+  size,
+  onPress,
+  type,
+  backgroundColor,
+  style,
+}: IconProps) {
   const SVGIcon = iconRegistry[name];
+  const $buttonType = type && buttonStyle[type];
+  const $buttonStyle = {
+    backgroundColor: backgroundColor && colorRegistry[backgroundColor],
+    ...style,
+  };
 
   if (onPress) {
     return (
-      <Pressable hitSlop={10} onPress={onPress}>
+      <Pressable style={[$buttonType, $buttonStyle]} onPress={onPress}>
         <SVGIcon color={colorRegistry[color]} size={size} />
       </Pressable>
     );
@@ -37,12 +56,13 @@ export function Icon({name, color = 'steel-blue', size, onPress}: IconProps) {
 
 const iconRegistry = {
   AddIcon: AddIcon,
+  CheckIcon: CheckIcon,
   ChevronLeftIcon: ChevronLeftIcon,
   ChevronRightIcon: ChevronRightIcon,
   CloseIcon: CloseIcon,
   EditIcon: EditIcon,
-  ToggleOffIcon: ToggleOffIcon,
-  ToggleOnIcon: ToggleOnIcon,
+  LockIcon: LockIcon,
+  PersonIcon: PersonIcon,
   TrashIcon: TrashIcon,
 };
 

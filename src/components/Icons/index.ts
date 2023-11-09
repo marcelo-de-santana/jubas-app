@@ -1,2 +1,2 @@
+export * from './BoxIcon';
 export * from './Icon';
-export * from './IconStatus';

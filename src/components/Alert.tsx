@@ -6,15 +6,13 @@ interface AlertProps {
   onPress?: () => void;
 }
 
-export function Alert({type, message, onPress}: AlertProps) {
-  if (type === 'alert') {
-    if (!message) message = 'Ocorreu um erro. Tente novamente mais tarde!';
-    AlertRN.alert('', message);
-  }
+export function Alert({type = 'alert', message, onPress}: AlertProps) {
+  message = message ?? 'Ocorreu um erro. Tente novamente mais tarde!';
+  let component = AlertRN.alert('', message);
 
   if (type === 'decision') {
-    if (!message) message = 'Deseja prosseguir?';
-    AlertRN.alert('', message, [
+    message = message ?? 'Deseja prosseguir?';
+    component = AlertRN.alert('', message, [
       {
         text: 'CANCELAR',
         style: 'cancel',
@@ -26,4 +24,5 @@ export function Alert({type, message, onPress}: AlertProps) {
       },
     ]);
   }
+  return component;
 }

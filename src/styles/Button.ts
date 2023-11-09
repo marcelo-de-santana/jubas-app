@@ -1,19 +1,26 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {colorRegistry} from './Colors';
+import {useDimensions} from '@hooks';
 
-const {height, width} = Dimensions.get('window');
+const {width} = useDimensions();
 
-export const buttonRegistry = StyleSheet.create({
-  'menu-box': {
+export const buttonStyle = StyleSheet.create({
+  box: {
+    borderColor: colorRegistry['midnight-blue-transparent'],
     borderRadius: 10,
-    borderWidth: 0.5,
+    borderWidth: 1,
     justifyContent: 'center',
-    height: width * 0.29,
+    height: width * 0.3,
     padding: 10,
-    margin: width * 0.01,
-    width: width * 0.29,
+    width: width * 0.3,
+    margin: width * 0.006,
   },
-  'menu-tab-lavender-gray': {
+  'view-box': {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  'tab-light-gray': {
     borderColor: colorRegistry['lavender-gray'],
     borderRadius: 10,
     borderWidth: 1,
@@ -22,7 +29,7 @@ export const buttonRegistry = StyleSheet.create({
     padding: 10,
     width: width * 0.3,
   },
-  'menu-tab-steel-blue': {
+  'tab-blue': {
     backgroundColor: colorRegistry['steel-blue'],
     borderRadius: 10,
     height: 50,
@@ -30,32 +37,38 @@ export const buttonRegistry = StyleSheet.create({
     padding: 10,
     width: width * 0.3,
   },
-  'square-flex': {
+  flexible: {
     flex: 1,
     borderRadius: 6,
     padding: 5,
     justifyContent: 'center',
   },
-  'square-inline': {
+  inline: {
     justifyContent: 'center',
     borderRadius: 6,
     minHeight: 40,
     marginVertical: 5,
   },
-  'square-right': {
+  center: {
+    justifyContent: 'center',
+    borderRadius: 6,
+    padding: 10,
+    marginVertical: 5,
+  },
+  floating: {
     padding: 10,
     borderRadius: 20,
     position: 'absolute',
     right: 15,
     bottom: 15,
   },
-  'square-small': {
+  small: {
     padding: 5,
     borderRadius: 6,
     marginHorizontal: 5,
     justifyContent: 'center',
   },
-  'square-inline-one-fifth-wide': {
+  'inline-one-fifth-wide': {
     justifyContent: 'center',
     borderRadius: 6,
     minHeight: 40,
@@ -68,12 +81,11 @@ export const buttonRegistry = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 5,
   },
-  'switch-spaced': {
+  'spaced-switch': {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 5,
   },
 });
 
-type buttonType = typeof buttonRegistry;
-export type ButtonName = keyof buttonType;
+export type ButtonStyleName = keyof typeof buttonStyle;

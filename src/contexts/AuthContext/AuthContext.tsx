@@ -1,8 +1,4 @@
-import {
-  UserResponseDTO,
-  UserToAuthenticatedRequestDTO,
-  authUser,
-} from '@domain';
+import {UserResponse, useUserAuth} from '@domain';
 import {createContext, useContext, useState} from 'react';
 
 const defaultUser = {
@@ -20,28 +16,36 @@ type AuthContextProviderProps = {
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  signIn: (user: UserToAuthenticatedRequestDTO) => void;
+  signIn: (email: string, password: string) => void;
   singOut: () => void;
-  user: UserResponseDTO;
+  isLoading: boolean;
+  isError: boolean | null;
+  status?: number | null;
+  user: UserResponse;
 };
 
 export const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   signIn: () => {},
   singOut: () => {},
+  isLoading: false,
+  status: null,
+  isError: null,
   user: defaultUser,
 });
 
 export function AuthContextProvider({children}: AuthContextProviderProps) {
   const [isAuthenticated, setAuthentication] = useState(false);
-  const [user, setUser] = useState<UserResponseDTO>(defaultUser);
+  const [user, setUser] = useState<UserResponse>(defaultUser);
+  const {data, fetchData, status, isLoading, isError} = useUserAuth();
 
-  async function signIn(user: UserToAuthenticatedRequestDTO) {
-    const response = await authUser(user);
-    if (response?.data) {
-      setUser(response.data);
-      setAuthentication(true);
-    }
+  function signIn(email: string, password: string) {
+    fetchData({email, password});
+  }
+
+  if (user.id === '' && !!data?.id) {
+    setUser(data);
+    setAuthentication(true);
   }
 
   function singOut() {
@@ -49,7 +53,16 @@ export function AuthContextProvider({children}: AuthContextProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{isAuthenticated, signIn, singOut, user}}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        signIn,
+        singOut,
+        user,
+        isLoading,
+        isError,
+        status,
+      }}>
       {children}
     </AuthContext.Provider>
   );

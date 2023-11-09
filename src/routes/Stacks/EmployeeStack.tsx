@@ -1,5 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
+  EmployeeCreateScreen,
   EmployeeListScreen,
   EmployeeDetailsScreen,
   EmployeeProfileUpdateScreen,
@@ -7,20 +8,21 @@ import {
   EmployeeServicesListScreen,
 } from '@screens';
 
-import {ProfileResponseDTO, WorkingHoursResponseDTO} from '@domain';
-import {colorRegistry} from '@styles';
+import {ProfileResponse, WorkingHoursResponse} from '@domain';
+import {defaultThemeOptions} from '@styles';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
-  EmployeeDetailsScreen: {profile: ProfileResponseDTO};
-  EmployeeProfileUpdateScreen: {profile: ProfileResponseDTO};
+  EmployeeDetailsScreen: {profile: ProfileResponse};
+  EmployeeCreateScreen: {profile: ProfileResponse};
+  EmployeeProfileUpdateScreen: {profile?: ProfileResponse};
   EmployeeTimeListScreen: {
-    employeeId: string;
-    workingHours: WorkingHoursResponseDTO;
+    employeeId?: string;
+    workingHour?: WorkingHoursResponse;
   };
   EmployeeServicesListScreen: {
-    employeeId: string;
-    services: any;
+    employeeId?: string;
+    services?: any[];
   };
 };
 
@@ -28,17 +30,7 @@ const NativeStack = createNativeStackNavigator<EmployeeStackParamList>();
 
 export function EmployeeStack() {
   return (
-    <NativeStack.Navigator
-      screenOptions={{
-        animation: 'fade_from_bottom',
-        headerShadowVisible: false,
-        headerShown: false,
-        headerStyle: {
-          backgroundColor: colorRegistry['light-gray'],
-        },
-        headerTintColor: colorRegistry['steel-blue'],
-        headerTitleAlign: 'center',
-      }}>
+    <NativeStack.Navigator screenOptions={defaultThemeOptions}>
       <NativeStack.Screen
         name="EmployeeListScreen"
         component={EmployeeListScreen}
@@ -54,6 +46,14 @@ export function EmployeeStack() {
           headerTitle: route.params.profile.name,
           headerShown: true,
         })}
+      />
+      <NativeStack.Screen
+        name="EmployeeCreateScreen"
+        component={EmployeeCreateScreen}
+        options={{
+          headerTitle: 'Novo funcionário',
+          headerShown: true,
+        }}
       />
       <NativeStack.Screen
         name="EmployeeProfileUpdateScreen"

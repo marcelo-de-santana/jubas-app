@@ -1,0 +1,41 @@
+import {
+  FormikConfig,
+  FormikErrors,
+  FormikTouched,
+  FormikValues,
+  useFormik,
+} from 'formik';
+
+export interface FormikExtractedParams {
+  values: FormikValues;
+  errors: FormikErrors<FormikValues>;
+  touched: FormikTouched<FormikValues>;
+  handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+  handleBlur: {
+    (e: React.FocusEvent<any, Element>): void;
+    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
+  };
+  handleChangeText: (key: string, value: string) => void;
+}
+
+export type UseFormType = FormikConfig<FormikValues>;
+
+export function useForm({...rest}: UseFormType) {
+  const formik = useFormik({
+    ...rest,
+  });
+
+  function handleChangeText(key: string, value: string) {
+    formik.setFieldValue(key, value);
+  }
+
+  function handleChangeBoolean(key: string) {
+    formik.setFieldValue(key, !formik.values[key]);
+  }
+
+  return {
+    handleChangeText,
+    handleChangeBoolean,
+    ...formik,
+  };
+}

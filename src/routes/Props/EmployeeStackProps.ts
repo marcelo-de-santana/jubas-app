@@ -9,6 +9,11 @@ export type EmployeeDetailsScreenProps = NativeStackScreenProps<
   'EmployeeDetailsScreen'
 >;
 
+export type EmployeeCreateScreenProps = NativeStackScreenProps<
+  EmployeeStackParamList,
+  'EmployeeCreateScreen'
+>;
+
 export type EmployeeProfileUpdateScreenProps = NativeStackScreenProps<
   EmployeeStackParamList,
   'EmployeeProfileUpdateScreen'
