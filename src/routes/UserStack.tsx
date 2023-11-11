@@ -1,9 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  MinimalUserResponseDTO,
-  ProfileResponseDTO,
-  UserResponseDTO,
-} from '@domain';
+import {MinimalUserResponseDTO, ProfileResponse, UserResponse} from '@domain';
 import {
   UserCreateScreen,
   UserListScreen,
@@ -17,12 +13,12 @@ import {colorRegistry} from '@styles';
 export type UserStackParamList = {
   UserListScreen: undefined;
   UserCreateScreen: undefined;
-  UserUpdateScreen: {user: UserResponseDTO};
-  UserProfileScreen: {user: UserResponseDTO};
+  UserUpdateScreen: {user: UserResponse};
+  UserProfileScreen: {user: UserResponse};
   UserProfileCreateScreen: {userId: string};
   UserProfileUpdateScreen: {
     userId: string;
-    profile: ProfileResponseDTO;
+    profile: ProfileResponse;
   };
 };
 
@@ -37,9 +33,9 @@ export function UserStack() {
         headerShadowVisible: false,
         headerShown: false,
         headerStyle: {
-          backgroundColor: colorRegistry['light-gray'],
+          backgroundColor: colorRegistry['lightGray'],
         },
-        headerTintColor: colorRegistry['steel-blue'],
+        headerTintColor: colorRegistry['steelBlue'],
         headerTitleAlign: 'center',
       }}>
       <NativeStack.Screen

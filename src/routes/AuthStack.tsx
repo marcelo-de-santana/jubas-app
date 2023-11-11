@@ -3,9 +3,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {SignInScreen, SignUpScreen, RecoveryPasswordScreen} from '@screens';
-import {defaultOptions} from '../Types/screenOptions';
-
-export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
+import {defaultOptions} from './screenOptions';
 
 export type AuthStackParamList = {
   SignInScreen: undefined;
@@ -18,7 +16,7 @@ const NativeStack = createNativeStackNavigator<AuthStackParamList>();
 export function AuthStack() {
   return (
     <NativeStack.Navigator
-      screenOptions={defaultOptions}
+      screenOptions={{...defaultOptions, headerShown: true}}
       initialRouteName="SignInScreen">
       <NativeStack.Screen
         name="SignInScreen"

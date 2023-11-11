@@ -2,7 +2,7 @@ import {ColorName, colorRegistry} from '@styles';
 import {ActivityIndicator} from '../ActivityIndicator';
 import {Text} from '../Text';
 
-export function Loader({color = 'steel-blue'}: {color?: ColorName}) {
+export function Loader({color = 'steelBlue'}: {color?: ColorName}) {
   return (
     <>
       <ActivityIndicator color={color} />

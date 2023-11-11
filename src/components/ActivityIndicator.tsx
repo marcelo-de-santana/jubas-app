@@ -9,7 +9,7 @@ export interface ActivityIndicatorProps extends RNActivityIndicatorProps {
 }
 
 export function ActivityIndicator({
-  color = 'steel-blue',
+  color = 'steelBlue',
   size = 'large',
   ...props
 }: ActivityIndicatorProps) {

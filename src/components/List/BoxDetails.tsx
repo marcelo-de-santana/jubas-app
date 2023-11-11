@@ -26,7 +26,7 @@ export function BoxDetails({
       {...props}>
       <TouchableOpacity
         style={{
-          ...themeRegistry['box-flex-row'],
+          ...themeRegistry['boxFlexRow'],
           padding: 10,
         }}
         {...boxProps}>

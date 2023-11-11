@@ -10,18 +10,18 @@ export interface SwitchProps extends RNSwitchProps {
 export function Switch({label, textProps, ...props}: SwitchProps) {
   return (
     <>
-      <Text align="justify" size="S" color="steel-blue" {...textProps}>
+      <Text align="justify" size="S" color="steelBlue" {...textProps}>
         {label}
       </Text>
       <RNSwitch
         trackColor={{
-          true: colorRegistry['blue-gray'],
-          false: colorRegistry['lavender-gray'],
+          true: colorRegistry['blueGray'],
+          false: colorRegistry['lavenderGray'],
         }}
         thumbColor={
           props.value === true
-            ? colorRegistry['midnight-blue']
-            : colorRegistry['lavender-gray']
+            ? colorRegistry['midnightBlue']
+            : colorRegistry['lavenderGray']
         }
         {...props}
       />

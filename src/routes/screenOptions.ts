@@ -2,15 +2,13 @@ import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {colorRegistry} from '@styles';
 
 export const defaultOptions: NativeStackNavigationOptions = {
-  animation: 'fade_from_bottom',
   headerShadowVisible: false,
-  headerShown: false,
   headerStyle: {
-    backgroundColor: colorRegistry['light-gray'],
+    backgroundColor: colorRegistry['lightGray'],
   },
-  headerTintColor: colorRegistry['steel-blue'],
+  headerTintColor: colorRegistry['steelBlue'],
   headerTitleAlign: 'center',
-  statusBarColor: colorRegistry['light-gray'],
+  statusBarColor: colorRegistry['lightGray'],
   statusBarStyle: 'dark',
   fullScreenGestureEnabled: true,
 };

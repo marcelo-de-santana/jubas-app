@@ -39,6 +39,18 @@ async function fullyUpdate(
   });
 }
 
+async function recoveryPassword(
+  email: string,
+  newPassword: string,
+  profileCpf: string,
+) {
+  return await api.patch(`${PATH}/recovery`, {
+    email,
+    newPassword,
+    profileCpf,
+  });
+}
+
 async function update(
   profileId: string,
   name: string,
@@ -63,4 +75,5 @@ export const profileApi = {
   fullyUpdate,
   update,
   remove,
+  recoveryPassword,
 };

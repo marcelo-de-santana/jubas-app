@@ -9,7 +9,7 @@ import {
 } from '@screens';
 
 import {ProfileResponse} from '@domain';
-import {defaultOptions} from '../Types/screenOptions';
+import {defaultOptions} from './screenOptions';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;

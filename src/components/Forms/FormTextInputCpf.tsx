@@ -9,7 +9,7 @@ export function FormTextInputCpf({formik, name, ...props}: FormTextInputProps) {
       maxLength={14}
       keyboardType="numeric"
       onBlur={formik.handleBlur(name)}
-      onChangeText={text => formik.handleChangeText(name, text)}
+      onChangeText={formik.handleChange(name)}
       value={mask.cpf(formik.values[name])}
       errorMessage={
         formik.touched[name] && formik.errors[name] !== undefined

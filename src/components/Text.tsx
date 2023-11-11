@@ -16,19 +16,22 @@ export interface TextProps extends TextPropsRN {
 
 export function Text({
   children,
+  style,
   align = 'center',
-  color = 'steel-blue',
+  color = 'steelBlue',
   size = 'S',
   ...props
 }: TextProps) {
   return (
     <TextRN
-      {...props}
-      style={{
-        color: colorRegistry[color],
-        fontSize: fontSizeRegistry[size],
-        textAlign: align,
-      }}>
+      style={[
+        {
+          color: colorRegistry[color],
+          fontSize: fontSizeRegistry[size],
+          textAlign: align        },
+          style
+        ]}
+      {...props}>
       {children}
     </TextRN>
   );

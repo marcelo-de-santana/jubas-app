@@ -7,7 +7,7 @@ interface ViewSeparatorProps extends ViewProps {
 }
 
 export function Separator({
-  color = 'lavender-gray',
+  color = 'lavenderGray',
   ...props
 }: ViewSeparatorProps) {
   return (

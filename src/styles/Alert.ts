@@ -2,23 +2,21 @@ import {ColorName} from './Colors';
 
 export type AlertName = 'light' | 'danger' | 'success';
 
-export const alertStyle: Record<
-  AlertName,
-  {box: ColorName; text: ColorName}
-> = {
-  light: {
-    box: 'light-gray',
-    text: 'steel-blue',
-  },
-  danger: {
-    box: 'red',
-    text: 'white',
-  },
-  success: {
-    box: 'light-green',
-    text: 'white',
-  },
-};
+export const alertStyle: Record<AlertName, {box: ColorName; text: ColorName}> =
+  {
+    light: {
+      box: 'lightGray',
+      text: 'steelBlue',
+    },
+    danger: {
+      box: 'red',
+      text: 'white',
+    },
+    success: {
+      box: 'lightGreen',
+      text: 'white',
+    },
+  };
 
 export type AlertStatusType = Record<
   number,

@@ -80,5 +80,5 @@ const $boxContainerStyle: StyleProp<ViewStyle> = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: colorRegistry['midnight-blue-transparent'],
+  backgroundColor: colorRegistry.midnightBlueTransparent,
 };

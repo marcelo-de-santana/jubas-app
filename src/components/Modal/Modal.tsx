@@ -9,7 +9,7 @@ interface ModalProps extends ViewProps {
 }
 export function Modal({
   children,
-  color = 'light-gray',
+  color = 'lightGray',
   onPress,
   ...props
 }: ModalProps) {
@@ -31,7 +31,7 @@ export function Modal({
             name={'CloseIcon'}
             backgroundColor="red"
             style={{borderRadius: 6}}
-            color="light-gray"
+            color="lightGray"
             size={20}
             onPress={onPress}
           />

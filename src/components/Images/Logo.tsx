@@ -8,7 +8,7 @@ export function Logo({height = 60}: {height?: number}) {
       source={require('../../assets/images/logo-marca.png')}
       style={{
         alignSelf: 'center',
-        backgroundColor: colorRegistry['lavender-gray'],
+        backgroundColor: colorRegistry['lavenderGray'],
         borderRadius: 20,
         height: height * 0.18,
         margin: 20,

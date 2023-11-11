@@ -1,9 +1,4 @@
-import {
-  ButtonComponent,
-  FormTextInput,
-  Screen,
-  StatusScreen,
-} from '@components';
+import {Button, FormTextInput, Screen, StatusScreen} from '@components';
 import {Keyboard, Pressable, ScrollView, View} from 'react-native';
 import {AuthStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
@@ -61,15 +56,17 @@ export function SignInScreen({navigation}: AuthStackProps) {
             <FormTextInput
               formik={formik}
               name="password"
-              label="Digite seu senha"
+              label="Digite sua senha"
               placeholder="**********"
               maxLength={20}
               secureTextEntry
             />
 
-            <ButtonComponent
-              type="save"
+            <Button
+              type="inline"
+              backgroundColor="steelBlue"
               text="Entrar"
+              textProps={{color: 'white', size: 'L'}}
               onPress={formik.handleSubmit}
             />
           </View>

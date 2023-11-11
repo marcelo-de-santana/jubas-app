@@ -29,7 +29,7 @@ export interface IconProps {
 
 export function Icon({
   name,
-  color = 'steel-blue',
+  color = 'steelBlue',
   size,
   onPress,
   type,

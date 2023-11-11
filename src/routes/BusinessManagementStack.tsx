@@ -10,7 +10,7 @@ import {
   WorkingHoursCreateScreen,
   WorkingHoursListScreen,
 } from '@screens';
-import {defaultOptions} from '../Types/screenOptions';
+import {defaultOptions} from './screenOptions';
 
 export type BusinessManagementParamList = {
   CategoryCreateScreen: undefined;

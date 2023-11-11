@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthStack} from './Stacks/AuthStack';
-import {AppStack} from './Stacks/AppStack';
+import {AuthStack} from './AuthStack';
+import {AppStack} from './AppStack';
 import {useAuthContext} from '@contexts';
 
 export function Routes() {
@@ -8,7 +8,7 @@ export function Routes() {
 
   return (
     <NavigationContainer>
-      {!isAuthenticated ? <AppStack /> : <AuthStack />}
+      {isAuthenticated ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

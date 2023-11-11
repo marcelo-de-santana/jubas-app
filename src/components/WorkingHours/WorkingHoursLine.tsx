@@ -14,11 +14,11 @@ export function WorkinhHoursLine({
   workingHourId,
   onPress,
 }: WorkingHoursLineProps) {
-  let $boxStyle: ColorName = 'light-gray';
+  let $boxStyle: ColorName = 'lightGray';
   let $boxDisable = false;
 
   if (item.id === workingHourId) {
-    $boxStyle = 'lavender-gray';
+    $boxStyle = 'lavenderGray';
     $boxDisable = true;
   }
 

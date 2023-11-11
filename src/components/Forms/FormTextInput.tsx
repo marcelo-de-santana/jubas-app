@@ -10,7 +10,7 @@ export function FormTextInput({formik, name, ...props}: FormTextInputProps) {
   return (
     <TextInput
       onBlur={formik.handleBlur(name)}
-      onChangeText={text => formik.handleChangeText(name, text)}
+      onChangeText={formik.handleChange(name)}
       value={formik.values[name]}
       errorMessage={
         formik.touched[name] && formik.errors[name] !== undefined

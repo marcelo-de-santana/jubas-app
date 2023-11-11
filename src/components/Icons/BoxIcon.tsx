@@ -9,11 +9,11 @@ interface BoxProps {
   backgroundColor?: ColorName;
 }
 
-export function BoxIcons({
+export function BoxIcon({
   name,
   size = 60,
   color = 'black',
-  backgroundColor = 'lavender-gray',
+  backgroundColor = 'lavenderGray',
 }: BoxProps) {
   return (
     <View

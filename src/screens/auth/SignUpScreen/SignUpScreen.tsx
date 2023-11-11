@@ -1,12 +1,12 @@
 import {
-  BoxIcon,
-  ButtonComponent,
+  Button,
   FormTextInput,
   Screen,
   StatusScreen,
+  BoxIcon,
 } from '@components';
 import {Keyboard, Pressable, ScrollView} from 'react-native';
-import {schemas} from '@utils';
+import {schemas, useNavigation} from '@utils';
 import {AuthStackProps} from '@routes';
 import {useUserCreate} from '@domain';
 import {AlertStatusType} from '@styles';
@@ -19,6 +19,7 @@ export function SignUpScreen({navigation}: AuthStackProps) {
   };
 
   const {fetchData, isLoading, status} = useUserCreate();
+  const {navigateBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.signUp,
     initialValues: {
@@ -34,23 +35,17 @@ export function SignUpScreen({navigation}: AuthStackProps) {
       }),
   });
 
-  function navigateToSignInScreen() {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    }
-  }
-
   return (
     <Screen>
       <StatusScreen
         loading={isLoading}
         status={status}
         customStatus={$customStatus}
-        successAction={navigateToSignInScreen}
+        successAction={navigateBack}
       />
       <Pressable style={{flex: 1}} onPress={Keyboard.dismiss}>
         <ScrollView>
-          <BoxIcon name="PersonIcon"/>
+          <BoxIcon name="PersonIcon" />
           <FormTextInput
             formik={formik}
             name="email"
@@ -77,9 +72,11 @@ export function SignUpScreen({navigation}: AuthStackProps) {
           />
         </ScrollView>
       </Pressable>
-      <ButtonComponent
-        type="save"
-        text="Cadastrar-me"
+      <Button
+        type="inline"
+        backgroundColor="steelBlue"
+        text="Cadastrar"
+        textProps={{color: 'white', size: 'L'}}
         onPress={formik.handleSubmit}
       />
     </Screen>

@@ -1,7 +1,7 @@
 import {View} from 'react-native';
 import {Loader} from '../Loaders/Loader';
 import {Text} from '../Text';
-import {ButtonComponent} from '../Buttons';
+import {Button} from '../Buttons';
 
 interface EmptyListProps {
   title?: string;
@@ -17,7 +17,7 @@ export function EmptyList({
   refetch,
 }: EmptyListProps) {
   let component = (
-    <Text size="M" color="steel-blue" align="center">
+    <Text size="M" color="steelBlue" align="center">
       {title}
     </Text>
   );
@@ -30,7 +30,7 @@ export function EmptyList({
     component = (
       <>
         <Text>Não foi possível carregar 😢</Text>
-        <ButtonComponent text="Recarregar" type="reload" onPress={refetch} />
+        <Button text="Recarregar" type="inline" onPress={refetch} />
       </>
     );
   }

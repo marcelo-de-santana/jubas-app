@@ -1,30 +1,43 @@
 import {
   BoxIcon,
-  ButtonComponent,
+  Button,
   FormTextInput,
   FormTextInputCpf,
   Screen,
   StatusScreen,
 } from '@components';
+import {useProfileRecoveryPassword} from '@domain';
 import {useForm} from '@hooks';
-import {schemas} from '@utils';
+import {schemas, useNavigation} from '@utils';
 import {Keyboard, Pressable} from 'react-native';
 import {ScrollView} from 'react-native';
 
 export function RecoveryPasswordScreen() {
+  const {data, isLoading, status, recoveryPass} = useProfileRecoveryPassword();
+  const {navigateBack} = useNavigation();
   const formik = useForm({
+    validationSchema: schemas.recoveryPass,
     initialValues: {
       email: '',
+      cpf: '',
       password: '',
       checkPass: '',
     },
-    onSubmit: () => console.log(formik.values),
-    validationSchema: schemas.recoveryPass,
+    onSubmit: () =>
+      recoveryPass({
+        email: formik.values.email,
+        password: formik.values.password,
+        cpf: formik.values.cpf,
+      }),
   });
 
   return (
     <Screen>
-      <StatusScreen loading={false} status={201} />
+      <StatusScreen
+        loading={isLoading}
+        status={status}
+        errorAction={navigateBack}
+      />
       <Pressable style={{flex: 1}} onPress={Keyboard.dismiss}>
         <ScrollView>
           <BoxIcon name="LockIcon" />
@@ -54,7 +67,13 @@ export function RecoveryPasswordScreen() {
             secureTextEntry
           />
         </ScrollView>
-        <ButtonComponent type="save" text="Solicitar recuperação" />
+        <Button
+          type="inline"
+          backgroundColor="steelBlue"
+          text="Enviar solicitação"
+          textProps={{color: 'white', size: 'L'}}
+          onPress={formik.handleSubmit}
+        />
       </Pressable>
     </Screen>
   );

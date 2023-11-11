@@ -6,7 +6,7 @@ const {width} = useDimensions();
 
 export const buttonStyle = StyleSheet.create({
   box: {
-    borderColor: colorRegistry['midnight-blue-transparent'],
+    borderColor: colorRegistry.midnightBlueTransparent,
     borderRadius: 10,
     borderWidth: 1,
     justifyContent: 'center',
@@ -21,7 +21,7 @@ export const buttonStyle = StyleSheet.create({
     justifyContent: 'space-between',
   },
   'tab-light-gray': {
-    borderColor: colorRegistry['lavender-gray'],
+    borderColor: colorRegistry.lavenderGray,
     borderRadius: 10,
     borderWidth: 1,
     height: 50,
@@ -30,7 +30,7 @@ export const buttonStyle = StyleSheet.create({
     width: width * 0.3,
   },
   'tab-blue': {
-    backgroundColor: colorRegistry['steel-blue'],
+    backgroundColor: colorRegistry.steelBlue,
     borderRadius: 10,
     height: 50,
     justifyContent: 'center',

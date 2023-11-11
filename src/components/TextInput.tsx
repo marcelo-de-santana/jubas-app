@@ -22,8 +22,8 @@ export function TextInput({label, errorMessage, ...props}: TextInputProps) {
     borderRadius: 6,
     height: 40,
     borderWidth: errorMessage ? 2 : 1,
-    borderColor: colorRegistry[errorMessage ? 'red' : 'steel-blue'],
-    backgroundColor: colorRegistry['lavender-gray'],
+    borderColor: colorRegistry[errorMessage ? 'red' : 'steelBlue'],
+    backgroundColor: colorRegistry['lavenderGray'],
   };
 
   function focusInput() {
@@ -34,7 +34,7 @@ export function TextInput({label, errorMessage, ...props}: TextInputProps) {
     <>
       <Pressable onPress={focusInput}>
         <View style={$viewTextStyle}>
-          <Text align="justify" size="S" color="steel-blue">
+          <Text align="justify" size="S" color="steelBlue">
             {label}
           </Text>
         </View>
@@ -42,8 +42,8 @@ export function TextInput({label, errorMessage, ...props}: TextInputProps) {
           <RNTextInput
             autoCapitalize="none"
             style={$textInputStyle}
-            placeholderTextColor={colorRegistry['midnight-blue-transparent']}
-            cursorColor={colorRegistry['midnight-blue']}
+            placeholderTextColor={colorRegistry['midnightBlueTransparent']}
+            cursorColor={colorRegistry['midnightBlue']}
             {...props}
           />
         </View>
@@ -61,5 +61,5 @@ export function TextInput({label, errorMessage, ...props}: TextInputProps) {
 
 const $textInputStyle = {
   paddingHorizontal: 10,
-  color: colorRegistry['midnight-blue'],
+  color: colorRegistry['midnightBlue'],
 };

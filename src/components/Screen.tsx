@@ -8,7 +8,7 @@ interface ScreenProps extends ViewProps {
 }
 export function Screen({
   children,
-  color = 'light-gray',
+  color = 'lightGray',
   onPress,
   ...props
 }: ScreenProps) {
