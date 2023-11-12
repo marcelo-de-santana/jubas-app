@@ -1,11 +1,9 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppStackParamList} from './AppStack';
-import {
-  AuthStackParamList,
-} from './Stacks';
 import {BusinessManagementParamList} from './BusinessManagementStack';
-import { EmployeeStackParamList } from './EmployeeStack';
-import { UserStackParamList } from './UserStack';
+import {EmployeeStackParamList} from './EmployeeStack';
+import {UserStackParamList} from './UserStack';
+import {AuthStackParamList} from './AuthStack';
 
 export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
 

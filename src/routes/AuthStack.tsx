@@ -1,7 +1,4 @@
-import {
-  NativeStackScreenProps,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SignInScreen, SignUpScreen, RecoveryPasswordScreen} from '@screens';
 import {defaultOptions} from './screenOptions';
 
