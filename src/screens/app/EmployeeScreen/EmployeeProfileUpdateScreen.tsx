@@ -1,22 +1,22 @@
 import {
-  Modal,
   Screen,
   FormTextInputCpf,
-  FormSwitch,
   StatusScreen,
   FormTextInputName,
   Button,
+  CheckBoxIcon,
 } from '@components';
 import {useProfileUpdate} from '@domain';
 import {useForm} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
-import {schemas} from '@utils';
+import {schemas, useNavigation} from '@utils';
 
 export function EmployeeProfileUpdateScreen({
   navigation,
   route,
 }: EmployeeScreenProps<'EmployeeProfileUpdateScreen'>) {
   const {profile} = route.params;
+  const {navigateBack} = useNavigation();
   const initalValues = profile?.id
     ? {...profile}
     : {id: '', name: '', cpf: '', statusProfile: false};
@@ -34,46 +34,32 @@ export function EmployeeProfileUpdateScreen({
       }),
   });
 
-  function handleSwitch() {
-    formik.handleChangeBoolean('statusProfile');
-  }
-
-  function navigateToEmployeeDetailsScreen() {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    }
-  }
-
   return (
-    <Screen color="black-transparent" onPress={navigateToEmployeeDetailsScreen}>
-      <StatusScreen
-        loading={isLoading}
-        status={status}
-        successAction={navigateToEmployeeDetailsScreen}
+    <Screen>
+      <StatusScreen status={status} successAction={navigateBack} />
+      <FormTextInputName formik={formik} label="Nome" name="name" />
+      <FormTextInputCpf
+        formik={formik}
+        label="CPF"
+        name="cpf"
+        keyboardType="numeric"
       />
-      <Modal onPress={navigateToEmployeeDetailsScreen}>
-        <FormTextInputName formik={formik} label="Nome" name="name" />
-        <FormTextInputCpf
-          formik={formik}
-          label="CPF"
-          name="cpf"
-          keyboardType="numeric"
-        />
-        <FormSwitch
-          switchProps={{
-            label: 'Status',
-            value: formik.values.statusProfile,
-            onValueChange: handleSwitch,
-          }}
-        />
-        <Button
-          type="inline"
-          backgroundColor="steel-blue"
-          text="Salvar"
-          textProps={{color: 'white', size: 'L'}}
-          onPress={formik.handleSubmit}
-        />
-      </Modal>
+
+      <CheckBoxIcon
+        label="Estado do perfil"
+        value={formik.values.statusProfile}
+        onPress={() => formik.handleChangeBoolean('statusProfile')}
+      />
+
+      <Button
+        type="inline"
+        loading={isLoading}
+        backgroundColor="steelBlue"
+        style={{marginTop: 20}}
+        title="Salvar"
+        textProps={{color: 'white', size: 'L'}}
+        onPress={formik.handleSubmit}
+      />
     </Screen>
   );
 }

@@ -15,12 +15,14 @@ import {EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {flatListStyle} from '@styles';
+import {useNavigation} from '@utils';
 
 export function EmployeeTimeListScreen({
   navigation,
   route,
 }: EmployeeScreenProps<'EmployeeTimeListScreen'>) {
   const {employeeId, workingHourId} = route.params;
+  const {navigateBack} = useNavigation();
   const useWorkingHous = useWorkingHoursList();
   const useEmployee = useEmployeeUpdate();
 
@@ -30,19 +32,13 @@ export function EmployeeTimeListScreen({
     });
   }, [navigation]);
 
-  function choiceWorkingHourk(workingHourId: number) {
+  const choiceWorkingHourk = (workingHourId: number) => {
     useEmployee.update({
       employeeId: employeeId ?? '',
       profileId: null,
       workingHourId,
     });
-  }
-
-  function navigateToEmployeeDetailsScreen() {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    }
-  }
+  };
 
   function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
     return (
@@ -56,11 +52,7 @@ export function EmployeeTimeListScreen({
 
   return (
     <Screen>
-      <StatusScreen
-        loading={useEmployee.isLoading}
-        status={useEmployee.status}
-        successAction={navigateToEmployeeDetailsScreen}
-      />
+      <StatusScreen status={useEmployee.status} successAction={navigateBack} />
       <FlatList
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}

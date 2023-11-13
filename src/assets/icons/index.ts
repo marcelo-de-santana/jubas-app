@@ -1,4 +1,6 @@
 export * from './AddIcon';
+export * from './CheckBoxBlank';
+export * from './CheckBoxChecked';
 export * from './CheckIcon';
 export * from './ChevronLeftIcon';
 export * from './ChevronRightIcon';

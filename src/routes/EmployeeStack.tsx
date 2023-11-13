@@ -43,6 +43,7 @@ export function EmployeeStack() {
         name="EmployeeDetailsScreen"
         component={EmployeeDetailsScreen}
         options={({route}) => ({
+          animation: 'slide_from_right',
           headerTitle: route.params.profile.name,
         })}
       />
@@ -57,8 +58,8 @@ export function EmployeeStack() {
         name="EmployeeProfileUpdateScreen"
         component={EmployeeProfileUpdateScreen}
         options={{
-          headerShown: false,
-          presentation: 'transparentModal',
+          animation: 'slide_from_right',
+          headerTitle: 'Dados pessoais',
         }}
       />
       <NativeStack.Screen
@@ -66,6 +67,7 @@ export function EmployeeStack() {
         component={EmployeeTimeListScreen}
         options={{
           headerTitle: 'Horários',
+          animation: 'slide_from_right',
         }}
       />
       <NativeStack.Screen
@@ -73,6 +75,7 @@ export function EmployeeStack() {
         component={EmployeeServicesListScreen}
         options={{
           headerTitle: 'Serviços',
+          animation: 'slide_from_right',
         }}
       />
     </NativeStack.Navigator>

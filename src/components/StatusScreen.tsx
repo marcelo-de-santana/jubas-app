@@ -1,15 +1,70 @@
-import {ModalAlert, ModalAlertProps} from './Modal';
-import {AlertStatusType, alertStatus} from '@styles';
+import {useEffect, useState} from 'react';
+import {Modal, Pressable, StyleProp, View, ViewStyle} from 'react-native';
+import {alertStatus, AlertStatusType, alertStyle, colorRegistry} from '@styles';
+import {Text} from './Text';
 
-interface StatusScreen extends ModalAlertProps {
+export interface StatusScreenProps {
+  status?: number | null;
   customStatus?: AlertStatusType;
+  successAction?: () => void;
+  errorAction?: () => void;
 }
 
-export function StatusScreen({status, customStatus, ...props}: StatusScreen) {
+export function StatusScreen({
+  status,
+  customStatus,
+  successAction,
+  errorAction,
+}: StatusScreenProps) {
   const alert = {...alertStatus, ...customStatus};
   const color = alert[status ?? 505].type;
-  let message = alert[status ?? 505].message;
+  const message = alert[status ?? 505].message;
+
+  const $itemColor = alertStyle[color].text;
+  const $boxColor = alertStyle[color].box;
+  const $boxStyle = {
+    padding: 20,
+    borderRadius: 6,
+    backgroundColor: colorRegistry[$boxColor],
+  };
+  const [isVisible, setVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (status) {
+      return handleVisibility();
+    }
+  }, [status]);
+
+  const closeModal = () => {
+    setVisible(false);
+    if (status === 200 || status === 201) {
+      if (successAction) successAction();
+    } else {
+      if (errorAction) errorAction();
+    }
+  };
+
+  const handleVisibility = () => {
+    setVisible(true);
+    setTimeout(closeModal, 2000);
+  };
+
   return (
-    <ModalAlert status={status} message={message} color={color} {...props} />
+    <Modal visible={isVisible} transparent={true} animationType="fade">
+      <Pressable style={$boxContainerStyle} onPress={() => setVisible(false)}>
+        <View style={$boxStyle}>
+          <Text color={$itemColor}>
+            {message ?? 'Ops... Algo inesperado aconteceu.'}
+          </Text>
+        </View>
+      </Pressable>
+    </Modal>
   );
 }
+
+const $boxContainerStyle: StyleProp<ViewStyle> = {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: colorRegistry.midnightBlueTransparent,
+};

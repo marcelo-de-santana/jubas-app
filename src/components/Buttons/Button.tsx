@@ -10,7 +10,7 @@ export interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   onPress?: () => void;
-  text?: string;
+  title?: string;
   textProps?: TextProps;
 }
 
@@ -21,7 +21,7 @@ export function Button({
   loading,
   disabled,
   onPress,
-  text,
+  title,
   textProps,
 }: ButtonProps) {
   const $buttonType = type && buttonStyle[type];
@@ -37,10 +37,10 @@ export function Button({
       onPress={onPress}
       disabled={disable}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color={textProps?.color ?? 'white'} size={'small'} />
       ) : (
         <Text align="center" {...textProps}>
-          {text}
+          {title}
         </Text>
       )}
     </Pressable>

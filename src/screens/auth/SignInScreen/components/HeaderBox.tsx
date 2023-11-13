@@ -1,11 +1,11 @@
 import {Logo, Text} from '@components';
 import {View} from 'react-native';
 
-export function HeaderBox({height}: {height?: number}) {
+export function HeaderBox() {
   return (
-    <View style={{paddingVertical: 10}}>
+    <View>
       <Text size="XL">Jubas Barbearia</Text>
-      <Logo height={height} />
+      <Logo />
     </View>
   );
 }

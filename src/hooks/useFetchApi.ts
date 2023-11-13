@@ -17,11 +17,9 @@ export function useFetchApi<TResponse = unknown, TRequest = void>({
       setLoading(true);
       setError(null);
       setStatus(null);
-  //    setTimeout(async () => {
-        const response = await apiFn(request);
-        setData(response.data);
-        setStatus(response.status);
-//      },2000);
+      const response = await apiFn(request);
+      setData(response.data);
+      setStatus(response.status);
     } catch (error) {
       setError(true);
       if (isAxiosError(error)) {

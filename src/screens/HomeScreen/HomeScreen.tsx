@@ -8,65 +8,65 @@ export function HomeScreen({navigation}: AppStackProps) {
   const {user} = useAuthContext();
   const {userPermission} = user;
 
-  function navigateToUnderConstruction() {
+  const navigateToUnderConstruction = () => {
     navigation.navigate('UnderConstruction');
-  }
+  };
 
-  function navigateToBusinessManagementStack() {
+  const navigateToBusinessManagementStack = () => {
     navigation.navigate('BusinessManagementStack');
-  }
+  };
 
-  function navigateToEmployeeStack() {
+  const navigateToEmployeeStack = () => {
     navigation.navigate('EmployeeStack');
-  }
+  };
 
-  function navigateToUserStack() {
+  const navigateToUserStack = () => {
     navigation.navigate('UserStack');
-  }
+  };
 
   return (
     <Screen style={{padding: 10}}>
       <View style={buttonStyle['view-box']}>
         <Button
           type="box"
-          text="Ver agenda"
+          title="Ver agenda"
           onPress={navigateToUnderConstruction}
         />
         <Button
           type="box"
-          text="Minhas compras"
+          title="Minhas compras"
           onPress={navigateToBusinessManagementStack}
         />
         <Button
           type="box"
-          text="Minha conta"
+          title="Minha conta"
           onPress={navigateToUnderConstruction}
         />
         {userPermission.id !== 1 && (
           <>
             <Button
               type="box"
-              text="Gerenciar agenda"
+              title="Gerenciar agenda"
               onPress={navigateToUnderConstruction}
             />
             <Button
               type="box"
-              text="Meus funcionários"
+              title="Meus funcionários"
               onPress={navigateToEmployeeStack}
             />
             <Button
               type="box"
-              text="Gerenciar negócio"
+              title="Gerenciar negócio"
               onPress={navigateToBusinessManagementStack}
             />
             <Button
               type="box"
-              text="Gerenciar usuários"
+              title="Gerenciar usuários"
               onPress={navigateToUserStack}
             />
             <Button
               type="box"
-              text="Gerenciar pagamentos"
+              title="Gerenciar pagamentos"
               onPress={navigateToUnderConstruction}
             />
           </>

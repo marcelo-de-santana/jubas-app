@@ -23,12 +23,16 @@ export function AuthStack() {
       <NativeStack.Screen
         name="RecoveryPasswordScreen"
         component={RecoveryPasswordScreen}
-        options={{headerTitle: 'Recuperar Senha'}}
+        options={{
+          headerTitle: 'Recuperar Senha',
+        }}
       />
       <NativeStack.Screen
         name="SignUpScreen"
         component={SignUpScreen}
-        options={{headerTitle: 'Cadastre-se'}}
+        options={{
+          headerTitle: 'Cadastre-se',
+        }}
       />
     </NativeStack.Navigator>
   );

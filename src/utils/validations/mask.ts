@@ -1,4 +1,4 @@
-function cpf(value: string | number) {
+const cpf = (value: string | number) => {
   value = String(value);
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{3})(\d)/, '$1.$2');
@@ -6,48 +6,48 @@ function cpf(value: string | number) {
   value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})$/, '$1.$2.$3-$4');
   value = value.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d{3,10})$/, '');
   return value;
-}
+};
 
-function removeCpf(value: string) {
+const removeCpf = (value: string) => {
   if (value === null) return '';
   return value.replace(/[.-]/g, '');
-}
+};
 
-function name(value: string) {
+const name = (value: string) => {
   value = value.replace(/^\d{0}[0-9]/, '');
   return value;
-}
+};
 
-function date(value: string) {
+const date = (value: string) => {
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{2})(\d)/, '$1/$2');
   value = value.replace(/(\d{2})\/(\d{2})(\d)$/, '$1/$2/$3');
   value = value.replace(/(\d{2})\/(\d{2})(\d{2,4})$/, '$1/$2/$3');
   return value;
-}
+};
 
-function phone(value: string) {
+const phone = (value: string) => {
   value = value.replace(/\D/g, '');
   value = value.replace(/^(\d{2})(\d)/, '($1)$2');
   value = value.replace(/(\d{4})(\d{1,4})$/, '$1-$2');
   return value;
-}
+};
 
-function time(value: string) {
+const time = (value: string) => {
   value = value.replace(/\D/, '');
   value = value.replace(/\d([2][4]|[3-9][0-9][0-9][0-9])/, '00:00');
   value = value.replace(/([0][0-9]|[1][0-9]|[2][0-3])([0-5][0-9])/, '$1:$2');
   return value;
-}
+};
 
-function fullTime(value: string) {
+const fullTime = (value: string) => {
   value = value.replace(/\D/g, '');
   value = value.replace(/(\d{2})(\d{1})/, '$1:$2');
   value = value.replace(/(\d{2}:\d{2})(\d)/, '$1:$2');
   return value;
-}
+};
 
-function timestampToTimeFormat({time = 1695783600000}: {time?: number}) {
+const timestampToTimeFormat = ({time = 1695783600000}: {time?: number}) => {
   let date = new Date(Number(time));
   let timeFormatted = date.toLocaleString('pt-BR', {
     hour: '2-digit',
@@ -55,9 +55,9 @@ function timestampToTimeFormat({time = 1695783600000}: {time?: number}) {
   });
 
   return timeFormatted;
-}
+};
 
-function timeToTimestamp({time = '00:00'}: {time?: string}) {
+const timeToTimestamp = ({time = '00:00'}: {time?: string}) => {
   const [hours, minutes] = time.split(':').map(Number);
 
   if (
@@ -78,7 +78,7 @@ function timeToTimestamp({time = '00:00'}: {time?: string}) {
   timestamp.setMilliseconds(0);
 
   return timestamp;
-}
+};
 
 export const mask = {
   cpf,

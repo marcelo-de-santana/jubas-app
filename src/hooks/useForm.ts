@@ -33,13 +33,13 @@ export function useForm({...rest}: UseFormType) {
     ...rest,
   });
 
-  function handleChangeText(key: string, value: string) {
+  const handleChangeText = (key: string, value: string) => {
     formik.setFieldValue(key, value);
-  }
+  };
 
-  function handleChangeBoolean(key: string) {
+  const handleChangeBoolean = (key: string) => {
     formik.setFieldValue(key, !formik.values[key]);
-  }
+  };
 
   return {
     handleChangeText,

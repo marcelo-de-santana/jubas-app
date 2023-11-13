@@ -1,6 +1,8 @@
 import {Pressable, PressableProps, ViewStyle} from 'react-native';
 import {
   AddIcon,
+  CheckBoxBlank,
+  CheckBoxChecked,
   ChevronLeftIcon,
   ChevronRightIcon,
   CheckIcon,
@@ -56,6 +58,8 @@ export function Icon({
 
 const iconRegistry = {
   AddIcon: AddIcon,
+  CheckBoxBlank: CheckBoxBlank,
+  CheckBoxChecked: CheckBoxChecked,
   CheckIcon: CheckIcon,
   ChevronLeftIcon: ChevronLeftIcon,
   ChevronRightIcon: ChevronRightIcon,

@@ -1,4 +1,4 @@
-import {BoxDetails, Icon, Screen, StatusScreen, Text} from '@components';
+import {BoxDetails, EmptyList, Icon, Screen, Text} from '@components';
 import {useEmplyeeFindByProfile} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {mask} from '@utils';
@@ -9,49 +9,44 @@ export function EmployeeDetailsScreen({
   navigation,
   route,
 }: EmployeeScreenProps<'EmployeeDetailsScreen'>) {
-  const {fetchData, status, isLoading, employee} = useEmplyeeFindByProfile();
+  const {employee, fetchData, status, isError, isLoading} =
+    useEmplyeeFindByProfile();
+
+  const getEmployee = () => {
+    fetchData({profileId: route.params.profile.id});
+  };
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      fetchData({profileId: route.params.profile.id});
+      getEmployee();
     });
   }, [navigation]);
 
-  function fatalErrorAction() {
-    if (status !== 404) {
-      navigateToEmployeeListScreen();
-    }
-  }
-
-  function navigateToEmployeeCreateScreen() {
+  const navigateToEmployeeCreateScreen = () => {
     navigation.navigate('EmployeeCreateScreen', {
       ...route.params,
     });
-  }
+  };
 
-  function navigateToEmployeeListScreen() {
-    navigation.goBack();
-  }
-
-  function navigateToProfileUpdateScreen() {
+  const navigateToProfileUpdateScreen = () => {
     navigation.navigate('EmployeeProfileUpdateScreen', {
       profile: employee?.profile,
     });
-  }
+  };
 
-  function navigateToTimeListScreen() {
+  const navigateToTimeListScreen = () => {
     navigation.navigate('EmployeeTimeListScreen', {
       employeeId: employee?.id,
       workingHourId: employee?.workingHour.id,
     });
-  }
+  };
 
-  function navigateToServiceListScreen() {
+  const navigateToServiceListScreen = () => {
     navigation.navigate('EmployeeServicesListScreen', {
       employeeId: employee?.id,
       services: employee?.services,
     });
-  }
+  };
 
   const profileFields = [
     `CPF: ${
@@ -75,13 +70,8 @@ export function EmployeeDetailsScreen({
 
   return (
     <Screen>
-      {status !== 404 ? (
+      {status === 200 ? (
         <>
-          <StatusScreen
-            loading={isLoading}
-            status={status}
-            errorAction={fatalErrorAction}
-          />
           <BoxDetails
             label="Dados pessoais"
             textFields={profileFields}
@@ -101,7 +91,7 @@ export function EmployeeDetailsScreen({
             onPress={navigateToServiceListScreen}
           />
         </>
-      ) : (
+      ) : status === 404 ? (
         <View style={{flex: 1, justifyContent: 'center'}}>
           <Text size="M" align="center">
             Ops... Parace que o funcionário ainda não foi cadastrado. Deseja
@@ -116,21 +106,23 @@ export function EmployeeDetailsScreen({
             <Icon
               name="CloseIcon"
               type="inline-one-fifth-wide"
-              color="light-gray"
+              color="lightGray"
               backgroundColor="red"
               style={{alignItems: 'center'}}
-              onPress={navigateToEmployeeListScreen}
+              onPress={() => navigation.goBack()}
             />
             <Icon
               name="CheckIcon"
               type="inline-one-fifth-wide"
-              color="light-gray"
-              backgroundColor="light-green"
+              color="lightGray"
+              backgroundColor="lightGreen"
               style={{alignItems: 'center'}}
               onPress={navigateToEmployeeCreateScreen}
             />
           </View>
         </View>
+      ) : (
+        <EmptyList loading={isLoading} error={isError} refetch={getEmployee} />
       )}
     </Screen>
   );

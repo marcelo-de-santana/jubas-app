@@ -13,16 +13,17 @@ import {
 } from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {AlertStatusType, flatListStyle} from '@styles';
+import {useNavigation} from '@utils';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
 export function EmployeeCreateScreen({
-  navigation,
   route,
 }: EmployeeScreenProps<'EmployeeCreateScreen'>) {
   const $customStatus: AlertStatusType = {
     201: {type: 'success', message: 'Funcionário cadastrado com sucesso.'},
   };
+  const {navigateBack} = useNavigation();
   const useWorkingHours = useWorkingHoursList();
   const useEmployee = useEmployeeCreate();
 
@@ -30,18 +31,12 @@ export function EmployeeCreateScreen({
     useWorkingHours.getList();
   }, []);
 
-  function registerEmployee(workingHourId: number) {
+  const registerEmployee = (workingHourId: number) => {
     useEmployee.create({
       profileId: route.params.profile.id,
       workingHourId: workingHourId,
     });
-  }
-
-  function navigateToEmployeeDetailsScreen() {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    }
-  }
+  };
 
   function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
     return <WorkinhHoursLine item={item} onPress={registerEmployee} />;
@@ -50,10 +45,9 @@ export function EmployeeCreateScreen({
   return (
     <Screen>
       <StatusScreen
-        loading={useEmployee.isLoading}
         status={useEmployee.status}
         customStatus={$customStatus}
-        successAction={navigateToEmployeeDetailsScreen}
+        successAction={navigateBack}
       />
       <FlatList
         data={useWorkingHours.data}

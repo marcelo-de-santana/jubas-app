@@ -2,8 +2,8 @@ import {EmptyList, Screen, Separator, BoxItem} from '@components';
 import {ProfileResponse, useProfileListByPermission} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {flatListStyle} from '@styles';
-import {useEffect} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
+import {useEffect, useState} from 'react';
+import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
 export function EmployeeListScreen({
   navigation,
@@ -11,14 +11,12 @@ export function EmployeeListScreen({
   const {data, isLoading, isError, refetch} = useProfileListByPermission();
 
   useEffect(() => {
-    navigation.addListener('focus', () => {
-      refetch();
-    });
-  }, [navigation]);
+    refetch();
+  }, []);
 
-  function natigateToEmployeeScreen(profile: ProfileResponse) {
+  const natigateToEmployeeScreen = (profile: ProfileResponse) => {
     navigation.navigate('EmployeeDetailsScreen', {profile});
-  }
+  };
 
   function renderItem({item}: ListRenderItemInfo<ProfileResponse>) {
     return (
@@ -37,10 +35,13 @@ export function EmployeeListScreen({
         renderItem={renderItem}
         ItemSeparatorComponent={Separator}
         contentContainerStyle={flatListStyle(data)}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={refetch} />
+        }
         ListEmptyComponent={
           <EmptyList
             title="Nenhum funcionário listado"
-            loading={!isLoading}
+            loading={isLoading}
             error={isError}
             refetch={refetch}
           />

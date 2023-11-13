@@ -2,26 +2,24 @@ import {Text} from '@components';
 import {TouchableOpacity, View} from 'react-native';
 
 export function FooterBox({
-  height = 0,
-  navigateToRecoveryPasswordScreen,
-  navigateToSignUpScreen,
+  navigateToRecoveryPassword,
+  navigateToSignUp,
 }: {
-  height?: number;
-  navigateToRecoveryPasswordScreen: () => void;
-  navigateToSignUpScreen: () => void;
+  navigateToRecoveryPassword: () => void;
+  navigateToSignUp: () => void;
 }) {
   return (
     <View
       style={{
-        height: height * 0.3,
+        height: 200,
+        marginVertical: 20,
         justifyContent: 'space-between',
-        paddingVertical: 10,
       }}>
-      <TouchableOpacity onPress={navigateToRecoveryPasswordScreen}>
+      <TouchableOpacity onPress={navigateToRecoveryPassword}>
         <Text>Esqueci minha senha</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={navigateToSignUpScreen}>
+      <TouchableOpacity onPress={navigateToSignUp}>
         <Text>Não possui uma conta? Cadastre-se</Text>
       </TouchableOpacity>
     </View>

@@ -9,8 +9,13 @@ interface UserRequestToCreate {
 }
 
 export function useUserCreate() {
-  return useFetchApi<UserResponse, UserRequestToCreate>({
+  const state = useFetchApi<UserResponse, UserRequestToCreate>({
     apiFn: ({email, password, permissionId}) =>
       userApi.create(email, password, permissionId),
   });
+
+  return {
+    create: state.fetchData,
+    ...state,
+  };
 }

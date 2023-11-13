@@ -1,7 +1,7 @@
 import {colorRegistry} from '@styles';
 import {Image} from 'react-native';
 
-export function Logo({height = 60}: {height?: number}) {
+export function Logo() {
   return (
     <Image
       resizeMode="stretch"
@@ -10,9 +10,9 @@ export function Logo({height = 60}: {height?: number}) {
         alignSelf: 'center',
         backgroundColor: colorRegistry['lavenderGray'],
         borderRadius: 20,
-        height: height * 0.18,
+        height: 150,
         margin: 20,
-        width: height * 0.14,
+        width: 130,
       }}
     />
   );

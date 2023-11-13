@@ -1,17 +1,17 @@
-import {Pressable, View, ViewProps} from 'react-native';
+import {
+  Keyboard,
+  Pressable,
+  PressableProps,
+  View,
+  ViewProps,
+} from 'react-native';
 import {ColorName, colorRegistry} from '@styles';
 
-interface ScreenProps extends ViewProps {
+interface ScreenProps extends PressableProps {
   children?: React.ReactNode;
   color?: ColorName;
-  onPress?: () => void;
 }
-export function Screen({
-  children,
-  color = 'lightGray',
-  onPress,
-  ...props
-}: ScreenProps) {
+export function Screen({children, color = 'lightGray', ...props}: ScreenProps) {
   const $containerStyle = {
     flex: 1,
     backgroundColor: colorRegistry[color],
@@ -19,17 +19,12 @@ export function Screen({
     paddingVertical: 10,
   };
 
-  if (onPress) {
-    return (
-      <Pressable style={$containerStyle} onPress={onPress}>
-        {children}
-      </Pressable>
-    );
-  }
-
   return (
-    <View style={$containerStyle} {...props}>
+    <Pressable
+      style={$containerStyle}
+      onPress={props.onPress ?? Keyboard.dismiss}
+      {...props}>
       {children}
-    </View>
+    </Pressable>
   );
 }

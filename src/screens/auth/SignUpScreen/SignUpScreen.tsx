@@ -5,20 +5,19 @@ import {
   StatusScreen,
   BoxIcon,
 } from '@components';
-import {Keyboard, Pressable, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 import {schemas, useNavigation} from '@utils';
-import {AuthStackProps} from '@routes';
 import {useUserCreate} from '@domain';
 import {AlertStatusType} from '@styles';
 import {useForm} from '@hooks';
 
-export function SignUpScreen({navigation}: AuthStackProps) {
+export function SignUpScreen() {
   const $customStatus: AlertStatusType = {
     201: {type: 'success', message: 'Usuário criado com sucesso.'},
     401: {type: 'danger', message: 'Você já possui cadastrado.'},
   };
 
-  const {fetchData, isLoading, status} = useUserCreate();
+  const {create, isLoading, status} = useUserCreate();
   const {navigateBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.signUp,
@@ -28,7 +27,7 @@ export function SignUpScreen({navigation}: AuthStackProps) {
       checkPass: '',
     },
     onSubmit: values =>
-      fetchData({
+      create({
         email: values.email,
         password: values.password,
         permissionId: 3,
@@ -38,47 +37,47 @@ export function SignUpScreen({navigation}: AuthStackProps) {
   return (
     <Screen>
       <StatusScreen
-        loading={isLoading}
         status={status}
         customStatus={$customStatus}
         successAction={navigateBack}
+        errorAction={navigateBack}
       />
-      <Pressable style={{flex: 1}} onPress={Keyboard.dismiss}>
-        <ScrollView>
-          <BoxIcon name="PersonIcon" />
-          <FormTextInput
-            formik={formik}
-            name="email"
-            label="E-mail"
-            keyboardType="email-address"
-            placeholder="jubasdeleao@exemplo.com"
-            maxLength={50}
-          />
-          <FormTextInput
-            formik={formik}
-            name="password"
-            label="Senha"
-            placeholder="********"
-            maxLength={20}
-            secureTextEntry
-          />
-          <FormTextInput
-            formik={formik}
-            name="checkPass"
-            label="Confirmar senha"
-            placeholder="********"
-            maxLength={20}
-            secureTextEntry
-          />
-        </ScrollView>
-      </Pressable>
-      <Button
-        type="inline"
-        backgroundColor="steelBlue"
-        text="Cadastrar"
-        textProps={{color: 'white', size: 'L'}}
-        onPress={formik.handleSubmit}
-      />
+      <ScrollView>
+        <BoxIcon name="PersonIcon" />
+        <FormTextInput
+          formik={formik}
+          name="email"
+          label="E-mail"
+          keyboardType="email-address"
+          placeholder="jubasdeleao@exemplo.com"
+          maxLength={50}
+        />
+        <FormTextInput
+          formik={formik}
+          name="password"
+          label="Senha"
+          placeholder="********"
+          maxLength={20}
+          secureTextEntry
+        />
+        <FormTextInput
+          formik={formik}
+          name="checkPass"
+          label="Confirmar senha"
+          placeholder="********"
+          maxLength={20}
+          secureTextEntry
+        />
+        <Button
+          type="inline"
+          loading={isLoading}
+          backgroundColor="steelBlue"
+          style={{marginTop: 20}}
+          title="Cadastrar"
+          textProps={{color: 'white', size: 'L'}}
+          onPress={formik.handleSubmit}
+        />
+      </ScrollView>
     </Screen>
   );
 }

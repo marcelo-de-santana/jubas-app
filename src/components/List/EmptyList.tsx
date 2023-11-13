@@ -30,7 +30,13 @@ export function EmptyList({
     component = (
       <>
         <Text>Não foi possível carregar 😢</Text>
-        <Button text="Recarregar" type="inline" onPress={refetch} />
+        <Button
+          title="Recarregar"
+          type="center"
+          backgroundColor="steelBlue"
+          textProps={{color: 'white'}}
+          onPress={refetch}
+        />
       </>
     );
   }
