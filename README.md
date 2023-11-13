@@ -1,8 +1,11 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Jubas App
+
+This is a React Native app responsible for managing all the services performed within Juba's barbershop.
+
+### Setting up the Environment
+>**Note**:The system was created with **React Native CLI**. Please refer to the official [documentation](https://reactnative.dev/docs/environment-setup?guide=native) for more details on how to set up the development environment. The backend of the project is available at [jubas-backend](https://github.com/marcelo-de-santana/jubas-backend).
 
 # Getting Started
-
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
 
@@ -18,7 +21,7 @@ npm start
 yarn start
 ```
 
-## Step 2: Start your Application
+## Step 2: Start Application
 
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
@@ -46,34 +49,22 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+### Technologies and Libraries Used
+- [React Native](https://reactnative.dev/)
+- [React Navigation](https://reactnavigation.org/)
+- [Formik:](https://formik.org/) form manager
+- [Yup:](https://www.npmjs.com/package/yup) validation manager
 
-Now that you have successfully run the app, let's modify it.
+### Screen Prototypes
+The latest updates are available on [Figma](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+<div display: flex; flex-wrap: wrap;">
+    <p align="center">SignIn</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/dev/src/assets/prints/SignIn.png?raw=true" width="300"/></p>
+    <p align="center">SingUp</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/dev/src/assets/prints/SignUp.png?raw=true" width="300"/></p>
+    <p align="center">Recovery Password</p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/dev/src/assets/prints/RecoveryPassword.png?raw=true" width="300"/></p>
+</div>
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
