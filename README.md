@@ -60,11 +60,11 @@ The latest updates are available on [Figma](https://www.figma.com/file/5ilvDi7rB
 
 <div display: flex; flex-wrap: wrap;">
     <p align="center">SignIn</p>
-    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/dev/src/assets/prints/SignIn.png?raw=true" width="300"/></p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignIn.png?raw=true" width="300"/></p>
     <p align="center">SingUp</p>
-    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/dev/src/assets/prints/SignUp.png?raw=true" width="300"/></p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignUp.png?raw=true" width="300"/></p>
     <p align="center">Recovery Password</p>
-    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/dev/src/assets/prints/RecoveryPassword.png?raw=true" width="300"/></p>
+    <p align="center"><img src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/RecoveryPassword.png?raw=true" width="300"/></p>
 </div>
 
 
