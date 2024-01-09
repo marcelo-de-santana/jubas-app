@@ -1,5 +1,5 @@
-import {Pressable, PressableProps, ViewStyle} from 'react-native';
-import {ButtonStyleName, ColorName, buttonStyle, colorRegistry} from '@styles';
+import {Pressable, ViewStyle} from 'react-native';
+import {ButtonStyleName, ColorName, buttonStyle, colors} from '@styles';
 import {Text, TextProps} from '../Text';
 import {ActivityIndicator} from '../ActivityIndicator';
 
@@ -26,14 +26,14 @@ export function Button({
 }: ButtonProps) {
   const $buttonType = type && buttonStyle[type];
   const $buttonStyle = {
-    backgroundColor: backgroundColor && colorRegistry[backgroundColor],
+    backgroundColor: backgroundColor && colors[backgroundColor],
     ...style,
   };
-  const disable = disabled || loading;
+  const disable = disabled ?? loading;
 
   return (
     <Pressable
-      style={[$buttonType, $buttonStyle]}
+      style={[$buttonStyle, $buttonType]}
       onPress={onPress}
       disabled={disable}>
       {loading ? (

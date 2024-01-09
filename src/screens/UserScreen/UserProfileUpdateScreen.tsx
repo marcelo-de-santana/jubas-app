@@ -1,60 +1,49 @@
 import {
-  Button,
   Alert,
-  Modal,
-  InputForm,
-  SwitchForm,
-  Text,
-  ButtonComponent,
-  TextInput,
   Screen,
+  StatusScreen,
+  FormTextInputName,
+  FormTextInputCpf,
+  CheckBoxIcon,
+  DeleteAndSaveButtonGroup,
 } from '@components';
-import {deleteProfile, updateProfileAndUser} from '@domain';
-import {UserProfileUpdateScreenProps} from '@routes';
-import {themeRegistry} from '@styles';
-import {cpfMask, removeCpfMask} from '@utils';
-import {useState} from 'react';
-import {View} from 'react-native';
+import {useProfileRemove, useProfileUpdate} from '@domain';
+import {useForm} from '@hooks';
+import {UserStackProps} from '@routes';
+import {mask, schemas, useNavigation} from '@utils';
 
 export function UserProfileUpdateScreen({
-  navigation,
   route,
-}: UserProfileUpdateScreenProps) {
-  const {params} = route;
-  const [profile, setProfile] = useState(params.profile);
+}: UserStackProps<'UserProfileUpdateScreen'>) {
+  const {profile} = route.params;
+  const {navigateBack} = useNavigation();
 
-  function handleProfile(key: string, value: string | number | boolean) {
-    setProfile(prev => ({...prev, [key]: value}));
-  }
+  //DOMAIN ACCESS
+  const updateProfile = useProfileUpdate();
+  const removeProfile = useProfileRemove();
 
-  async function sendToUpdate() {
-    const {id, cpf, name, statusProfile} = {
-      ...profile,
-      cpf: removeCpfMask(profile.cpf),
-    };
-    await updateProfileAndUser({
-      profileId: id,
-      name,
-      cpf,
-      statusProfile,
-      userId: params.userId,
-    });
-    navigation.goBack();
-  }
+  const formik = useForm({
+    validationSchema: schemas.profileUpdate,
+    initialValues: {
+      profileId: profile.id,
+      name: profile.name,
+      cpf: mask.cpf(profile.cpf),
+      statusProfile: profile.statusProfile,
+    },
+    onSubmit: () => {
+      updateProfile.update({
+        id: formik.values.profileId,
+        name: formik.values.name,
+        cpf: mask.removeCpf(formik.values.cpf),
+        statusProfile: formik.values.statusProfile,
+      });
+    },
+  });
 
-  async function sendToDelete() {
-    await deleteProfile(profile.id);
-    navigation.goBack();
-  }
-
-  /** Alert Components */
-  function askAboutUpdate() {
-    Alert({
-      type: 'decision',
-      message: 'Deseja salvar as alterações?',
-      onPress: sendToUpdate,
-    });
-  }
+  //ACTIONS OF DELETE BUTTON
+  const sendToDelete = () => {
+    removeProfile.remove({profileId: profile.id});
+  };
 
   function askAboutDeletion() {
     Alert({
@@ -65,37 +54,34 @@ export function UserProfileUpdateScreen({
   }
 
   return (
-    <Screen color="black-transparent">
-      <Modal onPress={() => navigation.goBack()}>
-        <TextInput
-          placeholder="Nome"
-          value={profile.name}
-          onChangeText={text => handleProfile('name', text)}
-        />
-        <TextInput
-          placeholder="CPF"
-          maxLength={14}
-          value={cpfMask(profile.cpf)}
-          onChangeText={text => handleProfile('cpf', text)}
-        />
-        <View style={{marginVertical: 10}}>
-          <SwitchForm
-            title="Status"
-            value={profile.statusProfile}
-            onValueChange={() =>
-              handleProfile('statusProfile', !profile.statusProfile)
-            }
-          />
-        </View>
-        <View style={themeRegistry['box-flex-row']}>
-          <ButtonComponent
-            type="save-flex"
-            text="Salvar"
-            onPress={askAboutUpdate}
-          />
-          <ButtonComponent type="trash" onPress={askAboutDeletion} />
-        </View>
-      </Modal>
+    <Screen>
+      <StatusScreen
+        status={updateProfile.status}
+        successAction={navigateBack}
+      />
+      <StatusScreen
+        status={removeProfile.status}
+        successAction={navigateBack}
+      />
+      <FormTextInputName formik={formik} label="Nome" name="name" />
+      <FormTextInputCpf
+        formik={formik}
+        label="CPF"
+        name="cpf"
+        keyboardType="numeric"
+      />
+
+      <CheckBoxIcon
+        label="Estado do perfil"
+        value={formik.values.statusProfile}
+        onPress={() => formik.handleChangeBoolean('statusProfile')}
+      />
+
+      <DeleteAndSaveButtonGroup
+        loading={updateProfile.isLoading || removeProfile.isLoading}
+        deleteButtonPress={askAboutDeletion}
+        saveButtonPress={formik.handleSubmit}
+      />
     </Screen>
   );
 }

@@ -6,4 +6,9 @@ export type WorkingHoursResponse = {
   endTime: string;
 };
 
-
+export type WorkingHoursRequest = {
+  startTime: string;
+  startInterval: string;
+  endInterval: string;
+  endTime: string;
+};

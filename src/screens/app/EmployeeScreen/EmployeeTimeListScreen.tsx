@@ -3,8 +3,8 @@ import {
   Screen,
   Separator,
   StatusScreen,
-  WorkinhHoursHeader,
-  WorkinhHoursLine,
+  WorkingHoursHeader,
+  WorkingHoursLine,
 } from '@components';
 import {
   WorkingHoursResponse,
@@ -32,9 +32,9 @@ export function EmployeeTimeListScreen({
     });
   }, [navigation]);
 
-  const choiceWorkingHourk = (workingHourId: number) => {
+  const choiceWorkingHours = (workingHourId: number) => {
     useEmployee.update({
-      employeeId: employeeId ?? '',
+      employeeId,
       profileId: null,
       workingHourId,
     });
@@ -42,10 +42,10 @@ export function EmployeeTimeListScreen({
 
   function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
     return (
-      <WorkinhHoursLine
+      <WorkingHoursLine
         item={item}
         workingHourId={workingHourId}
-        onPress={choiceWorkingHourk}
+        onPress={choiceWorkingHours}
       />
     );
   }
@@ -56,7 +56,7 @@ export function EmployeeTimeListScreen({
       <FlatList
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}
-        ListHeaderComponent={WorkinhHoursHeader}
+        ListHeaderComponent={WorkingHoursHeader}
         ItemSeparatorComponent={Separator}
         renderItem={renderItem}
         ListEmptyComponent={

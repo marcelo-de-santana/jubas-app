@@ -1,4 +1,4 @@
-import {ColorName, colorRegistry} from '@styles';
+import {ColorName, colors} from '@styles';
 import {View, ViewProps} from 'react-native';
 
 interface ViewSeparatorProps extends ViewProps {
@@ -14,7 +14,7 @@ export function Separator({
     <View
       style={{
         borderBottomWidth: 1,
-        borderColor: colorRegistry[color],
+        borderColor: colors[color],
       }}
       {...props}
     />

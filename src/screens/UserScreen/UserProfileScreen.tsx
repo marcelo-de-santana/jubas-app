@@ -1,100 +1,96 @@
-import {UserProfileProps} from '@routes';
-import {
-  ButtonComponent,
-  EmptyListComponent,
-  LoadingScreen,
-  Screen,
-  TouchableItem,
-  ViewSeparator,
-} from '@components';
-import {useEffect, useState} from 'react';
-import {ProfileResponseDTO, getAllProfilesByUserId} from '@domain';
-import {FlatList} from 'react-native';
-import {cpfMask} from '@utils';
+import {UserStackProps} from '@routes';
+import {BoxDetails, EmptyList, Icon, Screen} from '@components';
+import {useEffect} from 'react';
+import {IProfileResponse, useUserProfileListByUser} from '@domain';
+import {FlatList, ListRenderItemInfo} from 'react-native';
+import {flatListStyle} from '@styles';
+import {mask} from '@utils';
 
-export function UserProfileScreen({navigation, route}: UserProfileProps) {
-  const {id, email, userPermission} = route.params.user;
-
-  const [profiles, setProfiles] = useState<ProfileResponseDTO[]>([]);
-  const [isVisible, setIsVisible] = useState(true);
+export function UserProfileScreen({
+  navigation,
+  route,
+}: UserStackProps<'UserProfileScreen'>) {
+  const {userId} = route.params;
+  const {user, fetchData, status} = useUserProfileListByUser();
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      searchData();
+      fetchData({userId});
     });
-  }, []);
+  }, [navigation]);
 
-  async function searchData() {
-    setIsVisible(true);
-    setProfiles(await getAllProfilesByUserId(id));
-    setIsVisible(false);
-  }
+  /** NAVIGATION FUNCTIONS **/
+  const navigateToUserProfileUpdateScreen = (profile: IProfileResponse) =>
+    navigation.navigate('UserProfileUpdateScreen', {
+      userId,
+      profile,
+    });
 
-  function ListHeaderComponent() {
-    return (
-      <>
-        <TouchableItem
-          type="box-items-header"
-          onPress={() => navigation.navigate('UserUpdateScreen', route.params)}
-          textProps={{align: 'justify'}}
-          textValues={[`Usuário: ${email}`]}>
-          <TouchableItem
-            textValues={[`Nível: ${userPermission.id}`]}
-            disabled
-          />
-        </TouchableItem>
-        <ViewSeparator />
-      </>
-    );
-  }
+  const navigateToProfileCreate = () =>
+    navigation.navigate('UserProfileCreateScreen', {userId});
 
-  function renderItem({item}: {item: ProfileResponseDTO}) {
-    return (
-      <TouchableItem
-        type="box-items-header"
-        textValues={[item.name]}
-        textProps={{align: 'justify'}}
-        onPress={() =>
-          navigation.navigate('UserProfileUpdateScreen', {
-            userId: id,
-            profile: {...item},
-          })
-        }>
-        <TouchableItem
-          type="box-flex-row-list"
-          textValues={[
-            `CPF: ${cpfMask(item.cpf)}`,
-            `Status: ${item.statusProfile ? 'ATIVO' : 'INATIVO'}`,
+  /** SCREEN COMPONENTS **/
+  function Header() {
+    if (user) {
+      const navigateToUpdateScreen = () =>
+        navigation.navigate('UserUpdateScreen', {user: user});
+
+      return (
+        <BoxDetails
+          label="Dados de usuário"
+          textFields={[
+            `E-mail: ${user.email}`,
+            `Permissão: ${user.permission.type}`,
           ]}
-          disabled
+          onPress={navigateToUpdateScreen}
+          boxProps={{disabled: true}}
+          textProps={{align: 'justify'}}
         />
-      </TouchableItem>
+      );
+    }
+  }
+
+  function renderItem({item, index}: ListRenderItemInfo<IProfileResponse>) {
+    return (
+      <BoxDetails
+        label={`Perfil nº: ${index + 1}`}
+        textFields={[
+          `Nome: ${item.name}`,
+          `Status: ${item.statusProfile ? 'ativo' : 'desativado'}`,
+          `CPF: ${mask.cpf(item.cpf)}`,
+        ]}
+        boxProps={{disabled: true}}
+        textProps={{align: 'justify'}}
+        onPress={() => navigateToUserProfileUpdateScreen(item)}
+      />
     );
   }
 
-  if (isVisible) {
-    return <LoadingScreen />;
+  function AddButton() {
+    if (status === 200) {
+      return (
+        <Icon
+          name="AddIcon"
+          type="floating"
+          backgroundColor="steelBlue"
+          color="white"
+          size={35}
+          onPress={navigateToProfileCreate}
+        />
+      );
+    }
   }
 
   return (
     <Screen>
       <FlatList
-        keyExtractor={profile => profile.id}
-        data={profiles}
-        ListHeaderComponent={ListHeaderComponent}
+        data={user?.profiles}
+        ListHeaderComponent={Header}
         renderItem={renderItem}
-        ItemSeparatorComponent={ViewSeparator}
-        ListEmptyComponent={EmptyListComponent({
-          title: 'Nenhum perfil cadastrado',
-        })}
+        contentContainerStyle={flatListStyle(user)}
+        ListEmptyComponent={<EmptyList title="Nenhum perfil cadastrado" />}
       />
-
-      <ButtonComponent
-        type="add"
-        onPress={() =>
-          navigation.navigate('UserProfileCreateScreen', {userId: id})
-        }
-      />
+      <AddButton />
     </Screen>
   );
 }

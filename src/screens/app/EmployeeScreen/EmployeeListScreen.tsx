@@ -2,19 +2,20 @@ import {EmptyList, Screen, Separator, BoxItem} from '@components';
 import {ProfileResponse, useProfileListByPermission} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {flatListStyle} from '@styles';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
 export function EmployeeListScreen({
   navigation,
 }: EmployeeScreenProps<'EmployeeListScreen'>) {
-  const {data, isLoading, isError, refetch} = useProfileListByPermission();
+  const {data, isLoading, isError, refetch, fetchData} =
+    useProfileListByPermission();
 
   useEffect(() => {
-    refetch();
+    fetchData({permissionId: 2});
   }, []);
 
-  const natigateToEmployeeScreen = (profile: ProfileResponse) => {
+  const navigateToEmployeeDetailsScreen = (profile: ProfileResponse) => {
     navigation.navigate('EmployeeDetailsScreen', {profile});
   };
 
@@ -23,7 +24,7 @@ export function EmployeeListScreen({
       <BoxItem
         style={{paddingVertical: 20}}
         label={item.name}
-        onPress={() => natigateToEmployeeScreen(item)}
+        onPress={() => navigateToEmployeeDetailsScreen(item)}
       />
     );
   }
@@ -47,6 +48,7 @@ export function EmployeeListScreen({
           />
         }
       />
+      
     </Screen>
   );
 }

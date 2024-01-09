@@ -1,37 +1,39 @@
 import {Button, Screen} from '@components';
-import {BusinessManagementScreenProps} from '@routes';
-import {buttonStyle} from '@styles';
+import {BusinessManagementStackProps} from '@routes';
+import {buttonStyle, themeRegistry} from '@styles';
 import {View} from 'react-native';
 
-export function DashboardScreen({navigation}: BusinessManagementScreenProps) {
-  function navigateToWorkingHoursListScreen() {
+export function DashboardScreen({
+  navigation,
+}: BusinessManagementStackProps<'DashboardScreen'>) {
+  const navigateToWorkingHoursListScreen = () => {
     navigation.navigate('WorkingHoursListScreen');
-  }
+  };
 
-  function navigateToSpecialtyListScreen() {
+  const navigateToSpecialtyListScreen = () => {
     navigation.navigate('SpecialtyListScreen');
-  }
+  };
 
-  function navigateToCategoryListScreen() {
+  const navigateToCategoryListScreen = () => {
     navigation.navigate('CategoryListScreen');
-  }
+  };
 
   return (
     <Screen style={{padding: 10}}>
-      <View style={buttonStyle['view-box']}>
+      <View style={themeRegistry.boxFlexRow}>
         <Button
           type="box"
-          text="Gerenciar Horários"
+          title="Gerenciar Horários"
           onPress={navigateToWorkingHoursListScreen}
         />
         <Button
           type="box"
-          text="Gerenciar Serviços"
+          title="Gerenciar Serviços"
           onPress={navigateToSpecialtyListScreen}
         />
         <Button
           type="box"
-          text="Gerenciar Categorias"
+          title="Gerenciar Categorias"
           onPress={navigateToCategoryListScreen}
         />
       </View>

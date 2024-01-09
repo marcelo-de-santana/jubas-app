@@ -3,7 +3,7 @@ import {HomeScreen, UnderConstruction} from '@screens';
 import {UserStack} from './UserStack';
 import {EmployeeStack} from './EmployeeStack';
 import {BusinessManagementStack} from './BusinessManagementStack';
-import {defaultOptions} from './screenOptions';
+import {defaultOptions} from '../screenOptions';
 
 export type AppStackParamList = {
   BusinessManagementStack: undefined;

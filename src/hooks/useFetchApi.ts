@@ -8,25 +8,25 @@ export function useFetchApi<TResponse = unknown, TRequest = void>({
   apiFn,
 }: FetchApiType<TResponse, TRequest>) {
   const [data, setData] = useState<TResponse>();
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [isError, setError] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean | null>(null);
   const [status, setStatus] = useState<number | undefined | null>(null);
 
   async function fetchData(request: TRequest) {
     try {
-      setLoading(true);
-      setError(null);
+      setIsLoading(true);
+      setIsError(null);
       setStatus(null);
       const response = await apiFn(request);
       setData(response.data);
       setStatus(response.status);
     } catch (error) {
-      setError(true);
+      setIsError(true);
       if (isAxiosError(error)) {
         setStatus(error.response?.status);
       }
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }
 

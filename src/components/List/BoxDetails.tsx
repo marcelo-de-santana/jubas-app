@@ -4,7 +4,7 @@ import {Separator} from './Separator';
 import {themeRegistry} from '@styles';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
-interface BoxComponetProps extends BoxItemProps {
+interface BoxComponentProps extends BoxItemProps {
   textFields: string[];
   boxProps?: TouchableOpacityProps;
   textProps?: TextProps;
@@ -16,7 +16,7 @@ export function BoxDetails({
   boxProps,
   textProps,
   ...props
-}: BoxComponetProps) {
+}: BoxComponentProps) {
   return (
     <BoxItem
       style={{

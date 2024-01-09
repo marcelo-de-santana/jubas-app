@@ -2,7 +2,7 @@ import {Button, Screen} from '@components';
 import {AppStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
 import {View} from 'react-native';
-import {buttonStyle} from '@styles';
+import {buttonStyle, themeRegistry} from '@styles';
 
 export function HomeScreen({navigation}: AppStackProps) {
   const {user} = useAuthContext();
@@ -26,7 +26,7 @@ export function HomeScreen({navigation}: AppStackProps) {
 
   return (
     <Screen style={{padding: 10}}>
-      <View style={buttonStyle['view-box']}>
+      <View style={themeRegistry.boxFlexRow}>
         <Button
           type="box"
           title="Ver agenda"
@@ -35,7 +35,7 @@ export function HomeScreen({navigation}: AppStackProps) {
         <Button
           type="box"
           title="Minhas compras"
-          onPress={navigateToBusinessManagementStack}
+          onPress={navigateToUnderConstruction}
         />
         <Button
           type="box"

@@ -2,7 +2,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Routes} from '@routes';
 import {AuthContextProvider} from './contexts/AuthContext/AuthContext';
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   return (
     <AuthContextProvider>
       <SafeAreaProvider>
@@ -11,4 +11,3 @@ function App(): JSX.Element {
     </AuthContextProvider>
   );
 }
-export {App};

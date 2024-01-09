@@ -3,8 +3,8 @@ import {
   Screen,
   Separator,
   StatusScreen,
-  WorkinhHoursHeader,
-  WorkinhHoursLine,
+  WorkingHoursHeader,
+  WorkingHoursLine,
 } from '@components';
 import {
   WorkingHoursResponse,
@@ -39,7 +39,7 @@ export function EmployeeCreateScreen({
   };
 
   function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
-    return <WorkinhHoursLine item={item} onPress={registerEmployee} />;
+    return <WorkingHoursLine item={item} onPress={registerEmployee} />;
   }
 
   return (
@@ -54,7 +54,7 @@ export function EmployeeCreateScreen({
         renderItem={renderItem}
         ItemSeparatorComponent={Separator}
         contentContainerStyle={flatListStyle(useWorkingHours.data)}
-        ListHeaderComponent={<WorkinhHoursHeader />}
+        ListHeaderComponent={<WorkingHoursHeader />}
         ListEmptyComponent={
           <EmptyList
             loading={useWorkingHours.isLoading}

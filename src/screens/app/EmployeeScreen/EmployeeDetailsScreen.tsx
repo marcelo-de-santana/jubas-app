@@ -1,16 +1,20 @@
 import {BoxDetails, EmptyList, Icon, Screen, Text} from '@components';
-import {useEmplyeeFindByProfile} from '@domain';
+import {EmployeeResponse, useEmployeeFindByProfile} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {mask} from '@utils';
 import {useEffect} from 'react';
 import {View} from 'react-native';
+
+interface EmployeeDetailsComponentProps {
+  statusCode?: number | null;
+}
 
 export function EmployeeDetailsScreen({
   navigation,
   route,
 }: EmployeeScreenProps<'EmployeeDetailsScreen'>) {
   const {employee, fetchData, status, isError, isLoading} =
-    useEmplyeeFindByProfile();
+    useEmployeeFindByProfile();
 
   const getEmployee = () => {
     fetchData({profileId: route.params.profile.id});
@@ -28,23 +32,23 @@ export function EmployeeDetailsScreen({
     });
   };
 
-  const navigateToProfileUpdateScreen = () => {
+  const navigateToProfileUpdateScreen = (employee: EmployeeResponse) => {
     navigation.navigate('EmployeeProfileUpdateScreen', {
-      profile: employee?.profile,
+      profile: employee.profile,
     });
   };
 
-  const navigateToTimeListScreen = () => {
+  const navigateToTimeListScreen = (employee: EmployeeResponse) => {
     navigation.navigate('EmployeeTimeListScreen', {
-      employeeId: employee?.id,
-      workingHourId: employee?.workingHour.id,
+      employeeId: employee.id,
+      workingHourId: employee.workingHour.id,
     });
   };
 
-  const navigateToServiceListScreen = () => {
+  const navigateToServiceListScreen = (employee: EmployeeResponse) => {
     navigation.navigate('EmployeeServicesListScreen', {
-      employeeId: employee?.id,
-      services: employee?.services,
+      employeeId: employee.id,
+      services: employee.services,
     });
   };
 
@@ -68,34 +72,39 @@ export function EmployeeDetailsScreen({
     ? ['Implementar Lógica']
     : ['Nenhum serviço atribuído.'];
 
-  return (
-    <Screen>
-      {status === 200 ? (
+  function EmployeeDetailsComponent({
+    statusCode,
+  }: EmployeeDetailsComponentProps) {
+    if (employee && statusCode === 200) {
+      return (
         <>
           <BoxDetails
             label="Dados pessoais"
             textFields={profileFields}
             boxProps={{disabled: true}}
-            onPress={navigateToProfileUpdateScreen}
+            onPress={() => navigateToProfileUpdateScreen(employee)}
           />
           <BoxDetails
             label="Horários"
             textFields={workingHourFields}
             boxProps={{disabled: true}}
-            onPress={navigateToTimeListScreen}
+            onPress={() => navigateToTimeListScreen(employee)}
           />
           <BoxDetails
             label="Serviços"
             textFields={serviceFields}
             boxProps={{disabled: true}}
-            onPress={navigateToServiceListScreen}
+            onPress={() => navigateToServiceListScreen(employee)}
           />
         </>
-      ) : status === 404 ? (
+      );
+    }
+    if (statusCode === 404) {
+      return (
         <View style={{flex: 1, justifyContent: 'center'}}>
           <Text size="M" align="center">
-            Ops... Parace que o funcionário ainda não foi cadastrado. Deseja
-            registrá-lo agora?
+            Ops... O funcionário ainda não foi cadastrado. Deseja registrá-lo
+            agora?
           </Text>
           <View
             style={{
@@ -121,9 +130,16 @@ export function EmployeeDetailsScreen({
             />
           </View>
         </View>
-      ) : (
-        <EmptyList loading={isLoading} error={isError} refetch={getEmployee} />
-      )}
+      );
+    }
+    return (
+      <EmptyList loading={isLoading} error={isError} refetch={getEmployee} />
+    );
+  }
+
+  return (
+    <Screen>
+      <EmployeeDetailsComponent statusCode={status} />
     </Screen>
   );
 }

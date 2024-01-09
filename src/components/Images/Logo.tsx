@@ -1,4 +1,4 @@
-import {colorRegistry} from '@styles';
+import {colors} from '@styles';
 import {Image} from 'react-native';
 
 export function Logo() {
@@ -8,7 +8,7 @@ export function Logo() {
       source={require('../../assets/images/logo-marca.png')}
       style={{
         alignSelf: 'center',
-        backgroundColor: colorRegistry['lavenderGray'],
+        backgroundColor: colors['lavenderGray'],
         borderRadius: 20,
         height: 150,
         margin: 20,

@@ -2,17 +2,16 @@ import {Alert as AlertRN} from 'react-native';
 
 interface AlertProps {
   type: 'alert' | 'decision';
-  message?: undefined | string;
+  message?: string;
   onPress?: () => void;
 }
 
-export function Alert({type = 'alert', message, onPress}: AlertProps) {
+export function Alert({type, message, onPress}: AlertProps) {
   message = message ?? 'Ocorreu um erro. Tente novamente mais tarde!';
-  let component = AlertRN.alert('', message);
 
   if (type === 'decision') {
     message = message ?? 'Deseja prosseguir?';
-    component = AlertRN.alert('', message, [
+    AlertRN.alert('', message, [
       {
         text: 'CANCELAR',
         style: 'cancel',
@@ -24,5 +23,7 @@ export function Alert({type = 'alert', message, onPress}: AlertProps) {
       },
     ]);
   }
-  return component;
+  if (type === 'alert') {
+    AlertRN.alert('', message);
+  }
 }

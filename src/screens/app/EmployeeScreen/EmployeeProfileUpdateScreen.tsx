@@ -9,26 +9,28 @@ import {
 import {useProfileUpdate} from '@domain';
 import {useForm} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
-import {schemas, useNavigation} from '@utils';
+import {mask, schemas, useNavigation} from '@utils';
 
 export function EmployeeProfileUpdateScreen({
-  navigation,
   route,
 }: EmployeeScreenProps<'EmployeeProfileUpdateScreen'>) {
   const {profile} = route.params;
   const {navigateBack} = useNavigation();
-  const initalValues = profile?.id
-    ? {...profile}
-    : {id: '', name: '', cpf: '', statusProfile: false};
+
   const {update, isLoading, status} = useProfileUpdate();
 
   const formik = useForm({
-    validationSchema: schemas.profile,
-    initialValues: initalValues,
+    validationSchema: schemas.profileUpdate,
+    initialValues: {
+      profileId: profile.id,
+      name: profile.name,
+      cpf: mask.cpf(profile.cpf),
+      statusProfile: profile.statusProfile,
+    },
     onSubmit: () =>
       update({
-        id: formik.values.id,
-        cpf: formik.values.cpf,
+        id: formik.values.profileId,
+        cpf: mask.removeCpf(formik.values.cpf),
         name: formik.values.name,
         statusProfile: formik.values.statusProfile,
       }),

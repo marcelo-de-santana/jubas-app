@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import {Text} from './';
-import {colorRegistry} from '@styles';
+import {colors} from '@styles';
 
 export interface TextInputProps extends RNTextInputProps {
   label?: string;
@@ -22,8 +22,8 @@ export function TextInput({label, errorMessage, ...props}: TextInputProps) {
     borderRadius: 6,
     height: 40,
     borderWidth: errorMessage ? 2 : 1,
-    borderColor: colorRegistry[errorMessage ? 'red' : 'steelBlue'],
-    backgroundColor: colorRegistry['lavenderGray'],
+    borderColor: colors[errorMessage ? 'red' : 'steelBlue'],
+    backgroundColor: colors['lavenderGray'],
   };
 
   function focusInput() {
@@ -31,35 +31,33 @@ export function TextInput({label, errorMessage, ...props}: TextInputProps) {
   }
 
   return (
-    <>
-      <Pressable onPress={focusInput}>
+    <Pressable onPress={focusInput}>
+      <View style={$viewTextStyle}>
+        <Text align="justify" size="S" color="steelBlue">
+          {label}
+        </Text>
+      </View>
+      <View style={$viewTextInputStyle}>
+        <RNTextInput
+          autoCapitalize="none"
+          style={$textInputStyle}
+          placeholderTextColor={colors['midnightBlueTransparent']}
+          cursorColor={colors['midnightBlue']}
+          {...props}
+        />
+      </View>
+      {errorMessage && (
         <View style={$viewTextStyle}>
-          <Text align="justify" size="S" color="steelBlue">
-            {label}
+          <Text align="justify" color="red" size="XS">
+            {errorMessage}
           </Text>
         </View>
-        <View style={$viewTextInputStyle}>
-          <RNTextInput
-            autoCapitalize="none"
-            style={$textInputStyle}
-            placeholderTextColor={colorRegistry['midnightBlueTransparent']}
-            cursorColor={colorRegistry['midnightBlue']}
-            {...props}
-          />
-        </View>
-        {errorMessage && (
-          <View style={$viewTextStyle}>
-            <Text align="justify" color="red" size="XS">
-              {errorMessage}
-            </Text>
-          </View>
-        )}
-      </Pressable>
-    </>
+      )}
+    </Pressable>
   );
 }
 
 const $textInputStyle = {
   paddingHorizontal: 10,
-  color: colorRegistry['midnightBlue'],
+  color: colors['midnightBlue'],
 };

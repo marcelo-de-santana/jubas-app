@@ -1,7 +1,7 @@
 import {
   ColorName,
   FontSizeName,
-  colorRegistry,
+  colors,
   fontSizeRegistry,
   fontAlignType,
 } from '@styles';
@@ -26,7 +26,7 @@ export function Text({
     <TextRN
       style={[
         {
-          color: colorRegistry[color],
+          color: colors[color],
           fontSize: fontSizeRegistry[size],
           textAlign: align        },
           style

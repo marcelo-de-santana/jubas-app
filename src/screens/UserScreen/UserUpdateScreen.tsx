@@ -1,84 +1,93 @@
 import {
-  Alert,
-  Modal,
-  InputForm,
-  SwitchForm,
-  ButtonComponent,
+  Button,
+  FormTextInput,
   Screen,
+  StatusScreen,
+  Text,
+  ToggleableButton,
 } from '@components';
-import {updateUser} from '@domain';
-import {UserUpdateScreenProps} from '@routes';
+import {useUserUpdate} from '@domain';
+import {useForm} from '@hooks';
+import {UserStackProps} from '@routes';
 import {themeRegistry} from '@styles';
-import {useState} from 'react';
+import {schemas, useNavigation} from '@utils';
 import {View} from 'react-native';
 
-export function UserUpdateScreen({navigation, route}: UserUpdateScreenProps) {
-  const [user, setUser] = useState({password: '', ...route.params.user});
+export function UserUpdateScreen({route}: UserStackProps<'UserUpdateScreen'>) {
+  const {navigateBack} = useNavigation();
+  const {fetchData, isLoading, status} = useUserUpdate();
+  const {user} = route.params;
 
-  function handleUserState(key: string, value: string) {
-    setUser(prev => ({...prev, [key]: value}));
-  }
-
-  function handleUserPermissionState(key: string, value: string | number) {
-    setUser(prev => ({
-      ...prev,
-      userPermission: {...prev.userPermission, [key]: value},
-    }));
-  }
-
-  async function sendToUpdate() {
-    const {id, email, password, userPermission} = user;
-    await updateUser({
-      userId: id,
-      email,
-      password,
-      userPermissionId: userPermission.id,
-    });
-    navigation.popToTop();
-  }
-
-  function askAboutUpdate() {
-    Alert({type: 'decision', onPress: sendToUpdate});
-  }
+  const formik = useForm({
+    validationSchema: schemas.userUpdate,
+    initialValues: {
+      id: user.id,
+      email: user.email,
+      password: '',
+      permission: user.permission.id,
+    },
+    onSubmit: () => {
+      fetchData({
+        userId: formik.values.id,
+        email: formik.values.email,
+        password: formik.values.password,
+        permissionId: formik.values.permission,
+      });
+    },
+  });
 
   return (
-    <Screen color="black-transparent">
-      <Modal onPress={() => navigation.goBack()}>
-        <InputForm
-          inputProps={[
-            {
-              placeholder: 'E-mail',
-              value: user.email,
-              onChangeText: text => handleUserState('email', text),
-            },
-            {
-              placeholder: 'Senha (Opcional)',
-              value: user?.password,
-              secureTextEntry: true,
-              onChangeText: text => handleUserState('password', text),
-            },
-          ]}>
-          <View style={themeRegistry['box-flex-row']}>
-            <SwitchForm
-              title="ADMIN"
-              value={user.userPermission.id === 1}
-              onValueChange={() => handleUserPermissionState('id', 1)}
-            />
-            <SwitchForm
-              title="BARBER"
-              value={user.userPermission.id === 2}
-              onValueChange={() => handleUserPermissionState('id', 2)}
-            />
-            <SwitchForm
-              title="CLIENT"
-              value={user.userPermission.id === 3}
-              onValueChange={() => handleUserPermissionState('id', 3)}
-            />
-          </View>
+    <Screen>
+      <StatusScreen status={status} successAction={navigateBack} />
+      <FormTextInput
+        formik={formik}
+        name="email"
+        label="E-mail"
+        keyboardType="email-address"
+        placeholder="jubasdeleao@exemplo.com"
+        maxLength={50}
+      />
+      <FormTextInput
+        formik={formik}
+        name="password"
+        label="Senha"
+        placeholder="********"
+        maxLength={20}
+        secureTextEntry
+      />
 
-          <ButtonComponent type="save" text="Salvar" onPress={askAboutUpdate} />
-        </InputForm>
-      </Modal>
+      <Text align="justify" size="S" style={{margin: 5}}>
+        Nível de permissão
+      </Text>
+
+      <View style={themeRegistry['boxFlexRow']}>
+        <ToggleableButton
+          title="Admin"
+          value={formik.values.permission === 1}
+          onPress={() => formik.handleChangeText('permission', 1)}
+        />
+        <ToggleableButton
+          title="Barbeiro"
+          value={formik.values.permission === 2}
+          onPress={() => formik.handleChangeText('permission', 2)}
+        />
+        <ToggleableButton
+          title="Cliente"
+          value={formik.values.permission === 3}
+          onPress={() => formik.handleChangeText('permission', 3)}
+        />
+      </View>
+
+      <View style={{marginTop: 20}}>
+        <Button
+          type="inline"
+          loading={isLoading}
+          backgroundColor="steelBlue"
+          title="Salvar"
+          textProps={{color: 'white', size: 'L'}}
+          onPress={formik.handleSubmit}
+        />
+      </View>
     </Screen>
   );
 }

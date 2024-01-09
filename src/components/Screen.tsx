@@ -1,11 +1,5 @@
-import {
-  Keyboard,
-  Pressable,
-  PressableProps,
-  View,
-  ViewProps,
-} from 'react-native';
-import {ColorName, colorRegistry} from '@styles';
+import {Keyboard, Pressable, PressableProps} from 'react-native';
+import {ColorName, colors} from '@styles';
 
 interface ScreenProps extends PressableProps {
   children?: React.ReactNode;
@@ -14,7 +8,7 @@ interface ScreenProps extends PressableProps {
 export function Screen({children, color = 'lightGray', ...props}: ScreenProps) {
   const $containerStyle = {
     flex: 1,
-    backgroundColor: colorRegistry[color],
+    backgroundColor: colors[color],
     paddingHorizontal: 20,
     paddingVertical: 10,
   };

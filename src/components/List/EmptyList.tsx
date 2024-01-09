@@ -31,8 +31,8 @@ export function EmptyList({
       <>
         <Text>Não foi possível carregar 😢</Text>
         <Button
-          title="Recarregar"
           type="center"
+          title="Recarregar"
           backgroundColor="steelBlue"
           textProps={{color: 'white'}}
           onPress={refetch}

@@ -1,4 +1,4 @@
-export const colorRegistry = {
+export const colors = {
   black: '#000000',
   blackTransparent: '#000000E6',
   midnightBlue: '#161C26',
@@ -12,5 +12,5 @@ export const colorRegistry = {
   red: '#EA3838',
 };
 
-export type ColorType = typeof colorRegistry;
+export type ColorType = typeof colors;
 export type ColorName = keyof ColorType;

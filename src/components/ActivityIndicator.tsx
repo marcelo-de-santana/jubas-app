@@ -1,4 +1,4 @@
-import {ColorName, colorRegistry} from '@styles';
+import {ColorName, colors} from '@styles';
 import {
   ActivityIndicatorProps as RNActivityIndicatorProps,
   ActivityIndicator as RNActivityIndicator,
@@ -13,7 +13,5 @@ export function ActivityIndicator({
   size = 'large',
   ...props
 }: ActivityIndicatorProps) {
-  return (
-    <RNActivityIndicator size={size} color={colorRegistry[color]} {...props} />
-  );
+  return <RNActivityIndicator size={size} color={colors[color]} {...props} />;
 }

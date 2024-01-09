@@ -35,34 +35,35 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthContextProvider({children}: AuthContextProviderProps) {
-  const [isAuthenticated, setAuthentication] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<UserResponse>(defaultUser);
   const {data, fetchData, status, isLoading, isError} = useUserAuth();
 
-  function signIn(email: string, password: string) {
+  const signIn = (email: string, password: string) => {
     fetchData({email, password});
-  }
+  };
 
   if (user.id === '' && !!data?.id) {
     setUser(data);
-    setAuthentication(true);
+    setIsAuthenticated(true);
   }
 
-  function singOut() {
-    setAuthentication(false);
-  }
+  const singOut = () => {
+    setIsAuthenticated(false);
+  };
+
+  const authContextValue = {
+    isAuthenticated,
+    signIn,
+    singOut,
+    user,
+    isLoading,
+    isError,
+    status,
+  };
 
   return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        signIn,
-        singOut,
-        user,
-        isLoading,
-        isError,
-        status,
-      }}>
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );

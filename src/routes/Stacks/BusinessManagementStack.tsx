@@ -10,7 +10,7 @@ import {
   WorkingHoursCreateScreen,
   WorkingHoursListScreen,
 } from '@screens';
-import {defaultOptions} from './screenOptions';
+import {defaultOptions} from '../screenOptions';
 
 export type BusinessManagementParamList = {
   CategoryCreateScreen: undefined;
@@ -69,7 +69,6 @@ export function BusinessManagementStack() {
       <NativeStack.Screen
         name="WorkingHoursCreateScreen"
         component={WorkingHoursCreateScreen}
-        options={{presentation: 'transparentModal'}}
       />
       <NativeStack.Screen
         name="WorkingHoursListScreen"

@@ -1,4 +1,4 @@
-import {ColorName, colorRegistry} from '@styles';
+import {ColorName, colors} from '@styles';
 import {View} from 'react-native';
 import {Icon, IconName} from './Icon';
 
@@ -9,6 +9,9 @@ interface BoxProps {
   backgroundColor?: ColorName;
 }
 
+/**
+ * @description ICON TO LOGO SCREEN
+ */
 export function BoxIcon({
   name,
   size = 60,
@@ -19,7 +22,7 @@ export function BoxIcon({
     <View
       style={{
         padding: 10,
-        backgroundColor: colorRegistry[backgroundColor],
+        backgroundColor: colors[backgroundColor],
         borderRadius: 20,
         alignSelf: 'center',
       }}>

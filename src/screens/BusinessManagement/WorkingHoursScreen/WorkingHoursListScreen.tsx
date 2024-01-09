@@ -1,23 +1,31 @@
-import {BoxFourItems, Icon, EmptyList, Screen, Separator} from '@components';
+import {
+  BoxFourItems,
+  Icon,
+  EmptyList,
+  Screen,
+  Separator,
+} from '@components';
 import {WorkingHoursResponse, useWorkingHoursList} from '@domain';
-import {BusinessManagementScreenProps} from '@routes';
+import {BusinessManagementStackProps} from '@routes';
 import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, View} from 'react-native';
 
 export function WorkingHoursListScreen({
   navigation,
-}: BusinessManagementScreenProps) {
+}: BusinessManagementStackProps<'WorkingHoursListScreen'>) {
   const {data, isLoading, isError, fetchData} = useWorkingHoursList();
+
+  const navigateToWorkingHoursCreateScreen = () => {
+    navigation.navigate('WorkingHoursCreateScreen');
+  };
 
   useEffect(() => {
     navigation.addListener('focus', () => {
       fetchData();
     });
   }, [navigation]);
-  function navigateToWorkingHoursCreateScreen() {
-    navigation.navigate('WorkingHoursCreateScreen');
-  }
+
   const listHeader = [
     'Entrada',
     'Início\nIntervalo',
@@ -26,6 +34,7 @@ export function WorkingHoursListScreen({
   ];
 
   const Header = <BoxFourItems textValues={listHeader} />;
+
   const EmptyComponent = (
     <EmptyList
       loading={isLoading}
@@ -65,11 +74,12 @@ export function WorkingHoursListScreen({
         renderItem={renderItem}
         contentContainerStyle={flatListStyle(data)}
       />
+
       <Icon
         name="AddIcon"
         type="floating"
-        color="light-gray"
-        backgroundColor="steel-blue"
+        color="white"
+        backgroundColor="steelBlue"
         size={35}
         onPress={navigateToWorkingHoursCreateScreen}
       />

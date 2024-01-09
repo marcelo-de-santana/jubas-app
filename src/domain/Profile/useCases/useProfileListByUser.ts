@@ -1,9 +1,10 @@
 import {useFetchApi} from '@hooks';
 import {profileApi} from '../profileApi';
+import {ProfileResponse} from '../profileTypes';
 
-export function useProfileListByUser(userId: string) {
-  const state = useFetchApi({
-    apiFn: () => profileApi.getListByUser(userId),
+export function useProfileListByUser() {
+  const state = useFetchApi<ProfileResponse[], {userId: string}>({
+    apiFn: ({userId}) => profileApi.getListByUser(userId),
   });
 
   return {

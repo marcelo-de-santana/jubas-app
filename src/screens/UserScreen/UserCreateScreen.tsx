@@ -1,73 +1,88 @@
 import {
-  Alert,
-  SwitchForm,
-  Modal,
-  InputForm,
-  ButtonComponent,
+  Button,
+  FormTextInput,
   Screen,
-  TextInput,
+  StatusScreen,
+  Text,
+  ToggleableButton,
 } from '@components';
-import {useState} from 'react';
 import {themeRegistry} from '@styles';
-import {createUser} from '@domain';
-import {UserScreenProps} from '@routes';
 import {View} from 'react-native';
+import {useForm} from '@hooks';
+import {useUserCreate} from '@domain';
+import {schemas, useNavigation} from '@utils';
 
-export function UserCreateScreen({navigation}: UserScreenProps) {
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-    userPermissionId: 3,
+export function UserCreateScreen() {
+  const {navigateBack} = useNavigation();
+  const {fetchData, isLoading, status} = useUserCreate();
+
+  const formik = useForm({
+    validationSchema: schemas.userCreate,
+    initialValues: {
+      email: '',
+      password: '',
+      userPermission: 3,
+    },
+    onSubmit: () => {
+      fetchData({
+        email: formik.values.email,
+        password: formik.values.password,
+        permissionId: formik.values.userPermission,
+      });
+    },
   });
 
-  function handleUserState(key: string, value: string | number) {
-    setUser(prev => ({...prev, [key]: value}));
-  }
-
-  async function sendToCreate() {
-    await createUser(user);
-    navigation.goBack();
-  }
-
-  function askAboutCreate() {
-    Alert({type: 'decision', onPress: sendToCreate});
-  }
-
   return (
-    <Screen color="black-transparent">
-      <Modal onPress={() => navigation.goBack()}>
-        <TextInput
-          value={user.email}
-          onChangeText={text => handleUserState('email', text)}
-          placeholder="E-mail"
-          maxLength={50}
+    <Screen>
+      <StatusScreen status={status} successAction={navigateBack} />
+      <FormTextInput
+        formik={formik}
+        name="email"
+        label="E-mail"
+        keyboardType="email-address"
+        placeholder="jubasdeleao@exemplo.com"
+        maxLength={50}
+      />
+      <FormTextInput
+        formik={formik}
+        name="password"
+        label="Senha"
+        placeholder="********"
+        maxLength={20}
+        secureTextEntry
+      />
+      <Text align="justify" size="S" style={{margin: 5}}>
+        Nível de permissão
+      </Text>
+
+      <View style={themeRegistry['boxFlexRow']}>
+        <ToggleableButton
+          title="Admin"
+          value={formik.values.userPermission === 1}
+          onPress={() => formik.handleChangeText('userPermission', 1)}
         />
-        <TextInput
-          value={user.password}
-          onChangeText={text => handleUserState('password', text)}
-          placeholder="Senha"
-          maxLength={16}
-          secureTextEntry={true}
+        <ToggleableButton
+          title="Barbeiro"
+          value={formik.values.userPermission === 2}
+          onPress={() => formik.handleChangeText('userPermission', 2)}
         />
-        <View style={themeRegistry['box-flex-row']}>
-          <SwitchForm
-            title="ADMIN"
-            value={user.userPermissionId === 1}
-            onValueChange={() => handleUserState('userPermissionId', 1)}
-          />
-          <SwitchForm
-            title="BARBEIRO"
-            value={user.userPermissionId === 2}
-            onValueChange={() => handleUserState('userPermissionId', 2)}
-          />
-          <SwitchForm
-            title="CLIENTE"
-            value={user.userPermissionId === 3}
-            onValueChange={() => handleUserState('userPermissionId', 3)}
-          />
-        </View>
-        <ButtonComponent type="save" text="Salvar" onPress={askAboutCreate} />
-      </Modal>
+        <ToggleableButton
+          title="Cliente"
+          value={formik.values.userPermission === 3}
+          onPress={() => formik.handleChangeText('userPermission', 3)}
+        />
+      </View>
+
+      <View style={{marginTop: 20}}>
+        <Button
+          type="inline"
+          loading={isLoading}
+          backgroundColor="steelBlue"
+          title="Salvar"
+          textProps={{color: 'white', size: 'L'}}
+          onPress={formik.handleSubmit}
+        />
+      </View>
     </Screen>
   );
 }

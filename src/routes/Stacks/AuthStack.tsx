@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SignInScreen, SignUpScreen, RecoveryPasswordScreen} from '@screens';
-import {defaultOptions} from './screenOptions';
+import {defaultOptions} from '../screenOptions';
 
 export type AuthStackParamList = {
   SignInScreen: undefined;

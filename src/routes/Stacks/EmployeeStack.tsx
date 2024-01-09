@@ -9,16 +9,16 @@ import {
 } from '@screens';
 
 import {ProfileResponse} from '@domain';
-import {defaultOptions} from './screenOptions';
+import {defaultOptions} from '../screenOptions';
 
 export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
   EmployeeDetailsScreen: {profile: ProfileResponse};
   EmployeeCreateScreen: {profile: ProfileResponse};
-  EmployeeProfileUpdateScreen: {profile?: ProfileResponse};
+  EmployeeProfileUpdateScreen: {profile: ProfileResponse};
   EmployeeTimeListScreen: {
-    employeeId?: string;
-    workingHourId?: number;
+    employeeId: string;
+    workingHourId: number;
   };
   EmployeeServicesListScreen: {
     employeeId?: string;

@@ -8,9 +8,9 @@ const cpf = (value: string | number) => {
   return value;
 };
 
-const removeCpf = (value: string) => {
-  if (value === null) return '';
-  return value.replace(/[.-]/g, '');
+const removeCpf = (value?: string) => {
+  if (value) return value.replace(/[.-]/g, '');
+  return '';
 };
 
 const name = (value: string) => {

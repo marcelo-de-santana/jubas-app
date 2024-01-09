@@ -1,129 +1,112 @@
 import {
-  EmptyListComponent,
-  LoadingScreen,
+  EmptyList,
   Screen,
-  ViewSeparator,
-  TouchableItem,
-  ButtonComponent,
-  Button,
-  Text,
+  Separator,
+  BoxItem,
+  Icon,
+  TabButton,
 } from '@components';
-import {useCallback, useState} from 'react';
 
-import {UserScreenProps} from '@routes';
-import {UserResponseDTO, getAllUsersByPermission} from '@domain';
-import {FlatList, View} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
-import {themeRegistry} from '@styles';
+import {UserResponse, useUserListByPermission} from '@domain';
+import {FlatList, ListRenderItemInfo, RefreshControl, View} from 'react-native';
+import {flatListStyle, themeRegistry} from '@styles';
+import {UserStackProps} from '@routes';
+import {useEffect, useState} from 'react';
 
-export function UserListScreen({navigation}: UserScreenProps) {
-  const [userPermissionId, setUserPermissionId] = useState(3);
+export function UserListScreen({navigation}: UserStackProps<'UserListScreen'>) {
+  const {data, fetchData, isLoading, isError, status} =
+    useUserListByPermission();
 
-  const [users, setUsers] = useState<UserResponseDTO[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [permissionId, setPermissionId] = useState(3);
 
-  function changeMenuButton(indexButton: number) {
-    setUserPermissionId(indexButton);
-  }
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      fetchData({permissionId});
+    });
+  }, [navigation]);
 
-  interface ButtonTabProps {
-    index: boolean;
-    text: string;
-    onPress: () => void;
-  }
+  const changeMenuButton = (pressedButton: number) => {
+    setPermissionId(pressedButton);
+    fetchData({permissionId: pressedButton});
+  };
 
-  function ButtonTab({index, text, onPress}: ButtonTabProps) {
-    if (index) {
-      return (
-        <Button type="menu-tab-steel-blue" color="steel-blue" disabled>
-          <Text color="white">{text}</Text>
-        </Button>
-      );
-    }
+  function TabMenu() {
     return (
-      <Button
-        type="menu-tab-lavender-gray"
-        color="light-gray"
-        onPress={onPress}>
-        <Text color='steel-blue'>{text}</Text>
-      </Button>
-    );
-  }
-
-  function MenuTab() {
-    return (
-      <View style={themeRegistry['box-flex-row']}>
-        <ButtonTab
-          index={userPermissionId === 1}
-          text="Admin"
+      <View style={[themeRegistry['boxFlexRow'], {marginBottom: 10}]}>
+        <TabButton
+          isPressed={permissionId === 1}
+          title="Admin"
           onPress={() => changeMenuButton(1)}
         />
-        <ButtonTab
-          index={userPermissionId === 2}
-          text="Barbeiros"
+        <TabButton
+          isPressed={permissionId === 2}
+          title="Barbeiros"
           onPress={() => changeMenuButton(2)}
         />
-        <ButtonTab
-          index={userPermissionId === 3}
-          text="Clientes"
+        <TabButton
+          isPressed={permissionId === 3}
+          title="Clientes"
           onPress={() => changeMenuButton(3)}
         />
       </View>
     );
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      searchData();
-    }, [userPermissionId]),
-  );
-
-  async function searchData() {
-    setIsLoading(true);
-    setUsers(await getAllUsersByPermission(userPermissionId));
-    setIsLoading(false);
-  }
-
-  function changeScreen(params: UserResponseDTO) {
+  const changeScreen = (params: UserResponse) => {
     navigation.navigate('UserProfileScreen', {
-      user: params,
+      userId: params.id,
     });
-  }
+  };
 
-  function ListHeaderComponent() {
-    return <MenuTab />;
-  }
-
-  function renderItem({item}: {item: UserResponseDTO}) {
+  function renderItem({item}: ListRenderItemInfo<UserResponse>) {
     return (
-      <TouchableItem
+      <BoxItem
+        style={{paddingVertical: 20}}
         onPress={() => changeScreen({...item})}
-        textValues={[item.email]}
+        label={item.email}
       />
     );
   }
 
+  function AddButton() {
+    if (status == 200) {
+      return (
+        <Icon
+          name="AddIcon"
+          type="floating"
+          backgroundColor="steelBlue"
+          color="white"
+          size={35}
+          onPress={() => navigation.navigate('UserCreateScreen')}
+        />
+      );
+    }
+  }
+
   return (
     <Screen>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <FlatList
-          data={users}
-          keyExtractor={users => users.id}
-          renderItem={renderItem}
-          ListHeaderComponent={ListHeaderComponent}
-          ItemSeparatorComponent={ViewSeparator}
-          ListEmptyComponent={EmptyListComponent({
-            title: 'Nenhum usuário listado.',
-          })}
-        />
-      )}
-
-      <ButtonComponent
-        type="add"
-        onPress={() => navigation.navigate('UserCreateScreen')}
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        ListHeaderComponent={TabMenu}
+        ItemSeparatorComponent={Separator}
+        contentContainerStyle={flatListStyle(data)}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={() => fetchData({permissionId})}
+          />
+        }
+        ListEmptyComponent={
+          <EmptyList
+            title="Nenhum usuário listado."
+            loading={isLoading}
+            error={isError}
+            refetch={() => fetchData({permissionId})}
+          />
+        }
       />
+      <AddButton />
     </Screen>
   );
 }

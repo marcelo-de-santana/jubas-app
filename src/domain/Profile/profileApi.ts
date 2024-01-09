@@ -53,9 +53,9 @@ async function recoveryPassword(
 
 async function update(
   profileId: string,
-  name: string,
-  cpf: string,
-  statusProfile: boolean,
+  name?: string,
+  cpf?: string,
+  statusProfile?: boolean,
 ) {
   return await api.patch(`${PATH}/${profileId}`, {
     name,

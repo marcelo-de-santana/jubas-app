@@ -1,5 +1,5 @@
 import {Pressable, View, ViewProps, ViewStyle} from 'react-native';
-import {ColorName, colorRegistry} from '@styles';
+import {ColorName, colors} from '@styles';
 import {Icon} from '../Icons';
 
 interface ModalProps extends ViewProps {
@@ -14,7 +14,7 @@ export function Modal({
   ...props
 }: ModalProps) {
   const $modalStyle: ViewStyle = {
-    backgroundColor: colorRegistry[color],
+    backgroundColor: colors[color],
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     padding: 10,

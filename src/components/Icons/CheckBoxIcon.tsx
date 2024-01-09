@@ -8,6 +8,12 @@ interface CheckBoxIconProps {
   onPress?: () => void;
 }
 
+/**
+ *
+ * @description Check box icon
+ * @params {label?: string; value?: boolean}
+ */
+
 export function CheckBoxIcon({label, value, onPress}: CheckBoxIconProps) {
   const iconName: IconName = value ? 'CheckBoxChecked' : 'CheckBoxBlank';
 
@@ -17,8 +23,7 @@ export function CheckBoxIcon({label, value, onPress}: CheckBoxIconProps) {
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 5,
-        marginVertical: 5,
+        margin: 5,
       }}>
       <Text>{label}</Text>
       <Icon name={iconName} size={30} onPress={onPress} />

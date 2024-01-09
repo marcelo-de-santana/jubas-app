@@ -10,7 +10,6 @@ export * from './Loaders';
 export * from './Modal';
 export * from './WorkingHours';
 export * from './StatusScreen';
-export * from './Switch';
 export * from './Text';
 export * from './TextInput';
 export * from './Watch';

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Modal, Pressable, StyleProp, View, ViewStyle} from 'react-native';
-import {alertStatus, AlertStatusType, alertStyle, colorRegistry} from '@styles';
+import {alertStatus, AlertStatusType, alertStyle, colors} from '@styles';
 import {Text} from './Text';
 
 export interface StatusScreenProps {
@@ -25,9 +25,9 @@ export function StatusScreen({
   const $boxStyle = {
     padding: 20,
     borderRadius: 6,
-    backgroundColor: colorRegistry[$boxColor],
+    backgroundColor: colors[$boxColor],
   };
-  const [isVisible, setVisible] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if (status) {
@@ -36,22 +36,20 @@ export function StatusScreen({
   }, [status]);
 
   const closeModal = () => {
-    setVisible(false);
-    if (status === 200 || status === 201) {
+    setIsVisible(false);
+    if (status === 200 || status === 201 || status == 204) {
       if (successAction) successAction();
-    } else {
-      if (errorAction) errorAction();
-    }
+    } else if (errorAction) errorAction();
   };
 
   const handleVisibility = () => {
-    setVisible(true);
+    setIsVisible(true);
     setTimeout(closeModal, 2000);
   };
 
   return (
     <Modal visible={isVisible} transparent={true} animationType="fade">
-      <Pressable style={$boxContainerStyle} onPress={() => setVisible(false)}>
+      <Pressable style={$boxContainerStyle} onPress={() => setIsVisible(false)}>
         <View style={$boxStyle}>
           <Text color={$itemColor}>
             {message ?? 'Ops... Algo inesperado aconteceu.'}
@@ -66,5 +64,5 @@ const $boxContainerStyle: StyleProp<ViewStyle> = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: colorRegistry.midnightBlueTransparent,
+  backgroundColor: colors.midnightBlueTransparent,
 };

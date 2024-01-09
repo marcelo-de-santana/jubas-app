@@ -1,6 +1,6 @@
 import {WorkingHoursResponse} from '@domain';
 import {BoxFourItems} from '../List';
-import {ColorName, colorRegistry} from '@styles';
+import {ColorName, colors} from '@styles';
 import {View} from 'react-native';
 
 export interface WorkingHoursLineProps {
@@ -9,7 +9,7 @@ export interface WorkingHoursLineProps {
   onPress?: (id: number) => void;
 }
 
-export function WorkinhHoursLine({
+export function WorkingHoursLine({
   item,
   workingHourId,
   onPress,
@@ -29,7 +29,7 @@ export function WorkinhHoursLine({
       }}>
       <BoxFourItems
         style={{
-          backgroundColor: colorRegistry[$boxStyle],
+          backgroundColor: colors[$boxStyle],
           borderRadius: 6,
           padding: 10,
         }}

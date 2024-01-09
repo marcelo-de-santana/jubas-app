@@ -2,7 +2,7 @@ import {useFetchApi} from '@hooks';
 import {EmployeeResponse} from '../employeeTypes';
 import {employeeApi} from '../employeeApi';
 
-export function useEmplyeeFindByProfile() {
+export function useEmployeeFindByProfile() {
   const state = useFetchApi<
     EmployeeResponse,
     {

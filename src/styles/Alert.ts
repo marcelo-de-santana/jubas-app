@@ -26,6 +26,7 @@ export type AlertStatusType = Record<
 export const alertStatus: AlertStatusType = {
   200: {type: 'success', message: 'Requisição bem-sucedida.'},
   201: {type: 'success', message: 'Recurso criado com sucesso.'},
+  204: {type: 'success', message: 'Recurso atualizado com sucesso.'},
   401: {type: 'danger', message: 'Credenciais inválidas.'},
   403: {type: 'danger', message: 'Acesso negado.'},
   404: {type: 'danger', message: 'Recurso não encontrado.'},
