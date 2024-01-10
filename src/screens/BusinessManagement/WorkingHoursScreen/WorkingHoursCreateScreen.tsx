@@ -1,11 +1,11 @@
-import {Button, Alert, Screen, BoxFourItems} from '@components';
+import {Button, Alert, Screen, BoxFourItems, StatusScreen} from '@components';
 import {themeRegistry} from '@styles';
 import {useState} from 'react';
 import {View} from 'react-native';
 import {BusinessManagementStackProps} from '@routes';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {WorkingHoursRequest} from '@domain';
-import {mask} from '@utils';
+import {WorkingHoursRequest, useWorkingHoursCreate} from '@domain';
+import {mask, useNavigation} from '@utils';
 
 type WorkingHoursKeys = keyof WorkingHoursRequest;
 
@@ -27,6 +27,8 @@ const TimeButton: React.FC<TimeButtonProps> = ({title, onPress}) => (
 export function WorkingHoursCreateScreen({
   navigation,
 }: BusinessManagementStackProps<'WorkingHoursCreateScreen'>) {
+  const {create, status, isLoading} = useWorkingHoursCreate();
+  const {navigateBack} = useNavigation();
   const [workingHours, setWorkingHours] = useState<{[key: string]: string}>({
     startTime: '09:00',
     startInterval: '13:00',
@@ -60,19 +62,23 @@ export function WorkingHoursCreateScreen({
     }
     if (event.type === 'set') {
       closeWatch();
-      const timeformatted = mask.timestampToTimeFormat({
+      const timeFormatted = mask.timestampToTimeFormat({
         time: selectedTime?.getTime(),
       });
       setWorkingHours(prev => ({
         ...prev,
-        [workingHourKey]: timeformatted,
+        [workingHourKey]: timeFormatted,
       }));
     }
   };
 
-  const sendToCreate = async () => {
-    await createNewWorkingHour(workingHours);
-    navigation.goBack();
+  const sendToCreate = () => {
+    create({
+      startTime: workingHours.startTime,
+      startInterval: workingHours.startInterval,
+      endInterval: workingHours.endInterval,
+      endTime: workingHours.end,
+    });
   };
 
   const askAboutCreate = () => {
@@ -94,8 +100,9 @@ export function WorkingHoursCreateScreen({
       <View style={[themeRegistry['boxFlexRow']]}>
         {listHours?.map((item, index) => (
           <Button
-            key={index}
+            key={item[index]}
             type="inline-one-fifth-wide"
+            loading={isLoading}
             backgroundColor="lavenderGray"
             title={workingHours[item]}
             textProps={{color: 'steelBlue'}}
@@ -108,6 +115,7 @@ export function WorkingHoursCreateScreen({
 
   return (
     <Screen>
+      <StatusScreen status={status} successAction={navigateBack} />
       {watchVisible && (
         <DateTimePicker
           is24Hour
@@ -125,6 +133,7 @@ export function WorkingHoursCreateScreen({
       <Button
         type="inline"
         title="Salvar"
+        loading={isLoading}
         backgroundColor="steelBlue"
         style={{marginTop: 20}}
         textProps={{color: 'white', size: 'L'}}

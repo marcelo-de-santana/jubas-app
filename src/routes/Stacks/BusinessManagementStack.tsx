@@ -33,20 +33,21 @@ export function BusinessManagementStack() {
       <NativeStack.Screen
         name="DashboardScreen"
         component={DashboardScreen}
-        options={{headerShown: true, headerTitle: 'Dashboard'}}
+        options={{
+          ...defaultOptions,
+          headerTitle: 'Dashboard',
+          headerShown: true,
+        }}
       />
       <NativeStack.Screen
         name="CategoryCreateScreen"
         component={CategoryCreateScreen}
-        options={{
-          presentation: 'transparentModal',
-        }}
+        options={{}}
       />
       <NativeStack.Screen
         name="CategoryListScreen"
         component={CategoryListScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Categorias',
         }}
       />
@@ -57,24 +58,22 @@ export function BusinessManagementStack() {
       <NativeStack.Screen
         name="SpecialtyCreateScreen"
         component={SpecialtyCreateScreen}
-        options={{
-          presentation: 'transparentModal',
-        }}
+        options={{}}
       />
       <NativeStack.Screen
         name="SpecialtyListScreen"
         component={SpecialtyListScreen}
-        options={{headerShown: true, headerTitle: 'Especialidades'}}
+        options={{headerTitle: 'Especialidades'}}
       />
       <NativeStack.Screen
         name="WorkingHoursCreateScreen"
         component={WorkingHoursCreateScreen}
+        options={{headerTitle: 'Novo horário'}}
       />
       <NativeStack.Screen
         name="WorkingHoursListScreen"
         component={WorkingHoursListScreen}
         options={{
-          headerShown: true,
           headerTitle: 'Horários',
         }}
       />

@@ -15,7 +15,7 @@ export type EmployeeScreenProps<
 
 export type BusinessManagementStackProps<
   RouteName extends keyof BusinessManagementParamList,
-> = NativeStackScreenProps<BusinessManagementParamList>;
+> = NativeStackScreenProps<BusinessManagementParamList, RouteName>;
 
 export type UserStackProps<RouteName extends keyof UserStackParamList> =
   NativeStackScreenProps<UserStackParamList, RouteName>;

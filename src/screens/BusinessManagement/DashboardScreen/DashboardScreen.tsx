@@ -1,6 +1,6 @@
 import {Button, Screen} from '@components';
 import {BusinessManagementStackProps} from '@routes';
-import {buttonStyle, themeRegistry} from '@styles';
+import {themeRegistry} from '@styles';
 import {View} from 'react-native';
 
 export function DashboardScreen({
