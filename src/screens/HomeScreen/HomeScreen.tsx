@@ -2,11 +2,10 @@ import {Button, Screen} from '@components';
 import {AppStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
 import {View} from 'react-native';
-import {buttonStyle, themeRegistry} from '@styles';
+import {themeRegistry} from '@styles';
 
 export function HomeScreen({navigation}: AppStackProps) {
   const {user} = useAuthContext();
-  const {userPermission} = user;
 
   const navigateToUnderConstruction = () => {
     navigation.navigate('UnderConstruction');
@@ -42,7 +41,7 @@ export function HomeScreen({navigation}: AppStackProps) {
           title="Minha conta"
           onPress={navigateToUnderConstruction}
         />
-        {userPermission.id !== 1 && (
+        {user.permission.id !== 1 && (
           <>
             <Button
               type="box"

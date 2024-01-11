@@ -1,5 +1,5 @@
 import {useFetchApi} from '@hooks';
-import {UserResponse} from '../UserTypes';
+import {UserPermissionResponse} from '../UserTypes';
 import {userApi} from '../userApi';
 
 export interface AuthUserRequest {
@@ -8,7 +8,7 @@ export interface AuthUserRequest {
 }
 
 export function useUserAuth() {
-  return useFetchApi<UserResponse, AuthUserRequest>({
+  return useFetchApi<UserPermissionResponse, AuthUserRequest>({
     apiFn: ({email, password}) => userApi.auth(email, password),
   });
 }

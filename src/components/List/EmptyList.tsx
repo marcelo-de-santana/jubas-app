@@ -3,7 +3,7 @@ import {Loader} from '../Loaders/Loader';
 import {Text} from '../Text';
 import {Button} from '../Buttons';
 
-interface EmptyListProps {
+export interface EmptyListProps {
   title?: string;
   loading?: boolean;
   error?: unknown;

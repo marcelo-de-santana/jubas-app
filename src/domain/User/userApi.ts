@@ -14,9 +14,6 @@ async function getProfilesById(userId: string) {
   return await api.get(`${PATH}/${userId}/profile`);
 }
 
-async function getListByPermission(permissionId: number) {
-  return await api.get(`${PATH}/permission/${permissionId}`);
-}
 
 async function auth(email: string, password: string) {
   return await api.post(`${PATH}/login`, {email, password});
@@ -49,6 +46,5 @@ export const userApi = {
   getById,
   getList,
   getProfilesById,
-  getListByPermission,
   update,
 };

@@ -1,10 +1,10 @@
-import {UserResponse, useUserAuth} from '@domain';
+import {UserPermissionResponse, useUserAuth} from '@domain';
 import {createContext, useContext, useState} from 'react';
 
 const defaultUser = {
   id: '',
   email: '',
-  userPermission: {
+  permission: {
     id: 3,
     type: 'Client',
   },
@@ -21,7 +21,7 @@ type AuthContextType = {
   isLoading: boolean;
   isError: boolean | null;
   status?: number | null;
-  user: UserResponse;
+  user: UserPermissionResponse;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -36,7 +36,7 @@ export const AuthContext = createContext<AuthContextType>({
 
 export function AuthContextProvider({children}: AuthContextProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState<UserResponse>(defaultUser);
+  const [user, setUser] = useState<UserPermissionResponse>(defaultUser);
   const {data, fetchData, status, isLoading, isError} = useUserAuth();
 
   const signIn = (email: string, password: string) => {

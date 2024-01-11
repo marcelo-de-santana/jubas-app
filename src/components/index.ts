@@ -1,5 +1,6 @@
 export * from './ActivityIndicator';
 export * from './Alert';
+export * from './Body';
 export * from './Buttons';
 export * from './Forms';
 export * from './Screen';

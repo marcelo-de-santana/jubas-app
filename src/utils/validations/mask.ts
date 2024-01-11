@@ -80,7 +80,12 @@ const timeToTimestamp = ({time = '00:00'}: {time?: string}) => {
   return timestamp;
 };
 
+const capitalizeFirstLetter = (text: string) => {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
 export const mask = {
+  capitalizeFirstLetter,
   cpf,
   date,
   fullTime,

@@ -5,17 +5,18 @@ import {
   BoxItem,
   Icon,
   TabButton,
+  AddSteelBlue,
 } from '@components';
 
-import {UserResponse, useUserListByPermission} from '@domain';
+import {UserResponse, usePermissionGetUsersByPermissionId} from '@domain';
 import {FlatList, ListRenderItemInfo, RefreshControl, View} from 'react-native';
 import {flatListStyle, themeRegistry} from '@styles';
 import {UserStackProps} from '@routes';
 import {useEffect, useState} from 'react';
 
 export function UserListScreen({navigation}: UserStackProps<'UserListScreen'>) {
-  const {data, fetchData, isLoading, isError, status} =
-    useUserListByPermission();
+  const {permission, fetchData, isLoading, isError, status} =
+    usePermissionGetUsersByPermissionId();
 
   const [permissionId, setPermissionId] = useState(3);
 
@@ -52,7 +53,7 @@ export function UserListScreen({navigation}: UserStackProps<'UserListScreen'>) {
     );
   }
 
-  const changeScreen = (params: UserResponse) => {
+  const navigateToUserProfileScreen = (params: UserResponse) => {
     navigation.navigate('UserProfileScreen', {
       userId: params.id,
     });
@@ -62,35 +63,20 @@ export function UserListScreen({navigation}: UserStackProps<'UserListScreen'>) {
     return (
       <BoxItem
         style={{paddingVertical: 20}}
-        onPress={() => changeScreen({...item})}
+        onPress={() => navigateToUserProfileScreen(item)}
         label={item.email}
       />
     );
   }
 
-  function AddButton() {
-    if (status == 200) {
-      return (
-        <Icon
-          name="AddIcon"
-          type="floating"
-          backgroundColor="steelBlue"
-          color="white"
-          size={35}
-          onPress={() => navigation.navigate('UserCreateScreen')}
-        />
-      );
-    }
-  }
-
   return (
     <Screen>
       <FlatList
-        data={data}
+        data={permission?.users}
         renderItem={renderItem}
         ListHeaderComponent={TabMenu}
         ItemSeparatorComponent={Separator}
-        contentContainerStyle={flatListStyle(data)}
+        contentContainerStyle={flatListStyle(permission)}
         refreshControl={
           <RefreshControl
             refreshing={isLoading}
@@ -106,7 +92,9 @@ export function UserListScreen({navigation}: UserStackProps<'UserListScreen'>) {
           />
         }
       />
-      <AddButton />
+      {status === 200 && (
+        <AddSteelBlue onPress={() => navigation.navigate('UserCreateScreen')} />
+      )}
     </Screen>
   );
 }

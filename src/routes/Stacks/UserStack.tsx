@@ -1,17 +1,20 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProfileResponse, UserResponse} from '@domain';
+import {PermissionResponse, ProfileResponse, UserResponse} from '@domain';
 import {
   UserCreateScreen,
   UserListScreen,
+  UserPermissionScreen,
   UserProfileCreateScreen,
   UserProfileScreen,
   UserProfileUpdateScreen,
   UserUpdateScreen,
 } from '@screens';
 import {defaultOptions} from '../screenOptions';
+import {mask} from '@utils';
 
 export type UserStackParamList = {
-  UserListScreen: undefined;
+  UserPermissionScreen: undefined;
+  UserListScreen: {permission: PermissionResponse};
   UserCreateScreen: undefined;
   UserUpdateScreen: {user: UserResponse};
   UserProfileScreen: {userId: string};
@@ -27,12 +30,19 @@ const NativeStack = createNativeStackNavigator<UserStackParamList>();
 export function UserStack() {
   return (
     <NativeStack.Navigator
-      initialRouteName="UserListScreen"
+      initialRouteName="UserPermissionScreen"
       screenOptions={{...defaultOptions, headerShown: true}}>
+      <NativeStack.Screen
+        name="UserPermissionScreen"
+        component={UserPermissionScreen}
+        options={{headerTitle: 'Tipos de usuário'}}
+      />
       <NativeStack.Screen
         name="UserListScreen"
         component={UserListScreen}
-        options={{title: 'Usuários'}}
+        options={({route}) => ({
+          title: mask.capitalizeFirstLetter(route.params.permission.type),
+        })}
       />
       <NativeStack.Screen
         name="UserCreateScreen"

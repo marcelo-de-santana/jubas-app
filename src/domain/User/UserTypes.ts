@@ -1,9 +1,9 @@
-export interface MinimalUserResponseDTO {
+export interface UserResponse {
   id: string;
   email: string;
 }
 
-export interface UserResponse {
+export interface UserPermissionResponse {
   id: string;
   email: string;
   permission: {
