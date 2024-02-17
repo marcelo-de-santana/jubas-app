@@ -3,7 +3,7 @@ import {
   PermissionProfileResponse,
   PermissionResponse,
   PermissionUserResponse,
-} from './PermissionResponse';
+} from './permissionResponse';
 import {permissionApi} from './permissionApi';
 
 function getAll() {

@@ -1,4 +1,4 @@
-export type WorkingHoursResponse = {
+export type WorkingHourResponse = {
   id: number;
   startTime: string;
   startInterval: string;
@@ -6,7 +6,7 @@ export type WorkingHoursResponse = {
   endTime: string;
 };
 
-export type WorkingHoursRequest = {
+export type WorkingHourRequest = {
   startTime: string;
   startInterval: string;
   endInterval: string;

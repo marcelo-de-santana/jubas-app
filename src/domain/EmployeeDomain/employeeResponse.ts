@@ -1,5 +1,5 @@
 import {ProfileResponse} from '@domain';
-import {WorkingHoursResponse} from '../WorkingHours';
+import {WorkingHoursResponse} from '../WorkingHourDomain';
 
 export interface EmployeeResponse {
   id: string;
