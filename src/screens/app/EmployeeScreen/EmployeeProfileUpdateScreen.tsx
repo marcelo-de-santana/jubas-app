@@ -13,7 +13,7 @@ import {mask, schemas, useNavigation} from '@utils';
 
 export function EmployeeProfileUpdateScreen({
   route,
-}: EmployeeScreenProps<'EmployeeProfileUpdateScreen'>) {
+}: Readonly<EmployeeScreenProps<'EmployeeProfileUpdateScreen'>>) {
   const {profile} = route.params;
   const {navigateBack} = useNavigation();
 

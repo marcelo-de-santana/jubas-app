@@ -1,31 +1,26 @@
-import {
-  ButtonComponent,
-  EmptyListComponent,
-  LoadingScreen,
-  Screen,
-  TouchableItem,
-  ViewSeparator,
-} from '@components';
-import {CategoryResponseDTO, useCategoryCreate, useCategoryList} from '@domain';
-import {BusinessManagementScreenProps} from '@routes';
-import {useEffect, useState} from 'react';
-import {FlatList} from 'react-native';
+import {AddSteelBlue, BoxItem, EmptyList, Screen, Separator} from '@components';
+import {CategoryResponse, useCategoryList} from '@domain';
+import {BusinessManagementStackProps} from '@routes';
+import {flatListStyle} from '@styles';
+import {useEffect} from 'react';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
 export function CategoryListScreen({
   navigation,
-}: BusinessManagementScreenProps) {
-  const {categoryList, isLoading, refresh} = useCategoryList();
+}: Readonly<BusinessManagementStackProps<'CategoryListScreen'>>) {
+  const {categoryList, isLoading, isError, fetchData} = useCategoryList();
 
-  // useEffect(() => {
-  //   navigation.addListener('focus', () => {
-  //     searchData();
-  //   });
-  // }, [navigation]);
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      fetchData();
+    });
+  }, [navigation]);
 
-  function renderItem({item}: {item: CategoryResponseDTO}) {
+  function renderItem({item}: ListRenderItemInfo<CategoryResponse>) {
     return (
-      <TouchableItem
-        textValues={[item.name]}
+      <BoxItem
+        style={{paddingVertical: 20}}
+        label={item.name}
         onPress={() =>
           navigation.navigate('CategoryUpdateScreen', {category: item})
         }
@@ -33,22 +28,23 @@ export function CategoryListScreen({
     );
   }
 
-  function ListEmptyComponent() {
-    return <EmptyListComponent title="Nenhuma categoria encontrada." />;
-  }
-
-  if (isLoading) <LoadingScreen />;
-
   return (
     <Screen>
       <FlatList
+        style={flatListStyle(categoryList)}
         data={categoryList}
         renderItem={renderItem}
-        ItemSeparatorComponent={ViewSeparator}
-        ListEmptyComponent={ListEmptyComponent}
+        ItemSeparatorComponent={Separator}
+        ListEmptyComponent={
+          <EmptyList
+            title="Nenhuma categoria encontrada."
+            loading={isLoading}
+            error={isError}
+            refetch={fetchData}
+          />
+        }
       />
-      <ButtonComponent
-        type="add"
+      <AddSteelBlue
         onPress={() => navigation.navigate('CategoryCreateScreen')}
       />
     </Screen>

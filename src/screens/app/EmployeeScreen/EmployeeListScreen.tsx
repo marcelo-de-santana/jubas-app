@@ -1,5 +1,6 @@
 import {EmptyList, Screen, Separator, BoxItem} from '@components';
-import {ProfileResponse, useProfileListByPermission} from '@domain';
+import {ProfileResponse} from '@domain';
+import {useApi} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
 import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
@@ -7,12 +8,13 @@ import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
 export function EmployeeListScreen({
   navigation,
-}: EmployeeScreenProps<'EmployeeListScreen'>) {
-  const {data, isLoading, isError, refetch, fetchData} =
-    useProfileListByPermission();
+}: Readonly<EmployeeScreenProps<'EmployeeListScreen'>>) {
+  const {data, isLoading, isError, fetch} = useApi.permission.getProfilesById();
+
+  const searchData = () => fetch(2);
 
   useEffect(() => {
-    fetchData({permissionId: 2});
+    searchData();
   }, []);
 
   const navigateToEmployeeDetailsScreen = (profile: ProfileResponse) => {
@@ -32,23 +34,22 @@ export function EmployeeListScreen({
   return (
     <Screen>
       <FlatList
-        data={data}
+        data={data?.profiles}
         renderItem={renderItem}
         ItemSeparatorComponent={Separator}
         contentContainerStyle={flatListStyle(data)}
         refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={refetch} />
+          <RefreshControl refreshing={isLoading} onRefresh={searchData} />
         }
         ListEmptyComponent={
           <EmptyList
             title="Nenhum funcionário listado"
             loading={isLoading}
             error={isError}
-            refetch={refetch}
+            refetch={searchData}
           />
         }
       />
-      
     </Screen>
   );
 }

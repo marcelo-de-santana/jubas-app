@@ -36,5 +36,6 @@ export function useFetchApi<TResponse = unknown, TRequest = void>({
     isError,
     status,
     fetchData,
+    refresh: fetchData
   };
 }

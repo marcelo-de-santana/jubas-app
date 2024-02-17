@@ -19,7 +19,7 @@ import {FlatList, ListRenderItemInfo} from 'react-native';
 
 export function EmployeeCreateScreen({
   route,
-}: EmployeeScreenProps<'EmployeeCreateScreen'>) {
+}: Readonly<EmployeeScreenProps<'EmployeeCreateScreen'>>) {
   const $customStatus: AlertStatusType = {
     201: {type: 'success', message: 'Funcionário cadastrado com sucesso.'},
   };

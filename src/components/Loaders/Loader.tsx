@@ -1,6 +1,6 @@
 import {ColorName, colorRegistry} from '@styles';
-import {ActivityIndicator} from '../ActivityIndicator';
-import {Text} from '../Text';
+import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
+import {Text} from '../Text/Text';
 
 export function Loader({color = 'steelBlue'}: {color?: ColorName}) {
   return (

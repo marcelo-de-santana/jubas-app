@@ -1,4 +1,3 @@
-import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {StyleSheet, ViewStyle} from 'react-native';
 
 export const themeRegistry = StyleSheet.create({

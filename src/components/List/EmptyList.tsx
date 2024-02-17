@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import {Loader} from '../Loaders/Loader';
-import {Text} from '../Text';
+import {Text} from '../Text/Text';
 import {Button} from '../Buttons';
 
 export interface EmptyListProps {

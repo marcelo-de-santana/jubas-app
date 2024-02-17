@@ -2,14 +2,6 @@ import {api} from '@services';
 
 const PATH = '/profile';
 
-async function getListByUser(userId: string) {
-  return await api.get(`${PATH}/user/${userId}`);
-}
-
-async function getListByPermission(permissionId: number) {
-  return await api.get(`${PATH}/permission/${permissionId}`);
-}
-
 async function create(
   name: string,
   cpf: string,
@@ -24,27 +16,12 @@ async function create(
   });
 }
 
-async function fullyUpdate(
-  profileId: string,
-  name: string,
-  cpf: string,
-  statusProfile: boolean,
-  userId: string,
-) {
-  return await api.put(`${PATH}/${profileId}`, {
-    name,
-    cpf,
-    statusProfile,
-    userId,
-  });
-}
-
 async function recoveryPassword(
   email: string,
   newPassword: string,
   profileCpf: string,
 ) {
-  return await api.patch(`${PATH}/recovery`, {
+  return await api.post(`${PATH}/recovery-password`, {
     email,
     newPassword,
     profileCpf,
@@ -69,10 +46,7 @@ async function remove(id: string) {
 }
 
 export const profileApi = {
-  getListByUser,
-  getListByPermission,
   create,
-  fullyUpdate,
   update,
   remove,
   recoveryPassword,

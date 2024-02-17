@@ -1,6 +1,6 @@
 import {api} from '@services';
 
-const PATH = '/employee';
+const PATH = '/employees';
 
 async function create(profileId: string, workingHourId: number) {
   return await api.post(PATH, {profileId, workingHourId});

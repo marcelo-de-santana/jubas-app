@@ -7,9 +7,8 @@ import {
 } from '@components';
 import {ScrollView} from 'react-native';
 import {schemas, useNavigation} from '@utils';
-import {useUserCreate} from '@domain';
 import {AlertStatusType} from '@styles';
-import {useForm} from '@hooks';
+import {useApi, useForm} from '@hooks';
 
 export function SignUpScreen() {
   const $customStatus: AlertStatusType = {
@@ -17,7 +16,7 @@ export function SignUpScreen() {
     401: {type: 'danger', message: 'Você já possui cadastrado.'},
   };
 
-  const {create, isLoading, status} = useUserCreate();
+  const {fetch, isLoading, status} = useApi.user.create();
   const {navigateBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.signUp,
@@ -27,7 +26,7 @@ export function SignUpScreen() {
       checkPass: '',
     },
     onSubmit: values =>
-      create({
+      fetch({
         email: values.email,
         password: values.password,
         permissionId: 3,

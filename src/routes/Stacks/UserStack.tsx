@@ -1,5 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {PermissionResponse, ProfileResponse, UserResponse} from '@domain';
+import {
+  PermissionResponse,
+  ProfileResponse,
+  UserPermissionResponse,
+  UserResponse,
+} from '@domain';
 import {
   UserCreateScreen,
   UserListScreen,
@@ -16,7 +21,7 @@ export type UserStackParamList = {
   UserPermissionScreen: undefined;
   UserListScreen: {permission: PermissionResponse};
   UserCreateScreen: undefined;
-  UserUpdateScreen: {user: UserResponse};
+  UserUpdateScreen: {user: UserPermissionResponse};
   UserProfileScreen: {userId: string};
   UserProfileCreateScreen: {userId: string};
   UserProfileUpdateScreen: {

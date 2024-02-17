@@ -12,7 +12,7 @@ interface EmployeeDetailsComponentProps {
 export function EmployeeDetailsScreen({
   navigation,
   route,
-}: EmployeeScreenProps<'EmployeeDetailsScreen'>) {
+}: Readonly<EmployeeScreenProps<'EmployeeDetailsScreen'>>) {
   const {employee, fetchData, status, isError, isLoading} =
     useEmployeeFindByProfile();
 
@@ -74,7 +74,7 @@ export function EmployeeDetailsScreen({
 
   function EmployeeDetailsComponent({
     statusCode,
-  }: EmployeeDetailsComponentProps) {
+  }: Readonly<EmployeeDetailsComponentProps>) {
     if (employee && statusCode === 200) {
       return (
         <>

@@ -14,7 +14,7 @@ import {ScrollView} from 'react-native';
 
 export function RecoveryPasswordScreen() {
   const $customStatus: AlertStatusType = {
-    200: {type: 'success', message: 'Senha alterada com sucesso.'},
+    204: {type: 'success', message: 'Senha alterada com sucesso.'},
     404: {type: 'danger', message: 'Usuário não localizado.'},
   };
 

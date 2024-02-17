@@ -1,6 +1,6 @@
 import {colors, themeRegistry} from '@styles';
 import {View, ViewStyle} from 'react-native';
-import {ActivityIndicator} from '../ActivityIndicator';
+import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 import {Icon} from '../Icons';
 import {Button} from './Button';
 

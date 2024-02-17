@@ -1,4 +1,5 @@
-import {UserPermissionResponse, useUserAuth} from '@domain';
+import { UserPermissionResponse } from '@domain';
+import { useApi } from '@hooks';
 import {createContext, useContext, useState} from 'react';
 
 const defaultUser = {
@@ -34,13 +35,13 @@ export const AuthContext = createContext<AuthContextType>({
   user: defaultUser,
 });
 
-export function AuthContextProvider({children}: AuthContextProviderProps) {
+export function AuthContextProvider({children}: Readonly<AuthContextProviderProps>) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<UserPermissionResponse>(defaultUser);
-  const {data, fetchData, status, isLoading, isError} = useUserAuth();
+  const {data, fetch, status, isLoading, isError} = useApi.user.auth();
 
   const signIn = (email: string, password: string) => {
-    fetchData({email, password});
+    fetch({email, password});
   };
 
   if (user.id === '' && !!data?.id) {

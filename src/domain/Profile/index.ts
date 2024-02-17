@@ -1,6 +1,4 @@
 export * from './useCases/useProfileCreate';
-export * from './useCases/useProfileListByPermission';
-export * from './useCases/useProfileListByUser';
 export * from './useCases/useProfileRecoveryPassword';
 export * from './useCases/useProfileRemove';
 export * from './useCases/useProfileUpdate';

@@ -8,7 +8,7 @@ import {FooterBox} from './components/FooterBox';
 import {useForm} from '@hooks';
 import {AlertStatusType} from '@styles';
 
-export function SignInScreen({navigation}: AuthStackProps) {
+export function SignInScreen({navigation}: Readonly<AuthStackProps>) {
   const $customStatus: AlertStatusType = {
     401: {type: 'danger', message: 'Usuário e/ou senha incorreto(s).'},
     404: {type: 'danger', message: 'Você não possui cadastrado.'},

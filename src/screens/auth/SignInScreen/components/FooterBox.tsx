@@ -4,10 +4,10 @@ import {TouchableOpacity, View} from 'react-native';
 export function FooterBox({
   navigateToRecoveryPassword,
   navigateToSignUp,
-}: {
+}: Readonly<{
   navigateToRecoveryPassword: () => void;
   navigateToSignUp: () => void;
-}) {
+}>) {
   return (
     <View
       style={{

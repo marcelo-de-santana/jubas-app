@@ -1,7 +1,7 @@
 import {Pressable, ViewStyle} from 'react-native';
 import {ButtonStyleName, ColorName, buttonStyle, colors} from '@styles';
-import {Text, TextProps} from '../Text';
-import {ActivityIndicator} from '../ActivityIndicator';
+import {Text, TextProps} from '../Text/Text';
+import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 
 export interface ButtonProps {
   type?: ButtonStyleName;
