@@ -1,46 +1,40 @@
+import {EmptyList, Screen, Separator, StatusScreen} from '@components';
 import {
-  EmptyList,
-  Screen,
-  Separator,
-  StatusScreen,
-  WorkingHoursHeader,
-  WorkingHoursLine,
-} from '@components';
-import {
-  WorkingHoursResponse,
-  useEmployeeUpdate,
-  useWorkingHoursList,
+  WorkingHourResponse,
+  employeeUseCases,
+  workingHourUseCases,
 } from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {flatListStyle} from '@styles';
-import {useNavigation} from '@utils';
+import {useNavigation} from '@hooks';
+import {WorkingHoursLine} from '../../WorkingHours/WorkingHoursLine';
+import {WorkingHoursHeader} from '../../WorkingHours/WorkingHoursHeader';
 
 export function EmployeeTimeListScreen({
   navigation,
   route,
-}: EmployeeScreenProps<'EmployeeTimeListScreen'>) {
+}: Readonly<EmployeeScreenProps<'EmployeeTimeListScreen'>>) {
   const {employeeId, workingHourId} = route.params;
-  const {navigateBack} = useNavigation();
-  const useWorkingHous = useWorkingHoursList();
-  const useEmployee = useEmployeeUpdate();
+  const {goBack} = useNavigation();
+  const useWorkingHous = workingHourUseCases.getAll();
+  const useEmployee = employeeUseCases.updateWorkingHour();
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      useWorkingHous.getList();
+      useWorkingHous.fetch();
     });
   }, [navigation]);
 
-  const choiceWorkingHours = (workingHourId: number) => {
-    useEmployee.update({
-      employeeId,
-      profileId: null,
-      workingHourId,
-    });
-  };
+  function renderItem({item}: ListRenderItemInfo<WorkingHourResponse>) {
+    const choiceWorkingHours = () => {
+      useEmployee.fetch({
+        employeeId,
+        workingHourId,
+      });
+    };
 
-  function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
     return (
       <WorkingHoursLine
         item={item}
@@ -52,7 +46,7 @@ export function EmployeeTimeListScreen({
 
   return (
     <Screen>
-      <StatusScreen status={useEmployee.status} successAction={navigateBack} />
+      <StatusScreen status={useEmployee.status} successAction={goBack} />
       <FlatList
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}
@@ -64,7 +58,7 @@ export function EmployeeTimeListScreen({
             loading={useWorkingHous.isLoading}
             error={useWorkingHous.isError}
             title="Nenhum horário cadastrado."
-            refetch={useWorkingHous.fetchData}
+            refetch={useWorkingHous.fetch}
           />
         }
       />

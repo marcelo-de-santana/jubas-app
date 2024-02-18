@@ -6,7 +6,7 @@ export interface FormTextInputProps extends TextInputProps {
   name: string;
 }
 
-export function FormTextInput({formik, name, ...props}: FormTextInputProps) {
+export function FormTextInput({formik, name, ...props}: Readonly<FormTextInputProps>) {
   return (
     <TextInput
       onBlur={formik.handleBlur(name)}

@@ -1,7 +1,7 @@
 import {api} from '@services';
 import {CategoryRequest} from './categoryRequest';
 
-const PATH = '/category';
+const PATH = '/categories';
 
 async function getAll() {
   return await api.get(PATH);

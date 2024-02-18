@@ -41,7 +41,7 @@ export function HomeScreen({navigation}: Readonly<AppStackProps>) {
           title="Minha conta"
           onPress={navigateToUnderConstruction}
         />
-        {user.permission.id !== 1 && (
+        {user.permission !== 'ADMIN' && (
           <>
             <Button
               type="box"

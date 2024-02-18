@@ -1,5 +1,5 @@
 export type WorkingHourResponse = {
-  id: number;
+  id: string;
   startTime: string;
   startInterval: string;
   endInterval: string;

@@ -1,14 +1,10 @@
-import { UserPermissionResponse } from '@domain';
-import { useApi } from '@hooks';
+import {UserPermissionResponse, userUseCases} from '@domain';
 import {createContext, useContext, useState} from 'react';
 
 const defaultUser = {
   id: '',
   email: '',
-  permission: {
-    id: 3,
-    type: 'Client',
-  },
+  permission: 'CLIENTE',
 };
 
 type AuthContextProviderProps = {
@@ -35,10 +31,12 @@ export const AuthContext = createContext<AuthContextType>({
   user: defaultUser,
 });
 
-export function AuthContextProvider({children}: Readonly<AuthContextProviderProps>) {
+export function AuthContextProvider({
+  children,
+}: Readonly<AuthContextProviderProps>) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<UserPermissionResponse>(defaultUser);
-  const {data, fetch, status, isLoading, isError} = useApi.user.auth();
+  const {data, fetch, status, isLoading, isError} = userUseCases.auth();
 
   const signIn = (email: string, password: string) => {
     fetch({email, password});

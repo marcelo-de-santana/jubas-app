@@ -1,8 +1,7 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {colors} from './Colors';
-import {useDimensions} from '@hooks';
 
-const {width} = useDimensions();
+const {width} = Dimensions.get("screen");
 
 export const buttonStyle = StyleSheet.create({
   box: {

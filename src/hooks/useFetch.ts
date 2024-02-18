@@ -1,21 +1,29 @@
 import {AxiosResponse, isAxiosError} from 'axios';
 import {useState} from 'react';
 
+interface UseFetchResponse<TResponse, TRequest> {
+  data: TResponse | undefined;
+  isLoading: boolean;
+  isError: boolean | null;
+  status: number | null | undefined;
+  fetch: (request: TRequest) => Promise<void>;
+  refresh: (request: TRequest) => Promise<void>;
+}
+
 type ApiResponse<TResponse> = Promise<AxiosResponse<TResponse, any>>;
 type FetchType<TResponse, TRequest> = (
   request: TRequest,
 ) => ApiResponse<TResponse>;
 
-export function useFetch<TResponse = any, TRequest = unknown>(
+export function useFetch<TResponse = any, TRequest = void>(
   apiFn: FetchType<TResponse, TRequest>,
-) {
+): UseFetchResponse<TResponse, TRequest> {
   const [data, setData] = useState<TResponse>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean | null>(null);
   const [status, setStatus] = useState<number | undefined | null>(null);
 
   async function fetch(request: TRequest) {
-    console.log("Render")
     try {
       setIsLoading(true);
       setIsError(null);

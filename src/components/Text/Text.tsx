@@ -21,7 +21,7 @@ export function Text({
   color = 'steelBlue',
   size = 'S',
   ...props
-}: TextProps) {
+}: Readonly<TextProps>) {
   return (
     <TextRN
       style={[

@@ -1,22 +1,40 @@
 import {useFetch} from '@hooks';
 import {EmployeeResponse} from './employeeResponse';
-import {EmployeeCreateRequest, EmployeeUpdateRequest} from './employeeRequest';
+import {
+  EmployeeCreateRequest,
+  EmployeeSpecialtiesRequest,
+  EmployeeWorkingHourRequest,
+} from './employeeRequest';
 import {employeeApi} from './employeeApi';
 
-function create() {
-  return useFetch<EmployeeResponse, EmployeeCreateRequest>(employeeApi.create);
+function getAll() {
+  return useFetch<EmployeeResponse[]>(employeeApi.getAll);
 }
-
 function getById() {
   return useFetch<EmployeeResponse, string>(employeeApi.getById);
 }
-
-function update() {
-  return useFetch<EmployeeResponse, EmployeeUpdateRequest>(employeeApi.update);
+function getAppointments() {
+  return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
+}
+function create() {
+  return useFetch<EmployeeResponse, EmployeeCreateRequest>(employeeApi.create);
+}
+function addSpecialties() {
+  return useFetch<EmployeeResponse, EmployeeSpecialtiesRequest>(
+    employeeApi.addSpecialties,
+  );
+}
+function updateWorkingHour() {
+  return useFetch<EmployeeResponse, EmployeeWorkingHourRequest>(
+    employeeApi.updateWorkingHour,
+  );
 }
 
 export const employeeUseCases = {
-  create,
+  getAll,
   getById,
-  update,
+  getAppointments,
+  create,
+  addSpecialties,
+  updateWorkingHour,
 };

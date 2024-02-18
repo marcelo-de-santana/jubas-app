@@ -1,11 +1,11 @@
-import {Icon} from '../Icons';
+import {Icon} from '../Icons/Icon';
 
 interface AddButtonProps {
   status?: number | null;
   onPress?: () => void;
 }
 
-export function AddSteelBlue({onPress}: AddButtonProps) {
+export function AddSteelBlue({onPress}: Readonly<AddButtonProps>) {
   return (
     <Icon
       name="AddIcon"

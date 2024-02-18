@@ -1,4 +1,4 @@
-import {CategoryResponse} from '../CategoryDomain';
+import { CategoryResponse } from "../CategoryDomain/categoryResponse";
 
 export interface SpecialtyResponse {
   id: string;

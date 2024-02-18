@@ -1,7 +1,7 @@
 import {View} from 'react-native';
-import {Loader} from '../Loaders/Loader';
+import {Loader} from '../Loader/Loader';
 import {Text} from '../Text/Text';
-import {Button} from '../Buttons';
+import {Button} from '../Buttons/Button';
 
 export interface EmptyListProps {
   title?: string;
@@ -15,7 +15,7 @@ export function EmptyList({
   loading,
   error,
   refetch,
-}: EmptyListProps) {
+}: Readonly<EmptyListProps>) {
   let component = (
     <Text size="M" color="steelBlue" align="center">
       {title}

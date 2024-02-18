@@ -15,7 +15,7 @@ export function StatusScreen({
   customStatus,
   successAction,
   errorAction,
-}: StatusScreenProps) {
+}: Readonly<StatusScreenProps>) {
   const alert = {...alertStatus, ...customStatus};
   const color = alert[status ?? 505].type;
   const message = alert[status ?? 505].message;

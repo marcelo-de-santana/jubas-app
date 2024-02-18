@@ -12,6 +12,6 @@ export function ActivityIndicator({
   color = 'steelBlue',
   size = 'large',
   ...props
-}: ActivityIndicatorProps) {
+}: Readonly<ActivityIndicatorProps>) {
   return <RNActivityIndicator size={size} color={colors[color]} {...props} />;
 }

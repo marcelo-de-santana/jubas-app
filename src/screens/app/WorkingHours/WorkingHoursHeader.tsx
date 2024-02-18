@@ -1,4 +1,4 @@
-import {BoxFourItems} from '../List';
+import {BoxFourItems} from '@components';
 
 export function WorkingHoursHeader() {
   const listHeader = [

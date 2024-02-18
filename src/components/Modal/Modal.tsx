@@ -1,6 +1,6 @@
 import {Pressable, View, ViewProps, ViewStyle} from 'react-native';
 import {ColorName, colors} from '@styles';
-import {Icon} from '../Icons';
+import {Icon} from '../Icons/Icon';
 
 interface ModalProps extends ViewProps {
   children?: React.ReactNode;
@@ -12,7 +12,7 @@ export function Modal({
   color = 'lightGray',
   onPress,
   ...props
-}: ModalProps) {
+}: Readonly<ModalProps>) {
   const $modalStyle: ViewStyle = {
     backgroundColor: colors[color],
     borderTopLeftRadius: 10,

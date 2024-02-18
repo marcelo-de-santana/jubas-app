@@ -23,7 +23,7 @@ export function Button({
   onPress,
   title,
   textProps,
-}: ButtonProps) {
+}: Readonly<ButtonProps>) {
   const $buttonType = type && buttonStyle[type];
   const $buttonStyle = {
     backgroundColor: backgroundColor && colors[backgroundColor],

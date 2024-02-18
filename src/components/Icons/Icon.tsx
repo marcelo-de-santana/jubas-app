@@ -37,7 +37,7 @@ export function Icon({
   type,
   backgroundColor,
   style,
-}: IconProps) {
+}: Readonly<IconProps>) {
   const SVGIcon = iconRegistry[name];
   const $buttonType = type && buttonStyle[type];
   const $buttonStyle = {

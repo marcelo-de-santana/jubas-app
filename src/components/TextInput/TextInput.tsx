@@ -1,3 +1,4 @@
+import { colors } from '@styles';
 import {useRef} from 'react';
 import {
   Pressable,
@@ -5,15 +6,14 @@ import {
   TextInputProps as RNTextInputProps,
   View,
 } from 'react-native';
-import {Text} from '..';
-import {colors} from '@styles';
+import { Text } from '../Text/Text';
 
 export interface TextInputProps extends RNTextInputProps {
   label?: string;
   errorMessage?: string;
 }
 
-export function TextInput({label, errorMessage, ...props}: TextInputProps) {
+export function TextInput({label, errorMessage, ...props}: Readonly<TextInputProps>) {
   const inputRef = useRef<RNTextInput>(null);
 
   const $viewTextStyle = {padding: 5};

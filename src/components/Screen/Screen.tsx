@@ -5,7 +5,7 @@ interface ScreenProps extends PressableProps {
   children?: React.ReactNode;
   color?: ColorName;
 }
-export function Screen({children, color = 'lightGray', ...props}: ScreenProps) {
+export function Screen({children, color = 'lightGray', ...props}: Readonly<ScreenProps>) {
   const $containerStyle = {
     flex: 1,
     backgroundColor: colors[color],

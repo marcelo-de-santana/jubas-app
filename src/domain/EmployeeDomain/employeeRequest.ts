@@ -1,9 +1,14 @@
-export type EmployeeUpdateRequest = {
-  employeeId: string;
-  workingHourId: number;
-};
-
-export type EmployeeCreateRequest = {
+export interface EmployeeCreateRequest {
   profileId: string;
-  workingHourId: number;
-};
+  workingHourId: string;
+}
+
+export interface EmployeeSpecialtiesRequest {
+  employeeId: string;
+  specialties: string[];
+}
+
+export interface EmployeeWorkingHourRequest {
+  employeeId: string;
+  workingHourId: string;
+}

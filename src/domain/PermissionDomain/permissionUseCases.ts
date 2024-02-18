@@ -1,27 +1,18 @@
 import {useFetch} from '@hooks';
-import {
-  PermissionProfileResponse,
-  PermissionResponse,
-  PermissionUserResponse,
-} from './permissionResponse';
 import {permissionApi} from './permissionApi';
+import {UserResponse} from '../UserDomain/userResponse';
+import {ProfileResponse} from '../ProfileDomain/profileResponse';
 
-function getAll() {
-  return useFetch<PermissionResponse[]>(permissionApi.getAll);
-}
 function getProfilesById() {
-  return useFetch<PermissionProfileResponse, number>(
+  return useFetch<ProfileResponse[], string>(
     permissionApi.getProfilesByPermission,
   );
 }
 function getUsersById() {
-  return useFetch<PermissionUserResponse, number>(
-    permissionApi.getUsersByPermission,
-  );
+  return useFetch<UserResponse, string>(permissionApi.getUsersByPermission);
 }
 
 export const permissionUseCases = {
-  getAll,
   getProfilesById,
   getUsersById,
 };

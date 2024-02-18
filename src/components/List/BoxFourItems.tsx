@@ -1,6 +1,5 @@
 import {BoxItem} from '@components';
-import {useDimensions} from '@hooks';
-import {TouchableOpacity, ViewStyle} from 'react-native';
+import {Dimensions, TouchableOpacity, ViewStyle} from 'react-native';
 
 // 'lavender-gray' | 'light-gray'
 interface ListTimeProps {
@@ -15,7 +14,7 @@ export function BoxFourItems({
   textValues,
   disabled,
   onPress,
-}: ListTimeProps) {
+}: Readonly<ListTimeProps>) {
   //CHECK BOX DISABLED AND PRESS ACTION
   let $prop = {
     box: {disabled: true, onPress: () => {}},
@@ -29,7 +28,7 @@ export function BoxFourItems({
     }
   }
 
-  const {width} = useDimensions();
+  const {width} = Dimensions.get('screen');
   return (
     <TouchableOpacity
       style={{
@@ -39,10 +38,10 @@ export function BoxFourItems({
       }}
       disabled={$prop.box.disabled}
       onPress={$prop.box.onPress}>
-      {textValues?.map((item, index) => (
+      {textValues?.map(item => (
         <BoxItem
           label={item}
-          key={index}
+          key={item}
           style={{
             width: width * 0.2,
             justifyContent: 'center',

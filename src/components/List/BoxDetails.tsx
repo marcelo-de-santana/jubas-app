@@ -16,7 +16,7 @@ export function BoxDetails({
   boxProps,
   textProps,
   ...props
-}: BoxComponentProps) {
+}: Readonly<BoxComponentProps>) {
   return (
     <BoxItem
       style={{
@@ -30,8 +30,8 @@ export function BoxDetails({
           padding: 10,
         }}
         {...boxProps}>
-        {textFields?.map((item, index) => (
-          <Text key={index} {...textProps}>
+        {textFields?.map(item => (
+          <Text key={item} {...textProps}>
             {item}
           </Text>
         ))}

@@ -10,7 +10,7 @@ export function useNavigation() {
   };
 
   return {
-    navigateBack,
     ...navigation,
+    goBack: navigateBack,
   };
 }

@@ -12,7 +12,7 @@ function getAll() {
   return useFetch<WorkingHourResponse[]>(workingHourApi.getList);
 }
 
-export const workingHoursUseCases = {
+export const workingHourUseCases = {
   create,
   getAll,
 };

@@ -1,19 +1,19 @@
-import {WorkingHoursResponse} from '@domain';
-import {BoxFourItems} from '../List';
+import { BoxFourItems } from '@components';
+import {WorkingHourResponse} from '@domain';
 import {ColorName, colors} from '@styles';
 import {View} from 'react-native';
 
 export interface WorkingHoursLineProps {
-  item: WorkingHoursResponse;
-  workingHourId?: number;
-  onPress?: (id: number) => void;
+  item: WorkingHourResponse;
+  workingHourId?: string;
+  onPress?: (id: string) => void;
 }
 
 export function WorkingHoursLine({
   item,
   workingHourId,
   onPress,
-}: WorkingHoursLineProps) {
+}: Readonly<WorkingHoursLineProps>) {
   let $boxStyle: ColorName = 'lightGray';
   let $boxDisable = false;
 

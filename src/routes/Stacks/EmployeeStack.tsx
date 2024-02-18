@@ -18,7 +18,7 @@ export type EmployeeStackParamList = {
   EmployeeProfileUpdateScreen: {profile: ProfileResponse};
   EmployeeTimeListScreen: {
     employeeId: string;
-    workingHourId: number;
+    workingHourId: string;
   };
   EmployeeServicesListScreen: {
     employeeId?: string;

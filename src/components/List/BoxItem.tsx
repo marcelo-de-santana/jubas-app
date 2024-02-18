@@ -1,5 +1,5 @@
-import {Text, TextProps} from '../';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import { Text, TextProps } from '../Text/Text';
 
 export interface BoxItemProps extends TouchableOpacityProps {
   children?: React.ReactNode;
@@ -8,7 +8,7 @@ export interface BoxItemProps extends TouchableOpacityProps {
 }
 
 // use only if you are going to use the label
-export function BoxItem({children, label, textProps, ...props}: BoxItemProps) {
+export function BoxItem({children, label, textProps, ...props}: Readonly<BoxItemProps>) {
   return (
     <TouchableOpacity style={{justifyContent: 'center'}} {...props}>
       <Text size="S" align="justify" {...textProps}>

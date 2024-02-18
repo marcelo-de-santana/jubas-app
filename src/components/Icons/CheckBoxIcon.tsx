@@ -14,7 +14,7 @@ interface CheckBoxIconProps {
  * @params {label?: string; value?: boolean}
  */
 
-export function CheckBoxIcon({label, value, onPress}: CheckBoxIconProps) {
+export function CheckBoxIcon({label, value, onPress}: Readonly<CheckBoxIconProps>) {
   const iconName: IconName = value ? 'CheckBoxChecked' : 'CheckBoxBlank';
 
   return (

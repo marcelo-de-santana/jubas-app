@@ -1,11 +1,11 @@
-import {EmptyList, EmptyListProps} from '../List';
+import { EmptyList, EmptyListProps } from "../List/EmptyList";
 
 interface BodyProps extends EmptyListProps {
   children?: React.ReactElement;
   data?: any[];
 }
 
-export function Body({children, data, ...props}: BodyProps) {
+export function Body({children, data, ...props}: Readonly<BodyProps>) {
   if (data) {
     return children;
   }

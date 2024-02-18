@@ -1,7 +1,8 @@
-import {FormTextInputProps, TextInput} from '../';
 import {mask} from '@utils';
+import {TextInput} from '../TextInput/TextInput';
+import {FormTextInputProps} from './FormTextInput';
 
-export function FormTextInputCpf({formik, name, ...props}: FormTextInputProps) {
+export function FormTextInputCpf({formik, name, ...props}: Readonly<FormTextInputProps>) {
   return (
     <TextInput
       label="Digite seu CPF"
