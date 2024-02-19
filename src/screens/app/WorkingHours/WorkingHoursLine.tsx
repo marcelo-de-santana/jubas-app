@@ -1,4 +1,4 @@
-import { BoxFourItems } from '@components';
+import {BoxFourItems} from '@components';
 import {WorkingHourResponse} from '@domain';
 import {ColorName, colors} from '@styles';
 import {View} from 'react-native';

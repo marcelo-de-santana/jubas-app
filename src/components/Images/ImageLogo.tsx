@@ -1,7 +1,7 @@
 import {colors} from '@styles';
 import {Image} from 'react-native';
 
-export function Logo() {
+export function ImageLogo() {
   return (
     <Image
       resizeMode="stretch"
@@ -12,7 +12,7 @@ export function Logo() {
         borderRadius: 20,
         height: 150,
         margin: 20,
-        width: 130,
+        width: 120,
       }}
     />
   );

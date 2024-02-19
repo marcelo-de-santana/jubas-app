@@ -5,7 +5,7 @@ interface UseFetchResponse<TResponse, TRequest> {
   data: TResponse | undefined;
   isLoading: boolean;
   isError: boolean | null;
-  status: number | null | undefined;
+  status: number | null;
   fetch: (request: TRequest) => Promise<void>;
   refresh: (request: TRequest) => Promise<void>;
 }
@@ -21,7 +21,7 @@ export function useFetch<TResponse = any, TRequest = void>(
   const [data, setData] = useState<TResponse>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean | null>(null);
-  const [status, setStatus] = useState<number | undefined | null>(null);
+  const [status, setStatus] = useState<number | null>(null);
 
   async function fetch(request: TRequest) {
     try {
@@ -34,7 +34,9 @@ export function useFetch<TResponse = any, TRequest = void>(
     } catch (error) {
       setIsError(true);
       if (isAxiosError(error)) {
-        setStatus(error.response?.status);
+        if (error.response?.status) {
+          setStatus(error.response.status);
+        }
       }
     } finally {
       setIsLoading(false);

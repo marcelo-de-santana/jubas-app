@@ -2,7 +2,7 @@ import {ColorName, colors} from '@styles';
 import {View} from 'react-native';
 import {Icon, IconName} from './Icon';
 
-interface BoxProps {
+interface IconBoxProps {
   name: IconName;
   size?: number;
   color?: ColorName;
@@ -12,12 +12,12 @@ interface BoxProps {
 /**
  * @description ICON TO LOGO SCREEN
  */
-export function BoxIcon({
+export function IconBox({
   name,
   size = 60,
   color = 'black',
   backgroundColor = 'lavenderGray',
-}: BoxProps) {
+}: Readonly<IconBoxProps>) {
   return (
     <View
       style={{

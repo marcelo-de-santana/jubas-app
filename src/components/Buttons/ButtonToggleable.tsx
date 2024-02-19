@@ -1,11 +1,14 @@
 import {colors} from '@styles';
 import {Button, ButtonProps} from './Button';
 
-interface ToggleableButtonProps extends ButtonProps {
+interface ButtonToggleableProps extends ButtonProps {
   value: boolean;
 }
 
-export function ToggleableButton({value, ...props}: ToggleableButtonProps) {
+export function ButtonToggleable({
+  value,
+  ...props
+}: Readonly<ButtonToggleableProps>) {
   const $buttonStyle = {
     backgroundColor: colors[value ? 'lavenderGray' : 'lightGray'],
     borderColor: colors[value ? 'steelBlue' : 'lavenderGray'],

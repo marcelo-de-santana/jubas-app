@@ -1,15 +1,15 @@
 import {
-  BoxIcon,
+  IconBox,
   Button,
   FormTextInput,
   FormTextInputCpf,
   Screen,
-  StatusScreen,
+  ModalStatus,
 } from '@components';
-import {useProfileRecoveryPassword} from '@domain';
-import {useForm} from '@hooks';
+import {profileUseCases} from '@domain';
+import {useForm, useNavigation} from '@hooks';
 import {AlertStatusType} from '@styles';
-import {mask, schemas, useNavigation} from '@utils';
+import {mask, schemas} from '@utils';
 import {ScrollView} from 'react-native';
 
 export function RecoveryPasswordScreen() {
@@ -18,8 +18,8 @@ export function RecoveryPasswordScreen() {
     404: {type: 'danger', message: 'Usuário não localizado.'},
   };
 
-  const {isLoading, status, recoveryPass} = useProfileRecoveryPassword();
-  const {navigateBack} = useNavigation();
+  const {isLoading, status, fetch} = profileUseCases.recoveryPassword();
+  const {goBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.recoveryPass,
     initialValues: {
@@ -29,7 +29,7 @@ export function RecoveryPasswordScreen() {
       checkPass: '',
     },
     onSubmit: () =>
-      recoveryPass({
+      fetch({
         email: formik.values.email,
         password: formik.values.password,
         cpf: mask.removeCpf(formik.values.cpf),
@@ -38,14 +38,14 @@ export function RecoveryPasswordScreen() {
 
   return (
     <Screen>
-      <StatusScreen
+      <ModalStatus
         status={status}
         customStatus={$customStatus}
-        successAction={navigateBack}
-        errorAction={navigateBack}
+        successAction={goBack}
+        errorAction={goBack}
       />
       <ScrollView>
-        <BoxIcon name="LockIcon" />
+        <IconBox name="LockIcon" />
         <FormTextInput
           formik={formik}
           name="email"

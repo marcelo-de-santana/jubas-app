@@ -1,11 +1,11 @@
 import {colors} from '@styles';
 import {Button, ButtonProps} from './Button';
 
-interface SectionButtonProps extends ButtonProps {
+interface ButtonSectionProps extends ButtonProps {
   value: boolean;
 }
 
-export function SectionButton({value, ...props}: SectionButtonProps) {
+export function ButtonSection({value, ...props}: Readonly<ButtonSectionProps>) {
   const $buttonStyle = {
     backgroundColor: colors[value ? 'lavenderGray' : 'lightGray'],
     borderColor: colors[value ? 'steelBlue' : 'lavenderGray'],

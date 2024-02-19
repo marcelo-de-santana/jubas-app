@@ -31,9 +31,10 @@ async function addSpecialties(request: EmployeeSpecialtiesRequest) {
 }
 
 async function updateWorkingHour(request: EmployeeWorkingHourRequest) {
-  return await api.patch(`${PATH}/${request.employeeId}/working-hours`, {
-    workingHourId: request.workingHourId,
-  });
+  return await api.patch(
+    `${PATH}/${request.employeeId}/working-hours`,
+    request.workingHourId,
+  );
 }
 export const employeeApi = {
   getAll,

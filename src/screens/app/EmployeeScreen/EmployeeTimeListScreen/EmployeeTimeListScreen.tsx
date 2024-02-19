@@ -1,4 +1,4 @@
-import {EmptyList, Screen, Separator, StatusScreen} from '@components';
+import {EmptyList, Screen, Separator, ModalStatus} from '@components';
 import {
   WorkingHourResponse,
   employeeUseCases,
@@ -31,7 +31,7 @@ export function EmployeeTimeListScreen({
     const choiceWorkingHours = () => {
       useEmployee.fetch({
         employeeId,
-        workingHourId,
+        workingHourId: item.id,
       });
     };
 
@@ -46,7 +46,7 @@ export function EmployeeTimeListScreen({
 
   return (
     <Screen>
-      <StatusScreen status={useEmployee.status} successAction={goBack} />
+      <ModalStatus status={useEmployee.status} successAction={goBack} />
       <FlatList
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}

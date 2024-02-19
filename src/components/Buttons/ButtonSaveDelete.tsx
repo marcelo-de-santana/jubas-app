@@ -2,19 +2,19 @@ import {colors, themeRegistry} from '@styles';
 import {View, ViewStyle} from 'react-native';
 import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 import {Button} from './Button';
-import { Icon } from '../Icons/Icon';
+import {Icon} from '../Icons/Icon';
 
-interface DeleteAndSaveButtonGroupProps {
+interface ButtonSaveDeleteProps {
   deleteButtonPress: () => void;
   saveButtonPress: () => void;
   loading: boolean;
 }
 
-export function DeleteAndSaveButtonGroup({
+export function ButtonSaveDelete({
   deleteButtonPress,
   saveButtonPress,
   loading,
-}: Readonly<DeleteAndSaveButtonGroupProps>) {
+}: Readonly<ButtonSaveDeleteProps>) {
   const $deleteBoxStyle: ViewStyle = {
     alignItems: 'center',
     backgroundColor: colors['red'],

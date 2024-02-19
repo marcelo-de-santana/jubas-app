@@ -1,16 +1,22 @@
-import {Screen, SectionButton, Text} from '@components';
-import {useWorkingHoursList} from '@domain';
+import {Screen, ButtonSection, Text, EmptyList, ButtonSave} from '@components';
+import {
+  CategorySpecialtiesResponse,
+  SpecialtyResponse,
+  categoryUseCases,
+} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {themeRegistry} from '@styles';
 import {useEffect} from 'react';
-import {View} from 'react-native';
+import {SectionList, SectionListRenderItemInfo, View} from 'react-native';
 
 export function EmployeeServicesListScreen({
   navigation,
-}: EmployeeScreenProps<'EmployeeServicesListScreen'>) {
-  const {data, isLoading, status} = useWorkingHoursList();
+}: Readonly<EmployeeScreenProps<'EmployeeServicesListScreen'>>) {
+  const {data, isLoading, isError, fetch, refresh} =
+    categoryUseCases.getCategoriesAndSpecialties();
 
   /**
+   * TODO
    * Lista de tarefas
    *
    * Buscar todos os serviços que o barbeiro realiza
@@ -18,22 +24,43 @@ export function EmployeeServicesListScreen({
    * criar estrutura para adicionar e/ou excluir serviços
    */
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  function renderItem({item}: SectionListRenderItemInfo<SpecialtyResponse>) {
+    return (
+      <View style={themeRegistry.boxFlexRow}>
+        <ButtonSection title={item.name} value />
+      </View>
+    );
+  }
 
   return (
     <Screen>
-      <Text align="justify">Titulo</Text>
-      <View style={themeRegistry.boxFlexRow}>
-        <SectionButton title="Corte de cabelo navalhado" value={false} />
-        <SectionButton title="Corte de cabelo" value />
-        <SectionButton title="CorteCorte de cabelo" value />
-        <SectionButton title="Corte de cabelo" value />
-        <SectionButton title="Corte de cabelo" value />
-        <SectionButton title="Corte de cabelocabelo" value />
-        <SectionButton title="CorteCorte de cabelo" value />
-        <SectionButton title="CortecabeloCorte de cabelo" value />
-        <SectionButton title="Corte de cabelo" value />
-      </View>
+      <SectionList
+        sections={formatData(data)}
+        renderSectionHeader={({section: {title}}) => (
+          <Text size="M" align="justify">
+            {title}
+          </Text>
+        )}
+        renderItem={renderItem}
+        ListEmptyComponent={
+          <EmptyList loading={isLoading} error={isError} refetch={refresh} />
+        }
+      />
+      <ButtonSave />
     </Screen>
   );
 }
+
+const formatData = (data?: CategorySpecialtiesResponse[]) => {
+  if (data) {
+    return data.map(category => ({
+      title: category.name,
+      data: category.specialties,
+    }));
+  }
+  return [];
+};

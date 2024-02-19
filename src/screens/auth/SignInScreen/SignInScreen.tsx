@@ -1,4 +1,4 @@
-import {Button, FormTextInput, Screen, StatusScreen} from '@components';
+import {Button, FormTextInput, Screen, ModalStatus} from '@components';
 import {ScrollView, View} from 'react-native';
 import {AuthStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
@@ -26,7 +26,7 @@ export function SignInScreen({navigation}: Readonly<AuthStackProps>) {
 
   return (
     <Screen>
-      <StatusScreen status={status} customStatus={$customStatus} />
+      <ModalStatus status={status} customStatus={$customStatus} />
       <ScrollView>
         <HeaderBox />
         <View style={{marginVertical: 20}}>

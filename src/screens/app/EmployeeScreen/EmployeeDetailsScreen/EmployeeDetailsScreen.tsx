@@ -2,8 +2,8 @@ import {EmptyList, Screen} from '@components';
 import {employeeUseCases} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
-import { EmployeeDetails } from './components/EmployeeDetails';
-import { FirstEmployeeRegistration } from './components/FirstEmployeeRegistration';
+import {EmployeeDetails} from './components/EmployeeDetails';
+import {FirstEmployeeRegistration} from './components/FirstEmployeeRegistration';
 
 export function EmployeeDetailsScreen({
   navigation,

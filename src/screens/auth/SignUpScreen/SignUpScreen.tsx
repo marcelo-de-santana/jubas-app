@@ -1,14 +1,9 @@
-import {
-  Button,
-  FormTextInput,
-  Screen,
-  StatusScreen,
-  BoxIcon,
-} from '@components';
+import {Button, FormTextInput, Screen, ModalStatus, IconBox} from '@components';
 import {ScrollView} from 'react-native';
-import {schemas, useNavigation} from '@utils';
+import {schemas} from '@utils';
 import {AlertStatusType} from '@styles';
-import {useApi, useForm} from '@hooks';
+import {useForm, useNavigation} from '@hooks';
+import {userUseCases} from '@domain';
 
 export function SignUpScreen() {
   const $customStatus: AlertStatusType = {
@@ -16,8 +11,8 @@ export function SignUpScreen() {
     401: {type: 'danger', message: 'Você já possui cadastrado.'},
   };
 
-  const {fetch, isLoading, status} = useApi.user.create();
-  const {navigateBack} = useNavigation();
+  const {fetch, isLoading, status} = userUseCases.create();
+  const {goBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.signUp,
     initialValues: {
@@ -35,14 +30,14 @@ export function SignUpScreen() {
 
   return (
     <Screen>
-      <StatusScreen
+      <ModalStatus
         status={status}
         customStatus={$customStatus}
-        successAction={navigateBack}
-        errorAction={navigateBack}
+        successAction={goBack}
+        errorAction={goBack}
       />
       <ScrollView>
-        <BoxIcon name="PersonIcon" />
+        <IconBox name="PersonIcon" />
         <FormTextInput
           formik={formik}
           name="email"

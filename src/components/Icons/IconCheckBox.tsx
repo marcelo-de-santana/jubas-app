@@ -2,7 +2,7 @@ import {View} from 'react-native';
 import {Text} from '../Text/Text';
 import {Icon, IconName} from './Icon';
 
-interface CheckBoxIconProps {
+interface IconCheckBoxProps {
   label?: string;
   value?: boolean;
   onPress?: () => void;
@@ -14,7 +14,11 @@ interface CheckBoxIconProps {
  * @params {label?: string; value?: boolean}
  */
 
-export function CheckBoxIcon({label, value, onPress}: Readonly<CheckBoxIconProps>) {
+export function IconCheckBox({
+  label,
+  value,
+  onPress,
+}: Readonly<IconCheckBoxProps>) {
   const iconName: IconName = value ? 'CheckBoxChecked' : 'CheckBoxBlank';
 
   return (

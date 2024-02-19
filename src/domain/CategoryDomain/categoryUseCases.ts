@@ -1,17 +1,33 @@
 import {useFetch} from '@hooks';
-import {CategoryResponse} from './categoryResponse';
+import {
+  CategoryResponse,
+  CategorySpecialtiesResponse,
+} from './categoryResponse';
 import {categoryApi} from './categoryApi';
 import {CategoryRequest} from './categoryRequest';
 
-//TODO => ENUM
 function create() {
   return useFetch<void, string>(categoryApi.create);
-}
-function update() {
-  return useFetch<void, CategoryRequest>(categoryApi.update);
 }
 function getAll() {
   return useFetch<CategoryResponse[]>(categoryApi.getAll);
 }
+function getCategoriesAndSpecialties() {
+  return useFetch<CategorySpecialtiesResponse[]>(
+    categoryApi.getCategoriesAndSpecialties,
+  );
+}
+function remove() {
+  return useFetch<void, string>(categoryApi.remove);
+}
+function update() {
+  return useFetch<void, CategoryRequest>(categoryApi.update);
+}
 
-export const categoryUseCases = {create, update, getAll};
+export const categoryUseCases = {
+  create,
+  getAll,
+  getCategoriesAndSpecialties,
+  update,
+  remove,
+};

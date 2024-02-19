@@ -1,19 +1,12 @@
+import {EmptyList, Screen, Separator, ModalStatus} from '@components';
 import {
-  EmptyList,
-  Screen,
-  Separator,
-  StatusScreen,
-  WorkingHoursHeader,
-  WorkingHoursLine,
-} from '@components';
-import {
-  WorkingHoursResponse,
-  useEmployeeCreate,
-  useWorkingHoursList,
+  WorkingHourResponse,
+  employeeUseCases,
+  workingHourUseCases,
 } from '@domain';
+import {useNavigation} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
-import {AlertStatusType, flatListStyle} from '@styles';
-import {useNavigation} from '@utils';
+import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
@@ -23,31 +16,31 @@ export function EmployeeCreateScreen({
   const $customStatus: AlertStatusType = {
     201: {type: 'success', message: 'Funcionário cadastrado com sucesso.'},
   };
-  const {navigateBack} = useNavigation();
-  const useWorkingHours = useWorkingHoursList();
-  const useEmployee = useEmployeeCreate();
+  const {goBack} = useNavigation();
+  const useWorkingHours = workingHourUseCases.getAll();
+  const useEmployee = employeeUseCases.create();
 
   useEffect(() => {
-    useWorkingHours.getList();
+    useWorkingHours.fetch();
   }, []);
 
   const registerEmployee = (workingHourId: number) => {
-    useEmployee.create({
+    useEmployee.fetch({
       profileId: route.params.profile.id,
       workingHourId: workingHourId,
     });
   };
 
-  function renderItem({item}: ListRenderItemInfo<WorkingHoursResponse>) {
+  function renderItem({item}: ListRenderItemInfo<WorkingHourResponse>) {
     return <WorkingHoursLine item={item} onPress={registerEmployee} />;
   }
 
   return (
     <Screen>
-      <StatusScreen
+      <ModalStatus
         status={useEmployee.status}
         customStatus={$customStatus}
-        successAction={navigateBack}
+        successAction={goBack}
       />
       <FlatList
         data={useWorkingHours.data}

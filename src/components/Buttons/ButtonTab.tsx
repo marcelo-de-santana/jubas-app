@@ -1,13 +1,13 @@
 import {ButtonStyleName, ColorName} from '@styles';
 import {Button, ButtonProps} from './Button';
 
-interface TabButtonProps extends ButtonProps {
+interface ButtonTabProps extends ButtonProps {
   isPressed: boolean;
   title: string;
   onPress: () => void;
 }
 
-export function TabButton({isPressed, ...props}: TabButtonProps) {
+export function ButtonTab({isPressed, ...props}: Readonly<ButtonTabProps>) {
   const buttonType: ButtonStyleName = isPressed ? 'tab-blue' : 'tab-gray';
   const textColor: ColorName = isPressed ? 'white' : 'steelBlue';
 

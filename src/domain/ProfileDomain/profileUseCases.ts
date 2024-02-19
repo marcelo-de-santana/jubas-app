@@ -7,22 +7,22 @@ import {
 } from './profileRequest';
 import {profileApi} from './profileApi';
 
-export function useProfileCreate() {
+function create() {
   return useFetch<ProfileResponse, ProfileCreateRequest>(profileApi.create);
 }
 
-export function useProfileRecoveryPassword() {
+function recoveryPassword() {
   return useFetch<ProfileResponse, RecoveryPasswordRequest>(
     profileApi.recoveryPassword,
   );
 }
 
-export function useProfileRemove() {
+function remove() {
   return useFetch<void, string>(profileApi.remove);
 }
 
-export function useProfileUpdate() {
+function update() {
   return useFetch<ProfileResponse, ProfileUpdateRequest>(profileApi.update);
 }
 
-export const profileUseCases = {};
+export const profileUseCases = {create, recoveryPassword, remove, update};
