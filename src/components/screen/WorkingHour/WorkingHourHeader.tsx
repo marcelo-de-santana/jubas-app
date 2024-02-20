@@ -1,6 +1,6 @@
 import {BoxFourItems} from '@components';
 
-export function WorkingHoursHeader() {
+export function WorkingHourHeader() {
   const listHeader = [
     'Entrada',
     'Início\nIntervalo',

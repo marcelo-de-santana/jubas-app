@@ -2,7 +2,7 @@ import {Icon, Text} from '@components';
 import {EmployeeScreenProps} from '@routes';
 import {View} from 'react-native';
 
-export function FirstEmployeeRegistration({
+export function FirstRegistration({
   navigation,
   route,
 }: Readonly<EmployeeScreenProps<'EmployeeDetailsScreen'>>) {

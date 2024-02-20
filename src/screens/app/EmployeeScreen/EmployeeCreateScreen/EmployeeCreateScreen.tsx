@@ -1,4 +1,12 @@
-import {EmptyList, Screen, Separator, ModalStatus} from '@components';
+import {
+  EmptyList,
+  Screen,
+  Separator,
+  ModalStatus,
+  AlertStatusType,
+  WorkingHourLine,
+  WorkingHourHeader,
+} from '@components';
 import {
   WorkingHourResponse,
   employeeUseCases,
@@ -14,7 +22,7 @@ export function EmployeeCreateScreen({
   route,
 }: Readonly<EmployeeScreenProps<'EmployeeCreateScreen'>>) {
   const $customStatus: AlertStatusType = {
-    201: {type: 'success', message: 'Funcionário cadastrado com sucesso.'},
+    201: ['SUCCESS', 'Funcionário cadastrado com sucesso.'],
   };
   const {goBack} = useNavigation();
   const useWorkingHours = workingHourUseCases.getAll();
@@ -24,15 +32,15 @@ export function EmployeeCreateScreen({
     useWorkingHours.fetch();
   }, []);
 
-  const registerEmployee = (workingHourId: number) => {
-    useEmployee.fetch({
-      profileId: route.params.profile.id,
-      workingHourId: workingHourId,
-    });
-  };
-
   function renderItem({item}: ListRenderItemInfo<WorkingHourResponse>) {
-    return <WorkingHoursLine item={item} onPress={registerEmployee} />;
+    const registerEmployee = () => {
+      useEmployee.fetch({
+        profileId: route.params.profile.id,
+        workingHourId: item.id,
+      });
+    };
+
+    return <WorkingHourLine item={item} onPress={registerEmployee} />;
   }
 
   return (
@@ -47,13 +55,13 @@ export function EmployeeCreateScreen({
         renderItem={renderItem}
         ItemSeparatorComponent={Separator}
         contentContainerStyle={flatListStyle(useWorkingHours.data)}
-        ListHeaderComponent={<WorkingHoursHeader />}
+        ListHeaderComponent={<WorkingHourHeader />}
         ListEmptyComponent={
           <EmptyList
             loading={useWorkingHours.isLoading}
             error={useWorkingHours.isError}
             title="Lista Vazia."
-            refetch={useWorkingHours.fetchData}
+            refetch={useWorkingHours.fetch}
           />
         }
       />

@@ -1,4 +1,11 @@
-import {EmptyList, Screen, Separator, ModalStatus} from '@components';
+import {
+  EmptyList,
+  Screen,
+  Separator,
+  ModalStatus,
+  WorkingHourLine,
+  WorkingHourHeader,
+} from '@components';
 import {
   WorkingHourResponse,
   employeeUseCases,
@@ -9,8 +16,6 @@ import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {flatListStyle} from '@styles';
 import {useNavigation} from '@hooks';
-import {WorkingHoursLine} from '../../WorkingHours/WorkingHoursLine';
-import {WorkingHoursHeader} from '../../WorkingHours/WorkingHoursHeader';
 
 export function EmployeeTimeListScreen({
   navigation,
@@ -36,7 +41,7 @@ export function EmployeeTimeListScreen({
     };
 
     return (
-      <WorkingHoursLine
+      <WorkingHourLine
         item={item}
         workingHourId={workingHourId}
         onPress={choiceWorkingHours}
@@ -50,7 +55,7 @@ export function EmployeeTimeListScreen({
       <FlatList
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}
-        ListHeaderComponent={WorkingHoursHeader}
+        ListHeaderComponent={WorkingHourHeader}
         ItemSeparatorComponent={Separator}
         renderItem={renderItem}
         ListEmptyComponent={

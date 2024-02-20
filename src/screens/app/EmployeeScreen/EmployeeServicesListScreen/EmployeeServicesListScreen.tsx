@@ -1,13 +1,16 @@
-import {Screen, ButtonSection, Text, EmptyList, ButtonSave} from '@components';
+import {Screen, ButtonSection, Text, EmptyList, ButtonConfirm} from '@components';
 import {
   CategorySpecialtiesResponse,
-  SpecialtyResponse,
   categoryUseCases,
 } from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {themeRegistry} from '@styles';
 import {useEffect} from 'react';
-import {SectionList, SectionListRenderItemInfo, View} from 'react-native';
+import {
+  FlatList,
+  ListRenderItemInfo,
+  View,
+} from 'react-native';
 
 export function EmployeeServicesListScreen({
   navigation,
@@ -28,39 +31,29 @@ export function EmployeeServicesListScreen({
     fetch();
   }, []);
 
-  function renderItem({item}: SectionListRenderItemInfo<SpecialtyResponse>) {
+  function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
     return (
-      <View style={themeRegistry.boxFlexRow}>
-        <ButtonSection title={item.name} value />
+      <View>
+        <Text size="L" align="justify">
+          {item.name}
+        </Text>
+        <View style={themeRegistry.boxFlexRow}>
+          <ButtonSection title={item.name} value />
+        </View>
       </View>
     );
   }
 
   return (
     <Screen>
-      <SectionList
-        sections={formatData(data)}
-        renderSectionHeader={({section: {title}}) => (
-          <Text size="M" align="justify">
-            {title}
-          </Text>
-        )}
+      <FlatList
+        data={data}
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyList loading={isLoading} error={isError} refetch={refresh} />
         }
       />
-      <ButtonSave />
+      <ButtonConfirm />
     </Screen>
   );
 }
-
-const formatData = (data?: CategorySpecialtiesResponse[]) => {
-  if (data) {
-    return data.map(category => ({
-      title: category.name,
-      data: category.specialties,
-    }));
-  }
-  return [];
-};

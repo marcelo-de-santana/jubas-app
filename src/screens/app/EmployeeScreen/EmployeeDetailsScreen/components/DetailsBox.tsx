@@ -2,15 +2,15 @@ import {BoxDetails} from '@components';
 import {EmployeeResponse} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 
-interface EmployeeDetailsPros {
+interface DetailsBoxPros {
   navigation: EmployeeScreenProps<'EmployeeDetailsScreen'>['navigation'];
   employee: EmployeeResponse;
 }
 
-export function EmployeeDetails({
+export function DetailsBox({
   navigation,
   employee,
-}: Readonly<EmployeeDetailsPros>) {
+}: Readonly<DetailsBoxPros>) {
   const navigateToTimeListScreen = () => {
     navigation.navigate('EmployeeTimeListScreen', {
       employeeId: employee.id,

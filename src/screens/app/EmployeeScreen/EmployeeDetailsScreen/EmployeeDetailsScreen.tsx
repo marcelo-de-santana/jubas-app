@@ -2,8 +2,8 @@ import {EmptyList, Screen} from '@components';
 import {employeeUseCases} from '@domain';
 import {EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
-import {EmployeeDetails} from './components/EmployeeDetails';
-import {FirstEmployeeRegistration} from './components/FirstEmployeeRegistration';
+import {DetailsBox} from './components/DetailsBox';
+import {FirstRegistration} from './components/FirstRegistration';
 
 export function EmployeeDetailsScreen({
   navigation,
@@ -26,11 +26,11 @@ export function EmployeeDetailsScreen({
   );
 
   if (status === 200 && data) {
-    body = <EmployeeDetails navigation={navigation} employee={data} />;
+    body = <DetailsBox navigation={navigation} employee={data} />;
   }
 
   if (status === 404) {
-    body = <FirstEmployeeRegistration navigation={navigation} route={route} />;
+    body = <FirstRegistration navigation={navigation} route={route} />;
   }
 
   return <Screen>{body}</Screen>;

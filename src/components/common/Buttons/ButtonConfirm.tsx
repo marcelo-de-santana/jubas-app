@@ -1,6 +1,6 @@
 import {Button, ButtonProps} from './Button';
 
-export function ButtonSave({...props}: Readonly<ButtonProps>) {
+export function ButtonConfirm({...props}: Readonly<ButtonProps>) {
   return (
     <Button
       type="inline"

@@ -1,5 +1,6 @@
 import {FormikExtractedParams} from '@hooks';
-import {TextInputProps, TextInput} from '../';
+import { TextInput } from '../TextInput/TextInput';
+import { TextInputProps } from 'react-native';
 
 export interface FormTextInputProps extends TextInputProps {
   formik: FormikExtractedParams;

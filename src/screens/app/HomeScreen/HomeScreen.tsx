@@ -11,6 +11,10 @@ export function HomeScreen({navigation}: Readonly<AppStackProps>) {
     navigation.navigate('UnderConstruction');
   };
 
+  const navigateToScheduleStack = () => {
+    navigation.navigate('ScheduleStack');
+  };
+
   const navigateToBusinessManagementStack = () => {
     navigation.navigate('BusinessManagementStack');
   };
@@ -29,7 +33,7 @@ export function HomeScreen({navigation}: Readonly<AppStackProps>) {
         <Button
           type="box"
           title="Ver agenda"
-          onPress={navigateToUnderConstruction}
+          onPress={navigateToScheduleStack}
         />
         <Button
           type="box"

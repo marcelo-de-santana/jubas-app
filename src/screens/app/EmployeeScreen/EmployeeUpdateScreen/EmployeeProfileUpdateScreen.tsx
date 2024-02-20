@@ -1,23 +1,23 @@
 import {
   Screen,
   FormTextInputCpf,
-  StatusScreen,
+  ModalStatus,
   FormTextInputName,
   Button,
-  CheckBoxIcon,
+  IconCheckBox,
 } from '@components';
-import {useProfileUpdate} from '@domain';
-import {useForm} from '@hooks';
+import {profileUseCases} from '@domain';
+import {useForm, useNavigation} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
-import {mask, schemas, useNavigation} from '@utils';
+import {mask, schemas} from '@utils';
 
 export function EmployeeProfileUpdateScreen({
   route,
 }: Readonly<EmployeeScreenProps<'EmployeeProfileUpdateScreen'>>) {
   const {profile} = route.params;
-  const {navigateBack} = useNavigation();
+  const {goBack} = useNavigation();
 
-  const {update, isLoading, status} = useProfileUpdate();
+  const {fetch, isLoading, status} = profileUseCases.update();
 
   const formik = useForm({
     validationSchema: schemas.profileUpdate,
@@ -28,7 +28,7 @@ export function EmployeeProfileUpdateScreen({
       statusProfile: profile.statusProfile,
     },
     onSubmit: () =>
-      update({
+      fetch({
         id: formik.values.profileId,
         cpf: mask.removeCpf(formik.values.cpf),
         name: formik.values.name,
@@ -38,7 +38,7 @@ export function EmployeeProfileUpdateScreen({
 
   return (
     <Screen>
-      <StatusScreen status={status} successAction={navigateBack} />
+      <ModalStatus status={status} successAction={goBack} />
       <FormTextInputName formik={formik} label="Nome" name="name" />
       <FormTextInputCpf
         formik={formik}
@@ -47,7 +47,7 @@ export function EmployeeProfileUpdateScreen({
         keyboardType="numeric"
       />
 
-      <CheckBoxIcon
+      <IconCheckBox
         label="Estado do perfil"
         value={formik.values.statusProfile}
         onPress={() => formik.handleChangeBoolean('statusProfile')}

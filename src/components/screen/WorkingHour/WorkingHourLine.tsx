@@ -3,17 +3,17 @@ import {WorkingHourResponse} from '@domain';
 import {ColorName, colors} from '@styles';
 import {View} from 'react-native';
 
-export interface WorkingHoursLineProps {
+export interface WorkingHourLineProps {
   item: WorkingHourResponse;
   workingHourId?: string;
   onPress?: (id: string) => void;
 }
 
-export function WorkingHoursLine({
+export function WorkingHourLine({
   item,
   workingHourId,
   onPress,
-}: Readonly<WorkingHoursLineProps>) {
+}: Readonly<WorkingHourLineProps>) {
   let $boxStyle: ColorName = 'lightGray';
   let $boxDisable = false;
 

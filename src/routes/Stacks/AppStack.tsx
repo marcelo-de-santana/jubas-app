@@ -1,7 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, UnderConstruction} from '@screens';
-import {UserStack} from './UserStack';
 import {EmployeeStack} from './EmployeeStack';
+import {ScheduleStack} from './ScheduleStack';
+import {UserStack} from './UserStack';
 import {BusinessManagementStack} from './BusinessManagementStack';
 import {defaultOptions} from '../screenOptions';
 
@@ -10,6 +11,7 @@ export type AppStackParamList = {
   EmployeeStack: undefined;
   HomeScreen: undefined;
   UnderConstruction: undefined;
+  ScheduleStack: undefined;
   UserStack: undefined;
   // MyAccount: undefined;
   // ScheduleManagement: undefined;
@@ -32,6 +34,7 @@ export function AppStack() {
           headerShown: true,
         }}
       />
+      <NativeStack.Screen name="ScheduleStack" component={ScheduleStack} />
       <NativeStack.Screen
         name="BusinessManagementStack"
         component={BusinessManagementStack}
