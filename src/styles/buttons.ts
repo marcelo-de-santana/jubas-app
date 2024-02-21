@@ -1,9 +1,9 @@
-import {Dimensions, StyleSheet} from 'react-native';
-import {colors} from './Colors';
+import {Dimensions} from 'react-native';
+import {colors} from './colors';
 
-const {width} = Dimensions.get("screen");
+const {width} = Dimensions.get('screen');
 
-export const buttonStyle = StyleSheet.create({
+export const buttons = {
   box: {
     borderColor: colors.midnightBlueTransparent,
     borderRadius: 10,
@@ -72,6 +72,6 @@ export const buttonStyle = StyleSheet.create({
     padding: 10,
     width: width * 0.28,
   },
-});
+};
 
-export type ButtonStyleName = keyof typeof buttonStyle;
+export type ButtonName = keyof typeof buttons;

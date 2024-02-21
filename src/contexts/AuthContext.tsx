@@ -1,5 +1,6 @@
 import {UserPermissionResponse, userUseCases} from '@domain';
 import {createContext, useContext, useState} from 'react';
+import {Appearance} from 'react-native';
 
 const defaultUser = {
   id: '',

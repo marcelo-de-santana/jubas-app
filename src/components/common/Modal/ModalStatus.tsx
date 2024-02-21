@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Modal, Pressable, StyleProp, View, ViewStyle} from 'react-native';
-import {ColorName, colors} from '@styles';
 import {Text} from '../Text/Text';
+import {ThemeColors, theme} from '@styles';
 
 export interface ModalStatusProps {
   status?: number | null;
@@ -25,7 +25,7 @@ export function ModalStatus({
   const $boxStyle = {
     padding: 20,
     borderRadius: 6,
-    backgroundColor: colors[$boxColor],
+    backgroundColor: theme.colors[$boxColor],
   };
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -64,7 +64,7 @@ const $boxContainerStyle: StyleProp<ViewStyle> = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: colors.midnightBlueTransparent,
+  backgroundColor: theme.colors.midnightBlueTransparent,
 };
 
 const $alertStyle: AlertStyle = {
@@ -98,4 +98,4 @@ const $alertStatus: AlertStatusType = {
 
 export type AlertStatusType = Record<number, [AlertName, string]>;
 type AlertName = 'NEUTRAL' | 'DANGER' | 'SUCCESS';
-type AlertStyle = Record<AlertName, {box: ColorName; text: ColorName}>;
+type AlertStyle = Record<AlertName, {box: ThemeColors; text: ThemeColors}>;

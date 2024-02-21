@@ -1,48 +1,46 @@
-import {Pressable, ViewStyle} from 'react-native';
-import {ButtonStyleName, ColorName, buttonStyle, colors} from '@styles';
 import {Text, TextProps} from '../Text/Text';
 import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
+import {ButtonName, buttonPreset} from './buttonTypes';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from '../TouchableOpacity/TouchableOpacity';
 
-export interface ButtonProps {
-  type?: ButtonStyleName;
-  backgroundColor?: ColorName;
-  style?: ViewStyle;
+export interface ButtonProps extends TouchableOpacityProps {
+  type: ButtonName;
   loading?: boolean;
-  disabled?: boolean;
   onPress?: () => void;
   title?: string;
   textProps?: TextProps;
 }
 
 export function Button({
-  type,
-  backgroundColor,
-  style,
+  type = 'confirm',
   loading,
   disabled,
-  onPress,
   title,
   textProps,
+  ...props
 }: Readonly<ButtonProps>) {
-  const $buttonType = type && buttonStyle[type];
-  const $buttonStyle = {
-    backgroundColor: backgroundColor && colors[backgroundColor],
-    ...style,
-  };
-  const disable = disabled ?? loading;
+  const preset = buttonPreset[type];
 
   return (
-    <Pressable
-      style={[$buttonStyle, $buttonType]}
-      onPress={onPress}
-      disabled={disable}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      disabled={disabled ?? loading}
+      {...preset.container}
+      {...props}>
       {loading ? (
-        <ActivityIndicator color={textProps?.color ?? 'white'} size={'small'} />
+        <ActivityIndicator color={preset.content.color} size={'small'} />
       ) : (
-        <Text align="center" {...textProps}>
+        <Text
+          color={preset.content.color}
+          fontSize="XL"
+          textAlign="center"
+          {...textProps}>
           {title}
         </Text>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 }

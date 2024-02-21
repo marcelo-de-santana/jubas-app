@@ -17,6 +17,7 @@ export * from './Icons/IconCheckBox';
 export * from './Icons/Icon';
 export * from './Images/ImageConstruction';
 export * from './Images/ImageLogo';
+export * from './Box/Box';
 export * from './Box/BoxDetails';
 export * from './Box/BoxFourItems';
 export * from './Box/BoxItem';

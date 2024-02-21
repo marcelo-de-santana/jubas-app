@@ -1,14 +1,14 @@
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {colors} from '@styles';
+import {theme} from '@styles';
 
 export const defaultOptions: NativeStackNavigationOptions = {
   headerShadowVisible: false,
   headerStyle: {
-    backgroundColor: colors['lightGray'],
+    backgroundColor: theme.colors.backgroundPrimary,
   },
-  headerTintColor: colors['steelBlue'],
+  headerTintColor: theme.colors.fontPrimary,
   headerTitleAlign: 'center',
-  statusBarColor: colors['lightGray'],
-  statusBarStyle: 'dark',
+  statusBarColor: theme.colors.backgroundPrimary,
+  statusBarStyle: 'auto',
   fullScreenGestureEnabled: true,
 };

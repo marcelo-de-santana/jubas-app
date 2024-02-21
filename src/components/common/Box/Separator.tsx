@@ -1,22 +1,6 @@
-import {ColorName, colors} from '@styles';
-import {View, ViewProps} from 'react-native';
+import {ViewProps} from 'react-native';
+import {Box} from './Box';
 
-interface ViewSeparatorProps extends ViewProps {
-  size?: number;
-  color?: ColorName;
-}
-
-export function Separator({
-  color = 'lavenderGray',
-  ...props
-}: ViewSeparatorProps) {
-  return (
-    <View
-      style={{
-        borderBottomWidth: 1,
-        borderColor: colors[color],
-      }}
-      {...props}
-    />
-  );
+export function Separator(props: Readonly<ViewProps>) {
+  return <Box borderWidth={1} borderColor="backgroundContrast" />;
 }

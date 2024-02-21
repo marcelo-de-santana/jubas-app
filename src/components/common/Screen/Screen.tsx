@@ -1,33 +1,25 @@
-import {Keyboard, Pressable, PressableProps} from 'react-native';
-import {ColorName, colors} from '@styles';
+import {Box, BoxProps} from '../Box/Box';
+import {ScreenViewContainer, ScrollViewContainer} from './ScreenContainers';
+import {theme} from '@styles';
 
-interface ScreenProps extends PressableProps {
+interface Props extends BoxProps {
   children?: React.ReactNode;
-  color?: ColorName;
+  scrollable?: boolean;
 }
 
-/**
- * Componente responsável por formatar a tela e dar suporte na suspensão do
- * teclado quando o há um input em tela.
- */
 export function Screen({
   children,
-  color = 'lightGray',
+  scrollable = false,
+  px = 's20',
+  py = 's10',
   ...props
-}: Readonly<ScreenProps>) {
-  const $containerStyle = {
-    flex: 1,
-    backgroundColor: colors[color],
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  };
-
+}: Readonly<Props>) {
+  const Container = scrollable ? ScrollViewContainer : ScreenViewContainer;
   return (
-    <Pressable
-      style={$containerStyle}
-      onPress={props.onPress ?? Keyboard.dismiss}
-      {...props}>
-      {children}
-    </Pressable>
+    <Container backgroundColor={theme.colors.backgroundPrimary}>
+      <Box px={px} py={py} {...props}>
+        {children}
+      </Box>
+    </Container>
   );
 }

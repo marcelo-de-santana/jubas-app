@@ -1,4 +1,3 @@
-import { colors } from '@styles';
 import {useRef} from 'react';
 import {
   Pressable,
@@ -6,14 +5,19 @@ import {
   TextInputProps as RNTextInputProps,
   View,
 } from 'react-native';
-import { Text } from '../Text/Text';
+import {Text} from '../Text/Text';
+import {theme} from '@styles';
 
 export interface TextInputProps extends RNTextInputProps {
   label?: string;
   errorMessage?: string;
 }
 
-export function TextInput({label, errorMessage, ...props}: Readonly<TextInputProps>) {
+export function TextInput({
+  label,
+  errorMessage,
+  ...props
+}: Readonly<TextInputProps>) {
   const inputRef = useRef<RNTextInput>(null);
 
   const $viewTextStyle = {padding: 5};
@@ -22,8 +26,8 @@ export function TextInput({label, errorMessage, ...props}: Readonly<TextInputPro
     borderRadius: 6,
     height: 40,
     borderWidth: errorMessage ? 2 : 1,
-    borderColor: colors[errorMessage ? 'red' : 'steelBlue'],
-    backgroundColor: colors['lavenderGray'],
+    borderColor: theme.colors[errorMessage ? 'red' : 'steelBlue'],
+    backgroundColor: theme.colors['lavenderGray'],
   };
 
   function focusInput() {
@@ -33,7 +37,7 @@ export function TextInput({label, errorMessage, ...props}: Readonly<TextInputPro
   return (
     <Pressable onPress={focusInput}>
       <View style={$viewTextStyle}>
-        <Text align="justify" size="S" color="steelBlue">
+        <Text textAlign="justify" color="steelBlue" fontSize={theme.fontSize.S}>
           {label}
         </Text>
       </View>
@@ -41,14 +45,14 @@ export function TextInput({label, errorMessage, ...props}: Readonly<TextInputPro
         <RNTextInput
           autoCapitalize="none"
           style={$textInputStyle}
-          placeholderTextColor={colors['midnightBlueTransparent']}
-          cursorColor={colors['midnightBlue']}
+          placeholderTextColor={theme.colors['midnightBlueTransparent']}
+          cursorColor={theme.colors['midnightBlue']}
           {...props}
         />
       </View>
       {errorMessage && (
         <View style={$viewTextStyle}>
-          <Text align="justify" color="red" size="XS">
+          <Text textAlign="justify" color="red" fontSize={theme.fontSize.XS}>
             {errorMessage}
           </Text>
         </View>
@@ -59,5 +63,5 @@ export function TextInput({label, errorMessage, ...props}: Readonly<TextInputPro
 
 const $textInputStyle = {
   paddingHorizontal: 10,
-  color: colors['midnightBlue'],
+  color: theme.colors['midnightBlue'],
 };

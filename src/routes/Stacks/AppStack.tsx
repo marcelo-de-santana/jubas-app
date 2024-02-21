@@ -25,7 +25,10 @@ export function AppStack() {
   return (
     <NativeStack.Navigator
       initialRouteName="HomeScreen"
-      screenOptions={{...defaultOptions, headerShown: false}}>
+      screenOptions={{
+        ...defaultOptions,
+        headerShown: false,
+      }}>
       <NativeStack.Screen
         name="HomeScreen"
         component={HomeScreen}

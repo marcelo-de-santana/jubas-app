@@ -1,4 +1,3 @@
-export * from './Button';
-export * from './Colors';
-export * from './Font';
-export * from './Theme';
+export * from './fonts';
+export * from './theme';
+export * from './types';

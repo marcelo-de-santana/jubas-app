@@ -5,7 +5,7 @@ export function ButtonConfirm({...props}: Readonly<ButtonProps>) {
     <Button
       type="inline"
       backgroundColor="steelBlue"
-      style={{marginTop: 20}}
+      style={{marginTop: 20, height: 50}}
       title="Salvar"
       textProps={{color: 'white', size: 'L'}}
       {...props}

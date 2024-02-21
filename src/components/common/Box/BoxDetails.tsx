@@ -1,7 +1,6 @@
 import {BoxItem, BoxItemProps} from './BoxItem';
 import {Text, TextProps} from '../Text/Text';
 import {Separator} from './Separator';
-import {themeRegistry} from '@styles';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
 interface BoxComponentProps extends BoxItemProps {

@@ -1,11 +1,11 @@
-import {ColorName, colors} from '@styles';
+import {ThemeColors, theme} from '@styles';
 import {
   ActivityIndicatorProps as RNActivityIndicatorProps,
   ActivityIndicator as RNActivityIndicator,
 } from 'react-native';
 
 export interface ActivityIndicatorProps extends RNActivityIndicatorProps {
-  color?: ColorName;
+  color?: ThemeColors;
 }
 
 export function ActivityIndicator({
@@ -13,5 +13,7 @@ export function ActivityIndicator({
   size = 'large',
   ...props
 }: Readonly<ActivityIndicatorProps>) {
-  return <RNActivityIndicator size={size} color={colors[color]} {...props} />;
+  return (
+    <RNActivityIndicator size={size} color={theme.colors[color]} {...props} />
+  );
 }
