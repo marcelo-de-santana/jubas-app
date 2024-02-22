@@ -5,7 +5,6 @@ import {
   CollapsibleAccording,
   FlatList,
   Screen,
-  Text,
   TextProps,
 } from '@components';
 import {ScheduleResponse, appointmentUseCases} from '@domain';
@@ -13,15 +12,18 @@ import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
-//TODO FINALIZAR REGRAS DE NEGÓCIO E ROTAS PARA AGENDAMENTOS
+//TODO FINALIZAR REGRAS DE NEGÓCIO E ROTAS PARA AGENDAMENTOS COM FUNCIONÁRIO ESPECÍFICO
 export function ScheduleListScreen({
   navigation,
 }: Readonly<ScheduleStackProps<'ScheduleListScreen'>>) {
-  const {data, fetch, isLoading, isError, refresh} =
-    appointmentUseCases.getAll();
+  const {data, fetch, isLoading, isError} = appointmentUseCases.getAll();
+
+  const searchData = () => {
+    fetch({employeeId: '1253fc44-45c5-440c-b0d8-1b9a2c5dc919'});
+  };
 
   useEffect(() => {
-    fetch();
+    searchData();
   }, []);
 
   function renderItem({item}: ListRenderItemInfo<ScheduleResponse>) {
@@ -33,7 +35,7 @@ export function ScheduleListScreen({
         buttonProps={$buttonProps}
         textProps={$textProps}
         title={item.employeeName}>
-        <Box flexDirection="row" flexWrap="wrap" justifyContent="space-around">
+        <Box flexDirection="row" flexWrap="wrap" justifyContent="space-evenly">
           {item?.workingHours.map(workingHour => (
             <BoxTimeAvailable
               backgroundColor="backgroundPrimary"
@@ -48,7 +50,7 @@ export function ScheduleListScreen({
   }
 
   return (
-    <Screen>
+    <Screen flex={1}>
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -56,7 +58,7 @@ export function ScheduleListScreen({
         listEmptyTitle="Não foi possível listar a agenda."
         loading={isLoading}
         error={isError}
-        refetch={refresh}
+        refetch={searchData}
       />
     </Screen>
   );
