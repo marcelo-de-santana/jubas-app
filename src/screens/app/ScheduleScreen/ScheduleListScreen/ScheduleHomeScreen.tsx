@@ -1,14 +1,18 @@
-import {Box, BoxMenu, Button, ButtonConfirm, Screen, Text} from '@components';
+import {Box, BoxMenu, Screen, Text} from '@components';
+import {ScheduleStackProps} from '@routes';
 import {ThemeColors} from '@styles';
-import {useState} from 'react';
-import {View} from 'react-native';
 
 type ButtonStyleProps = (condition: boolean) => {
   box: ThemeColors;
   text: ThemeColors;
 };
 
-export function ScheduleHomeScreen() {
+export function ScheduleHomeScreen({
+  navigation,
+}: Readonly<ScheduleStackProps<'ScheduleHomeScreen'>>) {
+  const navigateToListScreen = () => {
+    navigation.navigate('ScheduleListScreen');
+  };
   return (
     <Screen scrollable>
       <Box py="s20">
@@ -16,7 +20,11 @@ export function ScheduleHomeScreen() {
       </Box>
       <BoxMenu height={200} marginVertical="s20" title="Agendar por serviço" />
 
-      <BoxMenu height={200} title="Agendar por barbeiro" />
+      <BoxMenu
+        height={200}
+        title="Agendar por barbeiro"
+        onPress={navigateToListScreen}
+      />
     </Screen>
   );
 }

@@ -1,10 +1,22 @@
-import {Box, BoxTimeAvailable, FlatList, Screen, Text} from '@components';
+import {
+  Box,
+  BoxTimeAvailable,
+  ButtonProps,
+  CollapsibleAccording,
+  FlatList,
+  Screen,
+  Text,
+  TextProps,
+} from '@components';
 import {ScheduleResponse, appointmentUseCases} from '@domain';
-import {theme} from '@styles';
+import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
-import {ListRenderItemInfo, View} from 'react-native';
+import {ListRenderItemInfo} from 'react-native';
 
-export function ScheduleListScreen() {
+//TODO FINALIZAR REGRAS DE NEGÓCIO E ROTAS PARA AGENDAMENTOS
+export function ScheduleListScreen({
+  navigation,
+}: Readonly<ScheduleStackProps<'ScheduleListScreen'>>) {
   const {data, fetch, isLoading, isError, refresh} =
     appointmentUseCases.getAll();
 
@@ -14,19 +26,24 @@ export function ScheduleListScreen() {
 
   function renderItem({item}: ListRenderItemInfo<ScheduleResponse>) {
     return (
-      <View>
-        <Text fontSize="XL" textAlign="justify">
-          {item.employeeName}
-        </Text>
-        <Box>
+      <CollapsibleAccording
+        backgroundColor="backgroundContrast"
+        borderBottomLeftRadius="s6"
+        borderBottomRightRadius="s6"
+        buttonProps={$buttonProps}
+        textProps={$textProps}
+        title={item.employeeName}>
+        <Box flexDirection="row" flexWrap="wrap" justifyContent="space-around">
           {item?.workingHours.map(workingHour => (
             <BoxTimeAvailable
+              backgroundColor="backgroundPrimary"
+              borderRadius="s10"
               key={workingHour.time}
               scheduleTime={workingHour}
             />
           ))}
         </Box>
-      </View>
+      </CollapsibleAccording>
     );
   }
 
@@ -35,6 +52,7 @@ export function ScheduleListScreen() {
       <FlatList
         data={data}
         renderItem={renderItem}
+        isSeparator={false}
         listEmptyTitle="Não foi possível listar a agenda."
         loading={isLoading}
         error={isError}
@@ -43,3 +61,21 @@ export function ScheduleListScreen() {
     </Screen>
   );
 }
+
+const $buttonProps: ButtonProps = {
+  backgroundColor: 'backgroundContrast',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+  paddingHorizontal: 's10',
+  height: 50,
+  borderTopLeftRadius: 's6',
+  borderTopRightRadius: 's6',
+  marginTop: 's4',
+};
+
+const $textProps: TextProps = {
+  color: 'fontContrast',
+  fontSize: 'XL',
+  textAlign: 'center',
+  verticalAlign: 'middle',
+};

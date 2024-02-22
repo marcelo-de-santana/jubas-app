@@ -1,6 +1,7 @@
 export * from './ActivityIndicator/ActivityIndicator';
 export * from './Alert';
 export * from './Buttons/';
+export * from './Collapsible/CollapsibleAccording';
 export * from './List/FlatList';
 export * from './Forms/';
 export * from './Icons/';

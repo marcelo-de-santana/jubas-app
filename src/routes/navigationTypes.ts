@@ -2,6 +2,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppStackParamList} from './Stacks/AppStack';
 import {BusinessManagementParamList} from './Stacks/BusinessManagementStack';
 import {EmployeeStackParamList} from './Stacks/EmployeeStack';
+import {ScheduleStackParamList} from './Stacks/ScheduleStack';
 import {UserStackParamList} from './Stacks/UserStack';
 import {AuthStackParamList} from './Stacks/AuthStack';
 
@@ -19,3 +20,6 @@ export type BusinessManagementStackProps<
 
 export type UserStackProps<RouteName extends keyof UserStackParamList> =
   NativeStackScreenProps<UserStackParamList, RouteName>;
+
+export type ScheduleStackProps<RouteName extends keyof ScheduleStackParamList> =
+  NativeStackScreenProps<ScheduleStackParamList, RouteName>;
