@@ -1,11 +1,5 @@
 import {Box, BoxMenu, Screen, Text} from '@components';
 import {ScheduleStackProps} from '@routes';
-import {ThemeColors} from '@styles';
-
-type ButtonStyleProps = (condition: boolean) => {
-  box: ThemeColors;
-  text: ThemeColors;
-};
 
 export function ScheduleHomeScreen({
   navigation,
@@ -13,17 +7,28 @@ export function ScheduleHomeScreen({
   const navigateToListScreen = () => {
     navigation.navigate('ScheduleListScreen');
   };
+
+  const navigateToSpecialtiesScreen = () => {
+    navigation.navigate('ScheduleSpecialtiesScreen');
+  };
+
   return (
     <Screen scrollable>
       <Box py="s20">
         <Text fontSize="XL">O que você prefere?</Text>
       </Box>
-      <BoxMenu height={200} marginVertical="s20" title="Agendar por serviço" />
 
       <BoxMenu
         height={200}
         title="Agendar por barbeiro"
         onPress={navigateToListScreen}
+      />
+
+      <BoxMenu
+        height={200}
+        marginVertical="s20"
+        title="Agendar por serviço"
+        onPress={navigateToSpecialtiesScreen}
       />
     </Screen>
   );

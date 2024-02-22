@@ -1,10 +1,15 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {defaultOptions} from '../screenOptions';
-import {ScheduleHomeScreen, ScheduleListScreen} from '@screens';
+import {
+  ScheduleHomeScreen,
+  ScheduleListScreen,
+  ScheduleSpecialtiesScreen,
+} from '@screens';
 
 export type ScheduleStackParamList = {
   ScheduleHomeScreen: undefined;
   ScheduleListScreen: undefined;
+  ScheduleSpecialtiesScreen: undefined;
 };
 
 export function ScheduleStack() {
@@ -21,6 +26,10 @@ export function ScheduleStack() {
       <NativeStack.Screen
         name="ScheduleListScreen"
         component={ScheduleListScreen}
+      />
+      <NativeStack.Screen
+        name="ScheduleSpecialtiesScreen"
+        component={ScheduleSpecialtiesScreen}
       />
     </NativeStack.Navigator>
   );
