@@ -9,8 +9,8 @@ export function ButtonAdd({onPress}: Readonly<ButtonAddProps>) {
   return (
     <Icon
       name="AddIcon"
-      type="floating"
-      backgroundColor="steelBlue"
+      // type="floating"
+      // backgroundColor="steelBlue"
       color="white"
       size={35}
       onPress={onPress}

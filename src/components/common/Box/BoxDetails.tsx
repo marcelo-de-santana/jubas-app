@@ -33,7 +33,7 @@ export function BoxDetails({
         justifyContent="space-between"
         {...boxProps}>
         {textFields?.map(item => (
-          <Text key={item} {...textProps}>
+          <Text key={item} textAlign="justify" {...textProps}>
             {item}
           </Text>
         ))}

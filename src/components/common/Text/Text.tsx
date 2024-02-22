@@ -1,35 +1,44 @@
-import {ThemeColors, ThemeFontSize, theme} from '@styles';
-import {Text as RNText, TextProps as RNTextProps} from 'react-native';
+import {createText} from '@shopify/restyle';
+import {Theme} from '@styles';
+import {ComponentProps} from 'react';
 
-export interface TextProps extends RNTextProps {
-  children?: React.ReactNode;
-  fontSize?: ThemeFontSize;
-  textAlign?: 'auto' | 'justify' | 'center' | 'right' | 'left';
-  verticalAlign?: 'auto' | 'top' | 'bottom' | 'middle';
-  color?: ThemeColors;
+export const RestyleText = createText<Theme>();
+export type RestyleTextProps = ComponentProps<typeof RestyleText>;
+
+export interface TextProps extends RestyleTextProps {
+  children?: string;
 }
 
-export function Text({
-  children,
-  fontSize = 'S',
-  color = 'fontPrimary',
-  textAlign = 'center',
-  verticalAlign = 'auto',
-  ...props
-}: Readonly<TextProps>) {
+export function Text({children, ...props}: Readonly<TextProps>) {
   return (
-    <RNText
-      style={[
-        {
-          color: theme.colors[color],
-          fontSize: theme.fontSize[fontSize],
-          textAlign,
-          verticalAlign,
-        },
-        props.style,
-      ]}
-      {...props}>
+    <RestyleText color="fontPrimary" textAlign="center" {...props}>
       {children}
-    </RNText>
+    </RestyleText>
   );
 }
+
+export const textVariants = {
+  defaults: {
+    fontSize: 14,
+  },
+  paragraphExtraSmall: {
+    fontSize: 10,
+  },
+  paragraphVerySmall: {
+    fontSize: 12,
+  },
+  paragraphSmall: {
+    fontSize: 14,
+  },
+  paragraphMedium: {
+    fontSize: 16,
+  },
+  paragraphLarge: {
+    fontSize: 18,
+  },
+  paragraphVeryLarge: {
+    fontSize: 20,
+  },
+};
+
+// const fontSize = [xxs - 10, xs - 12, s - 14, m - 16, l - 18, xl - 20];

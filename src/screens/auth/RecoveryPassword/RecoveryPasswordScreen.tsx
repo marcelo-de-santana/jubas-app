@@ -5,17 +5,17 @@ import {
   FormTextInputCpf,
   Screen,
   ModalStatus,
+  AlertStatusType,
 } from '@components';
 import {profileUseCases} from '@domain';
 import {useForm, useNavigation} from '@hooks';
-import {AlertStatusType} from '@styles';
 import {mask, schemas} from '@utils';
 import {ScrollView} from 'react-native';
 
 export function RecoveryPasswordScreen() {
   const $customStatus: AlertStatusType = {
-    204: {type: 'success', message: 'Senha alterada com sucesso.'},
-    404: {type: 'danger', message: 'Usuário não localizado.'},
+    204: ['SUCCESS', 'Senha alterada com sucesso.'],
+    404: ['DANGER', 'Usuário não localizado.'],
   };
 
   const {isLoading, status, fetch} = profileUseCases.recoveryPassword();

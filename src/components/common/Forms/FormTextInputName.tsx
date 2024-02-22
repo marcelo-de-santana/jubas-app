@@ -5,7 +5,7 @@ export function FormTextInputName({
   formik,
   name,
   ...props
-}: FormTextInputProps) {
+}: Readonly<FormTextInputProps>) {
   return (
     <TextInput
       label="Digite seu Nome"

@@ -17,7 +17,7 @@ export function ListEmpty({
   refetch,
 }: Readonly<ListEmptyProps>) {
   let component = (
-    <Text fontSize="M" color="steelBlue" textAlign="center">
+    <Text variant='paragraphMedium' color="steelBlue" textAlign="center">
       {title}
     </Text>
   );

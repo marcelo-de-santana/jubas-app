@@ -8,7 +8,7 @@ export function ButtonConfirm({...props}: Readonly<ButtonProps>) {
       borderRadius="s6"
       marginVertical="s4"
       marginTop="s20"
-      textProps={{color: 'fontContrast', fontSize: 'L'}}
+      textProps={{variant: 'paragraphLarge', color: 'fontContrast'}}
       {...props}
     />
   );

@@ -6,7 +6,6 @@ import {
   View,
 } from 'react-native';
 import {Text} from '../Text/Text';
-import {theme} from '@styles';
 
 export interface TextInputProps extends RNTextInputProps {
   label?: string;
@@ -26,8 +25,8 @@ export function TextInput({
     borderRadius: 6,
     height: 40,
     borderWidth: errorMessage ? 2 : 1,
-    borderColor: theme.colors[errorMessage ? 'red' : 'steelBlue'],
-    backgroundColor: theme.colors['lavenderGray'],
+    borderColor: errorMessage ? 'red' : 'steelBlue',
+    backgroundColor: 'lavenderGray',
   };
 
   function focusInput() {
@@ -37,7 +36,7 @@ export function TextInput({
   return (
     <Pressable onPress={focusInput}>
       <View style={$viewTextStyle}>
-        <Text textAlign="justify" color="steelBlue" fontSize={theme.fontSize.S}>
+        <Text variant="paragraphSmall" textAlign="justify" color="steelBlue">
           {label}
         </Text>
       </View>
@@ -45,14 +44,14 @@ export function TextInput({
         <RNTextInput
           autoCapitalize="none"
           style={$textInputStyle}
-          placeholderTextColor={theme.colors['midnightBlueTransparent']}
-          cursorColor={theme.colors['midnightBlue']}
+          placeholderTextColor={'midnightBlueTransparent'}
+          cursorColor={'midnightBlue'}
           {...props}
         />
       </View>
       {errorMessage && (
         <View style={$viewTextStyle}>
-          <Text textAlign="justify" color="red" fontSize={theme.fontSize.XS}>
+          <Text variant="paragraphExtraSmall" textAlign="justify" color="red">
             {errorMessage}
           </Text>
         </View>
@@ -63,5 +62,5 @@ export function TextInput({
 
 const $textInputStyle = {
   paddingHorizontal: 10,
-  color: theme.colors['midnightBlue'],
+  color: 'midnightBlue',
 };

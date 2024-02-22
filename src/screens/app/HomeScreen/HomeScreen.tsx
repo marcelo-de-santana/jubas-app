@@ -1,4 +1,12 @@
-import {Box, BoxMenu, Button, ButtonConfirm, ButtonSection, Screen} from '@components';
+import {
+  Box,
+  BoxMenu,
+  Button,
+  ButtonConfirm,
+  ButtonSection,
+  RestyleText,
+  Screen,
+} from '@components';
 import {AppStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
 

@@ -11,3 +11,33 @@ export const colors = {
   white: '#FFFFFF',
   red: '#EA3838',
 };
+
+export const defaultDarkThemeFontColors = {
+  fontPrimary: colors.blueGray,
+  fontContrast: colors.black,
+};
+export const defaultDarkThemeBackgroundColors = {
+  backgroundPrimary: colors.midnightBlue,
+  backgroundContrast: colors.blueGray,
+};
+
+export const defaultLightThemeFontColors = {
+  fontPrimary: colors.black,
+  fontContrast: colors.blueGray,
+};
+
+export const defaultLightThemeBackgroundColors = {
+  backgroundPrimary: colors.blueGray,
+  backgroundContrast: colors.midnightBlue,
+};
+
+//DARK
+// Background: #161C26 (Midnight Blue)
+// Text: #9BA7BF (Blue Gray)
+// Accent: #CCCED9 (Lavender Gray)
+// Highlight: #FFFFFF (White)
+//LIGHT
+// Background: #9BA7BF (Blue Gray)
+// Text: #000000 (Black)
+// Accent: #161C26 (Midnight Blue)
+// Highlight: #225522 (Light Green)

@@ -75,8 +75,8 @@ const $buttonProps: ButtonProps = {
 };
 
 const $textProps: TextProps = {
+  variant: 'paragraphVeryLarge',
   color: 'fontContrast',
-  fontSize: 'XL',
   textAlign: 'center',
   verticalAlign: 'middle',
 };

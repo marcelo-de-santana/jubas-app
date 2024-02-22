@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Modal, Pressable, StyleProp, View, ViewStyle} from 'react-native';
 import {Text} from '../Text/Text';
-import {ThemeColors, theme} from '@styles';
+import {ThemeColors} from '@styles';
 
 export interface ModalStatusProps {
   status?: number | null;
@@ -25,7 +25,7 @@ export function ModalStatus({
   const $boxStyle = {
     padding: 20,
     borderRadius: 6,
-    backgroundColor: theme.colors[$boxColor],
+    backgroundColor: $boxColor,
   };
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -51,7 +51,7 @@ export function ModalStatus({
     <Modal visible={isVisible} transparent={true} animationType="fade">
       <Pressable style={$boxContainerStyle} onPress={() => setIsVisible(false)}>
         <View style={$boxStyle}>
-          <Text color={$itemColor}>
+          <Text variant="paragraphMedium" color={$itemColor}>
             {message ?? 'Ops... Algo inesperado aconteceu.'}
           </Text>
         </View>
@@ -64,7 +64,7 @@ const $boxContainerStyle: StyleProp<ViewStyle> = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: theme.colors.midnightBlueTransparent,
+  backgroundColor: 'midnightBlueTransparent',
 };
 
 const $alertStyle: AlertStyle = {

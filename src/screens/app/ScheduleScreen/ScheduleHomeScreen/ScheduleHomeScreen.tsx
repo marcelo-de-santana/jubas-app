@@ -15,7 +15,7 @@ export function ScheduleHomeScreen({
   return (
     <Screen scrollable>
       <Box py="s20">
-        <Text fontSize="XL">O que você prefere?</Text>
+        <Text variant="paragraphVeryLarge">O que você prefere?</Text>
       </Box>
 
       <BoxMenu

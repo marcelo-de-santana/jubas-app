@@ -1,14 +1,20 @@
-import {Button, FormTextInput, Screen, ModalStatus, IconBox} from '@components';
+import {
+  Button,
+  FormTextInput,
+  Screen,
+  ModalStatus,
+  IconBox,
+  AlertStatusType,
+} from '@components';
 import {ScrollView} from 'react-native';
 import {schemas} from '@utils';
-import {AlertStatusType} from '@styles';
 import {useForm, useNavigation} from '@hooks';
 import {userUseCases} from '@domain';
 
 export function SignUpScreen() {
   const $customStatus: AlertStatusType = {
-    201: {type: 'success', message: 'Usuário criado com sucesso.'},
-    401: {type: 'danger', message: 'Você já possui cadastrado.'},
+    201: ['SUCCESS', 'Usuário criado com sucesso.'],
+    401: ['DANGER', 'Você já possui cadastrado.'],
   };
 
   const {fetch, isLoading, status} = userUseCases.create();
@@ -68,7 +74,7 @@ export function SignUpScreen() {
           backgroundColor="steelBlue"
           style={{marginTop: 20}}
           title="Cadastrar"
-          textProps={{color: 'white', size: 'L'}}
+          textProps={{variant: 'paragraphLarge', color: 'white'}}
           onPress={formik.handleSubmit}
         />
       </ScrollView>

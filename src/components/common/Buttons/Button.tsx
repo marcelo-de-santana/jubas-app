@@ -40,7 +40,7 @@ export function Button({
       ) : (
         <Text
           color="fontContrast"
-          fontSize="XL"
+          variant="paragraphVeryLarge"
           textAlign="center"
           {...textProps}>
           {title}

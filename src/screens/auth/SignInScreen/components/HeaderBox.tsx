@@ -4,7 +4,7 @@ import {View} from 'react-native';
 export function HeaderBox() {
   return (
     <View>
-      <Text size="XL">Jubas Barbearia</Text>
+      <Text variant="paragraphVeryLarge">Jubas Barbearia</Text>
       <ImageLogo />
     </View>
   );

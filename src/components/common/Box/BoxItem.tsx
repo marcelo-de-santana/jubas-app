@@ -19,7 +19,7 @@ export function BoxItem({
 }: Readonly<BoxItemProps>) {
   return (
     <TouchableOpacity justifyContent="center" {...props}>
-      <Text fontSize="S" textAlign="justify" {...textProps}>
+      <Text variant="paragraphSmall" {...textProps}>
         {label}
       </Text>
       {children}

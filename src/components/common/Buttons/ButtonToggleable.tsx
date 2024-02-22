@@ -1,6 +1,5 @@
 import {Dimensions} from 'react-native';
 import {Button, ButtonProps} from './Button';
-import {theme} from '@styles';
 
 interface ButtonToggleableProps extends ButtonProps {
   value: boolean;
@@ -13,8 +12,8 @@ export function ButtonToggleable({
   ...props
 }: Readonly<ButtonToggleableProps>) {
   const $buttonStyle = {
-    backgroundColor: theme.colors[value ? 'lavenderGray' : 'lightGray'],
-    borderColor: theme.colors[value ? 'steelBlue' : 'lavenderGray'],
+    backgroundColor: value ? 'lavenderGray' : 'lightGray',
+    borderColor: value ? 'steelBlue' : 'lavenderGray',
     borderWidth: 1,
   };
 

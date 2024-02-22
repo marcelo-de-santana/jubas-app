@@ -21,7 +21,7 @@ export function BoxTimeAvailable({
       borderRadius="s6"
       padding="s8"
       textProps={{
-        fontSize: 'S',
+        variant: 'paragraphSmall',
         color: $textColor,
       }}
       label={time}
