@@ -4,8 +4,8 @@ import {
   FlatList as RNFlatList,
   RefreshControl,
 } from 'react-native';
-import {Separator} from '../Box/Separator';
-import {EmptyList} from '../Box/EmptyList';
+import {ListSeparator} from './ListSeparator';
+import {ListEmpty} from './ListEmpty';
 
 interface ListRefreshProps {}
 
@@ -26,12 +26,12 @@ export function FlatList<T = any>({
   return (
     <RNFlatList
       contentContainerStyle={flatListStyle(props.data)}
-      ItemSeparatorComponent={Separator}
+      ItemSeparatorComponent={ListSeparator}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={refetch} />
       }
       ListEmptyComponent={
-        <EmptyList
+        <ListEmpty
           title={listEmptyTitle}
           loading={loading}
           error={error}

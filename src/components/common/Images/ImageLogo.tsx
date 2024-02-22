@@ -1,4 +1,4 @@
-import {colors} from '@styles';
+import {theme} from '@styles';
 import {Image} from 'react-native';
 
 export function ImageLogo() {
@@ -8,7 +8,7 @@ export function ImageLogo() {
       source={require('../../../assets/images/logo-marca.png')}
       style={{
         alignSelf: 'center',
-        backgroundColor: colors['lavenderGray'],
+        backgroundColor: theme.colors['lavenderGray'],
         borderRadius: 20,
         height: 150,
         margin: 20,

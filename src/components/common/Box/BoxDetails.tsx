@@ -1,7 +1,10 @@
 import {BoxItem, BoxItemProps} from './BoxItem';
 import {Text, TextProps} from '../Text/Text';
-import {Separator} from './Separator';
-import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {ListSeparator} from '../List/ListSeparator';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from '../TouchableOpacity/TouchableOpacity';
 
 interface BoxComponentProps extends BoxItemProps {
   textFields: string[];
@@ -24,10 +27,10 @@ export function BoxDetails({
       }}
       {...props}>
       <TouchableOpacity
-        style={{
-          ...themeRegistry['boxFlexRow'],
-          padding: 10,
-        }}
+        flexDirection="row"
+        flexWrap="wrap"
+        padding="s10"
+        justifyContent="space-between"
         {...boxProps}>
         {textFields?.map(item => (
           <Text key={item} {...textProps}>
@@ -35,7 +38,7 @@ export function BoxDetails({
           </Text>
         ))}
       </TouchableOpacity>
-      <Separator />
+      <ListSeparator />
     </BoxItem>
   );
 }

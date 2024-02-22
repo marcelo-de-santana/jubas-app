@@ -1,6 +1,6 @@
 import {BoxFourItems} from '@components';
 import {WorkingHourResponse} from '@domain';
-import {ColorName, colors} from '@styles';
+import {ThemeColors, theme} from '@styles';
 import {View} from 'react-native';
 
 export interface WorkingHourLineProps {
@@ -14,7 +14,7 @@ export function WorkingHourLine({
   workingHourId,
   onPress,
 }: Readonly<WorkingHourLineProps>) {
-  let $boxStyle: ColorName = 'lightGray';
+  let $boxStyle: ThemeColors = 'lightGray';
   let $boxDisable = false;
 
   if (item.id === workingHourId) {
@@ -29,7 +29,7 @@ export function WorkingHourLine({
       }}>
       <BoxFourItems
         style={{
-          backgroundColor: colors[$boxStyle],
+          backgroundColor: theme.colors[$boxStyle],
           borderRadius: 6,
           padding: 10,
         }}

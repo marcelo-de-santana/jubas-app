@@ -34,10 +34,11 @@ export const buttons = {
     bottom: 15,
   },
   inline: {
+    height: 50,
     justifyContent: 'center',
-    borderRadius: 6,
-    minHeight: 40,
-    marginVertical: 5,
+    borderRadius: 's6',
+    marginVertical: 's4',
+    marginTop: 's20',
   },
   'inline-one-fifth-wide': {
     justifyContent: 'center',
@@ -74,4 +75,4 @@ export const buttons = {
   },
 };
 
-export type ButtonName = keyof typeof buttons;
+ type ButtonName = keyof typeof buttons;

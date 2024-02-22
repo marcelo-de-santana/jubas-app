@@ -1,23 +1,23 @@
 import {View} from 'react-native';
-import {Loader} from '../Loader/Loader';
+import {Loader} from './Loader';
 import {Text} from '../Text/Text';
-import {Button} from '../Buttons/Button';
+import {ButtonCentral} from '../Buttons';
 
-export interface EmptyListProps {
+export interface ListEmptyProps {
   title?: string;
   loading?: boolean;
   error?: unknown;
   refetch?: () => void;
 }
 
-export function EmptyList({
+export function ListEmpty({
   title = 'Lista vazia',
   loading,
   error,
   refetch,
-}: Readonly<EmptyListProps>) {
+}: Readonly<ListEmptyProps>) {
   let component = (
-    <Text size="M" color="steelBlue" align="center">
+    <Text fontSize="M" color="steelBlue" textAlign="center">
       {title}
     </Text>
   );
@@ -29,14 +29,8 @@ export function EmptyList({
   if (error) {
     component = (
       <>
-        <Text>Não foi possível carregar 😢</Text>
-        <Button
-          type="center"
-          title="Recarregar"
-          backgroundColor="steelBlue"
-          textProps={{color: 'white'}}
-          onPress={refetch}
-        />
+        <ButtonCentral title="Recarregar" onPress={refetch} />
+        <Text color="backgroundContrast">Não foi possível carregar 😢</Text>
       </>
     );
   }

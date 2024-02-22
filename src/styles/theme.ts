@@ -17,8 +17,43 @@ const palette = {
   red: '#EA3838',
 };
 
+const box = {
+  flexRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  flexRowList: {
+    borderRadius: 6,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 10,
+    marginVertical: 5,
+  },
+  item: {minHeight: 50},
+};
+
+const items = {
+  header: {
+    minHeight: 50,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    paddingTop: 10,
+  },
+  line: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    minHeight: 50,
+    paddingHorizontal: 10,
+  },
+};
+
 const defaults = {
   fontSize,
+  box,
+  items,
+  buttons,
   spacing: {
     s4: 4,
     s8: 8,
@@ -35,38 +70,8 @@ const defaults = {
     s56: 56,
   },
   borderRadii: {
-    6: 6,
-    10: 10,
-  },
-  box: {
-    flexRow: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-    },
-    flexRowList: {
-      borderRadius: 6,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      padding: 10,
-      marginVertical: 5,
-    },
-    item: {minHeight: 50},
-  },
-  items: {
-    header: {
-      minHeight: 50,
-      paddingHorizontal: 10,
-      justifyContent: 'center',
-      paddingTop: 10,
-    },
-    line: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      minHeight: 50,
-      paddingHorizontal: 10,
-    },
+    s6: 6,
+    s10: 10,
   },
 };
 

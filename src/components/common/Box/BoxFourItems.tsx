@@ -1,16 +1,15 @@
 import {BoxItem} from '@components';
-import {Dimensions, TouchableOpacity, ViewStyle} from 'react-native';
+import {TouchableOpacity} from '../TouchableOpacity/TouchableOpacity';
+import {Dimensions} from 'react-native';
 
 // 'lavender-gray' | 'light-gray'
 interface ListTimeProps {
-  style?: ViewStyle;
   textValues?: string[];
   onPress?: () => void;
   disabled?: 'box' | 'item';
 }
 
 export function BoxFourItems({
-  style,
   textValues,
   disabled,
   onPress,
@@ -31,11 +30,8 @@ export function BoxFourItems({
   const {width} = Dimensions.get('screen');
   return (
     <TouchableOpacity
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        ...style,
-      }}
+      flexDirection="row"
+      justifyContent="space-between"
       disabled={$prop.box.disabled}
       onPress={$prop.box.onPress}>
       {textValues?.map(item => (
@@ -46,7 +42,7 @@ export function BoxFourItems({
             width: width * 0.2,
             justifyContent: 'center',
           }}
-          textProps={{align: 'center'}}
+          textProps={{textAlign: 'center'}}
           disabled={$prop.item.disabled}
           onPress={$prop.item.onPress}
         />

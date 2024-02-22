@@ -1,4 +1,4 @@
-import {Pressable, ViewStyle} from 'react-native';
+import {Pressable} from 'react-native';
 import {
   AddIcon,
   CheckBoxBlank,
@@ -12,8 +12,7 @@ import {
   PersonIcon,
   TrashIcon,
 } from '@assets';
-import {ButtonStyleName, ColorName, buttonStyle, colors} from '@styles';
-
+import {ThemeColors, theme} from '@styles';
 export interface IconBase {
   size?: number;
   color?: string;
@@ -21,12 +20,9 @@ export interface IconBase {
 
 export interface IconProps {
   name: IconName;
-  color?: ColorName;
+  color?: ThemeColors;
   size?: number;
   onPress?: () => void;
-  type?: ButtonStyleName;
-  backgroundColor?: ColorName;
-  style?: ViewStyle;
 }
 
 export function Icon({
@@ -34,26 +30,18 @@ export function Icon({
   color = 'steelBlue',
   size,
   onPress,
-  type,
-  backgroundColor,
-  style,
 }: Readonly<IconProps>) {
   const SVGIcon = iconRegistry[name];
-  const $buttonType = type && buttonStyle[type];
-  const $buttonStyle = {
-    backgroundColor: backgroundColor && colors[backgroundColor],
-    ...style,
-  };
 
   if (onPress) {
     return (
-      <Pressable style={[$buttonType, $buttonStyle]} onPress={onPress}>
-        <SVGIcon color={colors[color]} size={size} />
+      <Pressable onPress={onPress}>
+        <SVGIcon color={theme.colors[color]} size={size} />
       </Pressable>
     );
   }
 
-  return <SVGIcon color={colors[color]} size={size} />;
+  return <SVGIcon color={theme.colors[color]} size={size} />;
 }
 
 const iconRegistry = {

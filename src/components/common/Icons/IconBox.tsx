@@ -1,12 +1,12 @@
-import {ColorName, colors} from '@styles';
 import {View} from 'react-native';
 import {Icon, IconName} from './Icon';
+import {ThemeColors, theme} from '@styles';
 
 interface IconBoxProps {
   name: IconName;
   size?: number;
-  color?: ColorName;
-  backgroundColor?: ColorName;
+  color?: ThemeColors;
+  backgroundColor?: ThemeColors;
 }
 
 /**
@@ -22,7 +22,7 @@ export function IconBox({
     <View
       style={{
         padding: 10,
-        backgroundColor: colors[backgroundColor],
+        backgroundColor: theme.colors[backgroundColor],
         borderRadius: 20,
         alignSelf: 'center',
       }}>

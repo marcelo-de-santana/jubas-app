@@ -18,7 +18,7 @@ export function BoxTimeAvailable({
         padding: 5,
       }}
       textProps={{
-        size: 'L',
+        fontSize: 'L',
         color: $textColor,
       }}
       label={time}

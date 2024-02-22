@@ -11,7 +11,7 @@ export interface BoxItemProps extends TouchableOpacityProps {
 export function BoxItem({children, label, textProps, ...props}: Readonly<BoxItemProps>) {
   return (
     <TouchableOpacity style={{justifyContent: 'center'}} {...props}>
-      <Text size="S" align="justify" {...textProps}>
+      <Text fontSize="S" textAlign="justify" {...textProps}>
         {label}
       </Text>
       {children}

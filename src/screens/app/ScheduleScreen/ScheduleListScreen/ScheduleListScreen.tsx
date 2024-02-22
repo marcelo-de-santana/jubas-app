@@ -1,6 +1,6 @@
-import {BoxTimeAvailable, FlatList, Screen, Text} from '@components';
+import {Box, BoxTimeAvailable, FlatList, Screen, Text} from '@components';
 import {ScheduleResponse, appointmentUseCases} from '@domain';
-import {themeRegistry} from '@styles';
+import {theme} from '@styles';
 import {useEffect} from 'react';
 import {ListRenderItemInfo, View} from 'react-native';
 
@@ -15,17 +15,17 @@ export function ScheduleListScreen() {
   function renderItem({item}: ListRenderItemInfo<ScheduleResponse>) {
     return (
       <View>
-        <Text size="XL" align="justify">
+        <Text fontSize="XL" textAlign="justify">
           {item.employeeName}
         </Text>
-        <View style={themeRegistry.boxFlexRow}>
+        <Box>
           {item?.workingHours.map(workingHour => (
             <BoxTimeAvailable
               key={workingHour.time}
               scheduleTime={workingHour}
             />
           ))}
-        </View>
+        </Box>
       </View>
     );
   }

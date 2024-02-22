@@ -3,11 +3,12 @@ import {Button, ButtonProps} from './Button';
 export function ButtonConfirm({...props}: Readonly<ButtonProps>) {
   return (
     <Button
-      type="inline"
-      backgroundColor="steelBlue"
-      style={{marginTop: 20, height: 50}}
-      title="Salvar"
-      textProps={{color: 'white', size: 'L'}}
+      height={50}
+      justifyContent="center"
+      borderRadius="s6"
+      marginVertical="s4"
+      marginTop="s20"
+      textProps={{color: 'fontContrast', fontSize: 'L'}}
       {...props}
     />
   );
