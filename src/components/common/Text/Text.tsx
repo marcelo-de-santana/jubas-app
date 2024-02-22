@@ -5,6 +5,7 @@ export interface TextProps extends RNTextProps {
   children?: React.ReactNode;
   fontSize?: ThemeFontSize;
   textAlign?: 'auto' | 'justify' | 'center' | 'right' | 'left';
+  verticalAlign?: 'auto' | 'top' | 'bottom' | 'middle';
   color?: ThemeColors;
 }
 
@@ -13,6 +14,7 @@ export function Text({
   fontSize = 'S',
   color = 'fontPrimary',
   textAlign = 'center',
+  verticalAlign = 'auto',
   ...props
 }: Readonly<TextProps>) {
   return (
@@ -22,6 +24,7 @@ export function Text({
           color: theme.colors[color],
           fontSize: theme.fontSize[fontSize],
           textAlign,
+          verticalAlign,
         },
         props.style,
       ]}

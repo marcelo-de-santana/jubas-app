@@ -1,5 +1,6 @@
 import {ScheduleTimeResponse} from '@domain';
 import {BoxItem, BoxItemProps} from './BoxItem';
+import {ThemeColors} from '@styles';
 
 interface BoxTimeAvailableProps extends BoxItemProps {
   scheduleTime: ScheduleTimeResponse;
@@ -9,16 +10,18 @@ export function BoxTimeAvailable({
   scheduleTime: {isAvailable, time},
   ...props
 }: Readonly<BoxTimeAvailableProps>) {
-  const $textColor = isAvailable ? 'black' : 'red';
+  const $textColor: ThemeColors = isAvailable ? 'fontPrimary' : 'red';
   return (
     <BoxItem
       key={time}
-      style={{
-        justifyContent: 'center',
-        padding: 5,
-      }}
+      backgroundColor="backgroundPrimary"
+      justifyContent="center"
+      marginHorizontal="s4"
+      marginVertical="s10"
+      borderRadius="s6"
+      padding="s8"
       textProps={{
-        fontSize: 'L',
+        fontSize: 'S',
         color: $textColor,
       }}
       label={time}

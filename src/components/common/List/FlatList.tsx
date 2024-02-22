@@ -11,6 +11,7 @@ interface ListRefreshProps {}
 
 interface FlatListPros<T> extends RNFlatListProps<T> {
   listEmptyTitle?: string;
+  isSeparator?: boolean;
   loading: boolean;
   error: boolean | null;
   refetch: () => void;
@@ -20,13 +21,15 @@ export function FlatList<T = any>({
   listEmptyTitle,
   loading,
   error,
+  isSeparator = true,
   refetch,
   ...props
 }: Readonly<FlatListPros<T>>) {
+  const SeparatorItem = isSeparator ? ListSeparator : null;
   return (
     <RNFlatList
       contentContainerStyle={flatListStyle(props.data)}
-      ItemSeparatorComponent={ListSeparator}
+      ItemSeparatorComponent={SeparatorItem}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={refetch} />
       }
