@@ -1,39 +1,42 @@
-import {BoxItem, BoxItemProps} from './BoxItem';
+import {ListSeparator} from '../List';
 import {Text, TextProps} from '../Text/Text';
-import {ListSeparator} from '../List/ListSeparator';
 import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from '../TouchableOpacity/TouchableOpacity';
+import {BoxProps} from './Box';
 
-interface BoxComponentProps extends BoxItemProps {
-  textFields: any[];
+interface BoxItemsProps extends TouchableOpacityProps {
+  children?: React.ReactNode;
   boxProps?: TouchableOpacityProps;
   textProps?: TextProps;
+  textFields: any[];
+  isSeparator?: boolean;
+  separatorProps?: BoxProps;
 }
 
 // use only if you are going to use the textFields
-export function BoxDetails({
-  boxProps,
+export function BoxItems({
   textProps,
   textFields,
+  isSeparator = false,
+  separatorProps,
   ...props
-}: Readonly<BoxComponentProps>) {
+}: Readonly<BoxItemsProps>) {
   return (
-    <BoxItem justifyContent="center" paddingVertical="s4" {...props}>
+    <>
       <TouchableOpacity
         flexDirection="row"
         flexWrap="wrap"
-        padding="s10"
         justifyContent="space-between"
-        {...boxProps}>
+        {...props}>
         {textFields?.map(item => (
-          <Text key={item} textAlign="justify" {...textProps}>
+          <Text key={item} {...textProps}>
             {item}
           </Text>
         ))}
       </TouchableOpacity>
-      <ListSeparator />
-    </BoxItem>
+      {isSeparator && <ListSeparator {...separatorProps} />}
+    </>
   );
 }

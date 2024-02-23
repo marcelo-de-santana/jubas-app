@@ -84,6 +84,11 @@ const capitalizeFirstLetter = (text: string) => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
+function money(money: number | null) {
+  let number = money ?? 0;
+  return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+}
+
 export const mask = {
   capitalizeFirstLetter,
   cpf,
@@ -95,4 +100,5 @@ export const mask = {
   time,
   timeToTimestamp,
   timestampToTimeFormat,
+  money,
 };

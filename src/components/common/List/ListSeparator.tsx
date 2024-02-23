@@ -1,5 +1,5 @@
-import {Box} from '../Box/Box';
+import {Box, BoxProps} from '../Box/Box';
 
-export function ListSeparator() {
-  return <Box borderWidth={1} borderColor="primaryContrast" />;
+export function ListSeparator(props: BoxProps) {
+  return <Box borderWidth={1} borderColor="primaryContrast" {...props} />;
 }

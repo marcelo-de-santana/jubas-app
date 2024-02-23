@@ -6,7 +6,7 @@ import {
 
 export interface BoxItemProps extends TouchableOpacityProps {
   children?: React.ReactNode;
-  label?: string;
+  label?: any;
   textProps?: TextProps;
 }
 
@@ -18,7 +18,7 @@ export function BoxItem({
   ...props
 }: Readonly<BoxItemProps>) {
   return (
-    <TouchableOpacity justifyContent="center" {...props}>
+    <TouchableOpacity {...props}>
       <Text variant="paragraphSmall" {...textProps}>
         {label}
       </Text>
