@@ -1,9 +1,6 @@
 import {
   Box,
-  BoxDetails,
-  BoxItem,
   BoxItems,
-  BoxMenu,
   ButtonProps,
   CollapsibleAccording,
   FlatList,
@@ -27,10 +24,6 @@ export function ScheduleHomeScreen({
     fetch();
   }, []);
 
-  const navigateToListScreen = () => {
-    navigation.navigate('ScheduleListScreen');
-  };
-
   const navigateToSpecialtiesScreen = () => {
     navigation.navigate('ScheduleSpecialtiesScreen');
   };
@@ -38,33 +31,42 @@ export function ScheduleHomeScreen({
   function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
     return (
       <CollapsibleAccording
-        backgroundColor="secondary"
+        backgroundColor="primaryContrast"
+        paddingHorizontal="s8"
+        paddingBottom="s8"
         borderBottomLeftRadius="s6"
         borderBottomRightRadius="s6"
         buttonProps={$buttonProps}
         textProps={$textProps}
         title={item.name}>
-        {item.specialties.map((specialty, index) => (
-          <BoxItems
-            key={specialty.id}
-            mx="s4"
-            p="s10"
-            borderRadius="s6"
-            isSeparator={item.specialties.length !== index + 1}
-            separatorProps={{
-              backgroundColor: 'secondaryContrast',
-              borderColor: 'secondaryContrast',
-              borderWidth: 0.5,
-              marginHorizontal: 's14',
-            }}
-            textProps={{color: 'secondaryContrast'}}
-            textFields={[
-              specialty.name,
-              `${mask.money(specialty.price)}`,
-              specialty.timeDuration,
-            ]}
-          />
-        ))}
+        <Box backgroundColor="secondary" borderRadius="s6">
+          {item.specialties.map((specialty, index) => {
+            const navigateToEmployeesScreen = () => {
+              navigation.navigate('ScheduleEmployeesScreen', {specialty});
+            };
+
+            return (
+              <BoxItems
+                key={specialty.id}
+                padding="s12"
+                onPress={navigateToEmployeesScreen}
+                isSeparator={item.specialties.length !== index + 1}
+                separatorProps={{
+                  backgroundColor: 'secondaryContrast',
+                  borderColor: 'secondaryContrast',
+                  borderWidth: 0.5,
+                  marginHorizontal: 's14',
+                }}
+                textProps={{color: 'secondaryContrast'}}
+                textFields={[
+                  specialty.name,
+                  `${mask.money(specialty.price)}`,
+                  specialty.timeDuration,
+                ]}
+              />
+            );
+          })}
+        </Box>
       </CollapsibleAccording>
     );
   }
