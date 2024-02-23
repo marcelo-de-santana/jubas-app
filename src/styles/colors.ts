@@ -8,17 +8,7 @@ export const colors = {
   lavenderGray: '#CCCED9',
   lightGray: '#F2F2F2',
   lightGreen: '#225522',
+  deepSteel: '#303947',
   white: '#FFFFFF',
   red: '#EA3838',
 };
-
-//DARK
-// Background: #161C26 (Midnight Blue)
-// Text: #9BA7BF (Blue Gray)
-// Accent: #CCCED9 (Lavender Gray)
-// Highlight: #FFFFFF (White)
-//LIGHT
-// Background: #9BA7BF (Blue Gray)
-// Text: #000000 (Black)
-// Accent: #161C26 (Midnight Blue)
-// Highlight: #225522 (Light Green)

@@ -73,9 +73,11 @@ export const darkTheme = createTheme({
   ...defaults,
 
   colors: {
+    ...colors,
     primary: colors.midnightBlue,
     primaryContrast: colors.blueGray,
-    ...colors,
+    secondary: colors.lavenderGray,
+    secondaryContrast: colors.deepSteel,
   },
 
   buttons: buttons,
@@ -87,6 +89,8 @@ export const lightTheme = createTheme({
     ...colors,
     primary: colors.blueGray,
     primaryContrast: colors.midnightBlue,
+    secondary: colors.deepSteel,
+    secondaryContrast: colors.lavenderGray,
   },
 });
 
