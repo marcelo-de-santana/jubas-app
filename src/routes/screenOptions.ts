@@ -4,11 +4,11 @@ import {theme} from '@styles';
 export const defaultOptions: NativeStackNavigationOptions = {
   headerShadowVisible: false,
   headerStyle: {
-    backgroundColor: theme.colors.backgroundPrimary,
+    backgroundColor: theme.colors.primary,
   },
-  headerTintColor: theme.colors.fontPrimary,
+  headerTintColor: theme.colors.primaryContrast,
   headerTitleAlign: 'center',
-  statusBarColor: theme.colors.backgroundPrimary,
+  statusBarColor: theme.colors.primary,
   statusBarStyle: 'auto',
   fullScreenGestureEnabled: true,
 };

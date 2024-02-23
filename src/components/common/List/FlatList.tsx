@@ -16,7 +16,11 @@ interface FlatListPros<T> extends RNFlatListProps<T> {
   error: boolean | null;
   refetch: () => void;
 }
-
+/**
+ * Component completely
+ * @param param0
+ * @returns
+ */
 export function FlatList<T = any>({
   listEmptyTitle,
   loading,

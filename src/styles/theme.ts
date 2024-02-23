@@ -8,13 +8,7 @@ import {
 } from '@shopify/restyle';
 import {Appearance, ViewStyle} from 'react-native';
 import {buttons} from './buttons';
-import {
-  colors,
-  defaultDarkThemeBackgroundColors,
-  defaultDarkThemeFontColors,
-  defaultLightThemeBackgroundColors,
-  defaultLightThemeFontColors,
-} from './colors';
+import {colors} from './colors';
 import {textVariants} from '@components';
 
 const box = {
@@ -79,8 +73,8 @@ export const darkTheme = createTheme({
   ...defaults,
 
   colors: {
-    ...defaultDarkThemeFontColors,
-    ...defaultDarkThemeBackgroundColors,
+    primary: colors.midnightBlue,
+    primaryContrast: colors.blueGray,
     ...colors,
   },
 
@@ -90,9 +84,9 @@ export const darkTheme = createTheme({
 export const lightTheme = createTheme({
   ...defaults,
   colors: {
-    ...defaultLightThemeFontColors,
-    ...defaultLightThemeBackgroundColors,
     ...colors,
+    primary: colors.blueGray,
+    primaryContrast: colors.midnightBlue,
   },
 });
 

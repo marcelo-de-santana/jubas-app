@@ -8,7 +8,7 @@ export function ImageLogo() {
       source={require('../../../assets/images/logo-marca.png')}
       style={{
         alignSelf: 'center',
-        backgroundColor: theme.colors['lavenderGray'],
+        backgroundColor: theme.colors['primaryContrast'],
         borderRadius: 20,
         height: 150,
         margin: 20,

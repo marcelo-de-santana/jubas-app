@@ -10,11 +10,11 @@ export function BoxTimeAvailable({
   scheduleTime: {isAvailable, time},
   ...props
 }: Readonly<BoxTimeAvailableProps>) {
-  const $textColor: ThemeColors = isAvailable ? 'fontPrimary' : 'red';
+  const $textColor: ThemeColors = isAvailable ? 'primaryContrast' : 'red';
   return (
     <BoxItem
       key={time}
-      backgroundColor="backgroundPrimary"
+      backgroundColor="primary"
       justifyContent="center"
       marginHorizontal="s4"
       marginVertical="s10"

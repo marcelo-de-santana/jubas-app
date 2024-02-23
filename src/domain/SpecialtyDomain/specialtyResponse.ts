@@ -1,10 +1,6 @@
-import { CategoryResponse } from "../CategoryDomain/categoryResponse";
-
 export interface SpecialtyResponse {
   id: string;
   name: string;
+  price: number;
   timeDuration: string;
-  category: CategoryResponse;
 }
-
-

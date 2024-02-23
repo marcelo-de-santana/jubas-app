@@ -1,9 +1,10 @@
-import {ProfileResponse} from '../ProfileDomain/profileResponse';
+import {SpecialtyResponse} from '../SpecialtyDomain/specialtyResponse';
 import {WorkingHourResponse} from '../WorkingHourDomain/workingHourResponse';
 
 export interface EmployeeResponse {
   id: string;
-  profile: ProfileResponse;
+  name: string;
+  statusProfile: boolean;
   workingHour: WorkingHourResponse;
-  services: [] | {id: string; name: string; timeDuration?: string}[];
+  services: SpecialtyResponse[];
 }

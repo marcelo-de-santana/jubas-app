@@ -8,7 +8,7 @@ import {
 const PATH = '/employees';
 
 async function getAll() {
-  return await api.post(PATH);
+  return await api.get(PATH);
 }
 
 async function getById(employeeId: string) {

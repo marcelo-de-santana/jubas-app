@@ -2,7 +2,7 @@ export * from './ActivityIndicator/ActivityIndicator';
 export * from './Alert';
 export * from './Buttons/';
 export * from './Collapsible/CollapsibleAccording';
-export * from './List/FlatList';
+export * from './List';
 export * from './Forms/';
 export * from './Icons/';
 export * from './Images';

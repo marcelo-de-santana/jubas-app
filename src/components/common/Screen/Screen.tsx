@@ -16,7 +16,7 @@ export function Screen({
 }: Readonly<Props>) {
   const Container = scrollable ? ScrollViewContainer : ScreenViewContainer;
   return (
-    <Container backgroundColor={theme.colors.backgroundPrimary}>
+    <Container backgroundColor={theme.colors.primary}>
       <Box px={px} py={py} {...props}>
         {children}
       </Box>

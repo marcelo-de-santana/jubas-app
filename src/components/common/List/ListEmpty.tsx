@@ -1,7 +1,7 @@
-import {View} from 'react-native';
 import {Loader} from './Loader';
 import {Text} from '../Text/Text';
 import {ButtonCentral} from '../Buttons';
+import {Box} from '../Box';
 
 export interface ListEmptyProps {
   title?: string;
@@ -17,7 +17,7 @@ export function ListEmpty({
   refetch,
 }: Readonly<ListEmptyProps>) {
   let component = (
-    <Text variant='paragraphMedium' color="steelBlue" textAlign="center">
+    <Text variant="paragraphMedium" color="primaryContrast" textAlign="center">
       {title}
     </Text>
   );
@@ -30,19 +30,14 @@ export function ListEmpty({
     component = (
       <>
         <ButtonCentral title="Recarregar" onPress={refetch} />
-        <Text color="backgroundContrast">Não foi possível carregar 😢</Text>
+        <Text color="primaryContrast">Não foi possível carregar 😢</Text>
       </>
     );
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <Box flex={1} justifyContent="center" alignItems="center">
       {component}
-    </View>
+    </Box>
   );
 }

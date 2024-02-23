@@ -29,17 +29,17 @@ export function Button({
     <TouchableOpacity
       activeOpacity={0.7}
       disabled={disabled ?? loading}
-      backgroundColor="backgroundContrast"
+      backgroundColor="primaryContrast"
       {...props}>
       {loading ? (
         <ActivityIndicator
-          color="fontContrast"
+          color="primary"
           size={'small'}
           {...indicatorProps}
         />
       ) : (
         <Text
-          color="fontContrast"
+          color="primary"
           variant="paragraphVeryLarge"
           textAlign="center"
           {...textProps}>

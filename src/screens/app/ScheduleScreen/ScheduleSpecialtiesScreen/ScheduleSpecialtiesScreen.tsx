@@ -28,7 +28,7 @@ export function ScheduleSpecialtiesScreen({
   function renderItem({item}: ListRenderItemInfo<ScheduleResponse>) {
     return (
       <CollapsibleAccording
-        backgroundColor="backgroundContrast"
+        backgroundColor="primaryContrast"
         borderBottomLeftRadius="s6"
         borderBottomRightRadius="s6"
         buttonProps={$buttonProps}
@@ -37,7 +37,7 @@ export function ScheduleSpecialtiesScreen({
         <Box flexDirection="row" flexWrap="wrap" justifyContent="space-evenly">
           {item?.workingHours.map(workingHour => (
             <BoxTimeAvailable
-              backgroundColor="backgroundPrimary"
+              backgroundColor="primary"
               borderRadius="s10"
               key={workingHour.time}
               scheduleTime={workingHour}
@@ -64,7 +64,7 @@ export function ScheduleSpecialtiesScreen({
 }
 
 const $buttonProps: ButtonProps = {
-  backgroundColor: 'backgroundContrast',
+  backgroundColor: 'primaryContrast',
   alignItems: 'flex-start',
   justifyContent: 'center',
   paddingHorizontal: 's10',
@@ -75,8 +75,8 @@ const $buttonProps: ButtonProps = {
 };
 
 const $textProps: TextProps = {
-  variant: 'paragraphVeryLarge',
-  color: 'fontContrast',
+  variant: 'paragraphMedium',
+  color: 'primary',
   textAlign: 'center',
   verticalAlign: 'middle',
 };

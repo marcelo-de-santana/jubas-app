@@ -11,7 +11,7 @@ export interface TextProps extends RestyleTextProps {
 
 export function Text({children, ...props}: Readonly<TextProps>) {
   return (
-    <RestyleText color="fontPrimary" textAlign="center" {...props}>
+    <RestyleText color="primaryContrast" textAlign="center" {...props}>
       {children}
     </RestyleText>
   );

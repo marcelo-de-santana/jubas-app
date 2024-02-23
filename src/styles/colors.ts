@@ -12,25 +12,6 @@ export const colors = {
   red: '#EA3838',
 };
 
-export const defaultDarkThemeFontColors = {
-  fontPrimary: colors.blueGray,
-  fontContrast: colors.black,
-};
-export const defaultDarkThemeBackgroundColors = {
-  backgroundPrimary: colors.midnightBlue,
-  backgroundContrast: colors.blueGray,
-};
-
-export const defaultLightThemeFontColors = {
-  fontPrimary: colors.black,
-  fontContrast: colors.blueGray,
-};
-
-export const defaultLightThemeBackgroundColors = {
-  backgroundPrimary: colors.blueGray,
-  backgroundContrast: colors.midnightBlue,
-};
-
 //DARK
 // Background: #161C26 (Midnight Blue)
 // Text: #9BA7BF (Blue Gray)

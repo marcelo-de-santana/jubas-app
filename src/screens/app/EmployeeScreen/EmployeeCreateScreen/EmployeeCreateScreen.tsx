@@ -1,11 +1,11 @@
 import {
-  EmptyList,
   Screen,
-  Separator,
   ModalStatus,
   AlertStatusType,
   WorkingHourLine,
   WorkingHourHeader,
+  ListSeparator,
+  ListEmpty,
 } from '@components';
 import {
   WorkingHourResponse,
@@ -53,11 +53,11 @@ export function EmployeeCreateScreen({
       <FlatList
         data={useWorkingHours.data}
         renderItem={renderItem}
-        ItemSeparatorComponent={Separator}
+        ItemSeparatorComponent={ListSeparator}
         contentContainerStyle={flatListStyle(useWorkingHours.data)}
         ListHeaderComponent={<WorkingHourHeader />}
         ListEmptyComponent={
-          <EmptyList
+          <ListEmpty
             loading={useWorkingHours.isLoading}
             error={useWorkingHours.isError}
             title="Lista Vazia."
