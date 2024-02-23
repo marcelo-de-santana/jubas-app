@@ -13,8 +13,8 @@ interface FlatListPros<T> extends RNFlatListProps<T> {
   listEmptyTitle?: string;
   isSeparator?: boolean;
   loading: boolean;
-  error: boolean | null;
-  refetch: () => void;
+  error?: boolean | null;
+  refetch?: () => void;
 }
 /**
  * Component completely

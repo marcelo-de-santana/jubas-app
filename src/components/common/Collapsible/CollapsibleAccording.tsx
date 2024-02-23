@@ -18,10 +18,10 @@ export function CollapsibleAccording({
   title,
   buttonProps,
   textProps,
-  beginsClosed = true,
+  collapsed = true,
   ...collapsibleProps
 }: Readonly<CollapsibleAccordingProps>) {
-  const [isCollapsed, setIsCollapsed] = useState(beginsClosed);
+  const [isCollapsed, setIsCollapsed] = useState(collapsed);
 
   const handleCollapsible = () => {
     setIsCollapsed(!isCollapsed);
