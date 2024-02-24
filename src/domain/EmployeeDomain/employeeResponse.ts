@@ -8,8 +8,3 @@ export interface EmployeeResponse {
   workingHour: WorkingHourResponse;
   services: SpecialtyResponse[];
 }
-
-export interface IPerson {
-  id: string;
-  name: string;
-}

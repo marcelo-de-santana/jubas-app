@@ -4,6 +4,29 @@ import {colors} from './colors';
 const {width} = Dimensions.get('screen');
 
 export const buttons = {
+  default: {},
+  danger: {
+    primary: {},
+    outline: {
+      borderColor: 'red',
+      borderWidth: 1,
+      backgroundColor: 'primary',
+      flex: 1,
+      borderRadius: 's10',
+      p: 's14',
+      textProps: {variant: 'paragraphMedium', color: 'red'},
+    },
+  },
+  success: {
+    primary: {
+      backgroundColor: 'lightGreen',
+      flex: 1,
+      borderRadius: 's10',
+      p: 's14',
+      textProps: {variant: 'paragraphMedium', color: 'white'},
+    },
+    outline: {},
+  },
   box: {
     borderColor: colors.midnightBlueTransparent,
     borderRadius: 10,
@@ -75,4 +98,4 @@ export const buttons = {
   },
 };
 
- type ButtonName = keyof typeof buttons;
+type ButtonName = keyof typeof buttons;

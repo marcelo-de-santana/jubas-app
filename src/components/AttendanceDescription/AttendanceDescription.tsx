@@ -1,10 +1,10 @@
 import {Box, Text} from '@components';
-import {IPerson} from '@domain';
+import {ProfileResponse} from '@domain';
 
 export function AttendanceDescription({
   employee,
   hour,
-}: Readonly<{employee: IPerson; hour: string}>) {
+}: Readonly<{employee: Pick<ProfileResponse, 'id' | 'name'>; hour: string}>) {
   return (
     <Box>
       <Text variant="paragraphMedium" textAlign="justify">

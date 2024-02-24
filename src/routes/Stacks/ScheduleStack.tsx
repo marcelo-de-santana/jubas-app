@@ -3,23 +3,20 @@ import {defaultOptions} from '../screenOptions';
 import {
   ScheduleEmployeesScreen,
   ScheduleHomeScreen,
-  ScheduleListScreen,
   ScheduleProfilesScreen,
-  ScheduleSpecialtiesScreen,
+  ScheduleResumeScreen,
 } from '@screens';
-import {IPerson, SpecialtyResponse} from '@domain';
+import {ProfileResponse, SpecialtyResponse} from '@domain';
 
 interface ScheduleRouteParams {
   specialty: SpecialtyResponse;
-  employee: IPerson;
-  profile: IPerson;
+  employee: Pick<ProfileResponse, 'id' | 'name'>;
+  profile: Pick<ProfileResponse, 'id' | 'name'>;
   hour: string;
 }
 
 export type ScheduleStackParamList = {
   ScheduleHomeScreen: undefined;
-  ScheduleListScreen: undefined;
-  ScheduleSpecialtiesScreen: undefined;
   ScheduleEmployeesScreen: Pick<ScheduleRouteParams, 'specialty'>;
   ScheduleProfilesScreen: Omit<ScheduleRouteParams, 'profile'>;
   ScheduleResumeScreen: ScheduleRouteParams;
@@ -41,16 +38,12 @@ export function ScheduleStack() {
         component={ScheduleEmployeesScreen}
       />
       <NativeStack.Screen
-        name="ScheduleListScreen"
-        component={ScheduleListScreen}
-      />
-      <NativeStack.Screen
         name="ScheduleProfilesScreen"
         component={ScheduleProfilesScreen}
       />
       <NativeStack.Screen
-        name="ScheduleSpecialtiesScreen"
-        component={ScheduleSpecialtiesScreen}
+        name="ScheduleResumeScreen"
+        component={ScheduleResumeScreen}
       />
     </NativeStack.Navigator>
   );

@@ -1,5 +1,6 @@
 export * from './ActivityIndicator/ActivityIndicator';
 export * from './Alert';
+export * from './AttendanceDescription/AttendanceDescription';
 export * from './Buttons/';
 export * from './Collapsible/CollapsibleAccording';
 export * from './List';

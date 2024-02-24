@@ -1,9 +1,25 @@
 import {BoxItem, Text} from '@components';
-import {IProfileResponse} from '@domain';
+import {ProfileResponse} from '@domain';
+import {ScheduleStackProps} from '@routes';
+
+interface ClientListProps extends ScheduleStackProps<'ScheduleProfilesScreen'> {
+  profiles?: ProfileResponse[];
+}
 
 export function ClientList({
   profiles,
-}: Readonly<{profiles?: IProfileResponse[]}>) {
+  navigation,
+  route,
+}: Readonly<ClientListProps>) {
+  const navigateToResumeScreen = (
+    profile: Pick<ProfileResponse, 'id' | 'name'>,
+  ) => {
+    navigation.navigate('ScheduleResumeScreen', {
+      ...route.params,
+      profile,
+    });
+  };
+
   return (
     <>
       <Text variant="paragraphMedium" textAlign="justify" paddingVertical="s10">
@@ -21,6 +37,9 @@ export function ClientList({
             color: 'primary',
             textAlign: 'justify',
           }}
+          onPress={() =>
+            navigateToResumeScreen({id: profile.id, name: profile.name})
+          }
           label={profile.name}
         />
       ))}

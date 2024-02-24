@@ -1,16 +1,14 @@
 import {
+  AttendanceDescription,
   ListEmpty,
   ListSeparator,
   Screen,
   SpecialtyDescription,
 } from '@components';
 import {useAuthContext} from '@contexts';
-import {
-  userUseCases,
-} from '@domain';
+import {userUseCases} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
-import {AttendanceDescription} from './components/AttendanceDescription';
 import {ClientList} from './components/ClientList';
 
 export function ScheduleProfilesScreen({
@@ -35,22 +33,17 @@ export function ScheduleProfilesScreen({
   return (
     <Screen scrollable>
       <SpecialtyDescription specialty={route.params.specialty} />
-      <Separator />
+      <ListSeparator variant="first" />
       <AttendanceDescription
         employee={route.params.employee}
         hour={route.params.hour}
       />
-      <Separator />
-      <ClientList profiles={data?.profiles} />
+      <ListSeparator variant="first" />
+      <ClientList
+        profiles={data?.profiles}
+        navigation={navigation}
+        route={route}
+      />
     </Screen>
   );
 }
-
-const Separator = () => (
-  <ListSeparator
-    backgroundColor="primaryContrast"
-    borderColor="primaryContrast"
-    borderWidth={0.5}
-    marginBottom="s12"
-  />
-);
