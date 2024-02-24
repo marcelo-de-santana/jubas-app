@@ -1,9 +1,8 @@
-import {FlatList, Screen} from '@components';
+import {FlatList, Screen, SpecialtyDescription} from '@components';
 import {ScheduleResponse, appointmentUseCases} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
-import {Header} from './components/Header';
 import {Collapsible} from './components/Collapsible';
 
 export function ScheduleEmployeesScreen({
@@ -38,7 +37,9 @@ export function ScheduleEmployeesScreen({
         data={data}
         renderItem={renderItem}
         isSeparator={false}
-        ListHeaderComponent={<Header specialty={route.params.specialty} />}
+        ListHeaderComponent={
+          <SpecialtyDescription specialty={route.params.specialty} />
+        }
         listEmptyTitle="Nenhum funcionário disponível."
         loading={isLoading}
         refetch={searchData}

@@ -2,7 +2,7 @@ import {Box, Text} from '@components';
 import {SpecialtyResponse} from '@domain';
 import {mask} from '@utils';
 
-export function Header({specialty}: Readonly<{specialty: SpecialtyResponse}>) {
+export function SpecialtyDescription({specialty}: Readonly<{specialty: SpecialtyResponse}>) {
   return (
     <Box>
       <Text variant="paragraphMedium" textAlign="justify">
