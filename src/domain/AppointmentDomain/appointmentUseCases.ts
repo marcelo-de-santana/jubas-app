@@ -1,14 +1,22 @@
 import {useFetch} from '@hooks';
 import {appointmentApi} from './appointmentApi';
-import {ScheduleResponse} from './appointmentResponse';
-import {AppointmentGetAllRequest} from './appointmentRequest';
+import {
+  AppointmentCreateRequest,
+  AppointmentGetAllRequest,
+} from './appointmentRequest';
+import {AppointmentResponse} from './appointmentResponse';
 
 function getAll() {
-  return useFetch<ScheduleResponse[], AppointmentGetAllRequest>(
+  return useFetch<AppointmentResponse[], AppointmentGetAllRequest>(
     appointmentApi.getAll,
   );
 }
 
+function create() {
+  return useFetch<void, AppointmentCreateRequest>(appointmentApi.create);
+}
+
 export const appointmentUseCases = {
   getAll,
+  create,
 };

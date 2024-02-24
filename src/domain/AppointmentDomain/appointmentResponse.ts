@@ -1,12 +1,5 @@
-export interface AppointmentResponse {}
-
-export interface ScheduleResponse {
+export interface AppointmentResponse {
   employeeId: string;
   employeeName: string;
-  workingHours: ScheduleTimeResponse[];
-}
-
-export interface ScheduleTimeResponse {
-  time: string;
-  isAvailable: boolean;
+  workingHours: {time: string; isAvailable: boolean}[];
 }

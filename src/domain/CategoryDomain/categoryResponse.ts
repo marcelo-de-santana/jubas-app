@@ -5,8 +5,6 @@ export interface CategoryResponse {
   name: string;
 }
 
-export interface CategorySpecialtiesResponse {
-  id: number;
-  name: string;
+export interface CategorySpecialtiesResponse extends CategoryResponse {
   specialties: SpecialtyResponse[];
 }
