@@ -7,7 +7,6 @@ import {
   createTheme,
 } from '@shopify/restyle';
 import {Appearance, ViewStyle} from 'react-native';
-import {buttons} from './buttons';
 import {colors} from './colors';
 import {textVariants, separatorsVariants} from '@components';
 
@@ -46,7 +45,6 @@ const items = {
 const defaults = {
   box,
   items,
-  buttons,
   separatorsVariants,
   textVariants,
   spacing: {
@@ -80,8 +78,6 @@ export const darkTheme = createTheme({
     secondary: colors.lavenderGray,
     secondaryContrast: colors.deepSteel,
   },
-
-  buttons: buttons,
 });
 
 export const lightTheme = createTheme({

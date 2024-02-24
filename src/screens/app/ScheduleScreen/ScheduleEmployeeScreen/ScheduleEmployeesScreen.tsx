@@ -1,5 +1,5 @@
 import {FlatList, Screen, SpecialtyDescription} from '@components';
-import {ScheduleResponse, appointmentUseCases} from '@domain';
+import {AppointmentResponse, appointmentUseCases} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
@@ -19,7 +19,7 @@ export function ScheduleEmployeesScreen({
     searchData();
   }, []);
 
-  function renderItem({item}: ListRenderItemInfo<ScheduleResponse>) {
+  function renderItem({item}: ListRenderItemInfo<AppointmentResponse>) {
     const oneEmployee = data ? data.length === 1 : false;
     return (
       <Collapsible

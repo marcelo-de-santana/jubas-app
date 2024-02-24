@@ -22,7 +22,7 @@ export function ClientList({
 
   return (
     <>
-      <Text variant="paragraphMedium" textAlign="justify" paddingVertical="s10">
+      <Text variant="paragraphMedium" textAlign="justify" paddingBottom="s10">
         Quem vai receber o atendimento?
       </Text>
       {profiles?.map(profile => (

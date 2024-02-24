@@ -1,14 +1,24 @@
-import {Button, ButtonProps} from '../Buttons/Button';
+import {Text} from '../Text/Text';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from '../TouchableOpacity/TouchableOpacity';
 
-export function BoxMenu({...props}: Readonly<ButtonProps>) {
+export function BoxMenu({
+  title,
+  ...props
+}: Readonly<TouchableOpacityProps & {title?: string}>) {
   return (
-    <Button
+    <TouchableOpacity
+      backgroundColor="primaryContrast"
       borderRadius="s10"
       justifyContent="center"
       margin="s4"
       height={100}
-      textProps={{variant: 'paragraphLarge'}}
-      {...props}
-    />
+      {...props}>
+      <Text variant="paragraphLarge" color="primary">
+        {title}
+      </Text>
+    </TouchableOpacity>
   );
 }

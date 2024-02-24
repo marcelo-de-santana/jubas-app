@@ -27,7 +27,12 @@ export function ScheduleStack() {
 
   return (
     <NativeStack.Navigator
-      screenOptions={{...defaultOptions, headerShown: true}}
+      screenOptions={{
+        ...defaultOptions,
+        headerShown: true,
+        headerTitle: 'Agenda',
+        animation: 'none',
+      }}
       initialRouteName="ScheduleHomeScreen">
       <NativeStack.Screen
         name="ScheduleHomeScreen"

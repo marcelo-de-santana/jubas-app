@@ -5,12 +5,12 @@ import {
   CollapsibleAccording,
   TextProps,
 } from '@components';
-import {ScheduleResponse} from '@domain';
+import {AppointmentResponse} from '@domain';
 import {ScheduleStackProps} from '@routes';
 
 interface CollapsibleProps
   extends ScheduleStackProps<'ScheduleEmployeesScreen'> {
-  employee: ScheduleResponse;
+  employee: AppointmentResponse;
   collapsed?: boolean;
 }
 

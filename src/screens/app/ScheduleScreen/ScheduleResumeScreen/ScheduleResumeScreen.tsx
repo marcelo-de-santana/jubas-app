@@ -1,18 +1,22 @@
 import {
   AttendanceDescription,
   Box,
-  Button,
+  ButtonDangerOutline,
+  ButtonSuccess,
   ListSeparator,
   Screen,
   SpecialtyDescription,
 } from '@components';
 import {ScheduleStackProps} from '@routes';
 import {ClientDescription} from './components/ClientDescription';
+import {appointmentUseCases} from '@domain';
 
 export function ScheduleResumeScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleResumeScreen'>>) {
+  const {data, fetch, isError, isLoading} = appointmentUseCases.create();
+
   return (
     <Screen flex={1}>
       <SpecialtyDescription specialty={route.params.specialty} />
@@ -23,28 +27,17 @@ export function ScheduleResumeScreen({
       />
       <ListSeparator variant="first" />
       <ClientDescription route={route} />
-      <Box flexDirection="row" justifyContent="space-between">
-        <Button
-          borderColor="red"
-          borderWidth={1}
-          backgroundColor="primary"
-          flex={1}
-          borderRadius="s10"
-          p="s14"
+      <Box flexDirection="row" justifyContent="space-between" marginTop="s12">
+        <ButtonDangerOutline
           mr="s4"
-          textProps={{variant: 'paragraphMedium', color: 'red'}}
           onPress={() => navigation.goBack()}
           title="Voltar"
         />
-        <Button
-          backgroundColor="lightGreen"
-          flex={1}
-          borderRadius="s10"
-          p="s14"
+
+        <ButtonSuccess
           ml="s4"
-          textProps={{variant: 'paragraphMedium', color: 'white'}}
-          onPress={() => console.warn('Enviar')}
           title="Confirmar"
+          onPress={() => console.warn('Enviar')}
         />
       </Box>
     </Screen>

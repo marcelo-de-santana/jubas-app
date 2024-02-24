@@ -68,10 +68,13 @@ export function ScheduleHomeScreen({
   }
 
   return (
-    <Screen>
+    <Screen flex={1}>
       <FlatList
         ListHeaderComponent={
-          <Text variant="paragraphMedium" textAlign="justify" padding="s10">
+          <Text
+            variant="paragraphMedium"
+            textAlign="justify"
+            paddingBottom="s10">
             Selecione um serviço?
           </Text>
         }
