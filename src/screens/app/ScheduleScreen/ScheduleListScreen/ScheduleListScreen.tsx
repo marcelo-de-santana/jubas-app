@@ -12,7 +12,6 @@ import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
-//TODO FINALIZAR REGRAS DE NEGÓCIO E ROTAS PARA AGENDAMENTOS COM FUNCIONÁRIO ESPECÍFICO
 export function ScheduleListScreen({
   navigation,
 }: Readonly<ScheduleStackProps<'ScheduleListScreen'>>) {

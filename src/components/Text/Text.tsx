@@ -2,8 +2,8 @@ import {createText} from '@shopify/restyle';
 import {Theme} from '@styles';
 import {ComponentProps} from 'react';
 
-export const RestyleText = createText<Theme>();
-export type RestyleTextProps = ComponentProps<typeof RestyleText>;
+const RestyleText = createText<Theme>();
+type RestyleTextProps = ComponentProps<typeof RestyleText>;
 
 export interface TextProps extends RestyleTextProps {
   children?: string;

@@ -9,16 +9,20 @@ import {
 } from '@screens';
 import {IPerson, SpecialtyResponse} from '@domain';
 
+interface ScheduleRouteParams {
+  specialty: SpecialtyResponse;
+  employee: IPerson;
+  profile: IPerson;
+  hour: string;
+}
+
 export type ScheduleStackParamList = {
   ScheduleHomeScreen: undefined;
   ScheduleListScreen: undefined;
   ScheduleSpecialtiesScreen: undefined;
-  ScheduleEmployeesScreen: {specialty: SpecialtyResponse};
-  ScheduleProfilesScreen: {
-    specialty: SpecialtyResponse;
-    employee: IPerson;
-    hour: string;
-  };
+  ScheduleEmployeesScreen: Pick<ScheduleRouteParams, 'specialty'>;
+  ScheduleProfilesScreen: Omit<ScheduleRouteParams, 'profile'>;
+  ScheduleResumeScreen: ScheduleRouteParams;
 };
 
 export function ScheduleStack() {

@@ -24,10 +24,6 @@ export function ScheduleHomeScreen({
     fetch();
   }, []);
 
-  const navigateToSpecialtiesScreen = () => {
-    navigation.navigate('ScheduleSpecialtiesScreen');
-  };
-
   function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
     return (
       <CollapsibleAccording

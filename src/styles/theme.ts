@@ -9,7 +9,7 @@ import {
 import {Appearance, ViewStyle} from 'react-native';
 import {buttons} from './buttons';
 import {colors} from './colors';
-import {textVariants} from '@components';
+import {textVariants, separatorsVariants} from '@components';
 
 const box = {
   flexRow: {
@@ -47,6 +47,7 @@ const defaults = {
   box,
   items,
   buttons,
+  separatorsVariants,
   textVariants,
   spacing: {
     s4: 4,
