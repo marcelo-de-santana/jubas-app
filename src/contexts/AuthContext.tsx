@@ -1,9 +1,8 @@
 import {UserPermissionResponse, userUseCases} from '@domain';
 import {createContext, useContext, useState} from 'react';
-import {Appearance} from 'react-native';
 
 const defaultUser = {
-  id: '',
+  id: 'cbf3717a-c2cc-4dfd-93f8-b2e6c67aa7f9',
   email: '',
   permission: 'CLIENTE',
 };

@@ -12,10 +12,7 @@ export interface UserPermissionResponse {
 export interface UserProfileResponse {
   id: string;
   email: string;
-  permission: {
-    id: number;
-    type: string;
-  };
+  permission: string;
   profiles: IProfileResponse[];
 }
 

@@ -4,15 +4,21 @@ import {
   ScheduleEmployeesScreen,
   ScheduleHomeScreen,
   ScheduleListScreen,
+  ScheduleProfilesScreen,
   ScheduleSpecialtiesScreen,
 } from '@screens';
-import {SpecialtyResponse} from '@domain';
+import {IPerson, SpecialtyResponse} from '@domain';
 
 export type ScheduleStackParamList = {
   ScheduleHomeScreen: undefined;
   ScheduleListScreen: undefined;
   ScheduleSpecialtiesScreen: undefined;
   ScheduleEmployeesScreen: {specialty: SpecialtyResponse};
+  ScheduleProfilesScreen: {
+    specialty: SpecialtyResponse;
+    employee: IPerson;
+    hour: string;
+  };
 };
 
 export function ScheduleStack() {
@@ -33,6 +39,10 @@ export function ScheduleStack() {
       <NativeStack.Screen
         name="ScheduleListScreen"
         component={ScheduleListScreen}
+      />
+      <NativeStack.Screen
+        name="ScheduleProfilesScreen"
+        component={ScheduleProfilesScreen}
       />
       <NativeStack.Screen
         name="ScheduleSpecialtiesScreen"
