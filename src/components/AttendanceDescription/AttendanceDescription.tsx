@@ -1,23 +1,39 @@
-import {Box, Text} from '@components';
+import {BoxItem, BoxItems} from '@components';
 import {ProfileResponse} from '@domain';
 
+interface AttendanceDescriptionProps {
+  day: string;
+  employee: Pick<ProfileResponse, 'id' | 'name'>;
+  time: string;
+}
+
 export function AttendanceDescription({
+  day,
+  time,
   employee,
-  hour,
-}: Readonly<{employee: Pick<ProfileResponse, 'id' | 'name'>; hour: string}>) {
+}: Readonly<AttendanceDescriptionProps>) {
   return (
-    <Box>
-      <Text variant="paragraphMedium" textAlign="justify">
-        Descrição do atendimento
-      </Text>
-      <Box borderRadius="s6" padding="s12">
-        <Text color="primaryContrast" textAlign="justify">
-          {`Nome do barbeiro: ${employee.name}`}
-        </Text>
-        <Text color="primaryContrast" textAlign="justify">
-          {`Horário: ${hour}`}
-        </Text>
-      </Box>
-    </Box>
+    <BoxItem
+      textProps={{
+        variant: 'paragraphMedium',
+        color: 'primaryContrast',
+        textAlign: 'justify',
+      }}
+      label="Descrição do atendimento">
+      <BoxItems
+        flexDirection="column"
+        borderRadius="s6"
+        padding="s12"
+        textProps={{
+          color: 'primaryContrast',
+          textAlign: 'justify',
+        }}
+        textFields={[
+          `Dia: ${day}`,
+          `Horário: ${time}`,
+          `Nome do barbeiro: ${employee.name}`,
+        ]}
+      />
+    </BoxItem>
   );
 }

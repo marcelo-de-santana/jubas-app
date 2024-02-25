@@ -1,6 +1,7 @@
 import {
   OpacityProps,
   backgroundColor,
+  backgroundColorShorthand,
   border,
   createRestyleComponent,
   layout,
@@ -21,6 +22,14 @@ export const TouchableOpacity = createRestyleComponent<
   TouchableOpacityProps,
   Theme
 >(
-  [backgroundColor, spacing, spacingShorthand, layout, border, opacity],
+  [
+    backgroundColor,
+    spacing,
+    spacingShorthand,
+    layout,
+    border,
+    opacity,
+    backgroundColorShorthand,
+  ],
   RNTouchableOpacity,
 );

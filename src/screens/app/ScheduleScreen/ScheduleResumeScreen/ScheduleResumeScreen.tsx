@@ -9,24 +9,25 @@ import {
 } from '@components';
 import {ScheduleStackProps} from '@routes';
 import {ClientDescription} from './components/ClientDescription';
-import {appointmentUseCases} from '@domain';
 
 export function ScheduleResumeScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleResumeScreen'>>) {
-  const {data, fetch, isError, isLoading} = appointmentUseCases.create();
+  // TODO: finalizar agendamento e montar request de data
 
   return (
     <Screen flex={1}>
       <SpecialtyDescription specialty={route.params.specialty} />
-      <ListSeparator variant="first" />
+      <ListSeparator mb="s12" />
       <AttendanceDescription
+        day={route.params.day}
         employee={route.params.employee}
-        hour={route.params.hour}
+        time={route.params.time}
       />
-      <ListSeparator variant="first" />
+      <ListSeparator mb="s12" />
       <ClientDescription route={route} />
+
       <Box flexDirection="row" justifyContent="space-between" marginTop="s12">
         <ButtonDangerOutline
           mr="s4"

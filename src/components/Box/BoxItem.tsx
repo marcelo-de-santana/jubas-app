@@ -1,16 +1,12 @@
 import {Text, TextProps} from '../Text/Text';
-import {
-  TouchableOpacity,
-  TouchableOpacityProps,
-} from '../TouchableOpacity/TouchableOpacity';
+import {Box, BoxProps} from './Box';
 
-export interface BoxItemProps extends TouchableOpacityProps {
+export interface BoxItemProps extends BoxProps {
   children?: React.ReactNode;
   label?: any;
   textProps?: TextProps;
 }
 
-// use only if you are going to use the label
 export function BoxItem({
   children,
   label,
@@ -18,11 +14,11 @@ export function BoxItem({
   ...props
 }: Readonly<BoxItemProps>) {
   return (
-    <TouchableOpacity {...props}>
+    <Box {...props}>
       <Text variant="paragraphSmall" {...textProps}>
         {label}
       </Text>
       {children}
-    </TouchableOpacity>
+    </Box>
   );
 }

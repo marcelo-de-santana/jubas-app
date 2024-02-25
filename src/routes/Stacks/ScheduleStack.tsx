@@ -1,6 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {defaultOptions} from '../screenOptions';
 import {
+  ScheduleDaysScreen,
   ScheduleEmployeesScreen,
   ScheduleHomeScreen,
   ScheduleProfilesScreen,
@@ -12,12 +13,14 @@ interface ScheduleRouteParams {
   specialty: SpecialtyResponse;
   employee: Pick<ProfileResponse, 'id' | 'name'>;
   profile: Pick<ProfileResponse, 'id' | 'name'>;
-  hour: string;
+  day: string;
+  time: string;
 }
 
 export type ScheduleStackParamList = {
   ScheduleHomeScreen: undefined;
-  ScheduleEmployeesScreen: Pick<ScheduleRouteParams, 'specialty'>;
+  ScheduleDaysScreen: Pick<ScheduleRouteParams, 'specialty'>;
+  ScheduleEmployeesScreen: Pick<ScheduleRouteParams, 'specialty' | 'day'>;
   ScheduleProfilesScreen: Omit<ScheduleRouteParams, 'profile'>;
   ScheduleResumeScreen: ScheduleRouteParams;
 };
@@ -37,6 +40,10 @@ export function ScheduleStack() {
       <NativeStack.Screen
         name="ScheduleHomeScreen"
         component={ScheduleHomeScreen}
+      />
+      <NativeStack.Screen
+        name="ScheduleDaysScreen"
+        component={ScheduleDaysScreen}
       />
       <NativeStack.Screen
         name="ScheduleEmployeesScreen"

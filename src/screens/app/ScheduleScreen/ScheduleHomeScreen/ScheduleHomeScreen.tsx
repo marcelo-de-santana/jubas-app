@@ -1,14 +1,18 @@
 import {
   Box,
-  BoxItems,
   ButtonProps,
   CollapsibleAccording,
   FlatList,
   Screen,
   Text,
   TextProps,
+  TouchableOpacityItems,
 } from '@components';
-import {CategorySpecialtiesResponse, categoryUseCases} from '@domain';
+import {
+  CategorySpecialtiesResponse,
+  SpecialtyResponse,
+  categoryUseCases,
+} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {mask} from '@utils';
 import {useEffect} from 'react';
@@ -24,6 +28,10 @@ export function ScheduleHomeScreen({
     fetch();
   }, []);
 
+  const navigateToDaysScreen = (specialty: SpecialtyResponse) => {
+    navigation.navigate('ScheduleDaysScreen', {specialty});
+  };
+
   function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
     return (
       <CollapsibleAccording
@@ -37,15 +45,11 @@ export function ScheduleHomeScreen({
         title={item.name}>
         <Box backgroundColor="secondary" borderRadius="s6">
           {item.specialties.map((specialty, index) => {
-            const navigateToEmployeesScreen = () => {
-              navigation.navigate('ScheduleEmployeesScreen', {specialty});
-            };
-
             return (
-              <BoxItems
+              <TouchableOpacityItems
                 key={specialty.id}
                 padding="s12"
-                onPress={navigateToEmployeesScreen}
+                onPress={() => navigateToDaysScreen(specialty)}
                 isSeparator={item.specialties.length !== index + 1}
                 separatorProps={{
                   backgroundColor: 'secondaryContrast',
@@ -75,7 +79,7 @@ export function ScheduleHomeScreen({
             variant="paragraphMedium"
             textAlign="justify"
             paddingBottom="s10">
-            Selecione um serviço?
+            Selecione um serviço
           </Text>
         }
         data={data}

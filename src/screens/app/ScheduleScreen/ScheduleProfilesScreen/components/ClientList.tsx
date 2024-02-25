@@ -1,4 +1,4 @@
-import {BoxItem, Text} from '@components';
+import {Text, TouchableOpacityItem} from '@components';
 import {ProfileResponse} from '@domain';
 import {ScheduleStackProps} from '@routes';
 
@@ -26,7 +26,7 @@ export function ClientList({
         Quem vai receber o atendimento?
       </Text>
       {profiles?.map(profile => (
-        <BoxItem
+        <TouchableOpacityItem
           key={profile.id}
           backgroundColor="primaryContrast"
           borderRadius="s6"

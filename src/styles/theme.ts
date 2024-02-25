@@ -1,5 +1,6 @@
 import {
   BackgroundColorProps,
+  BackgroundColorShorthandProps,
   BorderProps,
   LayoutProps,
   SpacingProps,
@@ -99,6 +100,7 @@ export type ThemeColors = keyof (typeof theme)['colors'];
 export type ThemeSpacing = keyof (typeof theme)['spacing'];
 
 export type RestyleTypes = BackgroundColorProps<Theme> &
+  BackgroundColorShorthandProps<Theme> &
   SpacingProps<Theme> &
   LayoutProps<Theme> &
   BorderProps<Theme> &

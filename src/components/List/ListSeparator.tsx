@@ -10,7 +10,7 @@ import {
 } from '@shopify/restyle';
 import {RestyleTypes, Theme} from '@styles';
 
-type ListSeparatorProps = RestyleTypes &
+export type ListSeparatorProps = RestyleTypes &
   VariantProps<Theme, 'separatorsVariants'>;
 
 export const ListSeparator = createRestyleComponent<ListSeparatorProps, Theme>([
@@ -24,13 +24,13 @@ export const ListSeparator = createRestyleComponent<ListSeparatorProps, Theme>([
 
 export const separatorsVariants = {
   defaults: {
-    borderWidth: 1,
-    borderColor: 'primaryContrast',
-  },
-  first: {
     backgroundColor: 'primaryContrast',
     borderColor: 'primaryContrast',
     borderWidth: 0.5,
-    marginBottom: 's12',
+  },
+  first: {
+    borderColor: 'primaryContrast',
+    backgroundColor: 'primaryContrast',
+    borderWidth: 1,
   },
 };

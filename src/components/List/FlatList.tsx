@@ -29,11 +29,11 @@ export function FlatList<T = any>({
   refetch,
   ...props
 }: Readonly<FlatListPros<T>>) {
-  const SeparatorItem = isSeparator ? ListSeparator : null;
+  const SeparatorItem = isSeparator ? <ListSeparator variant="first" /> : null;
   return (
     <RNFlatList
       contentContainerStyle={flatListStyle(props.data)}
-      ItemSeparatorComponent={SeparatorItem}
+      ItemSeparatorComponent={() => SeparatorItem}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={refetch} />
       }

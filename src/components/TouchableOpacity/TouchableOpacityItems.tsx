@@ -1,26 +1,30 @@
-import {ListSeparator} from '../List';
+import {ListSeparator, ListSeparatorProps} from '../List';
 import {Text, TextProps} from '../Text/Text';
-import {Box, BoxProps} from './Box';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from '../TouchableOpacity/TouchableOpacity';
 
-interface BoxItemsProps extends BoxProps {
+interface TouchableOpacityItemsProps extends TouchableOpacityProps {
   children?: React.ReactNode;
+  boxProps?: TouchableOpacityProps;
   textProps?: TextProps;
   textFields: any[];
   isSeparator?: boolean;
-  separatorProps?: BoxProps;
+  separatorProps?: ListSeparatorProps;
 }
 
 // use only if you are going to use the textFields
-export function BoxItems({
+export function TouchableOpacityItems({
   textProps,
   textFields,
   isSeparator = false,
   separatorProps,
   ...props
-}: Readonly<BoxItemsProps>) {
+}: Readonly<TouchableOpacityItemsProps>) {
   return (
     <>
-      <Box
+      <TouchableOpacity
         flexDirection="row"
         flexWrap="wrap"
         justifyContent="space-between"
@@ -30,7 +34,7 @@ export function BoxItems({
             {item}
           </Text>
         ))}
-      </Box>
+      </TouchableOpacity>
       {isSeparator && <ListSeparator {...separatorProps} />}
     </>
   );

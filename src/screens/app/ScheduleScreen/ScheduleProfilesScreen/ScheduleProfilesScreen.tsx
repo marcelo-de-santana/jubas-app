@@ -33,12 +33,13 @@ export function ScheduleProfilesScreen({
   return (
     <Screen scrollable>
       <SpecialtyDescription specialty={route.params.specialty} />
-      <ListSeparator variant="first" />
+      <ListSeparator mb="s12" />
       <AttendanceDescription
+        day={route.params.day}
         employee={route.params.employee}
-        hour={route.params.hour}
+        time={route.params.time}
       />
-      <ListSeparator variant="first" />
+      <ListSeparator mb="s12" />
       <ClientList
         profiles={data?.profiles}
         navigation={navigation}

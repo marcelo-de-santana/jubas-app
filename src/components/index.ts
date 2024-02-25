@@ -13,5 +13,6 @@ export * from './SpecialtyDescription/SpecialtyDescription';
 export * from './Modal/ModalStatus';
 export * from './Text/Text';
 export * from './TextInput/TextInput';
+export * from './TouchableOpacity';
 export * from './Watch/Watch';
 export * from './WorkingHour/';
