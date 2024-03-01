@@ -89,10 +89,32 @@ function money(money: number | null) {
   return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
 }
 
+function dayOfWeek(date: Date) {
+  switch (date.getUTCDay()) {
+    case 0:
+      return 'DOMINGO';
+    case 1:
+      return 'SEGUNDA';
+    case 2:
+      return 'TERÇA';
+    case 3:
+      return 'QUARTA';
+    case 4:
+      return 'QUINTA';
+    case 5:
+      return 'SEXTA';
+    case 6:
+      return 'SÁBADO';
+    default:
+      throw new Error('Invalid date');
+  }
+}
+
 export const mask = {
   capitalizeFirstLetter,
   cpf,
   date,
+  dayOfWeek,
   fullTime,
   name,
   phone,

@@ -1,16 +1,10 @@
-import {
-  Box,
-  FlatList,
-  ListSeparator,
-  Screen,
-  SpecialtyDescription,
-  Text,
-} from '@components';
+import {FlatList, Screen} from '@components';
 import {AppointmentResponse, appointmentUseCases} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {Collapsible} from './components/Collapsible';
+import {Header} from './components/Header';
 
 export function ScheduleEmployeesScreen({
   navigation,
@@ -19,7 +13,7 @@ export function ScheduleEmployeesScreen({
   const {data, fetch, isLoading} = appointmentUseCases.getAll();
 
   const searchData = () => {
-    fetch({specialtyId: route.params.specialty.id});
+    fetch({date: route.params.day, specialtyId: route.params.specialty.id});
   };
 
   useEffect(() => {
@@ -50,26 +44,5 @@ export function ScheduleEmployeesScreen({
         refetch={searchData}
       />
     </Screen>
-  );
-}
-
-function Header({
-  route,
-}: Readonly<Pick<ScheduleStackProps<'ScheduleEmployeesScreen'>, 'route'>>) {
-  return (
-    <>
-      <SpecialtyDescription specialty={route.params.specialty} />
-      <ListSeparator mb="s12" />
-      <Box>
-        <Text variant="paragraphMedium" textAlign="justify">
-          Descrição do atendimento
-        </Text>
-        <Box borderRadius="s6" padding="s12">
-          <Text color="primaryContrast" textAlign="justify">
-            {`Dia: ${route.params.day}`}
-          </Text>
-        </Box>
-      </Box>
-    </>
   );
 }

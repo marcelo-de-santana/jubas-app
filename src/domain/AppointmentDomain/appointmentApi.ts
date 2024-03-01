@@ -1,6 +1,8 @@
 import {api} from '@services';
-import {AppointmentGetAllRequest} from './appointmentRequest';
-import {AppointmentCreateResponse} from './appointmentResponse';
+import {
+  AppointmentCreateRequest,
+  AppointmentGetAllRequest,
+} from './appointmentRequest';
 
 const PATH = '/appointments';
 
@@ -14,13 +16,17 @@ async function getAll({
   });
 }
 
+async function getDaysOfAttendance() {
+  return await api.get(PATH + '/daysOfAttendance');
+}
+
 async function create({
   date,
   time,
   employeeId,
   clientId,
   specialtyId,
-}: AppointmentCreateResponse) {
+}: AppointmentCreateRequest) {
   return await api.post(PATH, {
     dateTime: date + time,
     employeeId,
@@ -31,5 +37,6 @@ async function create({
 
 export const appointmentApi = {
   getAll,
+  getDaysOfAttendance,
   create,
 };

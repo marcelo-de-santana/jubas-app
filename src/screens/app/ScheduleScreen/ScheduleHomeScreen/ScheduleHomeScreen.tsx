@@ -75,12 +75,14 @@ export function ScheduleHomeScreen({
     <Screen flex={1}>
       <FlatList
         ListHeaderComponent={
-          <Text
-            variant="paragraphMedium"
-            textAlign="justify"
-            paddingBottom="s10">
-            Selecione um serviço
-          </Text>
+          data && (
+            <Text
+              variant="paragraphMedium"
+              textAlign="justify"
+              paddingBottom="s10">
+              Selecione um serviço
+            </Text>
+          )
         }
         data={data}
         renderItem={renderItem}

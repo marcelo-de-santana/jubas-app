@@ -12,11 +12,16 @@ function getAll() {
   );
 }
 
+function getDaysOfAttendance() {
+  return useFetch<string[]>(appointmentApi.getDaysOfAttendance);
+}
+
 function create() {
   return useFetch<void, AppointmentCreateRequest>(appointmentApi.create);
 }
 
 export const appointmentUseCases = {
   getAll,
+  getDaysOfAttendance,
   create,
 };
