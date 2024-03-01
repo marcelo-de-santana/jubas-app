@@ -5,7 +5,7 @@ export function ImageLogo() {
   return (
     <Image
       resizeMode="stretch"
-      source={require('../../assets/images/logo-marca.png')}
+      source={{uri: "https://github.com/marcelo-de-santana/imagioteca/blob/master/jubas-app/images/logo-marca.png?raw=true"}}
       style={{
         alignSelf: 'center',
         backgroundColor: theme.colors['primaryContrast'],
