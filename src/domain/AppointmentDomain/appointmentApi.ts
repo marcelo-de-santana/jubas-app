@@ -28,7 +28,7 @@ async function create({
   specialtyId,
 }: AppointmentCreateRequest) {
   return await api.post(PATH, {
-    dateTime: date + time,
+    dateTime: date + ' ' + time,
     employeeId,
     clientId,
     specialtyId,

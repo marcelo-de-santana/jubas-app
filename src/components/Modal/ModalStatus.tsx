@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
-import {Modal, Pressable, StyleProp, View, ViewStyle} from 'react-native';
+import {Modal, Pressable, View} from 'react-native';
 import {Text} from '../Text/Text';
 import {ThemeColors} from '@styles';
+import {useAppTheme} from '@hooks';
 
 export interface ModalStatusProps {
   status?: number | null;
@@ -16,6 +17,7 @@ export function ModalStatus({
   successAction,
   errorAction,
 }: Readonly<ModalStatusProps>) {
+  const {colors: themeColors} = useAppTheme();
   const alert = {...$alertStatus, ...customStatus};
   const color = alert[status ?? 505][0];
   const message = alert[status ?? 505][1];
@@ -24,8 +26,8 @@ export function ModalStatus({
   const $boxColor = $alertStyle[color].box;
   const $boxStyle = {
     padding: 20,
-    borderRadius: 6,
-    backgroundColor: $boxColor,
+    borderRadius: 10,
+    backgroundColor: themeColors[$boxColor],
   };
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -49,9 +51,20 @@ export function ModalStatus({
 
   return (
     <Modal visible={isVisible} transparent={true} animationType="fade">
-      <Pressable style={$boxContainerStyle} onPress={() => setIsVisible(false)}>
+      <Pressable
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: themeColors.primary,
+          opacity: 0.8,
+        }}
+        onPress={() => setIsVisible(false)}>
         <View style={$boxStyle}>
-          <Text variant="paragraphMedium" color={$itemColor}>
+          <Text
+            variant="paragraphSmall"
+            textAlign="justify"
+            color={$itemColor}>
             {message ?? 'Ops... Algo inesperado aconteceu.'}
           </Text>
         </View>
@@ -59,13 +72,6 @@ export function ModalStatus({
     </Modal>
   );
 }
-
-const $boxContainerStyle: StyleProp<ViewStyle> = {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'midnightBlueTransparent',
-};
 
 const $alertStyle: AlertStyle = {
   NEUTRAL: {
@@ -84,12 +90,12 @@ const $alertStyle: AlertStyle = {
 
 const $alertStatus: AlertStatusType = {
   200: ['SUCCESS', 'Requisição bem-sucedida.'],
-  201: ['SUCCESS', 'Recurso criado com sucesso.'],
-  204: ['SUCCESS', 'Recurso atualizado com sucesso.'],
+  201: ['SUCCESS', 'Criado com sucesso.'],
+  204: ['SUCCESS', 'Atualizado com sucesso.'],
   401: ['DANGER', 'Credenciais inválidas.'],
   403: ['DANGER', 'Acesso negado.'],
-  404: ['DANGER', 'Recurso não encontrado.'],
-  405: ['DANGER', 'Método não permitido.'],
+  404: ['DANGER', 'Não encontrado.'],
+  405: ['DANGER', 'Não permitido.'],
   413: ['DANGER', 'Requisição muito grande.'],
   500: ['NEUTRAL', 'Erro interno do servidor.'],
   503: ['NEUTRAL', 'Serviço indisponível.'],
