@@ -1,23 +1,51 @@
 import {
+  AlertStatusType,
   AttendanceDescription,
   Box,
   ButtonDangerOutline,
   ButtonSuccess,
   ListSeparator,
+  ModalStatus,
   Screen,
   SpecialtyDescription,
 } from '@components';
 import {ScheduleStackProps} from '@routes';
 import {ClientDescription} from './components/ClientDescription';
+import {appointmentUseCases} from '@domain';
 
 export function ScheduleResumeScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleResumeScreen'>>) {
-  // TODO: finalizar agendamento e montar request de data
+  const {fetch, status} = appointmentUseCases.create();
+
+  const registerNewAppointment = () => {
+    const {day: date, time, employee, profile, specialty} = route.params;
+    fetch({
+      date,
+      time,
+      clientId: profile.id,
+      employeeId: employee.id,
+      specialtyId: specialty.id,
+    });
+  };
+
+  const customStatus: AlertStatusType = {
+    201: ['SUCCESS', 'Agendamento realizado com sucesso.'],
+    401: [
+      'DANGER',
+      'O cliente já possui agendamento para o serviço.',
+    ],
+  };
 
   return (
     <Screen flex={1}>
+      <ModalStatus
+        customStatus={customStatus}
+        status={status}
+        errorAction={() => navigation.goBack()}
+        successAction={() => navigation.popToTop()}
+      />
       <SpecialtyDescription specialty={route.params.specialty} />
       <ListSeparator mb="s12" />
       <AttendanceDescription
@@ -38,7 +66,7 @@ export function ScheduleResumeScreen({
         <ButtonSuccess
           ml="s4"
           title="Confirmar"
-          onPress={() => console.warn('Enviar')}
+          onPress={registerNewAppointment}
         />
       </Box>
     </Screen>
