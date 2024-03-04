@@ -1,19 +1,22 @@
-import {Icon} from '../Icons/Icon';
+import {Icon, IconProps} from '../Icons/Icon';
+import {TouchableOpacity, TouchableOpacityProps} from '../TouchableOpacity';
 
-interface ButtonAddProps {
-  status?: number | null;
-  onPress?: () => void;
+interface ButtonAddProps extends TouchableOpacityProps {
+  iconProps?: Omit<IconProps, 'name'>;
 }
 
-export function ButtonAdd({onPress}: Readonly<ButtonAddProps>) {
+export function ButtonAdd({iconProps, ...props}: Readonly<ButtonAddProps>) {
   return (
-    <Icon
-      name="AddIcon"
-      // type="floating"
-      // backgroundColor="steelBlue"
-      color="white"
-      size={35}
-      onPress={onPress}
-    />
+    <TouchableOpacity
+      alignItems="center"
+      height={50}
+      borderRadius="s6"
+      borderColor="primaryContrast"
+      borderWidth={1}
+      justifyContent="center"
+      marginTop="s4"
+      {...props}>
+      <Icon name="AddIcon" size={30} color="primaryContrast" {...iconProps} />
+    </TouchableOpacity>
   );
 }

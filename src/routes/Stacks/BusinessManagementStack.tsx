@@ -1,6 +1,7 @@
 import {CategoryResponse} from '@domain';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
+  AppointmentHomeScreen,
   CategoryCreateScreen,
   CategoryListScreen,
   CategoryUpdateScreen,
@@ -13,11 +14,13 @@ import {
 import {defaultOptions} from '../screenOptions';
 
 export type BusinessManagementParamList = {
+  AppointmentHomeScreen: undefined;
   CategoryCreateScreen: undefined;
   CategoryListScreen: undefined;
   CategoryUpdateScreen: {category: CategoryResponse};
   DashboardScreen: undefined;
   SpecialtyCreateScreen: undefined;
+  SpecialtyUpdateScreen: undefined;
   SpecialtyListScreen: undefined;
   WorkingHoursCreateScreen: undefined;
   WorkingHoursListScreen: undefined;
@@ -37,7 +40,12 @@ export function BusinessManagementStack() {
           ...defaultOptions,
           headerTitle: 'Dashboard',
           headerShown: true,
+          animation: 'none',
         }}
+      />
+      <NativeStack.Screen
+        name="AppointmentHomeScreen"
+        component={AppointmentHomeScreen}
       />
       <NativeStack.Screen
         name="CategoryCreateScreen"

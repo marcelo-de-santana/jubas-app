@@ -7,7 +7,7 @@ import {
   SpacingShorthandProps,
   createTheme,
 } from '@shopify/restyle';
-import {Appearance, ViewStyle} from 'react-native';
+import {ViewStyle} from 'react-native';
 import {colors} from './colors';
 import {textVariants, separatorsVariants} from '@components';
 
@@ -49,6 +49,7 @@ const defaults = {
   separatorsVariants,
   textVariants,
   spacing: {
+    s0: 0,
     s4: 4,
     s8: 8,
     s10: 10,
