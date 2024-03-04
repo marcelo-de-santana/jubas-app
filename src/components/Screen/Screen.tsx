@@ -1,6 +1,6 @@
+import {useAppTheme} from '@hooks';
 import {Box, BoxProps} from '../Box/Box';
 import {ScreenViewContainer, ScrollViewContainer} from './ScreenContainers';
-import {theme} from '@styles';
 
 interface Props extends BoxProps {
   children?: React.ReactNode;
@@ -14,6 +14,7 @@ export function Screen({
   py = 's10',
   ...props
 }: Readonly<Props>) {
+  const theme = useAppTheme();
   const Container = scrollable ? ScrollViewContainer : ScreenViewContainer;
   return (
     <Container backgroundColor={theme.colors.primary}>

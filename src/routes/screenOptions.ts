@@ -1,5 +1,6 @@
+import {useAppTheme} from '@hooks';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {theme} from '@styles';
+const theme = useAppTheme();
 
 export const defaultOptions: NativeStackNavigationOptions = {
   headerShadowVisible: false,

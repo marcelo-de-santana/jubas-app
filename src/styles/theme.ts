@@ -92,12 +92,9 @@ export const lightTheme = createTheme({
   },
 });
 
-export const theme =
-  Appearance.getColorScheme() === 'dark' ? darkTheme : lightTheme;
-
-export type Theme = typeof theme;
-export type ThemeColors = keyof (typeof theme)['colors'];
-export type ThemeSpacing = keyof (typeof theme)['spacing'];
+export type Theme = typeof darkTheme;
+export type ThemeColors = keyof (typeof darkTheme)['colors'];
+export type ThemeSpacing = keyof (typeof darkTheme)['spacing'];
 
 export type RestyleTypes = BackgroundColorProps<Theme> &
   BackgroundColorShorthandProps<Theme> &
