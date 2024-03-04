@@ -5,28 +5,38 @@ import {
   TextInputProps as RNTextInputProps,
   View,
 } from 'react-native';
-import {Text} from '../Text/Text';
+import {Text, TextProps} from '../Text/Text';
+import {Box, BoxProps} from '../Box';
+import {useAppTheme} from '@hooks';
 
 export interface TextInputProps extends RNTextInputProps {
   label?: string;
+  labelProps?: TextProps;
+  boxTextInputProps?: BoxProps;
   errorMessage?: string;
 }
 
 export function TextInput({
   label,
+  labelProps,
+  boxTextInputProps,
   errorMessage,
   ...props
 }: Readonly<TextInputProps>) {
+  const {colors, spacing, borderRadii} = useAppTheme();
   const inputRef = useRef<RNTextInput>(null);
 
-  const $viewTextStyle = {padding: 5};
-
-  const $viewTextInputStyle = {
-    borderRadius: 6,
-    height: 40,
+  const $boxTextInput: BoxProps = {
+    borderRadius: 's6',
+    height: 50,
     borderWidth: errorMessage ? 2 : 1,
-    borderColor: errorMessage ? 'red' : 'steelBlue',
-    backgroundColor: 'lavenderGray',
+    borderColor: errorMessage ? 'red' : 'secondary',
+    backgroundColor: 'secondary',
+  };
+
+  const $textInputStyle = {
+    paddingHorizontal: spacing.s10,
+    color: colors.secondaryContrast,
   };
 
   function focusInput() {
@@ -35,32 +45,31 @@ export function TextInput({
 
   return (
     <Pressable onPress={focusInput}>
-      <View style={$viewTextStyle}>
-        <Text variant="paragraphSmall" textAlign="justify" color="steelBlue">
+      <Box p="s4">
+        <Text
+          variant="paragraphSmall"
+          textAlign="justify"
+          color="primaryContrast"
+          {...labelProps}>
           {label}
         </Text>
-      </View>
-      <View style={$viewTextInputStyle}>
+      </Box>
+      <Box {...$boxTextInput} {...boxTextInputProps}>
         <RNTextInput
           autoCapitalize="none"
           style={$textInputStyle}
-          placeholderTextColor={'midnightBlueTransparent'}
-          cursorColor={'midnightBlue'}
+          placeholderTextColor={colors.primaryContrast}
+          cursorColor={colors.secondaryContrast}
           {...props}
         />
-      </View>
+      </Box>
       {errorMessage && (
-        <View style={$viewTextStyle}>
-          <Text variant="paragraphExtraSmall" textAlign="justify" color="red">
+        <Box p="s4">
+          <Text variant="paragraphVerySmall" textAlign="justify" color="red">
             {errorMessage}
           </Text>
-        </View>
+        </Box>
       )}
     </Pressable>
   );
 }
-
-const $textInputStyle = {
-  paddingHorizontal: 10,
-  color: 'midnightBlue',
-};
