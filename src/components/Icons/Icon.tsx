@@ -12,7 +12,8 @@ import {
   PersonIcon,
   TrashIcon,
 } from '@assets';
-import {ThemeColors, theme} from '@styles';
+import {ThemeColors} from '@styles';
+import {useAppTheme} from '@hooks';
 export interface IconBase {
   size?: number;
   color?: string;
@@ -27,21 +28,23 @@ export interface IconProps {
 
 export function Icon({
   name,
-  color = 'steelBlue',
+  color = 'primaryContrast',
   size,
   onPress,
 }: Readonly<IconProps>) {
+  const {colors} = useAppTheme();
+
   const SVGIcon = iconRegistry[name];
 
   if (onPress) {
     return (
       <Pressable onPress={onPress}>
-        <SVGIcon color={theme.colors[color]} size={size} />
+        <SVGIcon color={colors[color]} size={size} />
       </Pressable>
     );
   }
 
-  return <SVGIcon color={theme.colors[color]} size={size} />;
+  return <SVGIcon color={colors[color]} size={size} />;
 }
 
 const iconRegistry = {

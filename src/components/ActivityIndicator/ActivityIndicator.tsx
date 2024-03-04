@@ -1,4 +1,5 @@
-import {ThemeColors, theme} from '@styles';
+import {useAppTheme} from '@hooks';
+import {ThemeColors} from '@styles';
 import {
   ActivityIndicatorProps as RNActivityIndicatorProps,
   ActivityIndicator as RNActivityIndicator,
@@ -13,7 +14,6 @@ export function ActivityIndicator({
   size = 'large',
   ...props
 }: Readonly<ActivityIndicatorProps>) {
-  return (
-    <RNActivityIndicator size={size} color={theme.colors[color]} {...props} />
-  );
+  const {colors} = useAppTheme();
+  return <RNActivityIndicator size={size} color={colors[color]} {...props} />;
 }
