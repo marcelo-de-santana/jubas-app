@@ -1,33 +1,42 @@
 import {
-  Box,
-  ButtonDangerOutline,
-  ButtonSuccess,
+  ButtonTwoOptions,
+  FormTextInput,
+  ModalStatus,
   Screen,
-  TextInput,
 } from '@components';
+import {categoryUseCases} from '@domain';
+import {useForm} from '@hooks';
 import {BusinessManagementStackProps} from '@routes';
-import {useState} from 'react';
+import {schemas} from '@utils';
 
 export function CategoryCreateScreen({
   navigation,
 }: Readonly<BusinessManagementStackProps<'CategoryCreateScreen'>>) {
-  const [categoryName, setCategoryName] = useState('');
+  const {fetch, status, isLoading} = categoryUseCases.create();
+
+  const formik = useForm({
+    initialValues: {name: ''},
+    validationSchema: schemas.categoryRequest,
+    onSubmit: () => {
+      fetch(formik.values.name);
+    },
+  });
 
   return (
     <Screen>
-      <TextInput
+      <ModalStatus status={status} successAction={navigation.goBack} />
+      <FormTextInput
+        formik={formik}
+        name="name"
         placeholder="Nome da categoria"
-        value={categoryName}
-        onChangeText={text => setCategoryName(text)}
       />
-      <Box flexDirection="row" marginTop="s32">
-        <ButtonDangerOutline
-          mr="s10"
-          title="Voltar"
-          onPress={navigation.goBack}
-        />
-        <ButtonSuccess ml="s10" title="Salvar" onPress={() => {}} />
-      </Box>
+      <ButtonTwoOptions
+        cancelButtonProps={{loading: isLoading, onPress: navigation.goBack}}
+        confirmButtonProps={{
+          loading: isLoading,
+          onPress: formik.handleSubmit,
+        }}
+      />
     </Screen>
   );
 }

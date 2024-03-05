@@ -43,6 +43,10 @@ const specialtyCreate = object().shape({
   name: fields.name,
 });
 
+const categoryRequest = object().shape({
+  name: fields.name,
+});
+
 export const schemas = {
   signIn,
   signUp,
@@ -52,4 +56,5 @@ export const schemas = {
   userCreate,
   userUpdate,
   specialtyCreate,
+  categoryRequest,
 };

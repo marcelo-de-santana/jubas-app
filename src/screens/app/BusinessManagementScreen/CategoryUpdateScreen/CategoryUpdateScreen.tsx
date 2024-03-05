@@ -1,42 +1,40 @@
 import {
-  Box,
-  ButtonDangerOutline,
-  ButtonSuccess,
+  ButtonTwoOptions,
+  FormTextInput,
+  ModalStatus,
   Screen,
-  TextInput,
 } from '@components';
+import {categoryUseCases} from '@domain';
+import {useForm} from '@hooks';
 import {BusinessManagementStackProps} from '@routes';
-import {useState} from 'react';
+import {schemas} from '@utils';
 
 export function CategoryUpdateScreen({
   navigation,
   route,
 }: Readonly<BusinessManagementStackProps<'CategoryUpdateScreen'>>) {
-  const [category, setCategory] = useState(route.params.category);
+  const {fetch, status, isLoading} = categoryUseCases.update();
 
-  function handleState(key: string, value: string) {
-    setCategory(prev => ({...prev, [key]: value}));
-  }
+  const formik = useForm({
+    initialValues: {name: route.params.category.name},
+    validationSchema: schemas.categoryRequest,
+    onSubmit: () => {
+      fetch({id: route.params.category.id, name: formik.values.name});
+    },
+  });
 
   return (
     <Screen flex={1}>
-      <TextInput
+      <ModalStatus status={status} successAction={navigation.goBack} />
+      <FormTextInput
+        formik={formik}
+        name="name"
         placeholder="Nome da categoria"
-        value={category.name}
-        onChangeText={text => handleState('name', text)}
       />
-      <Box flexDirection="row" marginTop="s32">
-        <ButtonDangerOutline
-          mr="s10"
-          title="Voltar"
-          onPress={navigation.goBack}
-        />
-        <ButtonSuccess
-          ml="s10"
-          title="Salvar"
-          onPress={() => console.warn('Salvar')}
-        />
-      </Box>
+      <ButtonTwoOptions
+        cancelButtonProps={{loading: isLoading, onPress: navigation.goBack}}
+        confirmButtonProps={{loading: isLoading, onPress: formik.handleSubmit}}
+      />
     </Screen>
   );
 }
