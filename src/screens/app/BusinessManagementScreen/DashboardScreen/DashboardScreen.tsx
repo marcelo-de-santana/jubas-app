@@ -8,18 +8,14 @@ export function DashboardScreen({
     <Screen paddingHorizontal="s10" scrollable>
       <BoxMenu
         title="Gerenciar Agenda"
-        onPress={() => navigation.navigate('AppointmentHomeScreen')}
+        onPress={() => navigation.navigate('AppointmentListScreen')}
       />
       <BoxMenu
         title="Gerenciar Horários"
-        onPress={() => navigation.navigate('WorkingHoursListScreen')}
+        onPress={() => navigation.navigate('WorkingHourListScreen')}
       />
       <BoxMenu
         title="Gerenciar Serviços"
-        onPress={() => navigation.navigate('SpecialtyListScreen')}
-      />
-      <BoxMenu
-        title="Gerenciar Categorias"
         onPress={() => navigation.navigate('CategoryListScreen')}
       />
     </Screen>

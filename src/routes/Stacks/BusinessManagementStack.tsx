@@ -1,29 +1,39 @@
-import {CategoryResponse} from '@domain';
+import {
+  CategoryResponse,
+  SpecialtyResponse,
+  WorkingHourResponse,
+} from '@domain';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
-  AppointmentHomeScreen,
+  AppointmentListScreen,
   CategoryCreateScreen,
   CategoryListScreen,
   CategoryUpdateScreen,
   DashboardScreen,
   SpecialtyCreateScreen,
-  SpecialtyListScreen,
-  WorkingHoursCreateScreen,
-  WorkingHoursListScreen,
+  SpecialtyUpdateScreen,
+  WorkingHourCreateScreen,
+  WorkingHourListScreen,
+  WorkingHourUpdateScreen,
 } from '@screens';
 import {defaultOptions} from '../screenOptions';
 
+interface SpecialtyUpdateParams {
+  category: CategoryResponse;
+  specialty: SpecialtyResponse;
+}
+
 export type BusinessManagementParamList = {
-  AppointmentHomeScreen: undefined;
+  AppointmentListScreen: undefined;
   CategoryCreateScreen: undefined;
   CategoryListScreen: undefined;
   CategoryUpdateScreen: {category: CategoryResponse};
   DashboardScreen: undefined;
-  SpecialtyCreateScreen: undefined;
-  SpecialtyUpdateScreen: undefined;
-  SpecialtyListScreen: undefined;
-  WorkingHoursCreateScreen: undefined;
-  WorkingHoursListScreen: undefined;
+  SpecialtyCreateScreen: {category: CategoryResponse};
+  SpecialtyUpdateScreen: SpecialtyUpdateParams;
+  WorkingHourCreateScreen: undefined;
+  WorkingHourListScreen: undefined;
+  WorkingHourUpdateScreen: {workingHour: WorkingHourResponse};
 };
 
 export function BusinessManagementStack() {
@@ -44,8 +54,8 @@ export function BusinessManagementStack() {
         }}
       />
       <NativeStack.Screen
-        name="AppointmentHomeScreen"
-        component={AppointmentHomeScreen}
+        name="AppointmentListScreen"
+        component={AppointmentListScreen}
       />
       <NativeStack.Screen
         name="CategoryCreateScreen"
@@ -69,18 +79,25 @@ export function BusinessManagementStack() {
         options={{}}
       />
       <NativeStack.Screen
-        name="SpecialtyListScreen"
-        component={SpecialtyListScreen}
-        options={{headerTitle: 'Especialidades'}}
+        name="SpecialtyUpdateScreen"
+        component={SpecialtyUpdateScreen}
+        options={{}}
       />
       <NativeStack.Screen
-        name="WorkingHoursCreateScreen"
-        component={WorkingHoursCreateScreen}
+        name="WorkingHourCreateScreen"
+        component={WorkingHourCreateScreen}
         options={{headerTitle: 'Novo horário'}}
       />
       <NativeStack.Screen
-        name="WorkingHoursListScreen"
-        component={WorkingHoursListScreen}
+        name="WorkingHourListScreen"
+        component={WorkingHourListScreen}
+        options={{
+          headerTitle: 'Horários',
+        }}
+      />
+      <NativeStack.Screen
+        name="WorkingHourUpdateScreen"
+        component={WorkingHourUpdateScreen}
         options={{
           headerTitle: 'Horários',
         }}

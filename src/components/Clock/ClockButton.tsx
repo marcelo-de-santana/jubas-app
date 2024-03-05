@@ -1,11 +1,11 @@
 import {mask} from '@utils';
-import {Dispatch, SetStateAction, useState} from 'react';
+import {useState} from 'react';
 import {ClockPicker} from './ClockPicker';
 import {Button, ButtonProps} from '@components';
 
 interface ButtonClockProps extends Omit<ButtonProps, 'title'> {
   timeState: string;
-  setTimeState: Dispatch<SetStateAction<string>>;
+  setTimeState: (time: string) => void;
 }
 
 export function ClockButton({

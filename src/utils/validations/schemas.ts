@@ -39,6 +39,10 @@ const userUpdate = object().shape({
   password: fields.optionalPassword,
 });
 
+const specialtyCreate = object().shape({
+  name: fields.name,
+});
+
 export const schemas = {
   signIn,
   signUp,
@@ -47,4 +51,5 @@ export const schemas = {
   profileUpdate,
   userCreate,
   userUpdate,
+  specialtyCreate,
 };

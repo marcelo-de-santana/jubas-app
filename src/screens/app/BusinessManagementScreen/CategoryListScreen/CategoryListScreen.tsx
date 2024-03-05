@@ -1,5 +1,9 @@
 import {ButtonAdd, FlatList, Screen} from '@components';
-import {CategorySpecialtiesResponse, categoryUseCases} from '@domain';
+import {
+  CategorySpecialtiesResponse,
+  SpecialtyResponse,
+  categoryUseCases,
+} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
@@ -19,17 +23,30 @@ export function CategoryListScreen({
   }, [navigation]);
 
   function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
+    const navigateToSpecialtyCreate = () =>
+      navigation.navigate('SpecialtyCreateScreen', {
+        category: {id: item.id, name: item.name},
+      });
+
+    const navigateToSpecialtyUpdate = (specialty: SpecialtyResponse) =>
+      navigation.navigate('SpecialtyUpdateScreen', {
+        category: {id: item.id, name: item.name},
+        specialty,
+      });
+
     return (
       <BoxCategory
         category={{id: item.id, name: item.name}}
         navigation={navigation}>
-        <BoxSpecialties specialties={item.specialties} navigation={navigation}>
+        <BoxSpecialties
+          specialties={item.specialties}
+          onPressToNavigate={navigateToSpecialtyUpdate}>
           <ButtonAdd
             iconProps={{color: 'secondaryContrast', size: 20}}
             borderWidth={0}
             marginTop="s0"
             height={40}
-            onPress={() => navigation.navigate('SpecialtyCreateScreen')}
+            onPress={navigateToSpecialtyCreate}
           />
         </BoxSpecialties>
       </BoxCategory>
@@ -37,7 +54,7 @@ export function CategoryListScreen({
   }
 
   return (
-    <Screen>
+    <Screen flex={1}>
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -47,9 +64,11 @@ export function CategoryListScreen({
         refetch={refresh}
         listEmptyTitle="Nenhuma categoria encontrada."
         ListFooterComponent={
-          <ButtonAdd
-            onPress={() => navigation.navigate('CategoryCreateScreen')}
-          />
+          data && (
+            <ButtonAdd
+              onPress={() => navigation.navigate('CategoryCreateScreen')}
+            />
+          )
         }
       />
     </Screen>

@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
-import {Modal, Pressable, View} from 'react-native';
+import {Modal, Pressable} from 'react-native';
 import {Text} from '../Text/Text';
 import {ThemeColors} from '@styles';
 import {useAppTheme} from '@hooks';
+import {Box} from '../Box';
 
 export interface ModalStatusProps {
   status?: number | null;
@@ -19,21 +20,18 @@ export function ModalStatus({
 }: Readonly<ModalStatusProps>) {
   const {colors: themeColors} = useAppTheme();
   const alert = {...$alertStatus, ...customStatus};
-  const color = alert[status ?? 505][0];
-  const message = alert[status ?? 505][1];
+  const [color, message] = alert[status ?? 505] || [
+    'NEUTRAL',
+    'Ops... Algo inesperado aconteceu.',
+  ];
 
-  const $itemColor = $alertStyle[color].text;
+  const $textColor = $alertStyle[color].text;
   const $boxColor = $alertStyle[color].box;
-  const $boxStyle = {
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: themeColors[$boxColor],
-  };
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    if (status) {
-      return handleVisibility();
+    if (typeof status === 'number') {
+      handleVisibility();
     }
   }, [status]);
 
@@ -60,14 +58,11 @@ export function ModalStatus({
           opacity: 0.8,
         }}
         onPress={() => setIsVisible(false)}>
-        <View style={$boxStyle}>
-          <Text
-            variant="paragraphSmall"
-            textAlign="justify"
-            color={$itemColor}>
+        <Box padding="s20" borderRadius="s10" backgroundColor={$boxColor}>
+          <Text variant="paragraphSmall" textAlign="justify" color={$textColor}>
             {message ?? 'Ops... Algo inesperado aconteceu.'}
           </Text>
-        </View>
+        </Box>
       </Pressable>
     </Modal>
   );

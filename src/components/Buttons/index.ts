@@ -4,4 +4,4 @@ export * from './ButtonCentral';
 export * from './ButtonDangerOutline';
 export * from './ButtonSuccess';
 export * from './ButtonSection';
-export * from './ButtonToggleable';
+export * from './ButtonTwoOptions';

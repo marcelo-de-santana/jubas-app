@@ -3,7 +3,6 @@ import {
   Pressable,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
-  View,
 } from 'react-native';
 import {Text, TextProps} from '../Text/Text';
 import {Box, BoxProps} from '../Box';
@@ -23,7 +22,7 @@ export function TextInput({
   errorMessage,
   ...props
 }: Readonly<TextInputProps>) {
-  const {colors, spacing, borderRadii} = useAppTheme();
+  const {colors, spacing} = useAppTheme();
   const inputRef = useRef<RNTextInput>(null);
 
   const $boxTextInput: BoxProps = {

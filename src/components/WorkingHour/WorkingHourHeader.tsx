@@ -1,4 +1,4 @@
-import {BoxFourItems} from '@components';
+import {BoxFourTimes} from '../Box';
 
 export function WorkingHourHeader() {
   const listHeader = [
@@ -8,5 +8,5 @@ export function WorkingHourHeader() {
     'Saída',
   ];
 
-  return <BoxFourItems textValues={listHeader} />;
+  return <BoxFourTimes textValues={listHeader} disabled />;
 }

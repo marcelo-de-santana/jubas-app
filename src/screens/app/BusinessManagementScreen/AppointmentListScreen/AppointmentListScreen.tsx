@@ -11,9 +11,9 @@ import {mask} from '@utils';
 import {useEffect, useState} from 'react';
 import {Schedule} from './components/Schedule';
 
-export function AppointmentHomeScreen({
+export function AppointmentListScreen({
   navigation,
-}: Readonly<BusinessManagementStackProps<'AppointmentHomeScreen'>>) {
+}: Readonly<BusinessManagementStackProps<'AppointmentListScreen'>>) {
   const {data, fetch, isError, isLoading} =
     appointmentUseCases.getDaysOfAttendance();
 
