@@ -38,7 +38,7 @@ export function Collapsible({
       buttonProps={$buttonProps}
       textProps={$textProps}
       title={appointment.employeeName}>
-      <Box flexDirection="row" flexWrap="wrap" justifyContent='space-between'>
+      <Box flexDirection="row" flexWrap="wrap" justifyContent='center'>
         {appointment?.workingHours.map(availableTime => {
           return (
             <BoxTimeAvailable

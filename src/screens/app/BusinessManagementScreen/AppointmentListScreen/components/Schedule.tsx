@@ -41,7 +41,7 @@ export function Schedule({date}: Readonly<{date?: string}>) {
           color: 'primary',
         }}
         title={item.employeeName}>
-        <Box flexDirection="row" flexWrap="wrap" justifyContent="space-between">
+        <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
           {item?.workingHours.map(availableTime => {
             return (
               <BoxTimeAvailable

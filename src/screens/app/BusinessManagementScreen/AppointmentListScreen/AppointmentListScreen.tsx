@@ -1,10 +1,4 @@
-import {
-  Box,
-  ListEmpty,
-  ListSeparator,
-  Screen,
-  TouchableOpacityItem,
-} from '@components';
+import {Box, ListEmpty, Screen, TouchableOpacityItem} from '@components';
 import {appointmentUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
 import {mask} from '@utils';
@@ -51,7 +45,6 @@ export function AppointmentListScreen({
               );
             })}
           </Box>
-          {dayOfWeek && <ListSeparator />}
           <Schedule date={dayOfWeek} />
         </>
       )}

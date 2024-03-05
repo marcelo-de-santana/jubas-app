@@ -23,6 +23,7 @@ export function BoxTimeAvailable({
       marginVertical="s4"
       borderRadius="s6"
       padding="s8"
+      width="20%"
       textProps={{
         variant: 'paragraphSmall',
         color: $textColor,
