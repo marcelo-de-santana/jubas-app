@@ -88,6 +88,12 @@ function money(money: number | null) {
   let number = money ?? 0;
   return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
 }
+//TODO FAZER REGEX E FORMATAR CAMPO DE DINHEIRO
+function currencyFormat(value: string) {
+  value = value.replace('.', ',');
+  value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return value;
+}
 
 function dayOfWeek(date: Date) {
   switch (date.getUTCDay()) {
@@ -123,4 +129,5 @@ export const mask = {
   timeToTimestamp,
   timestampToTimeFormat,
   money,
+  currencyFormat,
 };

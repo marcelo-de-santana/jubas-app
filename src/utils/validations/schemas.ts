@@ -41,6 +41,8 @@ const userUpdate = object().shape({
 
 const specialtyCreate = object().shape({
   name: fields.name,
+  price: fields.stringRequired,
+  timeDuration: fields.stringRequired,
 });
 
 const categoryRequest = object().shape({

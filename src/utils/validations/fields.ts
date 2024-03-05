@@ -28,6 +28,8 @@ const cpf = string().length(14, '*Deve ser CPF').required('*Campo obrigatório')
 
 const optionalCpf = string().length(14, '*Deve ser CPF').nullable();
 
+const stringRequired = string().required('*Campo obrigatório');
+
 export const fields = {
   email,
   name,
@@ -35,5 +37,6 @@ export const fields = {
   optionalCpf,
   optionalPassword,
   password,
+  stringRequired,
   checkPass,
 };

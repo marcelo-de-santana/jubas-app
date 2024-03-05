@@ -1,13 +1,8 @@
-import {
-  ButtonTwoOptions,
-  FormTextInput,
-  Screen,
-  Text,
-} from '@components';
+import {ButtonTwoOptions, FormTextInput, Screen, Text} from '@components';
 import {specialtyUseCases} from '@domain';
 import {useForm} from '@hooks';
 import {BusinessManagementStackProps} from '@routes';
-import {schemas} from '@utils';
+import {schemas, mask} from '@utils';
 
 export function SpecialtyCreateScreen({
   navigation,
@@ -45,6 +40,7 @@ export function SpecialtyCreateScreen({
         name="price"
         keyboardType="numeric"
         formik={formik}
+        value={mask.currencyFormat(formik.values.price)}
         placeholder="Preço"
       />
       <FormTextInput
