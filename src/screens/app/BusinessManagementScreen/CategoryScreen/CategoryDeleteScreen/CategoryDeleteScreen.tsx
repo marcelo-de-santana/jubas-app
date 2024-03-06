@@ -1,25 +1,28 @@
 import {
   AlertStatusType,
   Box,
+  BoxItem,
   ButtonDangerOutline,
   ButtonSuccess,
+  ModalDelete,
   ModalStatus,
   Screen,
 } from '@components';
+import {categoryUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
 import {useState} from 'react';
-import {Modal} from './components/Modal';
-import {specialtyUseCases} from '@domain';
 
-export function SpecialtyDeleteScreen({
+export function CategoryDeleteScreen({
   navigation,
   route,
-}: Readonly<BusinessManagementStackProps<'SpecialtyDeleteScreen'>>) {
-  const {fetch, isLoading, status} = specialtyUseCases.remove();
+}: Readonly<BusinessManagementStackProps<'CategoryDeleteScreen'>>) {
+  const {category} = route.params;
+
+  const {fetch, isLoading, status} = categoryUseCases.remove();
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const sendToDelete = () => {
-    fetch(route.params.specialty.id);
+    fetch(category.id);
   };
 
   const openModal = () => {
@@ -46,13 +49,23 @@ export function SpecialtyDeleteScreen({
         successAction={popTwoScreens}
         errorAction={popTwoScreens}
       />
-      <Modal
+      <ModalDelete
         loading={isLoading}
         isVisible={isVisible}
-        route={route}
         onPressToCancel={closeModal}
-        onPressToConfirm={sendToDelete}
-      />
+        onPressToConfirm={sendToDelete}>
+        <BoxItem
+          backgroundColor="secondary"
+          padding="s10"
+          borderRadius="s6"
+          textProps={{
+            variant: 'paragraphMedium',
+            color: 'primary',
+            textAlign: 'justify',
+          }}
+          label={'Categoria: ' + category.name}
+        />
+      </ModalDelete>
       <Box justifyContent="space-between">
         <ButtonDangerOutline
           flex={0}
@@ -63,7 +76,7 @@ export function SpecialtyDeleteScreen({
             color: 'red',
           }}
           onPress={openModal}
-          title="Excluir especialidade"
+          title="Excluir categoria"
         />
         <ButtonSuccess
           flex={0}
