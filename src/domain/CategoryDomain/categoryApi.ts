@@ -19,7 +19,7 @@ async function update(request: CategoryRequest) {
   return await api.put(PATH + '/' + request.id, {name: request.name});
 }
 
-async function remove(categoryId: string) {
+async function remove(categoryId: number) {
   return await api.delete(PATH + '/' + categoryId);
 }
 export const categoryApi = {

@@ -18,7 +18,7 @@ function getCategoriesAndSpecialties() {
   );
 }
 function remove() {
-  return useFetch<void, string>(categoryApi.remove);
+  return useFetch<void, number>(categoryApi.remove);
 }
 function update() {
   return useFetch<void, CategoryRequest>(categoryApi.update);

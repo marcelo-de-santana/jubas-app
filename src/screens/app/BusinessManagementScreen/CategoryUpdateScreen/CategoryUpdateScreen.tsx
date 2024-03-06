@@ -3,6 +3,7 @@ import {
   FormTextInput,
   ModalStatus,
   Screen,
+  TouchableOpacityItem,
 } from '@components';
 import {categoryUseCases} from '@domain';
 import {useForm} from '@hooks';
@@ -34,6 +35,14 @@ export function CategoryUpdateScreen({
       <ButtonTwoOptions
         cancelButtonProps={{loading: isLoading, onPress: navigation.goBack}}
         confirmButtonProps={{loading: isLoading, onPress: formik.handleSubmit}}
+      />
+      <TouchableOpacityItem
+        flex={1}
+        flexDirection="column-reverse"
+        label="Outras opções"
+        onPress={() =>
+          navigation.navigate('CategoryDeleteScreen', {...route.params})
+        }
       />
     </Screen>
   );

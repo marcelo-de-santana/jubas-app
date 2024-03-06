@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   AppointmentListScreen,
   CategoryCreateScreen,
+  CategoryDeleteScreen,
   CategoryListScreen,
   CategoryUpdateScreen,
   DashboardScreen,
@@ -19,7 +20,11 @@ import {
 } from '@screens';
 import {defaultOptions} from '../screenOptions';
 
-interface SpecialtyUpdateParams {
+interface CategoryParams {
+  category: CategoryResponse;
+}
+
+interface SpecialtyParams {
   category: CategoryResponse;
   specialty: SpecialtyResponse;
 }
@@ -27,12 +32,13 @@ interface SpecialtyUpdateParams {
 export type BusinessManagementParamList = {
   AppointmentListScreen: undefined;
   CategoryCreateScreen: undefined;
+  CategoryDeleteScreen: CategoryParams;
   CategoryListScreen: undefined;
-  CategoryUpdateScreen: {category: CategoryResponse};
+  CategoryUpdateScreen: CategoryParams;
   DashboardScreen: undefined;
-  SpecialtyCreateScreen: {category: CategoryResponse};
-  SpecialtyDeleteScreen: SpecialtyUpdateParams;
-  SpecialtyUpdateScreen: SpecialtyUpdateParams;
+  SpecialtyCreateScreen: CategoryParams;
+  SpecialtyDeleteScreen: SpecialtyParams;
+  SpecialtyUpdateScreen: SpecialtyParams;
   WorkingHourCreateScreen: undefined;
   WorkingHourListScreen: undefined;
   WorkingHourUpdateScreen: {workingHour: WorkingHourResponse};
@@ -64,6 +70,11 @@ export function BusinessManagementStack() {
         name="CategoryCreateScreen"
         component={CategoryCreateScreen}
         options={{headerTitle: 'Nova categoria'}}
+      />
+      <NativeStack.Screen
+        name="CategoryDeleteScreen"
+        component={CategoryDeleteScreen}
+        options={{headerShown: false, animation: 'fade_from_bottom'}}
       />
       <NativeStack.Screen
         name="CategoryListScreen"

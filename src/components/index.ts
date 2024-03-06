@@ -11,7 +11,7 @@ export * from './Images';
 export * from './Box';
 export * from './Screen/Screen';
 export * from './SpecialtyDescription/SpecialtyDescription';
-export * from './Modal/ModalStatus';
+export * from './Modal';
 export * from './Text/Text';
 export * from './TextInput/TextInput';
 export * from './TouchableOpacity';
