@@ -1,12 +1,12 @@
 import {Screen, BoxItem, FlatList} from '@components';
 import {ProfileResponse, permissionUseCases} from '@domain';
-import {EmployeeScreenProps} from '@routes';
+import {BusinessManagementStackProps, EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
 export function EmployeeListScreen({
   navigation,
-}: Readonly<EmployeeScreenProps<'EmployeeListScreen'>>) {
+}: Readonly<BusinessManagementStackProps<'EmployeeListScreen'>>) {
   const {data, isLoading, isError, fetch} =
     permissionUseCases.getProfilesById();
 

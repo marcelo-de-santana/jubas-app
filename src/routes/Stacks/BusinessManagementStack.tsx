@@ -11,6 +11,7 @@ import {
   CategoryListScreen,
   CategoryUpdateScreen,
   DashboardScreen,
+  EmployeeListScreen,
   SpecialtyCreateScreen,
   SpecialtyDeleteScreen,
   SpecialtyUpdateScreen,
@@ -36,6 +37,7 @@ export type BusinessManagementParamList = {
   CategoryListScreen: undefined;
   CategoryUpdateScreen: CategoryParams;
   DashboardScreen: undefined;
+  EmployeeListScreen: undefined;
   SpecialtyCreateScreen: CategoryParams;
   SpecialtyDeleteScreen: SpecialtyParams;
   SpecialtyUpdateScreen: SpecialtyParams;
@@ -87,6 +89,11 @@ export function BusinessManagementStack() {
         name="CategoryUpdateScreen"
         component={CategoryUpdateScreen}
         options={{headerTitle: 'Atualizar categoria'}}
+      />
+      <NativeStack.Screen
+        name="EmployeeListScreen"
+        component={EmployeeListScreen}
+        options={{headerTitle: 'Funcionários'}}
       />
       <NativeStack.Screen
         name="SpecialtyCreateScreen"
