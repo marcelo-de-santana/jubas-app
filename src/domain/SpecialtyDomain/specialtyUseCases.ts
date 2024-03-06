@@ -14,5 +14,8 @@ function getAll() {
 function update() {
   return useFetch<void, SpecialtyRequest>(specialtyApi.update);
 }
+function remove() {
+  return useFetch<void, string>(specialtyApi.remove);
+}
 
-export const specialtyUseCases = {create, getAll, update};
+export const specialtyUseCases = {create, getAll, update, remove};

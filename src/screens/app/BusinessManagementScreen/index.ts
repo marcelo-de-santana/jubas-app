@@ -4,6 +4,7 @@ export * from './CategoryListScreen/CategoryListScreen';
 export * from './CategoryUpdateScreen/CategoryUpdateScreen';
 export * from './DashboardScreen/DashboardScreen';
 export * from './SpecialtyCreateScreen/SpecialtyCreateScreen';
+export * from './SpecialtyDeleteScreen/SpecialtyDeleteScreen';
 export * from './SpecialtyUpdateScreen/SpecialtyUpdateScreen';
 export * from './WorkingHourCreateScreen/WorkingHourCreateScreen';
 export * from './WorkingHourListScreen/WorkingHourListScreen';

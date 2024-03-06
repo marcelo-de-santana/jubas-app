@@ -1,11 +1,13 @@
 import {
   Box,
+  BoxItem,
   ButtonTwoOptions,
   ClockButton,
   FormTextInput,
   FormTextInputName,
   Screen,
   Text,
+  TouchableOpacityItem,
 } from '@components';
 import {specialtyUseCases} from '@domain';
 import {useForm} from '@hooks';
@@ -41,7 +43,7 @@ export function SpecialtyUpdateScreen({
   };
 
   return (
-    <Screen>
+    <Screen flex={1}>
       <Text variant="paragraphMedium" textAlign="justify" mb="s12">
         {'Categoria: ' + route.params.category.name}
       </Text>
@@ -75,6 +77,14 @@ export function SpecialtyUpdateScreen({
       <ButtonTwoOptions
         cancelButtonProps={{onPress: navigation.goBack}}
         confirmButtonProps={{onPress: formik.handleSubmit}}
+      />
+      <TouchableOpacityItem
+        flex={1}
+        flexDirection="column-reverse"
+        label="Outras opções"
+        onPress={() =>
+          navigation.navigate('SpecialtyDeleteScreen', {...route.params})
+        }
       />
     </Screen>
   );

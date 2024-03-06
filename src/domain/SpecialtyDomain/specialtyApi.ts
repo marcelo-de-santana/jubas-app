@@ -15,8 +15,13 @@ async function update(request: SpecialtyRequest) {
   return await api.patch(PATH + '/' + request.id, request);
 }
 
+async function remove(specialtyId: string) {
+  return await api.delete(PATH + '/' + specialtyId);
+}
+
 export const specialtyApi = {
   getAll,
   create,
   update,
+  remove,
 };
