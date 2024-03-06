@@ -3,7 +3,7 @@ export * from './Alert';
 export * from './AttendanceDescription/AttendanceDescription';
 export * from './Buttons/';
 export * from './Clock/';
-export * from './Collapsible/CollapsibleAccording';
+export * from './Collapsible/';
 export * from './List';
 export * from './Forms/';
 export * from './Icons/';

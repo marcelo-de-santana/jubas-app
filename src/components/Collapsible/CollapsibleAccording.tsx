@@ -6,7 +6,7 @@ import {
 } from '../TouchableOpacity/TouchableOpacity';
 import {Collapsible, CollapsibleProps} from './Collapsible';
 
-interface CollapsibleAccordingProps extends CollapsibleProps {
+export interface CollapsibleAccordingProps extends CollapsibleProps {
   textProps?: TextProps;
   buttonProps?: TouchableOpacityProps;
   beginsClosed?: boolean;
