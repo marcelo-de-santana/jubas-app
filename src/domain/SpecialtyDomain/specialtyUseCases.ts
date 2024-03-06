@@ -1,6 +1,6 @@
 import {useFetch} from '@hooks';
 import {SpecialtyResponse} from './specialtyResponse';
-import {SpecialtyCreateRequest} from './specialtyRequest';
+import {SpecialtyCreateRequest, SpecialtyRequest} from './specialtyRequest';
 import {specialtyApi} from './specialtyApi';
 
 function create() {
@@ -8,9 +8,11 @@ function create() {
     specialtyApi.create,
   );
 }
-
 function getAll() {
   return useFetch<SpecialtyResponse[]>(specialtyApi.getAll);
 }
+function update() {
+  return useFetch<void, SpecialtyRequest>(specialtyApi.update);
+}
 
-export const specialtyUseCases = {create, getAll};
+export const specialtyUseCases = {create, getAll, update};

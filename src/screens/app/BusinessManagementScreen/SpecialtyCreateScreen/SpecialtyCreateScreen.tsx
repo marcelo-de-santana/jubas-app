@@ -20,7 +20,7 @@ export function SpecialtyCreateScreen({
 
   const formik = useForm({
     initialValues: {name: '', price: '', timeDuration: '00:20'},
-    validationSchema: schemas.specialtyCreate,
+    validationSchema: schemas.specialtyRequest,
     onSubmit: () => createSpecialty(),
   });
 
