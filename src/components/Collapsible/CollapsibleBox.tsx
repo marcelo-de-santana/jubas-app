@@ -34,6 +34,7 @@ const $buttonProps: ButtonProps = {
   borderTopLeftRadius: 's6',
   borderTopRightRadius: 's6',
   marginTop: 's4',
+  activeOpacity: 0.7,
 };
 
 const $textProps: TextProps = {
