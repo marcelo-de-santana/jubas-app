@@ -2,6 +2,7 @@ import {
   Screen,
   ModalStatus,
   BoxHeaderWorkingHour,
+  ListSeparator,
 } from '@components';
 import {
   WorkingHourResponse,
@@ -54,7 +55,7 @@ export function EmployeeTimeListScreen({
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}
         ListHeaderComponent={BoxHeaderWorkingHour}
-        ItemSeparatorComponent={Separator}
+        ItemSeparatorComponent={ListSeparator}
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyList

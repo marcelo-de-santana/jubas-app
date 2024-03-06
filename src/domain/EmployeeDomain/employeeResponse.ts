@@ -6,5 +6,5 @@ export interface EmployeeResponse {
   name: string;
   statusProfile: boolean;
   workingHour: WorkingHourResponse;
-  services: SpecialtyResponse[];
+  specialties: SpecialtyResponse[];
 }

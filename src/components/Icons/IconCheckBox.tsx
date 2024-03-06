@@ -1,9 +1,12 @@
-import {View} from 'react-native';
-import {Text} from '../Text/Text';
-import {Icon, IconName} from './Icon';
+import {Text, TextProps} from '../Text/Text';
+import {Icon, IconName, IconProps} from './Icon';
+import {ReactNode} from 'react';
+import {TouchableOpacity, TouchableOpacityProps} from '../TouchableOpacity';
 
-interface IconCheckBoxProps {
-  label?: string;
+interface IconCheckBoxProps extends TouchableOpacityProps {
+  label?: ReactNode | ReactNode[];
+  textProps?: TextProps;
+  iconProps?: Omit<IconProps, 'name'>;
   value?: boolean;
   onPress?: () => void;
 }
@@ -16,21 +19,21 @@ interface IconCheckBoxProps {
 
 export function IconCheckBox({
   label,
+  textProps,
+  iconProps,
   value,
-  onPress,
+  ...props
 }: Readonly<IconCheckBoxProps>) {
   const iconName: IconName = value ? 'CheckBoxChecked' : 'CheckBoxBlank';
 
   return (
-    <View
-      style={{
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        margin: 5,
-      }}>
-      <Text>{label}</Text>
-      <Icon name={iconName} size={30} onPress={onPress} />
-    </View>
+    <TouchableOpacity
+      alignItems="center"
+      flexDirection="row"
+      justifyContent="space-between"
+      {...props}>
+      <Text {...textProps}>{label}</Text>
+      <Icon name={iconName} size={30} {...iconProps} />
+    </TouchableOpacity>
   );
 }

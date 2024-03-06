@@ -1,6 +1,8 @@
-import {BoxFourTimes, BoxFourTimesProps} from '.';
+import {BoxFourTimes, BoxFourTimesProps} from './BoxFourTimes';
 
-export function BoxHeaderWorkingHour({...props}: Readonly<BoxFourTimesProps>) {
+export function BoxHeaderWorkingHour({
+  ...props
+}: Readonly<Omit<BoxFourTimesProps, 'textValues' | 'disabled'>>) {
   const listHeader = [
     'Entrada',
     'Início\nIntervalo',

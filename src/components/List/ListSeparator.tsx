@@ -33,4 +33,9 @@ export const separatorsVariants = {
     backgroundColor: 'primaryContrast',
     borderWidth: 1,
   },
+  second: {
+    borderColor: 'primary',
+    backgroundColor: 'primary',
+    borderWidth: 0.5,
+  },
 };
