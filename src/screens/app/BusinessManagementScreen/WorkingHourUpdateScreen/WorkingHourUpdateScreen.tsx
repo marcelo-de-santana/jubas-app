@@ -7,7 +7,7 @@ import {
   WorkingHourHeader,
 } from '@components';
 import {BusinessManagementStackProps} from '@routes';
-import {useNavigation, useWHClockFunctions} from '@hooks';
+import {useWHClockFunctions} from '@hooks';
 import {workingHourUseCases} from '@domain';
 
 export function WorkingHourUpdateScreen({
@@ -15,7 +15,6 @@ export function WorkingHourUpdateScreen({
   route,
 }: Readonly<BusinessManagementStackProps<'WorkingHourUpdateScreen'>>) {
   const {fetch, isLoading, status} = workingHourUseCases.update();
-  const {goBack} = useNavigation();
   const {workingHour, handleWorkingHour} = useWHClockFunctions(
     route.params.workingHour,
   );
@@ -28,8 +27,8 @@ export function WorkingHourUpdateScreen({
     <Screen>
       <ModalStatus
         status={status}
-        successAction={goBack}
-        errorAction={goBack}
+        successAction={navigation.goBack}
+        errorAction={navigation.goBack}
       />
       <WorkingHourHeader />
       <Box flexDirection="row" justifyContent="space-between">
@@ -63,8 +62,8 @@ export function WorkingHourUpdateScreen({
         />
       </Box>
       <ButtonTwoOptions
-        cancelButtonProps={{onPress: navigation.goBack}}
-        confirmButtonProps={{onPress: sendToUpdate}}
+        cancelButtonProps={{loading: isLoading, onPress: navigation.goBack}}
+        confirmButtonProps={{loading: isLoading, onPress: sendToUpdate}}
       />
     </Screen>
   );

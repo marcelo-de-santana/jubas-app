@@ -9,11 +9,12 @@ import {
 import {useApi, useForm} from '@hooks';
 import {UserStackProps} from '@routes';
 import {themeRegistry} from '@styles';
-import {schemas, useNavigation} from '@utils';
+import {schemas} from '@utils';
 import {View} from 'react-native';
 
-export function UserUpdateScreen({route}: Readonly<UserStackProps<'UserUpdateScreen'>>) {
-  const {navigateBack} = useNavigation();
+export function UserUpdateScreen({
+  route,
+}: Readonly<UserStackProps<'UserUpdateScreen'>>) {
   const {fetch, isLoading, status} = useApi.user.update();
   const {user} = route.params;
 
@@ -37,7 +38,7 @@ export function UserUpdateScreen({route}: Readonly<UserStackProps<'UserUpdateScr
 
   return (
     <Screen>
-      <StatusScreen status={status} successAction={navigateBack} />
+      <StatusScreen status={status} successAction={navigation.goBack} />
       <FormTextInput
         formik={formik}
         name="email"

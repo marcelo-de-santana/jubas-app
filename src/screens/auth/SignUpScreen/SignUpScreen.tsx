@@ -8,7 +8,7 @@ import {
 } from '@components';
 import {ScrollView} from 'react-native';
 import {schemas} from '@utils';
-import {useForm, useNavigation} from '@hooks';
+import {useForm} from '@hooks';
 import {userUseCases} from '@domain';
 
 export function SignUpScreen() {
@@ -18,7 +18,6 @@ export function SignUpScreen() {
   };
 
   const {fetch, isLoading, status} = userUseCases.create();
-  const {goBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.signUp,
     initialValues: {
@@ -39,8 +38,8 @@ export function SignUpScreen() {
       <ModalStatus
         status={status}
         customStatus={$customStatus}
-        successAction={goBack}
-        errorAction={goBack}
+        successAction={navigation.goBack}
+        errorAction={navigation.goBack}
       />
       <ScrollView>
         <IconBox name="PersonIcon" />

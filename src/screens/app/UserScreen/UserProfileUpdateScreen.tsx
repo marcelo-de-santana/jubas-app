@@ -11,13 +11,12 @@ import {useProfileRemove, useProfileUpdate} from '@domain';
 import {useForm} from '@hooks';
 import {UserStackProps} from '@routes';
 import {AlertStatusType} from '@styles';
-import {mask, schemas, useNavigation} from '@utils';
+import {mask, schemas} from '@utils';
 
 export function UserProfileUpdateScreen({
   route,
 }: Readonly<UserStackProps<'UserProfileUpdateScreen'>>) {
   const {profile} = route.params;
-  const {navigateBack} = useNavigation();
 
   //DOMAIN ACCESS
   const updateProfile = useProfileUpdate();
@@ -65,12 +64,12 @@ export function UserProfileUpdateScreen({
     <Screen>
       <StatusScreen
         status={updateProfile.status}
-        successAction={navigateBack}
+        successAction={navigation.goBack}
       />
       <StatusScreen
         customStatus={$customStatus}
         status={removeProfile.status}
-        successAction={navigateBack}
+        successAction={navigation.goBack}
       />
       <FormTextInputName formik={formik} label="Nome" name="name" />
       <FormTextInputCpf

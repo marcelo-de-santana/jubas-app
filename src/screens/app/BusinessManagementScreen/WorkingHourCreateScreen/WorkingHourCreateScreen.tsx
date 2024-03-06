@@ -8,7 +8,7 @@ import {
 } from '@components';
 import {workingHourUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
-import {useNavigation, useWHClockFunctions} from '@hooks';
+import {useWHClockFunctions} from '@hooks';
 
 const initialValues = {
   startTime: '09:00',
@@ -21,7 +21,6 @@ export function WorkingHourCreateScreen({
   navigation,
 }: Readonly<BusinessManagementStackProps<'WorkingHourCreateScreen'>>) {
   const {fetch, isLoading, status} = workingHourUseCases.create();
-  const {goBack} = useNavigation();
   const {workingHour, handleWorkingHour} = useWHClockFunctions(initialValues);
 
   const sendToCreate = () => {
@@ -30,10 +29,7 @@ export function WorkingHourCreateScreen({
 
   return (
     <Screen flex={1}>
-      <ModalStatus
-        status={status}
-        successAction={goBack}
-      />
+      <ModalStatus status={status} successAction={navigation.goBack} />
       <WorkingHourHeader />
       <Box flexDirection="row" justifyContent="space-between">
         <ClockButton
@@ -66,8 +62,8 @@ export function WorkingHourCreateScreen({
         />
       </Box>
       <ButtonTwoOptions
-        cancelButtonProps={{onPress: navigation.goBack}}
-        confirmButtonProps={{onPress: sendToCreate}}
+        cancelButtonProps={{loading: isLoading, onPress: navigation.goBack}}
+        confirmButtonProps={{loading: isLoading, onPress: sendToCreate}}
       />
     </Screen>
   );

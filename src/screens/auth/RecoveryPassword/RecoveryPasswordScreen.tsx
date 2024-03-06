@@ -8,7 +8,7 @@ import {
   AlertStatusType,
 } from '@components';
 import {profileUseCases} from '@domain';
-import {useForm, useNavigation} from '@hooks';
+import {useForm} from '@hooks';
 import {mask, schemas} from '@utils';
 import {ScrollView} from 'react-native';
 
@@ -19,7 +19,6 @@ export function RecoveryPasswordScreen() {
   };
 
   const {isLoading, status, fetch} = profileUseCases.recoveryPassword();
-  const {goBack} = useNavigation();
   const formik = useForm({
     validationSchema: schemas.recoveryPass,
     initialValues: {
@@ -41,8 +40,8 @@ export function RecoveryPasswordScreen() {
       <ModalStatus
         status={status}
         customStatus={$customStatus}
-        successAction={goBack}
-        errorAction={goBack}
+        successAction={navigation.goBack}
+        errorAction={navigation.goBack}
       />
       <ScrollView>
         <IconBox name="LockIcon" />
@@ -77,7 +76,7 @@ export function RecoveryPasswordScreen() {
           backgroundColor="steelBlue"
           style={{marginTop: 20}}
           title="Enviar solicitação"
-          textProps={{color: 'white', size: 'L'}}
+          textProps={{color: 'white', variant: 'paragraphLarge'}}
           onPress={formik.handleSubmit}
         />
       </ScrollView>

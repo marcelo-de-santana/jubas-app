@@ -7,15 +7,15 @@ import {
   IconCheckBox,
 } from '@components';
 import {profileUseCases} from '@domain';
-import {useForm, useNavigation} from '@hooks';
+import {useForm} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
 import {mask, schemas} from '@utils';
 
 export function EmployeeProfileUpdateScreen({
+  navigation,
   route,
 }: Readonly<EmployeeScreenProps<'EmployeeProfileUpdateScreen'>>) {
   const {profile} = route.params;
-  const {goBack} = useNavigation();
 
   const {fetch, isLoading, status} = profileUseCases.update();
 
@@ -38,7 +38,7 @@ export function EmployeeProfileUpdateScreen({
 
   return (
     <Screen>
-      <ModalStatus status={status} successAction={goBack} />
+      <ModalStatus status={status} successAction={navigation.goBack} />
       <FormTextInputName formik={formik} label="Nome" name="name" />
       <FormTextInputCpf
         formik={formik}
@@ -59,7 +59,7 @@ export function EmployeeProfileUpdateScreen({
         backgroundColor="steelBlue"
         style={{marginTop: 20}}
         title="Salvar"
-        textProps={{color: 'white', size: 'L'}}
+        textProps={{color: 'white', variant: 'paragraphLarge'}}
         onPress={formik.handleSubmit}
       />
     </Screen>

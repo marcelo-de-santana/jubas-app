@@ -2,17 +2,16 @@ import {
   Button,
   FormTextInput,
   Screen,
-  StatusScreen,
+  ModalStatus,
   Text,
   ToggleableButton,
 } from '@components';
 import {themeRegistry} from '@styles';
 import {View} from 'react-native';
 import {useApi, useForm} from '@hooks';
-import {schemas, useNavigation} from '@utils';
+import {schemas} from '@utils';
 
 export function UserCreateScreen() {
-  const {navigateBack} = useNavigation();
   const {fetch, isLoading, status} = useApi.user.create();
 
   const formik = useForm({
@@ -33,7 +32,7 @@ export function UserCreateScreen() {
 
   return (
     <Screen>
-      <StatusScreen status={status} successAction={navigateBack} />
+      <ModalStatus status={status} successAction={navigation.goBack} />
       <FormTextInput
         formik={formik}
         name="email"
@@ -78,7 +77,7 @@ export function UserCreateScreen() {
           loading={isLoading}
           backgroundColor="steelBlue"
           title="Salvar"
-          textProps={{color: 'white', size: 'L'}}
+          textProps={{color: 'white', variant: 'paragraphLarge'}}
           onPress={formik.handleSubmit}
         />
       </View>

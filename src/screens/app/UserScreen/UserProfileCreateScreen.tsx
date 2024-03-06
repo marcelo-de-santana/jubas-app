@@ -4,18 +4,17 @@ import {
   FormTextInputCpf,
   FormTextInputName,
   Screen,
-  StatusScreen,
+  ModalStatus,
 } from '@components';
 import {useProfileCreate} from '@domain';
 import {useForm} from '@hooks';
 import {UserStackProps} from '@routes';
-import {mask, schemas, useNavigation} from '@utils';
+import {mask, schemas} from '@utils';
 import {View} from 'react-native';
 
 export function UserProfileCreateScreen({
   route,
 }: Readonly<UserStackProps<'UserProfileCreateScreen'>>) {
-  const {navigateBack} = useNavigation();
   const {fetchData, isLoading, status} = useProfileCreate();
 
   const formik = useForm({
@@ -38,7 +37,7 @@ export function UserProfileCreateScreen({
 
   return (
     <Screen>
-      <StatusScreen status={status} successAction={navigateBack} />
+      <ModalStatus status={status} successAction={navigation.goBack} />
       <FormTextInputName formik={formik} label="Nome" name="name" />
       <FormTextInputCpf
         formik={formik}
@@ -59,7 +58,7 @@ export function UserProfileCreateScreen({
           loading={isLoading}
           backgroundColor="steelBlue"
           title="Salvar"
-          textProps={{color: 'white', size: 'L'}}
+          textProps={{color: 'white', variant: 'paragraphLarge'}}
           onPress={formik.handleSubmit}
         />
       </View>

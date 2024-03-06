@@ -12,19 +12,18 @@ import {
   employeeUseCases,
   workingHourUseCases,
 } from '@domain';
-import {useNavigation} from '@hooks';
 import {EmployeeScreenProps} from '@routes';
 import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
 export function EmployeeCreateScreen({
+  navigation,
   route,
 }: Readonly<EmployeeScreenProps<'EmployeeCreateScreen'>>) {
   const $customStatus: AlertStatusType = {
     201: ['SUCCESS', 'Funcionário cadastrado com sucesso.'],
   };
-  const {goBack} = useNavigation();
   const useWorkingHours = workingHourUseCases.getAll();
   const useEmployee = employeeUseCases.create();
 
@@ -48,7 +47,7 @@ export function EmployeeCreateScreen({
       <ModalStatus
         status={useEmployee.status}
         customStatus={$customStatus}
-        successAction={goBack}
+        successAction={navigation.goBack}
       />
       <FlatList
         data={useWorkingHours.data}
