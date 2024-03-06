@@ -1,13 +1,14 @@
 import {api} from '@services';
+import {PermissionRequest} from './permissionRequest';
 
 const PATH = '/permissions';
 
-async function getUsersByPermission(permissionId: string) {
-  return await api.get(`${PATH}/${permissionId}/users`);
+async function getUsersByPermission(permissionType: PermissionRequest) {
+  return await api.get(`${PATH}/${permissionType}/users`);
 }
 
-async function getProfilesByPermission(permissionId: string) {
-  return await api.get(`${PATH}/${permissionId}/profiles`);
+async function getProfilesByPermission(permissionType: PermissionRequest) {
+  return await api.get(`${PATH}/${permissionType}/profiles`);
 }
 
 export const permissionApi = {
