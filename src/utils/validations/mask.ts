@@ -88,11 +88,23 @@ function money(money: number | null) {
   let number = money ?? 0;
   return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
 }
-//TODO FAZER REGEX E FORMATAR CAMPO DE DINHEIRO
-function currencyFormat(value: string) {
-  value = value.replace('.', ',');
-  value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  return value;
+
+function currencyFormatBRL(value: string) {
+  value = value.replace(/\D/g, '');
+  value = value.replace(/(\d{1,})(\d{2})$/, '$1,$2');
+  return value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+}
+function currencyFormatUSD(value: string) {
+  value = value.replace(/\./g, '').replace(',', '.');
+  return parseFloat(value).toFixed(2);
+}
+
+function cleanCurrency(value: string) {
+  return value.replace(/[.,]/g, '');
+}
+
+function formatToFloat(value: string) {
+  return parseFloat((Number(value) / 100).toFixed(2));
 }
 
 function dayOfWeek(date: Date) {
@@ -129,5 +141,8 @@ export const mask = {
   timeToTimestamp,
   timestampToTimeFormat,
   money,
-  currencyFormat,
+  currencyFormatBRL,
+  currencyFormatUSD,
+  cleanCurrency,
+  formatToFloat,
 };

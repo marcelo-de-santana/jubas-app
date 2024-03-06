@@ -1,4 +1,12 @@
-import {ButtonTwoOptions, FormTextInput, Screen, Text} from '@components';
+import {
+  ButtonTwoOptions,
+  FormTextInput,
+  Screen,
+  Text,
+  ClockButton,
+  Box,
+  FormTextInputName,
+} from '@components';
 import {specialtyUseCases} from '@domain';
 import {useForm} from '@hooks';
 import {BusinessManagementStackProps} from '@routes';
@@ -11,7 +19,7 @@ export function SpecialtyCreateScreen({
   const {fetch} = specialtyUseCases.create();
 
   const formik = useForm({
-    initialValues: {name: '', price: '', timeDuration: ''},
+    initialValues: {name: '', price: '', timeDuration: '00:20'},
     validationSchema: schemas.specialtyCreate,
     onSubmit: () => createSpecialty(),
   });
@@ -20,7 +28,7 @@ export function SpecialtyCreateScreen({
     fetch({
       categoryId: route.params.category.id,
       name: formik.values.name,
-      price: formik.values.price,
+      price: mask.formatToFloat(mask.cleanCurrency(formik.values.price)),
       timeDuration: formik.values.timeDuration,
     });
     navigation.goBack();
@@ -28,30 +36,39 @@ export function SpecialtyCreateScreen({
 
   return (
     <Screen>
-      <Text variant="paragraphMedium" textAlign="justify">
+      <Text variant="paragraphMedium" textAlign="justify" mb="s12">
         {'Categoria: ' + route.params.category.name}
       </Text>
-      <FormTextInput
+      <FormTextInputName
+        label="Nome"
         name="name"
         formik={formik}
-        placeholder="Nome da especialidade"
+        placeholder=""
       />
       <FormTextInput
+        label="Preço"
         name="price"
         keyboardType="numeric"
         formik={formik}
-        value={mask.currencyFormat(formik.values.price)}
-        placeholder="Preço"
+        value={mask.currencyFormatBRL(formik.values.price)}
+        maxLength={9}
       />
-      <FormTextInput
-        name="timeDuration"
-        keyboardType="numeric"
-        formik={formik}
-        placeholder="Tempo de duração"
-      />
+      <Box mt="s4">
+        <Text variant="paragraphSmall" textAlign="justify" mb="s4">
+          Tempo de duração
+        </Text>
+        <ClockButton
+          backgroundColor="secondary"
+          height={50}
+          width="100%"
+          textProps={{variant: 'paragraphMedium', color: 'secondaryContrast'}}
+          timeState={formik.values.timeDuration}
+          setTimeState={time => formik.handleChangeText('timeDuration', time)}
+        />
+      </Box>
       <ButtonTwoOptions
         cancelButtonProps={{onPress: navigation.goBack}}
-        confirmButtonProps={{onPress: createSpecialty}}
+        confirmButtonProps={{onPress: formik.handleSubmit}}
       />
     </Screen>
   );

@@ -41,7 +41,7 @@ const userUpdate = object().shape({
 
 const specialtyCreate = object().shape({
   name: fields.name,
-  price: fields.stringRequired,
+  price: fields.price,
   timeDuration: fields.stringRequired,
 });
 
