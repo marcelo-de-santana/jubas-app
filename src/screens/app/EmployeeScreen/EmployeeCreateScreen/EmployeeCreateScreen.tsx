@@ -2,8 +2,7 @@ import {
   Screen,
   ModalStatus,
   AlertStatusType,
-  WorkingHourLine,
-  WorkingHourHeader,
+  BoxHeaderWorkingHour,
   ListSeparator,
   ListEmpty,
 } from '@components';
@@ -12,7 +11,7 @@ import {
   employeeUseCases,
   workingHourUseCases,
 } from '@domain';
-import {EmployeeScreenProps} from '@routes';
+import { BusinessManagementStackProps } from '@routes';
 import {flatListStyle} from '@styles';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
@@ -20,7 +19,7 @@ import {FlatList, ListRenderItemInfo} from 'react-native';
 export function EmployeeCreateScreen({
   navigation,
   route,
-}: Readonly<EmployeeScreenProps<'EmployeeCreateScreen'>>) {
+}: Readonly<BusinessManagementStackProps<'EmployeeCreateScreen'>>) {
   const $customStatus: AlertStatusType = {
     201: ['SUCCESS', 'Funcionário cadastrado com sucesso.'],
   };
@@ -54,7 +53,7 @@ export function EmployeeCreateScreen({
         renderItem={renderItem}
         ItemSeparatorComponent={ListSeparator}
         contentContainerStyle={flatListStyle(useWorkingHours.data)}
-        ListHeaderComponent={<WorkingHourHeader />}
+        ListHeaderComponent={<BoxHeaderWorkingHour />}
         ListEmptyComponent={
           <ListEmpty
             loading={useWorkingHours.isLoading}

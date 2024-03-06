@@ -4,7 +4,7 @@ import {
   Screen,
   BoxFourTimes,
   ButtonAdd,
-  WorkingHourHeader,
+  BoxHeaderWorkingHour,
 } from '@components';
 import {WorkingHourResponse, workingHourUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
@@ -47,7 +47,7 @@ export function WorkingHourListScreen({
         loading={isLoading}
         error={isError}
         renderItem={renderItem}
-        ListHeaderComponent={data && WorkingHourHeader}
+        ListHeaderComponent={data && BoxHeaderWorkingHour}
         listEmptyTitle="Nenhum horário cadastrado"
         ListFooterComponent={
           data && (

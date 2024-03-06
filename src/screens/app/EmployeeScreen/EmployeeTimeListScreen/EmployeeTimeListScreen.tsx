@@ -1,15 +1,14 @@
 import {
   Screen,
   ModalStatus,
-  WorkingHourLine,
-  WorkingHourHeader,
+  BoxHeaderWorkingHour,
 } from '@components';
 import {
   WorkingHourResponse,
   employeeUseCases,
   workingHourUseCases,
 } from '@domain';
-import {EmployeeScreenProps} from '@routes';
+import {BusinessManagementStackProps} from '@routes';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {flatListStyle} from '@styles';
@@ -17,7 +16,7 @@ import {flatListStyle} from '@styles';
 export function EmployeeTimeListScreen({
   navigation,
   route,
-}: Readonly<EmployeeScreenProps<'EmployeeTimeListScreen'>>) {
+}: Readonly<BusinessManagementStackProps<'EmployeeTimeListScreen'>>) {
   const {employeeId, workingHourId} = route.params;
   const useWorkingHous = workingHourUseCases.getAll();
   const useEmployee = employeeUseCases.updateWorkingHour();
@@ -54,7 +53,7 @@ export function EmployeeTimeListScreen({
       <FlatList
         data={useWorkingHous.data}
         contentContainerStyle={flatListStyle(useWorkingHous.data)}
-        ListHeaderComponent={WorkingHourHeader}
+        ListHeaderComponent={BoxHeaderWorkingHour}
         ItemSeparatorComponent={Separator}
         renderItem={renderItem}
         ListEmptyComponent={

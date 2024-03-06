@@ -4,7 +4,7 @@ import {
   ClockButton,
   ModalStatus,
   Screen,
-  WorkingHourHeader,
+  BoxHeaderWorkingHour,
 } from '@components';
 import {BusinessManagementStackProps} from '@routes';
 import {useWHClockFunctions} from '@hooks';
@@ -30,7 +30,7 @@ export function WorkingHourUpdateScreen({
         successAction={navigation.goBack}
         errorAction={navigation.goBack}
       />
-      <WorkingHourHeader />
+      <BoxHeaderWorkingHour />
       <Box flexDirection="row" justifyContent="space-between">
         <ClockButton
           loading={isLoading}

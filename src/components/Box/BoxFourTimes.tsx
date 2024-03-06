@@ -5,7 +5,7 @@ import {
 } from '../TouchableOpacity/TouchableOpacity';
 import {Dimensions} from 'react-native';
 
-interface BoxFourTimesProps extends TouchableOpacityProps {
+export interface BoxFourTimesProps extends TouchableOpacityProps {
   boxItemProps?: BoxItemProps;
   textProps?: TextProps;
   textValues?: string[];

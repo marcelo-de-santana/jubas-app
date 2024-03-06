@@ -1,12 +1,12 @@
 import {createText} from '@shopify/restyle';
 import {Theme} from '@styles';
-import {ComponentProps} from 'react';
+import {ComponentProps, ReactNode} from 'react';
 
 const RestyleText = createText<Theme>();
 type RestyleTextProps = ComponentProps<typeof RestyleText>;
 
 export interface TextProps extends RestyleTextProps {
-  children?: string;
+  children?: ReactNode | ReactNode[];
 }
 
 export function Text({children, ...props}: Readonly<TextProps>) {
@@ -40,5 +40,3 @@ export const textVariants = {
     fontSize: 20,
   },
 };
-
-// const fontSize = [xxs - 10, xs - 12, s - 14, m - 16, l - 18, xl - 20];

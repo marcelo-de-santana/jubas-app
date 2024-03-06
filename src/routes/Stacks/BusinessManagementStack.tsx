@@ -38,6 +38,7 @@ export type BusinessManagementParamList = {
   CategoryUpdateScreen: CategoryParams;
   DashboardScreen: undefined;
   EmployeeListScreen: undefined;
+  EmployeeUpdateScreen: undefined;
   SpecialtyCreateScreen: CategoryParams;
   SpecialtyDeleteScreen: SpecialtyParams;
   SpecialtyUpdateScreen: SpecialtyParams;
