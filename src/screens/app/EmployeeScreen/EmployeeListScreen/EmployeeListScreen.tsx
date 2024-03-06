@@ -9,7 +9,6 @@ import {HeaderWorkingHour} from './components/HeaderWorkingHour';
 
 export function EmployeeListScreen({
   navigation,
-  route,
 }: Readonly<BusinessManagementStackProps<'EmployeeListScreen'>>) {
   const {data, isLoading, isError, fetch} = employeeUseCases.getAll();
 

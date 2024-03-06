@@ -25,7 +25,9 @@ export function BoxWorkingHour({
         marginBottom="s12"
         padding="s10"
         onLongPress={() =>
-          navigation.navigate('EmployeeUpdateWorkingHourScreen')
+          navigation.navigate('EmployeeWorkingHourScreen', {
+            workingHourId: workingHour.id,
+          })
         }>
         <BoxHeaderWorkingHour
           justifyContent="center"
@@ -56,7 +58,7 @@ export function BoxWorkingHour({
         Nenhuma jornada atribuída
       </Text>
       <ButtonAddComponent
-        onPress={() => navigation.navigate('EmployeeAddWorkingHourScreen')}
+        onPress={() => navigation.navigate('EmployeeWorkingHourScreen')}
       />
     </Box>
   );

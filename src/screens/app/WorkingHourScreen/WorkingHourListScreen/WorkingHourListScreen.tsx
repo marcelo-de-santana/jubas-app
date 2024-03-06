@@ -1,5 +1,4 @@
 import {
-  Box,
   FlatList,
   Screen,
   BoxFourTimes,
@@ -34,9 +33,11 @@ export function WorkingHourListScreen({
     ];
 
     return (
-      <Box height={50} justifyContent="center">
-        <BoxFourTimes textValues={listTime} onLongPress={navigateToUpdate} />
-      </Box>
+      <BoxFourTimes
+        height={50}
+        textValues={listTime}
+        onLongPress={navigateToUpdate}
+      />
     );
   }
 

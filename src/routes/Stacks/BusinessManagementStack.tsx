@@ -12,6 +12,7 @@ import {
   CategoryUpdateScreen,
   DashboardScreen,
   EmployeeListScreen,
+  EmployeeWorkingHourScreen,
   SpecialtyCreateScreen,
   SpecialtyDeleteScreen,
   SpecialtyUpdateScreen,
@@ -39,6 +40,7 @@ export type BusinessManagementParamList = {
   DashboardScreen: undefined;
   EmployeeListScreen: undefined;
   EmployeeUpdateScreen: undefined;
+  EmployeeWorkingHourScreen?: {workingHourId: string};
   SpecialtyCreateScreen: CategoryParams;
   SpecialtyDeleteScreen: SpecialtyParams;
   SpecialtyUpdateScreen: SpecialtyParams;
@@ -95,6 +97,11 @@ export function BusinessManagementStack() {
         name="EmployeeListScreen"
         component={EmployeeListScreen}
         options={{headerTitle: 'Funcionários'}}
+      />
+      <NativeStack.Screen
+        name="EmployeeWorkingHourScreen"
+        component={EmployeeWorkingHourScreen}
+        options={{headerTitle: 'Jornada de trabalho'}}
       />
       <NativeStack.Screen
         name="SpecialtyCreateScreen"
