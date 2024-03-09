@@ -3,7 +3,7 @@
 </h1>
 
 <div align="center">
-
+    
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-1b1b1d?style=for-the-badge&logo=react&logoColor=61dafb)
 ![React Native](https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react&logoColor=23272f)
@@ -21,15 +21,15 @@
     <a href="/README.md">Português Brasileiro</a>
 </p>
 
-Este aplicativo React Native foi desenvolvido para gerenciar todos os serviços oferecidos pela barbearia Jubas.
-Para baixar e instalar o aplicativo em seu dispositivo [clique aqui]().
+This is a React Native app responsible for managing all the services provided by Jubas barbershop.
+To download and install the app on your device [click here]().
 
-<h2 align="center">Telas disponíveis</h2>
+<h2 align="center">Available Screens</h2>
 
-| Tela de Login                           | Tela de Cadastro                        | Tela de Recuperação de Senha               |
+| Login Screen                            | Signup Screen                           | Password Recovery Screen                   |
 |-----------------------------------------|-----------------------------------------|--------------------------------------------|
 | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignIn.png?raw=true"/> | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignUp.png?raw=true"/> | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/RecoveryPassword.png?raw=true"/> |
 
-Para ver os protótipos de telas [clique aqui](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
+To view the screen prototypes [click here](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 
-Desenvolvido por Marcelo Santana
+Developed by Marcelo Santana
