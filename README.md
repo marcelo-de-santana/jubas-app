@@ -28,7 +28,7 @@ Para baixar e instalar o aplicativo em seu dispositivo [clique aqui]().
 
 | Tela de Login                           | Tela de Cadastro                        | Tela de Recuperação de Senha               |
 |-----------------------------------------|-----------------------------------------|--------------------------------------------|
-| <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignIn.png?raw=true"/> | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignUp.png?raw=true"/> | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/RecoveryPassword.png?raw=true"/> |
+| <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignIn.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignUp.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/RecoveryPassword.png"/> |
 
 Para ver os protótipos de telas [clique aqui](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 
