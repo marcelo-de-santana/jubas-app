@@ -1,25 +1,24 @@
 import {
-  BoxIcon,
+  IconBox,
   Button,
   FormTextInput,
   FormTextInputCpf,
   Screen,
-  StatusScreen,
+  ModalStatus,
+  AlertStatusType,
 } from '@components';
-import {useProfileRecoveryPassword} from '@domain';
+import {profileUseCases} from '@domain';
 import {useForm} from '@hooks';
-import {AlertStatusType} from '@styles';
-import {mask, schemas, useNavigation} from '@utils';
+import {mask, schemas} from '@utils';
 import {ScrollView} from 'react-native';
 
 export function RecoveryPasswordScreen() {
   const $customStatus: AlertStatusType = {
-    200: {type: 'danger', message: 'Senha alterada com sucesso.'},
-    404: {type: 'danger', message: 'Usuário não localizado.'},
+    204: ['SUCCESS', 'Senha alterada com sucesso.'],
+    404: ['DANGER', 'Usuário não localizado.'],
   };
 
-  const {isLoading, status, recoveryPass} = useProfileRecoveryPassword();
-  const {navigateBack} = useNavigation();
+  const {isLoading, status, fetch} = profileUseCases.recoveryPassword();
   const formik = useForm({
     validationSchema: schemas.recoveryPass,
     initialValues: {
@@ -29,7 +28,7 @@ export function RecoveryPasswordScreen() {
       checkPass: '',
     },
     onSubmit: () =>
-      recoveryPass({
+      fetch({
         email: formik.values.email,
         password: formik.values.password,
         cpf: mask.removeCpf(formik.values.cpf),
@@ -38,14 +37,14 @@ export function RecoveryPasswordScreen() {
 
   return (
     <Screen>
-      <StatusScreen
+      <ModalStatus
         status={status}
         customStatus={$customStatus}
-        successAction={navigateBack}
-        errorAction={navigateBack}
+        successAction={navigation.goBack}
+        errorAction={navigation.goBack}
       />
       <ScrollView>
-        <BoxIcon name="LockIcon" />
+        <IconBox name="LockIcon" />
         <FormTextInput
           formik={formik}
           name="email"
@@ -77,7 +76,7 @@ export function RecoveryPasswordScreen() {
           backgroundColor="steelBlue"
           style={{marginTop: 20}}
           title="Enviar solicitação"
-          textProps={{color: 'white', size: 'L'}}
+          textProps={{color: 'white', variant: 'paragraphLarge'}}
           onPress={formik.handleSubmit}
         />
       </ScrollView>

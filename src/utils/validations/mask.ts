@@ -8,9 +8,9 @@ const cpf = (value: string | number) => {
   return value;
 };
 
-const removeCpf = (value: string) => {
-  if (value === null) return '';
-  return value.replace(/[.-]/g, '');
+const removeCpf = (value?: string) => {
+  if (value) return value.replace(/[.-]/g, '');
+  return '';
 };
 
 const name = (value: string) => {
@@ -80,9 +80,59 @@ const timeToTimestamp = ({time = '00:00'}: {time?: string}) => {
   return timestamp;
 };
 
+const capitalizeFirstLetter = (text: string) => {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
+function money(money: number | null) {
+  let number = money ?? 0;
+  return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+}
+
+function currencyFormatBRL(value: string) {
+  value = value.replace(/\D/g, '');
+  value = value.replace(/(\d{1,})(\d{2})$/, '$1,$2');
+  return value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+}
+function currencyFormatUSD(value: string) {
+  value = value.replace(/\./g, '').replace(',', '.');
+  return parseFloat(value).toFixed(2);
+}
+
+function cleanCurrency(value: string) {
+  return value.replace(/[.,]/g, '');
+}
+
+function formatToFloat(value: string) {
+  return parseFloat((Number(value) / 100).toFixed(2));
+}
+
+function dayOfWeek(date: Date) {
+  switch (date.getUTCDay()) {
+    case 0:
+      return 'DOMINGO';
+    case 1:
+      return 'SEGUNDA';
+    case 2:
+      return 'TERÇA';
+    case 3:
+      return 'QUARTA';
+    case 4:
+      return 'QUINTA';
+    case 5:
+      return 'SEXTA';
+    case 6:
+      return 'SÁBADO';
+    default:
+      throw new Error('Invalid date');
+  }
+}
+
 export const mask = {
+  capitalizeFirstLetter,
   cpf,
   date,
+  dayOfWeek,
   fullTime,
   name,
   phone,
@@ -90,4 +140,9 @@ export const mask = {
   time,
   timeToTimestamp,
   timestampToTimeFormat,
+  money,
+  currencyFormatBRL,
+  currencyFormatUSD,
+  cleanCurrency,
+  formatToFloat,
 };

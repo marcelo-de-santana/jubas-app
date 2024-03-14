@@ -1,5 +1,1 @@
-export * from './Alert';
-export * from './Button';
-export * from './Colors';
-export * from './Font';
-export * from './Theme';
+export * from "./theme"

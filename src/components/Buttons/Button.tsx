@@ -1,48 +1,51 @@
-import {Pressable, PressableProps, ViewStyle} from 'react-native';
-import {ButtonStyleName, ColorName, buttonStyle, colorRegistry} from '@styles';
-import {Text, TextProps} from '../Text';
-import {ActivityIndicator} from '../ActivityIndicator';
+import {Text, TextProps} from '../Text/Text';
+import {
+  ActivityIndicator,
+  ActivityIndicatorProps,
+} from '../ActivityIndicator/ActivityIndicator';
+import {
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from '../TouchableOpacity/TouchableOpacity';
 
-export interface ButtonProps {
-  type?: ButtonStyleName;
-  backgroundColor?: ColorName;
-  style?: ViewStyle;
+export interface ButtonProps extends TouchableOpacityProps {
   loading?: boolean;
-  disabled?: boolean;
   onPress?: () => void;
   title?: string;
+  indicatorProps?: ActivityIndicatorProps;
   textProps?: TextProps;
 }
 
 export function Button({
-  type,
-  backgroundColor,
-  style,
+  children,
   loading,
   disabled,
-  onPress,
   title,
   textProps,
-}: ButtonProps) {
-  const $buttonType = type && buttonStyle[type];
-  const $buttonStyle = {
-    backgroundColor: backgroundColor && colorRegistry[backgroundColor],
-    ...style,
-  };
-  const disable = disabled || loading;
-
+  indicatorProps,
+  ...props
+}: Readonly<ButtonProps>) {
   return (
-    <Pressable
-      style={[$buttonType, $buttonStyle]}
-      onPress={onPress}
-      disabled={disable}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      disabled={disabled ?? loading}
+      backgroundColor="primaryContrast"
+      {...props}>
       {loading ? (
-        <ActivityIndicator color={textProps?.color ?? 'white'} size={'small'} />
+        <ActivityIndicator
+          color={textProps?.color || 'primary'}
+          size={'small'}
+          {...indicatorProps}
+        />
       ) : (
-        <Text align="center" {...textProps}>
+        <Text
+          color="primary"
+          variant="paragraphVeryLarge"
+          textAlign="center"
+          {...textProps}>
           {title}
         </Text>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 }

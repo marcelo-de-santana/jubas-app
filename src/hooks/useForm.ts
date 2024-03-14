@@ -33,7 +33,7 @@ export function useForm({...rest}: UseFormType) {
     ...rest,
   });
 
-  const handleChangeText = (key: string, value: string) => {
+  const handleChangeText = (key: string, value: string | number) => {
     formik.setFieldValue(key, value);
   };
 

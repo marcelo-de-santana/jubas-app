@@ -1,21 +1,20 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {AppStackParamList} from './AppStack';
-import {BusinessManagementParamList} from './BusinessManagementStack';
-import {EmployeeStackParamList} from './EmployeeStack';
-import {UserStackParamList} from './UserStack';
-import {AuthStackParamList} from './AuthStack';
+import {AppStackParamList} from './Stacks/AppStack';
+import {BusinessManagementParamList} from './Stacks/BusinessManagementStack';
+import {ScheduleStackParamList} from './Stacks/ScheduleStack';
+import {UserStackParamList} from './Stacks/UserStack';
+import {AuthStackParamList} from './Stacks/AuthStack';
 
 export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
 
 export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
 
-export type EmployeeScreenProps<
-  RouteName extends keyof EmployeeStackParamList,
-> = NativeStackScreenProps<EmployeeStackParamList, RouteName>;
-
 export type BusinessManagementStackProps<
   RouteName extends keyof BusinessManagementParamList,
-> = NativeStackScreenProps<BusinessManagementParamList>;
+> = NativeStackScreenProps<BusinessManagementParamList, RouteName>;
 
 export type UserStackProps<RouteName extends keyof UserStackParamList> =
-  NativeStackScreenProps<UserStackParamList>;
+  NativeStackScreenProps<UserStackParamList, RouteName>;
+
+export type ScheduleStackProps<RouteName extends keyof ScheduleStackParamList> =
+  NativeStackScreenProps<ScheduleStackParamList, RouteName>;

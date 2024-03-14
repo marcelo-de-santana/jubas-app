@@ -5,10 +5,10 @@ export function FormTextInputName({
   formik,
   name,
   ...props
-}: FormTextInputProps) {
+}: Readonly<FormTextInputProps>) {
   return (
     <TextInput
-      label="Digite seu Nome"
+      label="Digite seu nome"
       placeholder="Cristiano Matos"
       maxLength={50}
       onBlur={formik.handleBlur(name)}

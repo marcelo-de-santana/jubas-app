@@ -1,3 +1,3 @@
-export * from './BoxIcon';
-export * from './CheckBoxIcon';
+export * from './IconBox';
+export * from './IconCheckBox';
 export * from './Icon';

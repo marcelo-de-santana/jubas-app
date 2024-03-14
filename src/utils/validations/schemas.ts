@@ -14,18 +14,49 @@ const signUp = object().shape({
 
 const recoveryPass = object().shape({
   email: fields.email,
+  cpf: fields.cpf,
   password: fields.password,
   checkPass: fields.checkPass,
 });
 
-const profile = object().shape({
+const profileCreate = object().shape({
   name: fields.name,
-  cpf: fields.cpf
+  cpf: fields.cpf,
+});
+
+const profileUpdate = object().shape({
+  name: fields.name,
+  cpf: fields.optionalCpf,
+});
+
+const userCreate = object().shape({
+  email: fields.email,
+  password: fields.password,
+});
+
+const userUpdate = object().shape({
+  email: fields.email,
+  password: fields.optionalPassword,
+});
+
+const specialtyRequest = object().shape({
+  name: fields.name,
+  price: fields.price,
+  timeDuration: fields.stringRequired,
+});
+
+const categoryRequest = object().shape({
+  name: fields.name,
 });
 
 export const schemas = {
   signIn,
   signUp,
   recoveryPass,
-  profile,
+  profileCreate,
+  profileUpdate,
+  userCreate,
+  userUpdate,
+  specialtyRequest,
+  categoryRequest,
 };

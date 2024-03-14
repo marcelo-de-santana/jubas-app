@@ -1,4 +1,10 @@
-import {Button, FormTextInput, Screen, StatusScreen} from '@components';
+import {
+  Button,
+  FormTextInput,
+  Screen,
+  ModalStatus,
+  AlertStatusType,
+} from '@components';
 import {ScrollView, View} from 'react-native';
 import {AuthStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
@@ -6,12 +12,11 @@ import {schemas} from '@utils';
 import {HeaderBox} from './components/HeaderBox';
 import {FooterBox} from './components/FooterBox';
 import {useForm} from '@hooks';
-import {AlertStatusType} from '@styles';
 
-export function SignInScreen({navigation}: AuthStackProps) {
+export function SignInScreen({navigation}: Readonly<AuthStackProps>) {
   const $customStatus: AlertStatusType = {
-    401: {type: 'danger', message: 'Usuário e/ou senha incorreto(s).'},
-    404: {type: 'danger', message: 'Você não possui cadastrado.'},
+    401: ['DANGER', 'Usuário e/ou senha incorreto(s).'],
+    404: ['DANGER', 'Você não possui cadastrado.'],
   };
   const {signIn, isLoading, status} = useAuthContext();
 
@@ -26,7 +31,7 @@ export function SignInScreen({navigation}: AuthStackProps) {
 
   return (
     <Screen>
-      <StatusScreen status={status} customStatus={$customStatus} />
+      <ModalStatus status={status} customStatus={$customStatus} />
       <ScrollView>
         <HeaderBox />
         <View style={{marginVertical: 20}}>

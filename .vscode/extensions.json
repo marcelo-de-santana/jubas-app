@@ -2,8 +2,11 @@
     "recommendations": [
         "esbenp.prettier-vscode",
         "christian-kohler.path-intellisense",
-        "visualstudioexptteam.vscodeintellicode",
-        "naumovs.color-highlight",
-        "pkief.material-icon-theme"
+        "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+        "adpyke.codesnap",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "tabnine.tabnine-vscode",
+        "sonarsource.sonarlint-vscode",
     ]
 }

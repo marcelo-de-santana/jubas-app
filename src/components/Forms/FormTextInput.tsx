@@ -1,12 +1,16 @@
 import {FormikExtractedParams} from '@hooks';
-import {TextInputProps, TextInput} from '../';
+import {TextInput, TextInputProps} from '../TextInput/TextInput';
 
 export interface FormTextInputProps extends TextInputProps {
   formik: FormikExtractedParams;
   name: string;
 }
 
-export function FormTextInput({formik, name, ...props}: FormTextInputProps) {
+export function FormTextInput({
+  formik,
+  name,
+  ...props
+}: Readonly<FormTextInputProps>) {
   return (
     <TextInput
       onBlur={formik.handleBlur(name)}

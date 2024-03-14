@@ -2,23 +2,22 @@ import {
   Button,
   FormTextInput,
   Screen,
-  StatusScreen,
-  BoxIcon,
+  ModalStatus,
+  IconBox,
+  AlertStatusType,
 } from '@components';
 import {ScrollView} from 'react-native';
-import {schemas, useNavigation} from '@utils';
-import {useUserCreate} from '@domain';
-import {AlertStatusType} from '@styles';
+import {schemas} from '@utils';
 import {useForm} from '@hooks';
+import {userUseCases} from '@domain';
 
 export function SignUpScreen() {
   const $customStatus: AlertStatusType = {
-    201: {type: 'success', message: 'Usuário criado com sucesso.'},
-    401: {type: 'danger', message: 'Você já possui cadastrado.'},
+    201: ['SUCCESS', 'Usuário criado com sucesso.'],
+    401: ['DANGER', 'Você já possui cadastrado.'],
   };
 
-  const {create, isLoading, status} = useUserCreate();
-  const {navigateBack} = useNavigation();
+  const {fetch, isLoading, status} = userUseCases.create();
   const formik = useForm({
     validationSchema: schemas.signUp,
     initialValues: {
@@ -27,7 +26,7 @@ export function SignUpScreen() {
       checkPass: '',
     },
     onSubmit: values =>
-      create({
+      fetch({
         email: values.email,
         password: values.password,
         permissionId: 3,
@@ -36,14 +35,14 @@ export function SignUpScreen() {
 
   return (
     <Screen>
-      <StatusScreen
+      <ModalStatus
         status={status}
         customStatus={$customStatus}
-        successAction={navigateBack}
-        errorAction={navigateBack}
+        successAction={navigation.goBack}
+        errorAction={navigation.goBack}
       />
       <ScrollView>
-        <BoxIcon name="PersonIcon" />
+        <IconBox name="PersonIcon" />
         <FormTextInput
           formik={formik}
           name="email"
@@ -74,7 +73,7 @@ export function SignUpScreen() {
           backgroundColor="steelBlue"
           style={{marginTop: 20}}
           title="Cadastrar"
-          textProps={{color: 'white', size: 'L'}}
+          textProps={{variant: 'paragraphLarge', color: 'white'}}
           onPress={formik.handleSubmit}
         />
       </ScrollView>
