@@ -1,7 +1,7 @@
 export interface AppointmentResponse {
   employeeId: string;
   employeeName: string;
-  workingHours: ScheduleTimeAvailableResponse [];
+  workingHours: ScheduleTimeAvailableResponse[];
 }
 
 export interface ScheduleTimeAvailableResponse {
@@ -10,16 +10,6 @@ export interface ScheduleTimeAvailableResponse {
 }
 
 export interface DayOfWeekResponse {
-  day: DayOfWeek;
+  date: string;
   isAvailable: boolean;
-}
-
-export enum DayOfWeek {
-  'DOMINGO',
-  'SEGUNDA',
-  'TERÇA',
-  'QUARTA',
-  'QUINTA',
-  'SEXTA',
-  'SÁBADO',
 }

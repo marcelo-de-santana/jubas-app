@@ -1,7 +1,8 @@
 import {View} from 'react-native';
 import {Icon, IconName} from './Icon';
 import {ThemeColors} from '@styles';
-import { Box } from '../Box';
+import {Box} from '../Box';
+import {useAppTheme} from '@hooks';
 
 interface IconBoxProps {
   name: IconName;
@@ -16,14 +17,15 @@ interface IconBoxProps {
 export function IconBox({
   name,
   size = 60,
-  color = 'black',
-  backgroundColor = 'lavenderGray',
+  color = 'primary',
+  backgroundColor = 'primaryContrast',
 }: Readonly<IconBoxProps>) {
+  const {colors} = useAppTheme();
   return (
     <Box
       style={{
         padding: 10,
-        // backgroundColor: theme.colors[backgroundColor],
+        backgroundColor: colors[backgroundColor],
         borderRadius: 20,
         alignSelf: 'center',
       }}>

@@ -3,8 +3,8 @@ import {CategoryRequest} from './categoryRequest';
 
 const PATH = '/categories';
 
-async function getAll() {
-  return await api.get(PATH);
+async function getAll(specialties?: boolean) {
+  return await api.get(PATH, {params: {specialties}});
 }
 
 async function getCategoriesAndSpecialties() {

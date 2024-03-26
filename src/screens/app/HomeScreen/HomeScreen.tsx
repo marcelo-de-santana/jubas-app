@@ -19,7 +19,7 @@ export function HomeScreen({navigation}: Readonly<AppStackProps>) {
         <BoxMenu title="Minhas compras" onPress={navigateToUnderConstruction} />
         <BoxMenu title="Minha conta" onPress={navigateToUnderConstruction} />
 
-        {user.permission !== 'ADMIN' && (
+        {user?.permission === 'ADMIN' && (
           <BoxMenu
             title="Gerenciar negócio"
             onPress={() => navigation.navigate('BusinessManagementStack')}

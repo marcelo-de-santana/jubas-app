@@ -33,7 +33,7 @@ export function Button({
       {...props}>
       {loading ? (
         <ActivityIndicator
-          color={textProps?.color || 'primary'}
+          color={textProps?.color ?? 'primary'}
           size={'small'}
           {...indicatorProps}
         />

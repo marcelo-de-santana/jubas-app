@@ -1,5 +1,6 @@
 import {Box, ListSeparator, SpecialtyDescription, Text} from '@components';
 import {ScheduleStackProps} from '@routes';
+import {mask} from '@utils';
 
 export function Header({
   route,
@@ -14,7 +15,7 @@ export function Header({
         </Text>
         <Box borderRadius="s6" padding="s12">
           <Text color="primaryContrast" textAlign="justify">
-            {`Dia: ${route.params.day}`}
+            {mask.date(new Date(route.params.day))}
           </Text>
         </Box>
       </Box>

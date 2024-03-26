@@ -6,13 +6,17 @@ import {
   Screen,
   ModalStatus,
   AlertStatusType,
+  ButtonSuccess,
 } from '@components';
 import {profileUseCases} from '@domain';
 import {useForm} from '@hooks';
+import {AuthStackProps} from '@routes';
 import {mask, schemas} from '@utils';
 import {ScrollView} from 'react-native';
 
-export function RecoveryPasswordScreen() {
+export function RecoveryPasswordScreen({
+  navigation,
+}: Readonly<AuthStackProps<'RecoveryPasswordScreen'>>) {
   const $customStatus: AlertStatusType = {
     204: ['SUCCESS', 'Senha alterada com sucesso.'],
     404: ['DANGER', 'Usuário não localizado.'],
@@ -70,13 +74,12 @@ export function RecoveryPasswordScreen() {
           maxLength={20}
           secureTextEntry
         />
-        <Button
-          type="inline"
+        <ButtonSuccess
           loading={isLoading}
-          backgroundColor="steelBlue"
+          backgroundColor="primaryContrast"
           style={{marginTop: 20}}
           title="Enviar solicitação"
-          textProps={{color: 'white', variant: 'paragraphLarge'}}
+          textProps={{color: 'primary', variant: 'paragraphLarge'}}
           onPress={formik.handleSubmit}
         />
       </ScrollView>

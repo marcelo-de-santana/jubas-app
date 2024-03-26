@@ -34,6 +34,7 @@ export function useFetch<TResponse = any, TRequest = void>(
     } catch (error) {
       setIsError(true);
       if (isAxiosError(error)) {
+        console.warn(error.message)
         if (error.response?.status) {
           setStatus(error.response.status);
         }

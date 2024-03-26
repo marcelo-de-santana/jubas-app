@@ -1,6 +1,6 @@
 import {api} from '@services';
 import {
-  AuthUserRequest,
+  AuthRequest,
   CreateUserRequest,
   UpdateUserRequest,
 } from './userRequest';
@@ -19,8 +19,8 @@ async function getProfilesByUser(userId: string) {
   return await api.get(`${PATH}/${userId}/profiles`);
 }
 
-async function auth(request: AuthUserRequest) {
-  return await api.post(`${PATH}/login`, request);
+async function auth(request: AuthRequest) {
+  return await api.post('/auth', request);
 }
 
 async function create(request: CreateUserRequest) {

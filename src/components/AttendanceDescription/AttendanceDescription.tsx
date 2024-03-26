@@ -1,5 +1,6 @@
 import {BoxItem, BoxItems} from '@components';
 import {ProfileResponse} from '@domain';
+import {mask} from '@utils';
 
 interface AttendanceDescriptionProps {
   day: string;
@@ -29,7 +30,7 @@ export function AttendanceDescription({
           textAlign: 'justify',
         }}
         textFields={[
-          `Dia: ${day}`,
+          mask.date(new Date(day)),
           `Horário: ${time}`,
           `Nome do barbeiro: ${employee.name}`,
         ]}

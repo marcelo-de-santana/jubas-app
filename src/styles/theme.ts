@@ -79,6 +79,7 @@ export const darkTheme = createTheme({
     primaryContrast: colors.blueGray,
     secondary: colors.lavenderGray,
     secondaryContrast: colors.deepSteel,
+    secondaryContrastTransparent: colors.deepSteelTransparent,
   },
 });
 
@@ -90,6 +91,7 @@ export const lightTheme = createTheme({
     primaryContrast: colors.midnightBlue,
     secondary: colors.deepSteel,
     secondaryContrast: colors.lavenderGray,
+    secondaryContrastTransparent: colors.lavenderGrayTransparent,
   },
 });
 

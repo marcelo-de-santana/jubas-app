@@ -18,13 +18,13 @@ const name = (value: string) => {
   return value;
 };
 
-const date = (value: string) => {
-  value = value.replace(/\D/g, '');
-  value = value.replace(/^(\d{2})(\d)/, '$1/$2');
-  value = value.replace(/(\d{2})\/(\d{2})(\d)$/, '$1/$2/$3');
-  value = value.replace(/(\d{2})\/(\d{2})(\d{2,4})$/, '$1/$2/$3');
-  return value;
-};
+function date(date: Date) {
+  let formattedDate = date.toLocaleDateString('pt-BR', {
+    timeZone: 'UTC',
+    weekday: 'long',
+  });
+  return formattedDate.charAt(0).toUpperCase() + formattedDate.substring(1);
+}
 
 const phone = (value: string) => {
   value = value.replace(/\D/g, '');

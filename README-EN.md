@@ -28,7 +28,7 @@ To download and install the app on your device [click here]().
 
 | Login Screen                            | Signup Screen                           | Password Recovery Screen                   |
 |-----------------------------------------|-----------------------------------------|--------------------------------------------|
-| <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignIn.png?raw=true"/> | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/SignUp.png?raw=true"/> | <img height="600" width="300" src="https://github.com/marcelo-de-santana/jubas-app/blob/master/src/assets/prints/RecoveryPassword.png?raw=true"/> |
+| <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignIn.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignUp.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/RecoveryPassword.png"/> |
 
 To view the screen prototypes [click here](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 

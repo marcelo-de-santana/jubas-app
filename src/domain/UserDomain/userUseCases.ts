@@ -1,14 +1,15 @@
 import {userApi} from './userApi';
 import {useFetch} from '@hooks';
 import {
+  AuthResponse,
   UserPermissionResponse,
   UserProfileResponse,
   UserResponse,
 } from './userResponse';
-import {AuthUserRequest, CreateUserRequest, UpdateUserRequest} from './userRequest';
+import {AuthRequest, CreateUserRequest, UpdateUserRequest} from './userRequest';
 
 function auth() {
-  return useFetch<UserPermissionResponse, AuthUserRequest>(userApi.auth);
+  return useFetch<AuthResponse, AuthRequest>(userApi.auth);
 }
 function create() {
   return useFetch<UserResponse, CreateUserRequest>(userApi.create);

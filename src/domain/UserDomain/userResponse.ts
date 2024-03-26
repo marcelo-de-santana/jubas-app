@@ -1,6 +1,13 @@
 export interface UserResponse {
   id: string;
   email: string;
+  permission: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  expiresIn: number;
+  user: UserResponse;
 }
 
 export interface UserPermissionResponse {

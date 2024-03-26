@@ -21,11 +21,14 @@ import {ListRenderItemInfo} from 'react-native';
 export function ScheduleHomeScreen({
   navigation,
 }: Readonly<ScheduleStackProps<'ScheduleHomeScreen'>>) {
-  const {data, fetch, isError, isLoading, refresh} =
-    categoryUseCases.getCategoriesAndSpecialties();
+  const {data, fetch, isError, isLoading} = categoryUseCases.getAll();
+
+  const searchData = () => {
+    fetch(true);
+  };
 
   useEffect(() => {
-    fetch();
+    searchData();
   }, []);
 
   const navigateToDaysScreen = (specialty: SpecialtyResponse) => {
@@ -44,13 +47,13 @@ export function ScheduleHomeScreen({
         textProps={$textProps}
         title={item.name}>
         <Box backgroundColor="secondary" borderRadius="s6">
-          {item.specialties.map((specialty, index) => {
+          {item.specialties?.map((specialty, index) => {
             return (
               <TouchableOpacityItems
                 key={specialty.id}
                 padding="s12"
                 onPress={() => navigateToDaysScreen(specialty)}
-                isSeparator={item.specialties.length !== index + 1}
+                isSeparator={item.specialties?.length !== index + 1}
                 separatorProps={{
                   backgroundColor: 'secondaryContrast',
                   borderColor: 'secondaryContrast',
@@ -88,7 +91,7 @@ export function ScheduleHomeScreen({
         renderItem={renderItem}
         error={isError}
         loading={isLoading}
-        refetch={refresh}
+        refetch={searchData}
         isSeparator={false}
       />
     </Screen>

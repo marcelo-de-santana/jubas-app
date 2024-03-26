@@ -4,11 +4,11 @@ import {AppStack} from './Stacks/AppStack';
 import {useAuthContext} from '@contexts';
 
 export function Routes() {
-  const {isAuthenticated} = useAuthContext();
+  const {authCredentials} = useAuthContext();
 
   return (
     <NavigationContainer>
-      {!isAuthenticated ? <AppStack /> : <AuthStack />}
+      {authCredentials ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

@@ -16,18 +16,20 @@ export function ScheduleProfilesScreen({
   route,
 }: Readonly<ScheduleStackProps<'ScheduleProfilesScreen'>>) {
   const {user} = useAuthContext();
-  const {data, fetch, isError, isLoading} = userUseCases.getProfilesByUserId();
+  const {data, fetch, isError, status, isLoading} =
+    userUseCases.getProfilesByUserId();
 
   useEffect(() => {
-    fetch(user.id);
+    if (user) fetch(user.id);
   }, []);
 
   if (isLoading || isError) {
-    return (
-      <Screen flex={1}>
-        <ListEmpty loading={isLoading} error={isError} />
-      </Screen>
-    );
+    if (status === 401) console.warn("Você não possui conta cadastrada.")
+      return (
+        <Screen flex={1}>
+          <ListEmpty loading={isLoading} error={isError} />
+        </Screen>
+      );
   }
 
   return (

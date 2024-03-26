@@ -5,16 +5,13 @@ import {ReactNode, useEffect} from 'react';
 
 interface BoxDaysOfWeekProps {
   children?: ReactNode;
-  disabled?: boolean;
-  opacity?: number;
+
   navigate: (day: string) => void;
 }
 
 export function BoxDaysOfWeek({
   navigate,
   children,
-  disabled = false,
-  opacity,
 }: Readonly<BoxDaysOfWeekProps>) {
   const {data, fetch, isLoading, isError} =
     appointmentUseCases.getDaysOfAttendance();
@@ -33,9 +30,12 @@ export function BoxDaysOfWeek({
 
       <Box flexDirection="row" justifyContent="space-between" flexWrap="wrap">
         {data?.map(item => {
+          const disabled = !item.isAvailable;
+          const opacity = disabled ? 0.5 : 1;
+
           return (
             <TouchableOpacityItem
-              key={item}
+              key={item.date}
               bg="primaryContrast"
               padding="s10"
               marginBottom="s10"
@@ -44,8 +44,8 @@ export function BoxDaysOfWeek({
               disabled={disabled}
               opacity={opacity}
               textProps={{color: 'primary'}}
-              onPress={() => navigate(item)}
-              label={mask.dayOfWeek(new Date(item))}
+              onPress={() => navigate(item.date)}
+              label={mask.dayOfWeek(new Date(item.date))}
             />
           );
         })}

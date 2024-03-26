@@ -1,9 +1,9 @@
 import {
-  Button,
   FormTextInput,
   Screen,
   ModalStatus,
   AlertStatusType,
+  ButtonSuccess,
 } from '@components';
 import {ScrollView, View} from 'react-native';
 import {AuthStackProps} from '@routes';
@@ -13,7 +13,9 @@ import {HeaderBox} from './components/HeaderBox';
 import {FooterBox} from './components/FooterBox';
 import {useForm} from '@hooks';
 
-export function SignInScreen({navigation}: Readonly<AuthStackProps>) {
+export function SignInScreen({
+  navigation,
+}: Readonly<AuthStackProps<'SignInScreen'>>) {
   const $customStatus: AlertStatusType = {
     401: ['DANGER', 'Usuário e/ou senha incorreto(s).'],
     404: ['DANGER', 'Você não possui cadastrado.'],
@@ -52,13 +54,12 @@ export function SignInScreen({navigation}: Readonly<AuthStackProps>) {
             maxLength={20}
             secureTextEntry
           />
-          <Button
-            type="inline"
+          <ButtonSuccess
             loading={isLoading}
-            backgroundColor="steelBlue"
+            backgroundColor="primaryContrast"
             style={{marginTop: 20}}
             title="Entrar"
-            textProps={{color: 'white', size: 'L'}}
+            textProps={{variant: 'paragraphLarge', color: 'primary'}}
             onPress={formik.handleSubmit}
           />
         </View>

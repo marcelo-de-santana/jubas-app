@@ -4,7 +4,7 @@ import {
   AppointmentCreateRequest,
   AppointmentGetAllRequest,
 } from './appointmentRequest';
-import {AppointmentResponse} from './appointmentResponse';
+import {AppointmentResponse, DayOfWeekResponse} from './appointmentResponse';
 
 function getAll() {
   return useFetch<AppointmentResponse[], AppointmentGetAllRequest>(
@@ -13,7 +13,7 @@ function getAll() {
 }
 
 function getDaysOfAttendance() {
-  return useFetch<string[]>(appointmentApi.getDaysOfAttendance);
+  return useFetch<DayOfWeekResponse[]>(appointmentApi.getDaysOfAttendance);
 }
 
 function create() {

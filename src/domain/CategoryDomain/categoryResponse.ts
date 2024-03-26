@@ -6,5 +6,5 @@ export interface CategoryResponse {
 }
 
 export interface CategorySpecialtiesResponse extends CategoryResponse {
-  specialties: SpecialtyResponse[];
+  specialties?: SpecialtyResponse[];
 }

@@ -5,7 +5,8 @@ import {ScheduleStackParamList} from './Stacks/ScheduleStack';
 import {UserStackParamList} from './Stacks/UserStack';
 import {AuthStackParamList} from './Stacks/AuthStack';
 
-export type AuthStackProps = NativeStackScreenProps<AuthStackParamList>;
+export type AuthStackProps<RouteName extends keyof AuthStackParamList> =
+  NativeStackScreenProps<AuthStackParamList, RouteName>;
 
 export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
 

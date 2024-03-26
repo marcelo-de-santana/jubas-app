@@ -1,3 +1,4 @@
+import {AuthResponse} from '@domain';
 import axios from 'axios';
 
 export const api = axios.create({
@@ -7,3 +8,14 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+export function registerToken({
+  authCredentials,
+}: {
+  authCredentials: AuthResponse;
+}) {
+  api.interceptors.request.use(config => {
+    config.headers.Authorization = authCredentials.accessToken;
+    return config;
+  });
+}

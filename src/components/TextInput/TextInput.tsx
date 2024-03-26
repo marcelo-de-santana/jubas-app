@@ -57,7 +57,7 @@ export function TextInput({
         <RNTextInput
           autoCapitalize="none"
           style={$textInputStyle}
-          placeholderTextColor={colors.primaryContrast}
+          placeholderTextColor={colors.secondaryContrastTransparent}
           cursorColor={colors.secondaryContrast}
           {...props}
         />

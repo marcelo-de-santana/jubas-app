@@ -30,17 +30,17 @@ export function AppointmentListScreen({
             {data?.map(item => {
               return (
                 <TouchableOpacityItem
-                  key={item}
+                  key={item.date}
                   bg="primaryContrast"
                   padding="s10"
                   marginBottom="s10"
                   width={100}
                   borderRadius="s6"
-                  disabled={dayOfWeek === item}
-                  opacity={dayOfWeek === item ? 0.7 : 1}
+                  disabled={dayOfWeek === item.isAvailable}
+                  opacity={dayOfWeek === item.isAvailable ? 0.7 : 1}
                   textProps={{color: 'primary'}}
-                  label={mask.dayOfWeek(new Date(item))}
-                  onPress={() => setDayOfWeek(item)}
+                  label={mask.dayOfWeek(new Date(item.date))}
+                  onPress={() => setDayOfWeek(item.date)}
                 />
               );
             })}

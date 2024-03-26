@@ -6,9 +6,11 @@ export const colors = {
   steelBlue: '#3C4659',
   blueGray: '#9BA7BF',
   lavenderGray: '#CCCED9',
+  lavenderGrayTransparent: '#CCCED970',
   lightGray: '#F2F2F2',
   lightGreen: '#225522',
   deepSteel: '#303947',
+  deepSteelTransparent: '#30394770',
   white: '#FFFFFF',
   red: '#EA3838',
 };
