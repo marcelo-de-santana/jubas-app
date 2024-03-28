@@ -32,7 +32,6 @@ export function SignUpScreen({
       fetch({
         email: values.email,
         password: values.password,
-        permissionId: 3,
       }),
   });
 
@@ -73,7 +72,7 @@ export function SignUpScreen({
         <ButtonSuccess
           loading={isLoading}
           backgroundColor="primaryContrast"
-          style={{marginTop: 20}}
+          marginTop='s20'
           title="Cadastrar"
           textProps={{variant: 'paragraphLarge', color: 'primary'}}
           onPress={formik.handleSubmit}

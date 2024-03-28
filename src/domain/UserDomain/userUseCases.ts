@@ -14,14 +14,11 @@ function auth() {
 function create() {
   return useFetch<UserResponse, CreateUserRequest>(userApi.create);
 }
-function getProfilesByUserId() {
-  return useFetch<UserProfileResponse, string>(userApi.getProfilesByUser);
-}
 function getAll() {
   return useFetch<UserResponse[]>(userApi.getAll);
 }
 function getById() {
-  return useFetch<UserResponse, string>(userApi.getById);
+  return useFetch<UserProfileResponse, string>(userApi.getById);
 }
 function update() {
   return useFetch<UserPermissionResponse, UpdateUserRequest>(userApi.update);
@@ -33,5 +30,4 @@ export const userUseCases = {
   update,
   getAll,
   getById,
-  getProfilesByUserId,
 };

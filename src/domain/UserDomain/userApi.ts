@@ -15,10 +15,6 @@ async function getAll() {
   return await api.get(PATH);
 }
 
-async function getProfilesByUser(userId: string) {
-  return await api.get(`${PATH}/${userId}/profiles`);
-}
-
 async function auth(request: AuthRequest) {
   return await api.post('/auth', request);
 }
@@ -40,6 +36,5 @@ export const userApi = {
   create,
   getById,
   getAll,
-  getProfilesByUser,
   update,
 };

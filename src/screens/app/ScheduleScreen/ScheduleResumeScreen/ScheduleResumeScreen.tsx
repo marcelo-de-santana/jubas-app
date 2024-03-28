@@ -32,10 +32,12 @@ export function ScheduleResumeScreen({
 
   const customStatus: AlertStatusType = {
     201: ['SUCCESS', 'Agendamento realizado com sucesso.'],
-    401: [
-      'DANGER',
-      'O cliente já possui agendamento para o serviço.',
-    ],
+    409: ['DANGER', 'O cliente já possui agendamento para o serviço.'],
+  };
+
+  const navigateToHomeScreen = () => {
+    navigation.popToTop();
+    navigation.pop();
   };
 
   return (
@@ -44,7 +46,7 @@ export function ScheduleResumeScreen({
         customStatus={customStatus}
         status={status}
         errorAction={() => navigation.goBack()}
-        successAction={() => navigation.popToTop()}
+        successAction={() => navigateToHomeScreen()}
       />
       <SpecialtyDescription specialty={route.params.specialty} />
       <ListSeparator mb="s12" />

@@ -15,7 +15,7 @@ export function registerToken({
   authCredentials: AuthResponse;
 }) {
   api.interceptors.request.use(config => {
-    config.headers.Authorization = authCredentials.accessToken;
+    config.headers.Authorization = 'Bearer ' + authCredentials.accessToken;
     return config;
   });
 }

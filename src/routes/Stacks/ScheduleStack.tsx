@@ -4,6 +4,7 @@ import {
   ScheduleDaysScreen,
   ScheduleEmployeesScreen,
   ScheduleHomeScreen,
+  ScheduleProfileCreateScreen,
   ScheduleProfilesScreen,
   ScheduleResumeScreen,
 } from '@screens';
@@ -23,6 +24,7 @@ export type ScheduleStackParamList = {
   ScheduleEmployeesScreen: Pick<ScheduleRouteParams, 'specialty' | 'day'>;
   ScheduleProfilesScreen: Omit<ScheduleRouteParams, 'profile'>;
   ScheduleResumeScreen: ScheduleRouteParams;
+  ScheduleProfileCreateScreen: undefined;
 };
 
 export function ScheduleStack() {
@@ -52,6 +54,11 @@ export function ScheduleStack() {
       <NativeStack.Screen
         name="ScheduleProfilesScreen"
         component={ScheduleProfilesScreen}
+      />
+      <NativeStack.Screen
+        name="ScheduleProfileCreateScreen"
+        component={ScheduleProfileCreateScreen}
+        options={{headerShown: false, animation: 'fade_from_bottom'}}
       />
       <NativeStack.Screen
         name="ScheduleResumeScreen"
