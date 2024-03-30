@@ -3,12 +3,9 @@ export interface EmployeeCreateRequest {
   workingHourId: string;
 }
 
-export interface EmployeeSpecialtiesRequest {
+export interface EmployeeUpdateRequest {
   employeeId: string;
-  specialties: string[];
-}
-
-export interface EmployeeWorkingHourRequest {
-  employeeId: string;
-  workingHourId: string;
+  profileId?: string;
+  workingHourId?: string;
+  specialties?: string[];
 }

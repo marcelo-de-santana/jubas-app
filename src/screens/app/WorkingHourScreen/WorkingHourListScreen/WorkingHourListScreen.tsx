@@ -4,6 +4,7 @@ import {
   BoxFourTimes,
   ButtonAdd,
   BoxHeaderWorkingHour,
+  ListSeparator,
 } from '@components';
 import {WorkingHourResponse, workingHourUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
@@ -52,9 +53,12 @@ export function WorkingHourListScreen({
         listEmptyTitle="Nenhum horário cadastrado"
         ListFooterComponent={
           data && (
-            <ButtonAdd
-              onPress={() => navigation.navigate('WorkingHourCreateScreen')}
-            />
+            <>
+              <ListSeparator variant="first" />
+              <ButtonAdd
+                onPress={() => navigation.navigate('WorkingHourCreateScreen')}
+              />
+            </>
           )
         }
       />

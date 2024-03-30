@@ -5,7 +5,7 @@ import {ReactNode} from 'react';
 
 type BoxSpecialtiesProps = {
   children?: ReactNode;
-  specialties: SpecialtyResponse[];
+  specialties?: SpecialtyResponse[];
   onPressToNavigate: (specialty: SpecialtyResponse) => void;
 };
 
@@ -16,7 +16,7 @@ export function BoxSpecialties({
 }: Readonly<BoxSpecialtiesProps>) {
   return (
     <Box backgroundColor="secondary" borderRadius="s6">
-      {specialties.map(specialty => {
+      {specialties?.map(specialty => {
         return (
           <SpecialtyItem
             key={specialty.id}

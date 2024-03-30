@@ -1,40 +1,44 @@
-import {Box, Text, TouchableOpacityItem, ListSeparator} from '@components';
-import {ButtonAddComponent} from './ButtonAdd';
-import {SpecialtyResponse} from '@domain';
+import {Text, ListSeparator, TouchableOpacity, BoxItem} from '@components';
+import {EmployeeResponse} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
 
 type BoxSpecialtyProps = {
-  specialties: SpecialtyResponse[];
+  employee: EmployeeResponse;
 } & Pick<BusinessManagementStackProps<'EmployeeListScreen'>, 'navigation'>;
 
 export function BoxSpecialty({
   navigation,
-  specialties,
+  employee,
 }: Readonly<BoxSpecialtyProps>) {
+  const {specialties} = employee;
   return (
     <>
       <Text color="secondaryContrast" textAlign="justify" mb="s4">
         Serviços
       </Text>
-      <Box bg="primaryContrast" borderRadius="s6" padding="s10">
+      <TouchableOpacity
+        bg="primaryContrast"
+        borderRadius="s6"
+        padding="s10"
+        onPress={() =>
+          navigation.navigate('EmployeeSpecialtiesScreen', {
+            employee,
+          })
+        }>
         {specialties.length !== 0 ? (
           specialties.map((specialty, index) => {
             const hasNext = specialties.length !== index + 1;
 
             return (
-              <Box key={specialty.id}>
-                <TouchableOpacityItem
-                  padding="s10"
-                  textProps={{color: 'primary'}}
-                  label={specialty.name}
-                  onLongPress={() =>
-                    navigation.navigate('EmployeeUpdateSpecialtyScreen')
-                  }
-                />
+              <BoxItem
+                key={specialty.id}
+                padding="s10"
+                textProps={{color: 'primary'}}
+                label={specialty.name}>
                 {hasNext && (
                   <ListSeparator variant="second" marginHorizontal="s4" />
                 )}
-              </Box>
+              </BoxItem>
             );
           })
         ) : (
@@ -42,10 +46,7 @@ export function BoxSpecialty({
             Nenhum Serviço atribuído.
           </Text>
         )}
-        <ButtonAddComponent
-          onPress={() => navigation.navigate('EmployeeAddSpecialtyScreen')}
-        />
-      </Box>
+      </TouchableOpacity>
     </>
   );
 }

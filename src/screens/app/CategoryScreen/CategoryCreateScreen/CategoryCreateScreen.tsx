@@ -8,7 +8,7 @@ import {categoryUseCases} from '@domain';
 import {useForm} from '@hooks';
 import {BusinessManagementStackProps} from '@routes';
 import {schemas} from '@utils';
-//TODO: TRANSFORMAR AGREGAR A TELA DE UPDATE COM A DE CREATE
+
 export function CategoryCreateScreen({
   navigation,
 }: Readonly<BusinessManagementStackProps<'CategoryCreateScreen'>>) {

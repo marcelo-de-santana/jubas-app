@@ -1,10 +1,6 @@
 import {useFetch} from '@hooks';
 import {EmployeeResponse} from './employeeResponse';
-import {
-  EmployeeCreateRequest,
-  EmployeeSpecialtiesRequest,
-  EmployeeWorkingHourRequest,
-} from './employeeRequest';
+import {EmployeeCreateRequest, EmployeeUpdateRequest} from './employeeRequest';
 import {employeeApi} from './employeeApi';
 
 function getAll() {
@@ -17,17 +13,10 @@ function getAppointments() {
   return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
 }
 function create() {
-  return useFetch<EmployeeResponse, EmployeeCreateRequest>(employeeApi.create);
+  return useFetch<void, EmployeeCreateRequest>(employeeApi.create);
 }
-function addSpecialties() {
-  return useFetch<EmployeeResponse, EmployeeSpecialtiesRequest>(
-    employeeApi.addSpecialties,
-  );
-}
-function updateWorkingHour() {
-  return useFetch<EmployeeResponse, EmployeeWorkingHourRequest>(
-    employeeApi.updateWorkingHour,
-  );
+function update() {
+  return useFetch<void, EmployeeUpdateRequest>(employeeApi.update);
 }
 
 export const employeeUseCases = {
@@ -35,6 +24,5 @@ export const employeeUseCases = {
   getById,
   getAppointments,
   create,
-  addSpecialties,
-  updateWorkingHour,
+  update,
 };

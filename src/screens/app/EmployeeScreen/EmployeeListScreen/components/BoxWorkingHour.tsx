@@ -24,7 +24,7 @@ export function BoxWorkingHour({
         borderRadius="s6"
         marginBottom="s12"
         padding="s10"
-        onLongPress={() =>
+        onPress={() =>
           navigation.navigate('EmployeeWorkingHourScreen', {
             workingHourId: workingHour.id,
           })

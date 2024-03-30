@@ -1,6 +1,5 @@
 import {EmptyList, Screen} from '@components';
 import {employeeUseCases} from '@domain';
-import {EmployeeScreenProps} from '@routes';
 import {useEffect} from 'react';
 import {DetailsBox} from './components/DetailsBox';
 import {FirstRegistration} from './components/FirstRegistration';

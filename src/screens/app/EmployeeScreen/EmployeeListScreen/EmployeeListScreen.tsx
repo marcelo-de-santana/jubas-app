@@ -18,8 +18,8 @@ export function EmployeeListScreen({
     searchData();
   }, []);
 
-  function renderItem({item}: ListRenderItemInfo<EmployeeResponse>) {
-    const {name, specialties, statusProfile, workingHour} = item;
+  function renderItem({item: employee}: ListRenderItemInfo<EmployeeResponse>) {
+    const {name, statusProfile, workingHour} = employee;
 
     return (
       <CollapsibleBox title={name}>
@@ -27,7 +27,7 @@ export function EmployeeListScreen({
           <Box padding="s12">
             <HeaderWorkingHour statusProfile={statusProfile} />
             <BoxWorkingHour workingHour={workingHour} navigation={navigation} />
-            <BoxSpecialty specialties={specialties} navigation={navigation} />
+            <BoxSpecialty employee={employee} navigation={navigation} />
           </Box>
         </Box>
       </CollapsibleBox>

@@ -10,9 +10,6 @@ export function ButtonAdd({iconProps, ...props}: Readonly<ButtonAddProps>) {
     <TouchableOpacity
       alignItems="center"
       height={50}
-      borderRadius="s6"
-      borderColor="primaryContrast"
-      borderWidth={1}
       justifyContent="center"
       marginTop="s4"
       {...props}>

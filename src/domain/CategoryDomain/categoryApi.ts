@@ -3,12 +3,8 @@ import {CategoryRequest} from './categoryRequest';
 
 const PATH = '/categories';
 
-async function getAll(specialties?: boolean) {
+async function getAll(specialties: boolean) {
   return await api.get(PATH, {params: {specialties}});
-}
-
-async function getCategoriesAndSpecialties() {
-  return await api.get(PATH + '/specialties');
 }
 
 async function create(name: string) {
@@ -24,7 +20,6 @@ async function remove(categoryId: number) {
 }
 export const categoryApi = {
   getAll,
-  getCategoriesAndSpecialties,
   create,
   update,
   remove,

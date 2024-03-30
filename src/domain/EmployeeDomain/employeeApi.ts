@@ -1,9 +1,5 @@
 import {api} from '@services';
-import {
-  EmployeeCreateRequest,
-  EmployeeSpecialtiesRequest,
-  EmployeeWorkingHourRequest,
-} from './employeeRequest';
+import {EmployeeCreateRequest, EmployeeUpdateRequest} from './employeeRequest';
 
 const PATH = '/employees';
 
@@ -12,35 +8,34 @@ async function getAll() {
 }
 
 async function getById(employeeId: string) {
-  return await api.get(`${PATH}/${employeeId}`);
+  return await api.get(PATH + '/' + employeeId);
 }
 
 async function getAppointments(employeeId: string) {
-  return await api.get(`${PATH}/${employeeId}/appointments`);
+  return await api.get(PATH + '/' + employeeId + '/appointments');
 }
 
 async function create(request: EmployeeCreateRequest) {
   return await api.post(PATH, request);
 }
 
-async function addSpecialties(request: EmployeeSpecialtiesRequest) {
-  return await api.post(
-    `${PATH}/${request.employeeId}/specialties`,
-    request.specialties,
-  );
+async function update({
+  employeeId,
+  profileId,
+  specialties,
+  workingHourId,
+}: EmployeeUpdateRequest) {
+  return await api.patch(PATH + '/' + employeeId, {
+    profileId,
+    workingHourId,
+    specialties,
+  });
 }
 
-async function updateWorkingHour(request: EmployeeWorkingHourRequest) {
-  return await api.patch(
-    `${PATH}/${request.employeeId}/working-hours`,
-    request.workingHourId,
-  );
-}
 export const employeeApi = {
   getAll,
   getById,
   getAppointments,
   create,
-  addSpecialties,
-  updateWorkingHour,
+  update,
 };

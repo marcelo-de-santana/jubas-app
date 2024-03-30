@@ -9,11 +9,6 @@ function create() {
 function getAll() {
   return useFetch<CategorySpecialtiesResponse[], boolean>(categoryApi.getAll);
 }
-function getCategoriesAndSpecialties() {
-  return useFetch<CategorySpecialtiesResponse[]>(
-    categoryApi.getCategoriesAndSpecialties,
-  );
-}
 function remove() {
   return useFetch<void, number>(categoryApi.remove);
 }
@@ -24,7 +19,6 @@ function update() {
 export const categoryUseCases = {
   create,
   getAll,
-  getCategoriesAndSpecialties,
   update,
   remove,
 };

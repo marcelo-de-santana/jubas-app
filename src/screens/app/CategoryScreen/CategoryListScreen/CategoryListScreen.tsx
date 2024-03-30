@@ -13,13 +13,14 @@ import {BoxCategory} from './components/BoxCategory';
 export function CategoryListScreen({
   navigation,
 }: Readonly<BusinessManagementStackProps<'CategoryListScreen'>>) {
-  const {data, fetch, isLoading, isError, refresh} =
-    categoryUseCases.getCategoriesAndSpecialties();
+  const {data, fetch, isLoading, isError} = categoryUseCases.getAll();
+
+  const searchData = () => {
+    fetch(true);
+  };
 
   useEffect(() => {
-    navigation.addListener('focus', () => {
-      fetch();
-    });
+    navigation.addListener('focus', searchData);
   }, [navigation]);
 
   function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
@@ -61,7 +62,7 @@ export function CategoryListScreen({
         isSeparator={false}
         loading={isLoading}
         error={isError}
-        refetch={refresh}
+        refetch={searchData}
         listEmptyTitle="Nenhuma categoria encontrada."
         ListFooterComponent={
           data && (
