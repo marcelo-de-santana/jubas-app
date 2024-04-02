@@ -1,5 +1,5 @@
 import {useFetch} from '@hooks';
-import {ProfileResponse} from './profileResponse';
+import {ProfileUserResponse} from './profileResponse';
 import {
   ProfileCreateRequest,
   ProfileUpdateRequest,
@@ -7,14 +7,16 @@ import {
 } from './profileRequest';
 import {profileApi} from './profileApi';
 
+function getAll() {
+  return useFetch<ProfileUserResponse[], boolean>(profileApi.getAll);
+}
+
 function create() {
-  return useFetch<ProfileResponse, ProfileCreateRequest>(profileApi.create);
+  return useFetch<void, ProfileCreateRequest>(profileApi.create);
 }
 
 function recoveryPassword() {
-  return useFetch<ProfileResponse, RecoveryPasswordRequest>(
-    profileApi.recoveryPassword,
-  );
+  return useFetch<void, RecoveryPasswordRequest>(profileApi.recoveryPassword);
 }
 
 function remove() {
@@ -22,7 +24,13 @@ function remove() {
 }
 
 function update() {
-  return useFetch<ProfileResponse, ProfileUpdateRequest>(profileApi.update);
+  return useFetch<void, ProfileUpdateRequest>(profileApi.update);
 }
 
-export const profileUseCases = {create, recoveryPassword, remove, update};
+export const profileUseCases = {
+  getAll,
+  create,
+  recoveryPassword,
+  remove,
+  update,
+};

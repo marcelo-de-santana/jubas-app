@@ -64,13 +64,6 @@ export function CategoryListScreen({
         error={isError}
         refetch={searchData}
         listEmptyTitle="Nenhuma categoria encontrada."
-        ListFooterComponent={
-          data && (
-            <ButtonAdd
-              onPress={() => navigation.navigate('CategoryCreateScreen')}
-            />
-          )
-        }
       />
     </Screen>
   );

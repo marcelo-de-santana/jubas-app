@@ -1,4 +1,4 @@
-import {api} from '@services';
+import {api} from '@api';
 import {PermissionRequest} from './permissionRequest';
 
 const PATH = '/permissions';

@@ -59,7 +59,7 @@ export function EmployeeSpecialtiesScreen({
       />
       <ModalConfirmSend
         employee={employee}
-        specialties={assignedSpecialties}
+        assignedSpecialties={assignedSpecialties}
         navigation={navigation}
       />
     </Screen>

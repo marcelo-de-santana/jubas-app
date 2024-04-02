@@ -1,7 +1,7 @@
 import {AuthResponse, userUseCases} from '@domain';
-import {createContext, useCallback, useContext, useState} from 'react';
+import {createContext, useContext, useState} from 'react';
 import {AuthContextType} from './authContextTypes';
-import {registerToken} from '@services';
+import {registerToken} from '@api';
 
 type AuthContextProviderProps = {
   children: React.ReactNode;

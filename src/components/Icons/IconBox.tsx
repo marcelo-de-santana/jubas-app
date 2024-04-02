@@ -1,4 +1,3 @@
-import {View} from 'react-native';
 import {Icon, IconName} from './Icon';
 import {ThemeColors} from '@styles';
 import {Box} from '../Box';

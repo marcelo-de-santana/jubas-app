@@ -5,17 +5,17 @@ import {mask} from '@utils';
 export function SpecialtyItem({
   specialty,
   isSeparator,
-  onLongPress,
+  onPress,
 }: Readonly<{
   specialty: SpecialtyResponse;
   isSeparator: boolean;
-  onLongPress: () => void;
+  onPress: () => void;
 }>) {
   return (
     <TouchableOpacityItems
       key={specialty.id}
       padding="s12"
-      onLongPress={onLongPress}
+      onPress={onPress}
       isSeparator={isSeparator}
       separatorProps={{
         backgroundColor: 'secondaryContrast',

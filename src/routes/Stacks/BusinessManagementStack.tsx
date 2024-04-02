@@ -12,6 +12,7 @@ import {
   CategoryListScreen,
   CategoryUpdateScreen,
   DashboardScreen,
+  EmployeeCreateScreen,
   EmployeeListScreen,
   EmployeeSpecialtiesScreen,
   EmployeeWorkingHourScreen,
@@ -23,6 +24,11 @@ import {
   WorkingHourUpdateScreen,
 } from '@screens';
 import {defaultOptions} from '../screenOptions';
+import {
+  NavigationToCategoryCreate,
+  NavigationToEmployeeCreate,
+  NavigationToWorkingHourCreate,
+} from '@components';
 
 interface CategoryParams {
   category: CategoryResponse;
@@ -40,6 +46,7 @@ export type BusinessManagementParamList = {
   CategoryListScreen: undefined;
   CategoryUpdateScreen: CategoryParams;
   DashboardScreen: undefined;
+  EmployeeCreateScreen: undefined;
   EmployeeListScreen: undefined;
   EmployeeUpdateScreen: undefined;
   EmployeeSpecialtiesScreen: {employee: EmployeeResponse};
@@ -89,6 +96,7 @@ export function BusinessManagementStack() {
         component={CategoryListScreen}
         options={{
           headerTitle: 'Categorias',
+          headerRight: NavigationToCategoryCreate,
         }}
       />
       <NativeStack.Screen
@@ -97,9 +105,19 @@ export function BusinessManagementStack() {
         options={{headerTitle: 'Atualizar categoria'}}
       />
       <NativeStack.Screen
+        name="EmployeeCreateScreen"
+        component={EmployeeCreateScreen}
+        options={{
+          headerTitle: 'Novo funcionário',
+        }}
+      />
+      <NativeStack.Screen
         name="EmployeeListScreen"
         component={EmployeeListScreen}
-        options={{headerTitle: 'Funcionários'}}
+        options={{
+          headerTitle: 'Funcionários',
+          headerRight: NavigationToEmployeeCreate,
+        }}
       />
       <NativeStack.Screen
         name="EmployeeSpecialtiesScreen"
@@ -141,6 +159,7 @@ export function BusinessManagementStack() {
         component={WorkingHourListScreen}
         options={{
           headerTitle: 'Horários',
+          headerRight: NavigationToWorkingHourCreate,
         }}
       />
       <NativeStack.Screen

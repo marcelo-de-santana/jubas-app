@@ -1,10 +1,10 @@
 import {IconBase} from '@components';
 import {Path, Svg} from 'react-native-svg';
 
-export function ChevronLeftIcon({size = 20, color = '#3C4659'}: IconBase) {
+export function ArrowRight({size, color}: Readonly<IconBase>) {
   return (
     <Svg width={size} height={size} fill={color} viewBox="0 -960 960 960">
-      <Path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+      <Path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
     </Svg>
   );
 }

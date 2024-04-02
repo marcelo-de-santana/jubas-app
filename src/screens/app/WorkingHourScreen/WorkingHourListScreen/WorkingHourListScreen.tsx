@@ -2,9 +2,7 @@ import {
   FlatList,
   Screen,
   BoxFourTimes,
-  ButtonAdd,
   BoxHeaderWorkingHour,
-  ListSeparator,
 } from '@components';
 import {WorkingHourResponse, workingHourUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
@@ -37,7 +35,7 @@ export function WorkingHourListScreen({
       <BoxFourTimes
         height={50}
         textValues={listTime}
-        onLongPress={navigateToUpdate}
+        onPress={navigateToUpdate}
       />
     );
   }
@@ -51,16 +49,6 @@ export function WorkingHourListScreen({
         renderItem={renderItem}
         ListHeaderComponent={data && BoxHeaderWorkingHour}
         listEmptyTitle="Nenhum horário cadastrado"
-        ListFooterComponent={
-          data && (
-            <>
-              <ListSeparator variant="first" />
-              <ButtonAdd
-                onPress={() => navigation.navigate('WorkingHourCreateScreen')}
-              />
-            </>
-          )
-        }
       />
     </Screen>
   );

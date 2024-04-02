@@ -1,4 +1,4 @@
-import {api} from '@services';
+import {api} from '@api';
 import {CategoryRequest} from './categoryRequest';
 
 const PATH = '/categories';

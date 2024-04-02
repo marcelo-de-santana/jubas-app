@@ -1,68 +1,77 @@
-import {
-  Screen,
-  ModalStatus,
-  AlertStatusType,
-  BoxHeaderWorkingHour,
-  ListSeparator,
-  ListEmpty,
-} from '@components';
-import {
-  WorkingHourResponse,
-  employeeUseCases,
-  workingHourUseCases,
-} from '@domain';
-import { BusinessManagementStackProps } from '@routes';
-import {flatListStyle} from '@styles';
-import {useEffect} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
+import {Screen, ButtonSuccess, ModalStatus, AlertStatusType} from '@components';
+import {BusinessManagementStackProps} from '@routes';
+import {BoxProfile} from './components/BoxProfile';
+import {BoxWorkingHour} from './components/BoxWorkingHour';
+import {BoxSpecialties} from './components/BoxSpecialties';
+import {useEmployeeCreateService} from '@services';
+import {employeeUseCases} from '@domain';
 
 export function EmployeeCreateScreen({
   navigation,
-  route,
 }: Readonly<BusinessManagementStackProps<'EmployeeCreateScreen'>>) {
-  const $customStatus: AlertStatusType = {
-    201: ['SUCCESS', 'Funcionário cadastrado com sucesso.'],
-  };
-  const useWorkingHours = workingHourUseCases.getAll();
-  const useEmployee = employeeUseCases.create();
+  const {
+    employee,
+    addSpecialty,
+    removeSpecialty,
+    selectParams,
+    getSpecialtyIds,
+  } = useEmployeeCreateService.useEmployeeStateFunctions();
 
-  useEffect(() => {
-    useWorkingHours.fetch();
-  }, []);
+  const {profile, specialties, workingHour} = employee;
+  const hasProfile = !!profile;
+  const hasWorkingHour = !!workingHour;
+  const hasSpecialties = !!specialties;
 
-  function renderItem({item}: ListRenderItemInfo<WorkingHourResponse>) {
-    const registerEmployee = () => {
-      useEmployee.fetch({
-        profileId: route.params.profile.id,
-        workingHourId: item.id,
+  const {status, fetch, isLoading} = employeeUseCases.create();
+
+  const createEmployee = () => {
+    if (hasProfile && hasWorkingHour && hasSpecialties) {
+      fetch({
+        profileId: profile.id,
+        workingHourId: workingHour.id,
+        specialties: getSpecialtyIds(specialties),
       });
-    };
-
-    return <WorkingHourLine item={item} onPress={registerEmployee} />;
-  }
+    }
+  };
 
   return (
-    <Screen>
+    <Screen flex={1}>
       <ModalStatus
-        status={useEmployee.status}
+        status={status}
         customStatus={$customStatus}
         successAction={navigation.goBack}
       />
-      <FlatList
-        data={useWorkingHours.data}
-        renderItem={renderItem}
-        ItemSeparatorComponent={ListSeparator}
-        contentContainerStyle={flatListStyle(useWorkingHours.data)}
-        ListHeaderComponent={<BoxHeaderWorkingHour />}
-        ListEmptyComponent={
-          <ListEmpty
-            loading={useWorkingHours.isLoading}
-            error={useWorkingHours.isError}
-            title="Lista Vazia."
-            refetch={useWorkingHours.fetch}
-          />
-        }
-      />
+
+      <BoxProfile selectParams={selectParams} selectedProfile={profile} />
+
+      {hasProfile && (
+        <BoxWorkingHour
+          selectedWorkingHour={workingHour}
+          selectParams={selectParams}
+        />
+      )}
+      {hasWorkingHour && (
+        <BoxSpecialties
+          addSpecialty={addSpecialty}
+          removeSpecialty={removeSpecialty}
+          selectedSpecialties={specialties}
+        />
+      )}
+      {hasProfile && hasWorkingHour && (
+        <ButtonSuccess
+          flex={0}
+          loading={isLoading}
+          style={{position: 'absolute', bottom: 10, left: 20, right: 20}}
+          textProps={{variant: 'paragraphLarge', color: 'secondary'}}
+          backgroundColor="secondaryContrast"
+          onPress={createEmployee}
+          title="Salvar"
+        />
+      )}
     </Screen>
   );
 }
+
+const $customStatus: AlertStatusType = {
+  201: ['SUCCESS', 'Funcionário cadastrado com sucesso.'],
+};

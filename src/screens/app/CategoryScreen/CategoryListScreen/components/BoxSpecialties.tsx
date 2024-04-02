@@ -22,7 +22,7 @@ export function BoxSpecialties({
             key={specialty.id}
             specialty={specialty}
             isSeparator
-            onLongPress={() => onPressToNavigate(specialty)}
+            onPress={() => onPressToNavigate(specialty)}
           />
         );
       })}

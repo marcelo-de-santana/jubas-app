@@ -1,4 +1,4 @@
-import {api} from '@services';
+import {api} from '@api';
 import {EmployeeCreateRequest, EmployeeUpdateRequest} from './employeeRequest';
 
 const PATH = '/employees';
@@ -21,12 +21,10 @@ async function create(request: EmployeeCreateRequest) {
 
 async function update({
   employeeId,
-  profileId,
   specialties,
   workingHourId,
 }: EmployeeUpdateRequest) {
   return await api.patch(PATH + '/' + employeeId, {
-    profileId,
     workingHourId,
     specialties,
   });

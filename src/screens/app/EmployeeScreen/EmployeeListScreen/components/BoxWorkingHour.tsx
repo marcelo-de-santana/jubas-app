@@ -1,65 +1,85 @@
 import {
-  Box,
   Text,
   BoxFourTimes,
   BoxHeaderWorkingHour,
   TouchableOpacity,
+  Box,
 } from '@components';
-import {ButtonAddComponent} from './ButtonAdd';
-import {BusinessManagementStackProps} from '@routes';
 import {WorkingHourResponse} from '@domain';
+import {
+  ModalProfileStatus,
+  ModalProfileStatusProps,
+} from './ModalProfileStatus';
+import {EmployeeListScreenNavigation} from '../EmployeeListScreen';
 
-type BoxWorkingHourProps = {
-  workingHour: WorkingHourResponse;
-} & Pick<BusinessManagementStackProps<'EmployeeListScreen'>, 'navigation'>;
+type BoxWorkingHourProps = EmployeeListScreenNavigation &
+  ModalProfileStatusProps;
 
 export function BoxWorkingHour({
   navigation,
-  workingHour,
+  employee,
 }: Readonly<BoxWorkingHourProps>) {
-  if (workingHour.id) {
-    return (
-      <TouchableOpacity
-        bg="primaryContrast"
-        borderRadius="s6"
-        marginBottom="s12"
-        padding="s10"
-        onPress={() =>
-          navigation.navigate('EmployeeWorkingHourScreen', {
-            workingHourId: workingHour.id,
-          })
-        }>
-        <BoxHeaderWorkingHour
-          justifyContent="center"
-          textProps={{color: 'primary'}}
-        />
-        <BoxFourTimes
-          justifyContent="center"
-          disabled
-          textProps={{color: 'primary'}}
-          textValues={[
-            workingHour.startTime,
-            workingHour.startInterval,
-            workingHour.endInterval,
-            workingHour.endTime,
-          ]}
-        />
-      </TouchableOpacity>
-    );
-  }
-
   return (
-    <Box
+    <>
+      <Box flexDirection="row" justifyContent="space-between">
+        <Text
+          color="secondaryContrast"
+          textAlign="justify"
+          verticalAlign="middle">
+          Horários
+        </Text>
+        <ModalProfileStatus employee={employee} />
+      </Box>
+      <WorkingHourItem
+        navigation={navigation}
+        workingHour={employee.workingHour}
+      />
+    </>
+  );
+}
+
+type WorkingHourItemProps = {
+  workingHour: WorkingHourResponse;
+} & EmployeeListScreenNavigation;
+
+function WorkingHourItem({
+  navigation,
+  workingHour,
+}: Readonly<WorkingHourItemProps>) {
+  return (
+    <TouchableOpacity
       bg="primaryContrast"
       borderRadius="s6"
       marginBottom="s12"
-      padding="s10">
-      <Text padding="s10" color="primary">
-        Nenhuma jornada atribuída
-      </Text>
-      <ButtonAddComponent
-        onPress={() => navigation.navigate('EmployeeWorkingHourScreen')}
-      />
-    </Box>
+      padding="s10"
+      onPress={() =>
+        navigation.navigate('EmployeeWorkingHourScreen', {
+          workingHourId: workingHour.id,
+        })
+      }>
+      {workingHour.id ? (
+        <>
+          <BoxHeaderWorkingHour
+            justifyContent="center"
+            textProps={{color: 'primary'}}
+          />
+          <BoxFourTimes
+            justifyContent="center"
+            disabled
+            textProps={{color: 'primary'}}
+            textValues={[
+              workingHour.startTime,
+              workingHour.startInterval,
+              workingHour.endInterval,
+              workingHour.endTime,
+            ]}
+          />
+        </>
+      ) : (
+        <Text padding="s10" color="primary">
+          Nenhuma jornada atribuída
+        </Text>
+      )}
+    </TouchableOpacity>
   );
 }

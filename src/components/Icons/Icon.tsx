@@ -1,10 +1,10 @@
 import {Pressable} from 'react-native';
 import {
   AddIcon,
+  ArrowLeft,
+  ArrowRight,
   CheckBoxBlank,
   CheckBoxChecked,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   CheckIcon,
   CloseIcon,
   EditIcon,
@@ -29,7 +29,7 @@ export interface IconProps {
 export function Icon({
   name,
   color = 'primaryContrast',
-  size,
+  size = 20,
   onPress,
 }: Readonly<IconProps>) {
   const {colors} = useAppTheme();
@@ -38,7 +38,7 @@ export function Icon({
 
   if (onPress) {
     return (
-      <Pressable onPress={onPress}>
+      <Pressable onPress={onPress} hitSlop={10}>
         <SVGIcon color={colors[color]} size={size} />
       </Pressable>
     );
@@ -49,11 +49,11 @@ export function Icon({
 
 const iconRegistry = {
   AddIcon: AddIcon,
+  ArrowLeft: ArrowLeft,
+  ArrowRight: ArrowRight,
   CheckBoxBlank: CheckBoxBlank,
   CheckBoxChecked: CheckBoxChecked,
   CheckIcon: CheckIcon,
-  ChevronLeftIcon: ChevronLeftIcon,
-  ChevronRightIcon: ChevronRightIcon,
   CloseIcon: CloseIcon,
   EditIcon: EditIcon,
   LockIcon: LockIcon,

@@ -3,31 +3,36 @@ import {EmployeeResponse, employeeUseCases} from '@domain';
 import {BusinessManagementStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
-import {BoxSpecialty} from './components/BoxSpecialty';
+import {BoxSpecialties} from './components/BoxSpecialties';
 import {BoxWorkingHour} from './components/BoxWorkingHour';
-import {HeaderWorkingHour} from './components/HeaderWorkingHour';
+
+export type EmployeeListScreenNavigation = Pick<
+  BusinessManagementStackProps<'EmployeeListScreen'>,
+  'navigation'
+>;
 
 export function EmployeeListScreen({
   navigation,
 }: Readonly<BusinessManagementStackProps<'EmployeeListScreen'>>) {
   const {data, isLoading, isError, fetch} = employeeUseCases.getAll();
 
-  const searchData = () => fetch();
+  const searchData = () => {
+    fetch();
+  };
 
   useEffect(() => {
-    searchData();
-  }, []);
+    navigation.addListener('focus', searchData);
+  }, [navigation]);
 
   function renderItem({item: employee}: ListRenderItemInfo<EmployeeResponse>) {
-    const {name, statusProfile, workingHour} = employee;
+    const {name: employeeName} = employee;
 
     return (
-      <CollapsibleBox title={name}>
+      <CollapsibleBox title={employeeName}>
         <Box backgroundColor="secondary" borderRadius="s6">
           <Box padding="s12">
-            <HeaderWorkingHour statusProfile={statusProfile} />
-            <BoxWorkingHour workingHour={workingHour} navigation={navigation} />
-            <BoxSpecialty employee={employee} navigation={navigation} />
+            <BoxWorkingHour employee={employee} navigation={navigation} />
+            <BoxSpecialties employee={employee} navigation={navigation} />
           </Box>
         </Box>
       </CollapsibleBox>
@@ -35,7 +40,7 @@ export function EmployeeListScreen({
   }
 
   return (
-    <Screen>
+    <Screen flex={1}>
       <FlatList
         data={data}
         renderItem={renderItem}
