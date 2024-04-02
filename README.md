@@ -26,9 +26,25 @@ Para baixar e instalar o aplicativo em seu dispositivo [clique aqui]().
 
 <h2 align="center">Telas disponíveis</h2>
 
-| Tela de Login                           | Tela de Cadastro                        | Tela de Recuperação de Senha               |
-|-----------------------------------------|-----------------------------------------|--------------------------------------------|
-| <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignIn.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignUp.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/RecoveryPassword.png"/> |
+<div align="center">
+
+| Login | Cadastro |
+|-|-|
+| <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignIn.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/SignUp.png"/> | 
+
+| Recuperação de Senha | Home |
+|-|-|
+| <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/RecoveryPassword.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/HomeScreen.png"/> | 
+
+| Listagem de Serviços | Listagem de Horários Disponíveis |
+|-|-|
+<img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/ScheduleScheen1.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/ScheduleScheen2.png"/> |
+
+Seleção de Perfil | App em Construção |
+|-|-|
+| <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/ScheduleScheen3.png"/> | <img height="600" width="300" src="https://raw.githubusercontent.com/marcelo-de-santana/imagioteca/master/jubas-app/prints/pagina-em-construcao.gif"/> |
+
+</div>
 
 Para ver os protótipos de telas [clique aqui](https://www.figma.com/file/5ilvDi7rBbEM8hG74pETXk/Barber-App).
 
