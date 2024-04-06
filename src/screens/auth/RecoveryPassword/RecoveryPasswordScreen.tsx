@@ -1,14 +1,13 @@
 import {
   IconBox,
-  Button,
   FormTextInput,
   FormTextInputCpf,
   Screen,
   ModalStatus,
-  AlertStatusType,
+  AlertMessageType,
   ButtonSuccess,
 } from '@components';
-import {profileUseCases} from '@domain';
+import {useProfileRecoveryPassword} from '@domain';
 import {useForm} from '@hooks';
 import {AuthStackProps} from '@routes';
 import {mask, schemas} from '@utils';
@@ -17,12 +16,7 @@ import {ScrollView} from 'react-native';
 export function RecoveryPasswordScreen({
   navigation,
 }: Readonly<AuthStackProps<'RecoveryPasswordScreen'>>) {
-  const $customStatus: AlertStatusType = {
-    204: ['SUCCESS', 'Senha alterada com sucesso.'],
-    404: ['DANGER', 'Usuário não localizado.'],
-  };
-
-  const {isLoading, status, fetch} = profileUseCases.recoveryPassword();
+  const {isPending, isError, isSuccess, mutate} = useProfileRecoveryPassword();
   const formik = useForm({
     validationSchema: schemas.recoveryPass,
     initialValues: {
@@ -32,7 +26,7 @@ export function RecoveryPasswordScreen({
       checkPass: '',
     },
     onSubmit: () =>
-      fetch({
+      mutate({
         email: formik.values.email,
         password: formik.values.password,
         cpf: mask.removeCpf(formik.values.cpf),
@@ -42,8 +36,9 @@ export function RecoveryPasswordScreen({
   return (
     <Screen>
       <ModalStatus
-        status={status}
-        customStatus={$customStatus}
+        isError={isError}
+        isSuccess={isSuccess}
+        customMessage={$customMessage}
         successAction={navigation.goBack}
         errorAction={navigation.goBack}
       />
@@ -75,7 +70,7 @@ export function RecoveryPasswordScreen({
           secureTextEntry
         />
         <ButtonSuccess
-          loading={isLoading}
+          loading={isPending}
           backgroundColor="primaryContrast"
           style={{marginTop: 20}}
           title="Enviar solicitação"
@@ -86,3 +81,8 @@ export function RecoveryPasswordScreen({
     </Screen>
   );
 }
+
+const $customMessage: AlertMessageType = {
+  success: 'Senha alterada com sucesso.',
+  error: 'Usuário não localizado.',
+};

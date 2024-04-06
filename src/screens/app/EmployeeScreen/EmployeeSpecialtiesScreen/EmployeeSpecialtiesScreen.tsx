@@ -1,7 +1,7 @@
 import {FlatList, Screen, Text} from '@components';
-import {SpecialtyResponse, categoryUseCases} from '@domain';
-import {BusinessManagementStackProps} from '@routes';
-import {useEffect, useState} from 'react';
+import {SpecialtyResponse, useCategoryGetAll} from '@domain';
+import {EmployeeStackProps} from '@routes';
+import {useState} from 'react';
 import {BoxAssignedSpecialties} from './components/BoxAssignedSpecialties';
 import {BoxAvailableSpecialties} from './components/BoxAvailableSpecialties';
 import {ModalConfirmSend} from './components/ModalConfirmSend';
@@ -9,10 +9,10 @@ import {ModalConfirmSend} from './components/ModalConfirmSend';
 export function EmployeeSpecialtiesScreen({
   navigation,
   route,
-}: Readonly<BusinessManagementStackProps<'EmployeeSpecialtiesScreen'>>) {
+}: Readonly<EmployeeStackProps<'EmployeeSpecialtiesScreen'>>) {
   const {employee} = route.params;
 
-  const {data, fetch, isLoading} = categoryUseCases.getAll();
+  const {data, isLoading} = useCategoryGetAll();
 
   const [assignedSpecialties, setAssignedSpecialties] = useState(
     employee.specialties,
@@ -29,10 +29,6 @@ export function EmployeeSpecialtiesScreen({
       ),
     );
   };
-
-  useEffect(() => {
-    fetch(true);
-  }, []);
 
   return (
     <Screen flex={1}>

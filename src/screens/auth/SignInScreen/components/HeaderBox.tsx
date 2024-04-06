@@ -1,11 +1,10 @@
-import {ImageLogo, Text} from '@components';
-import {View} from 'react-native';
+import {Box, ImageLogo, Text} from '@components';
 
 export function HeaderBox() {
   return (
-    <View>
+    <>
       <Text variant="paragraphVeryLarge">Jubas Barbearia</Text>
       <ImageLogo />
-    </View>
+    </>
   );
 }

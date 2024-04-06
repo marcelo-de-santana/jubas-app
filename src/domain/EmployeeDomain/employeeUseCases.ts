@@ -1,7 +1,8 @@
 import {useFetch} from '@hooks';
 import {EmployeeResponse} from './employeeResponse';
-import {EmployeeCreateRequest, EmployeeUpdateRequest} from './employeeRequest';
+import {EmployeeUpdateRequest} from './employeeRequest';
 import {employeeApi} from './employeeApi';
+import {useMutation} from '@tanstack/react-query';
 
 function getAll() {
   return useFetch<EmployeeResponse[]>(employeeApi.getAll);
@@ -12,8 +13,8 @@ function getById() {
 function getAppointments() {
   return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
 }
-function create() {
-  return useFetch<void, EmployeeCreateRequest>(employeeApi.create);
+export function useEmployeeCreate() {
+  return useMutation({mutationFn: employeeApi.create});
 }
 function update() {
   return useFetch<void, EmployeeUpdateRequest>(employeeApi.update);
@@ -23,6 +24,5 @@ export const employeeUseCases = {
   getAll,
   getById,
   getAppointments,
-  create,
   update,
 };

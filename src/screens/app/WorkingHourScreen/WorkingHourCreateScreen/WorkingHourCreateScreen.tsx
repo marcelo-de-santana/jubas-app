@@ -7,7 +7,7 @@ import {
   BoxHeaderWorkingHour,
 } from '@components';
 import {workingHourUseCases} from '@domain';
-import {BusinessManagementStackProps} from '@routes';
+import {WorkingHourStackProps} from '@routes';
 import {useWHClockFunctions} from '@hooks';
 
 const initialValues = {
@@ -19,7 +19,7 @@ const initialValues = {
 
 export function WorkingHourCreateScreen({
   navigation,
-}: Readonly<BusinessManagementStackProps<'WorkingHourCreateScreen'>>) {
+}: Readonly<WorkingHourStackProps<'WorkingHourCreateScreen'>>) {
   const {fetch, isLoading, status} = workingHourUseCases.create();
   const {workingHour, handleWorkingHour} = useWHClockFunctions(initialValues);
 

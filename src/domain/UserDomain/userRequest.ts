@@ -1,7 +1,4 @@
-export interface AuthRequest {
-  email: string;
-  password: string;
-}
+import {PermissionType} from './userResponse';
 
 export interface CreateUserRequest {
   email: string;
@@ -13,7 +10,5 @@ export interface UpdateUserRequest {
   userId: string;
   email?: string;
   password?: string;
-  permissionId?: number;
+  permission?: string;
 }
-
-type PermissionType = 'ADMIN' | 'BARBEIRO' | 'CLIENTE';

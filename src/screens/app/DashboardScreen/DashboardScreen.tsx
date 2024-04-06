@@ -11,16 +11,20 @@ export function DashboardScreen({
         onPress={() => navigation.navigate('AppointmentListScreen')}
       />
       <BoxMenu
+        title="Gerenciar Usuários"
+        onPress={() => navigation.navigate('UserStack')}
+      />
+      <BoxMenu
         title="Gerenciar Funcionários"
-        onPress={() => navigation.navigate('EmployeeListScreen')}
+        onPress={() => navigation.navigate('EmployeeStack')}
       />
       <BoxMenu
         title="Gerenciar Horários"
-        onPress={() => navigation.navigate('WorkingHourListScreen')}
+        onPress={() => navigation.navigate('WorkingHourStack')}
       />
       <BoxMenu
-        title="Gerenciar Serviços"
-        onPress={() => navigation.navigate('CategoryListScreen')}
+        title="Gerenciar Catálogo"
+        onPress={() => navigation.navigate('CatalogStack')}
       />
     </Screen>
   );

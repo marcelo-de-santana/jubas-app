@@ -1,9 +1,9 @@
 import {workingHourUseCases} from '@domain';
 import {useEffect} from 'react';
 import {BoxHeaderWorkingHour, FlatList} from '@components';
-import {EmployeeSelectWorkingHourScreenProps} from '@services';
 import {WorkingHourListItem} from './components/WorkingHourListItem';
 import {Separator} from '../EmployeeCreateScreen/components/Separator';
+import { EmployeeSelectWorkingHourScreenProps } from '../EmployeeCreateScreen/components/types';
 export function EmployeeSelectWorkingHourScreen({
   chooseWorkingHour,
   selectedWorkingHour,

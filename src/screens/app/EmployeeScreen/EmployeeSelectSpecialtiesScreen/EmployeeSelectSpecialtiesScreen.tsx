@@ -1,17 +1,12 @@
-import {categoryUseCases} from '@domain';
-import {useEffect} from 'react';
 import {FlatList} from '@components';
-import {EmployeeSelectSpecialtiesScreenProps} from '@services';
 import {ServicesListItem} from './components/ServicesListItem';
+import {useCategoryGetAll} from '@domain';
+import { EmployeeSelectSpecialtiesScreenProps } from '../EmployeeCreateScreen/components/types';
 
 export function EmployeeSelectSpecialtiesScreen(
   listSpecialtiesProps: Readonly<EmployeeSelectSpecialtiesScreenProps>,
 ) {
-  const {data, fetch, isError, isLoading} = categoryUseCases.getAll();
-
-  useEffect(() => {
-    fetch(true);
-  }, []);
+  const {data, isError, isLoading} = useCategoryGetAll();
 
   return (
     <FlatList

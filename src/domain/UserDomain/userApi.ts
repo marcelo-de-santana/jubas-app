@@ -1,38 +1,35 @@
 import {api} from '@api';
-import {
-  AuthRequest,
-  CreateUserRequest,
-  UpdateUserRequest,
-} from './userRequest';
+import {CreateUserRequest, UpdateUserRequest} from './userRequest';
+import {UserProfileResponse} from './userResponse';
 
 const PATH = '/users';
 
-async function getById(userId: string) {
-  return await api.get(`${PATH}/${userId}`);
+async function getAll(profiles?: boolean): Promise<UserProfileResponse[]> {
+  return (await api.get(PATH, {params: {profiles}})).data;
 }
 
-async function getAll() {
-  return await api.get(PATH);
-}
-
-async function auth(request: AuthRequest) {
-  return await api.post('/auth', request);
+async function getById(userId: string): Promise<UserProfileResponse> {
+  return await api.get(PATH + '/' + userId);
 }
 
 async function create(request: CreateUserRequest) {
-  return await api.post(PATH, request);
+  return (await api.post(PATH, request)).data;
 }
 
-async function update(request: UpdateUserRequest) {
-  return await api.patch(`${PATH}/${request.userId}`, {
-    email: request.email,
-    password: request.password,
-    permissionId: request.permissionId,
+async function update({
+  userId,
+  email,
+  password,
+  permission,
+}: UpdateUserRequest): Promise<void> {
+  return await api.patch(PATH + '/' + userId, {
+    email,
+    password,
+    permission,
   });
 }
 
 export const userApi = {
-  auth,
   create,
   getById,
   getAll,

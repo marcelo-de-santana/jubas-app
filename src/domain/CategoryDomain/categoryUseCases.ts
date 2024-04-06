@@ -1,24 +1,32 @@
-import {useFetch} from '@hooks';
-import {CategorySpecialtiesResponse} from './categoryResponse';
+import {QueryKeys} from '@hooks';
 import {categoryApi} from './categoryApi';
-import {CategoryRequest} from './categoryRequest';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-function create() {
-  return useFetch<void, string>(categoryApi.create);
-}
-function getAll() {
-  return useFetch<CategorySpecialtiesResponse[], boolean>(categoryApi.getAll);
-}
-function remove() {
-  return useFetch<void, number>(categoryApi.remove);
-}
-function update() {
-  return useFetch<void, CategoryRequest>(categoryApi.update);
+export function useCategoryCreate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: categoryApi.create,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: [QueryKeys.CategoryGetAll]});
+    },
+  });
 }
 
-export const categoryUseCases = {
-  create,
-  getAll,
-  update,
-  remove,
-};
+export function useCategoryGetAll({
+  withProfiles = true,
+}: {
+  withProfiles?: boolean;
+} = {}) {
+  return useQuery({
+    queryKey: [QueryKeys.CategoryGetAll],
+    queryFn: () => categoryApi.getAll(withProfiles),
+  });
+}
+
+export function useCategoryRemove() {
+  return useMutation({mutationFn: categoryApi.remove});
+}
+
+export function useCategoryUpdate() {
+  return useMutation({mutationFn: categoryApi.update});
+}

@@ -1,6 +1,9 @@
 export * from './AppointmentDomain/appointmentUseCases';
 export * from './AppointmentDomain/appointmentResponse';
 
+export * from './AuthDomain/authUseCases';
+export * from './AuthDomain/authResponse';
+
 export * from './CategoryDomain/categoryUseCases';
 export * from './CategoryDomain/categoryResponse';
 

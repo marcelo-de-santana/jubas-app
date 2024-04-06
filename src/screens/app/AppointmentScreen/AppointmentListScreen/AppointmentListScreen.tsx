@@ -17,6 +17,8 @@ export function AppointmentListScreen({
 
   const [dayOfWeek, setDayOfWeek] = useState<string>();
 
+  console.log(dayOfWeek);
+
   return (
     <Screen flex={1}>
       {isLoading || isError || data?.length === 0 ? (
@@ -36,8 +38,10 @@ export function AppointmentListScreen({
                   marginBottom="s10"
                   width={100}
                   borderRadius="s6"
-                  disabled={dayOfWeek === item.isAvailable}
-                  opacity={dayOfWeek === item.isAvailable ? 0.7 : 1}
+                  disabled={dayOfWeek === item.date || !item.isAvailable}
+                  opacity={
+                    dayOfWeek === item.date ? 0.5 : 1
+                  }
                   textProps={{color: 'primary'}}
                   label={mask.dayOfWeek(new Date(item.date))}
                   onPress={() => setDayOfWeek(item.date)}

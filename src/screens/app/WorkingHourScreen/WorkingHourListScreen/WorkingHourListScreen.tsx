@@ -5,13 +5,13 @@ import {
   BoxHeaderWorkingHour,
 } from '@components';
 import {WorkingHourResponse, workingHourUseCases} from '@domain';
-import {BusinessManagementStackProps} from '@routes';
+import {WorkingHourStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
 export function WorkingHourListScreen({
   navigation,
-}: Readonly<BusinessManagementStackProps<'WorkingHourListScreen'>>) {
+}: Readonly<WorkingHourStackProps<'WorkingHourListScreen'>>) {
   const {data, fetch, isLoading, isError} = workingHourUseCases.getAll();
 
   useEffect(() => {

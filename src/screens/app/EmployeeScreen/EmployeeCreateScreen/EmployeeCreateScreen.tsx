@@ -1,14 +1,19 @@
-import {Screen, ButtonSuccess, ModalStatus, AlertStatusType} from '@components';
-import {BusinessManagementStackProps} from '@routes';
+import {
+  Screen,
+  ButtonSuccess,
+  ModalStatus,
+  AlertMessageType,
+} from '@components';
+import {EmployeeStackProps} from '@routes';
 import {BoxProfile} from './components/BoxProfile';
 import {BoxWorkingHour} from './components/BoxWorkingHour';
 import {BoxSpecialties} from './components/BoxSpecialties';
-import {useEmployeeCreateService} from '@services';
-import {employeeUseCases} from '@domain';
+import {useEmployeeCreate} from '@domain';
+import {useEmployeeCreateService} from './components/functions';
 
 export function EmployeeCreateScreen({
   navigation,
-}: Readonly<BusinessManagementStackProps<'EmployeeCreateScreen'>>) {
+}: Readonly<EmployeeStackProps<'EmployeeCreateScreen'>>) {
   const {
     employee,
     addSpecialty,
@@ -22,11 +27,11 @@ export function EmployeeCreateScreen({
   const hasWorkingHour = !!workingHour;
   const hasSpecialties = !!specialties;
 
-  const {status, fetch, isLoading} = employeeUseCases.create();
+  const {mutate, isSuccess, isError, isPending} = useEmployeeCreate();
 
   const createEmployee = () => {
     if (hasProfile && hasWorkingHour && hasSpecialties) {
-      fetch({
+      mutate({
         profileId: profile.id,
         workingHourId: workingHour.id,
         specialties: getSpecialtyIds(specialties),
@@ -37,8 +42,9 @@ export function EmployeeCreateScreen({
   return (
     <Screen flex={1}>
       <ModalStatus
-        status={status}
-        customStatus={$customStatus}
+        isSuccess={isSuccess}
+        isError={isError}
+        customMessage={$customStatus}
         successAction={navigation.goBack}
       />
 
@@ -59,8 +65,7 @@ export function EmployeeCreateScreen({
       )}
       {hasProfile && hasWorkingHour && (
         <ButtonSuccess
-          flex={0}
-          loading={isLoading}
+          loading={isPending}
           style={{position: 'absolute', bottom: 10, left: 20, right: 20}}
           textProps={{variant: 'paragraphLarge', color: 'secondary'}}
           backgroundColor="secondaryContrast"
@@ -72,6 +77,6 @@ export function EmployeeCreateScreen({
   );
 }
 
-const $customStatus: AlertStatusType = {
-  201: ['SUCCESS', 'Funcionário cadastrado com sucesso.'],
+const $customStatus: AlertMessageType = {
+  success: 'Funcionário cadastrado com sucesso.',
 };

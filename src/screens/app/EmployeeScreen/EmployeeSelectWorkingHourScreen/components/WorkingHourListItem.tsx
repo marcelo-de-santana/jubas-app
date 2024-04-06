@@ -1,5 +1,5 @@
 import {BoxFourTimes} from '@components';
-import {WorkingHourListItemProps} from '@services';
+import {WorkingHourListItemProps} from '../../EmployeeCreateScreen/components/types';
 
 export function WorkingHourListItem({
   item: workingHour,

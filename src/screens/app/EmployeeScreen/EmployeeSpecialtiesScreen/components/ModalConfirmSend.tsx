@@ -9,16 +9,13 @@ import {
 } from '@components';
 import {EmployeeResponse, SpecialtyResponse, employeeUseCases} from '@domain';
 import {useModalVisibility} from '@hooks';
-import {BusinessManagementStackProps} from '@routes';
+import {EmployeeStackProps} from '@routes';
 import {Modal as RNModal} from 'react-native';
 
 type ModalConfirmSendProps = {
   employee: EmployeeResponse;
   assignedSpecialties?: SpecialtyResponse[];
-} & Pick<
-  BusinessManagementStackProps<'EmployeeSpecialtiesScreen'>,
-  'navigation'
->;
+} & Pick<EmployeeStackProps<'EmployeeSpecialtiesScreen'>, 'navigation'>;
 
 export function ModalConfirmSend({
   navigation,

@@ -1,4 +1,5 @@
-import {SpecialtyListItemProps, useEmployeeCreateService} from '@services';
+import { useEmployeeCreateService } from '../../EmployeeCreateScreen/components/functions';
+import { SpecialtyListItemProps } from '../../EmployeeCreateScreen/components/types';
 import {CategoryItem} from './CategoryItem';
 import {SpecialtyList} from './SpecialtyList';
 

@@ -4,8 +4,8 @@ import {BoxFourTimes, ListSeparator, Text} from '@components';
 import {Modal} from './Modal';
 import {useModalVisibility} from '@hooks';
 
-import {BoxWorkingHourProps, SelectedWorkingHourState} from '@services';
 import {EmployeeSelectWorkingHourScreen} from '../../EmployeeSelectWorkingHourScreen/EmployeeSelectWorkingHourScreen';
+import {BoxWorkingHourProps, SelectedWorkingHourState} from './types';
 
 export function BoxWorkingHour({
   selectParams,

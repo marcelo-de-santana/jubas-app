@@ -6,14 +6,14 @@ import {
   Screen,
   BoxHeaderWorkingHour,
 } from '@components';
-import {BusinessManagementStackProps} from '@routes';
+import {WorkingHourStackProps} from '@routes';
 import {useWHClockFunctions} from '@hooks';
 import {workingHourUseCases} from '@domain';
 
 export function WorkingHourUpdateScreen({
   navigation,
   route,
-}: Readonly<BusinessManagementStackProps<'WorkingHourUpdateScreen'>>) {
+}: Readonly<WorkingHourStackProps<'WorkingHourUpdateScreen'>>) {
   const {fetch, isLoading, status} = workingHourUseCases.update();
   const {workingHour, handleWorkingHour} = useWHClockFunctions(
     route.params.workingHour,

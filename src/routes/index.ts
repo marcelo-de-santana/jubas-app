@@ -1,4 +1,4 @@
-export * from './Stacks/AppStack';
-export * from './Stacks/AuthStack';
-export * from './navigationTypes';
+export * from './Stacks/AppStack/AppStack';
+export * from './Stacks/AuthStack/AuthStack';
+export * from './navigationProps';
 export * from './Routes';

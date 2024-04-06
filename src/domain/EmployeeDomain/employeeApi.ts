@@ -15,7 +15,7 @@ async function getAppointments(employeeId: string) {
   return await api.get(PATH + '/' + employeeId + '/appointments');
 }
 
-async function create(request: EmployeeCreateRequest) {
+async function create(request: EmployeeCreateRequest): Promise<void> {
   return await api.post(PATH, request);
 }
 

@@ -1,33 +1,33 @@
+import {QueryKeys} from '@hooks';
 import {userApi} from './userApi';
-import {useFetch} from '@hooks';
-import {
-  AuthResponse,
-  UserPermissionResponse,
-  UserProfileResponse,
-  UserResponse,
-} from './userResponse';
-import {AuthRequest, CreateUserRequest, UpdateUserRequest} from './userRequest';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-function auth() {
-  return useFetch<AuthResponse, AuthRequest>(userApi.auth);
-}
-function create() {
-  return useFetch<UserResponse, CreateUserRequest>(userApi.create);
-}
-function getAll() {
-  return useFetch<UserResponse[]>(userApi.getAll);
-}
-function getById() {
-  return useFetch<UserProfileResponse, string>(userApi.getById);
-}
-function update() {
-  return useFetch<UserPermissionResponse, UpdateUserRequest>(userApi.update);
+export function useUserGetAll({
+  withProfiles = true,
+}: {withProfiles?: boolean} = {}) {
+  return useQuery({
+    queryKey: [QueryKeys.UserGetAll],
+    queryFn: () => userApi.getAll(withProfiles),
+  });
 }
 
-export const userUseCases = {
-  auth,
-  create,
-  update,
-  getAll,
-  getById,
-};
+export function useUserGetById(userId: string) {
+  return useQuery({
+    queryKey: ['userGetById'],
+    queryFn: () => userApi.getById(userId),
+  });
+}
+
+export function useUserCreate() {
+  return useMutation({mutationFn: userApi.create});
+}
+
+export function useUserUpdate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: userApi.update,
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: [QueryKeys.UserGetAll]});
+    },
+  });
+}

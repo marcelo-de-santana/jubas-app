@@ -1,7 +1,5 @@
 import {Button, Screen} from '@components';
-import {PermissionResponse} from '@domain';
 import {UserStackProps} from '@routes';
-import {themeRegistry} from '@styles';
 import {mask} from '@utils';
 import {View} from 'react-native';
 

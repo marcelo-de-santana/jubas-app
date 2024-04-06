@@ -1,19 +1,19 @@
 import {Screen, FlatList, CollapsibleBox, Box} from '@components';
 import {EmployeeResponse, employeeUseCases} from '@domain';
-import {BusinessManagementStackProps} from '@routes';
+import {EmployeeStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {BoxSpecialties} from './components/BoxSpecialties';
 import {BoxWorkingHour} from './components/BoxWorkingHour';
 
 export type EmployeeListScreenNavigation = Pick<
-  BusinessManagementStackProps<'EmployeeListScreen'>,
+  EmployeeStackProps<'EmployeeListScreen'>,
   'navigation'
 >;
 
 export function EmployeeListScreen({
   navigation,
-}: Readonly<BusinessManagementStackProps<'EmployeeListScreen'>>) {
+}: Readonly<EmployeeStackProps<'EmployeeListScreen'>>) {
   const {data, isLoading, isError, fetch} = employeeUseCases.getAll();
 
   const searchData = () => {

@@ -15,8 +15,10 @@ async function create(request: ProfileCreateRequest) {
   return await api.post(PATH, request);
 }
 
-async function recoveryPassword(request: RecoveryPasswordRequest) {
-  return await api.post(PATH + '/recovery-password', request);
+async function recoveryPassword(
+  request: RecoveryPasswordRequest,
+): Promise<void> {
+  return (await api.post(PATH + '/recovery-password', request)).data;
 }
 
 async function update(request: ProfileUpdateRequest) {
@@ -27,8 +29,8 @@ async function update(request: ProfileUpdateRequest) {
   });
 }
 
-async function remove(id: string) {
-  return await api.delete(PATH + '/' + id);
+async function remove(id: string): Promise<void> {
+  return (await api.delete(PATH + '/' + id)).data;
 }
 
 export const profileApi = {

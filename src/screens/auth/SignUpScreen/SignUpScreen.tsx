@@ -3,24 +3,20 @@ import {
   Screen,
   ModalStatus,
   IconBox,
-  AlertStatusType,
   ButtonSuccess,
+  AlertMessageType,
 } from '@components';
 import {ScrollView} from 'react-native';
 import {schemas} from '@utils';
 import {useForm} from '@hooks';
-import {userUseCases} from '@domain';
 import {AuthStackProps} from '@routes';
+import {useUserCreate} from '@domain';
 
 export function SignUpScreen({
   navigation,
 }: Readonly<AuthStackProps<'SignUpScreen'>>) {
-  const $customStatus: AlertStatusType = {
-    201: ['SUCCESS', 'Usuário criado com sucesso.'],
-    401: ['DANGER', 'Você já possui cadastrado.'],
-  };
+  const {mutate, isError, isSuccess, isPending} = useUserCreate();
 
-  const {fetch, isLoading, status} = userUseCases.create();
   const formik = useForm({
     validationSchema: schemas.signUp,
     initialValues: {
@@ -29,7 +25,7 @@ export function SignUpScreen({
       checkPass: '',
     },
     onSubmit: values =>
-      fetch({
+      mutate({
         email: values.email,
         password: values.password,
       }),
@@ -38,8 +34,9 @@ export function SignUpScreen({
   return (
     <Screen>
       <ModalStatus
-        status={status}
-        customStatus={$customStatus}
+        customMessage={$customMessage}
+        isError={isError}
+        isSuccess={isSuccess}
         successAction={navigation.goBack}
         errorAction={navigation.goBack}
       />
@@ -70,9 +67,9 @@ export function SignUpScreen({
           secureTextEntry
         />
         <ButtonSuccess
-          loading={isLoading}
+          loading={isPending}
           backgroundColor="primaryContrast"
-          marginTop='s20'
+          marginTop="s20"
           title="Cadastrar"
           textProps={{variant: 'paragraphLarge', color: 'primary'}}
           onPress={formik.handleSubmit}
@@ -81,3 +78,8 @@ export function SignUpScreen({
     </Screen>
   );
 }
+
+const $customMessage: AlertMessageType = {
+  success: 'Usuário criado com sucesso.',
+  error: 'Você já possui cadastrado.',
+};

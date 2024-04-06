@@ -1,6 +1,6 @@
 import {Box, TouchableOpacityItem} from '@components';
-import {SpecialtyListProps} from '@services';
 import {Separator} from './Separator';
+import {SpecialtyListProps} from '../../EmployeeCreateScreen/components/types';
 
 export function SpecialtyList({
   specialties,

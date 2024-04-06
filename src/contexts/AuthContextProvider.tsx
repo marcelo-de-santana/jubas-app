@@ -1,5 +1,5 @@
-import {AuthResponse, userUseCases} from '@domain';
-import {createContext, useContext, useState} from 'react';
+import {AuthResponse} from '@domain';
+import {createContext, useContext, useEffect, useState} from 'react';
 import {AuthContextType} from './authContextTypes';
 import {registerToken} from '@api';
 
@@ -8,13 +8,9 @@ type AuthContextProviderProps = {
 };
 
 export const AuthContext = createContext<AuthContextType>({
-  signIn: () => {},
-  singOut: () => {},
+  saveCredentials: async () => {},
   authCredentials: null,
   user: null,
-  isLoading: false,
-  status: null,
-  isError: null,
 });
 
 export function AuthContextProvider({
@@ -24,18 +20,18 @@ export function AuthContextProvider({
     null,
   );
 
-  const {data, fetch, status, isLoading, isError} = userUseCases.auth();
 
-  if (data?.accessToken && authCredentials === null) {
-    setAuthCredentials(data);
-    registerToken({authCredentials: data});
-  }
 
-  const signIn = (email: string, password: string) => {
-    fetch({email, password});
+  useEffect(() => {
+    return ;
+  }, [authCredentials]);
+
+  const saveCredentials = async (
+    authCredentials: AuthResponse,
+  ): Promise<void> => {
+    setAuthCredentials(authCredentials);
+    registerToken({authCredentials});
   };
-
-  const singOut = () => {};
 
   const user = authCredentials?.user || null;
 
@@ -44,11 +40,7 @@ export function AuthContextProvider({
       value={{
         authCredentials,
         user,
-        signIn,
-        singOut,
-        isLoading,
-        isError,
-        status,
+        saveCredentials,
       }}>
       {children}
     </AuthContext.Provider>

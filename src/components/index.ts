@@ -11,6 +11,7 @@ export * from './Icons/';
 export * from './Images';
 export * from './Modal';
 export * from './Navigation';
+export * from './ProfileItems/ProfileItems';
 export * from './Screen/Screen';
 export * from './SpecialtyDescription/SpecialtyDescription';
 export * from './Text/Text';

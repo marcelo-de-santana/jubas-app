@@ -1,51 +1,53 @@
 import {useEffect, useState} from 'react';
 import {Modal, Pressable} from 'react-native';
 import {Text} from '../Text/Text';
-import {ThemeColors} from '@styles';
 import {useAppTheme} from '@hooks';
+import {ThemeColors} from '@styles';
 import {Box} from '../Box';
 
 export interface ModalStatusProps {
-  status?: number | null;
-  customStatus?: AlertStatusType;
+  isSuccess?: boolean;
+  isError?: boolean | null;
   successAction?: () => void;
   errorAction?: () => void;
+  customMessage?: AlertMessageType;
 }
 
+type StatusType = 'success' | 'error';
+
+export type AlertMessageType = Partial<Record<StatusType, string>>;
+type AlertStyleType = Record<StatusType, {box: ThemeColors; text: ThemeColors}>;
+
 export function ModalStatus({
-  status,
-  customStatus,
+  isSuccess,
+  isError,
   successAction,
   errorAction,
-}: Readonly<ModalStatusProps>) {
+  customMessage,
+}: ModalStatusProps) {
   const {colors: themeColors} = useAppTheme();
-  const alert = {...$alertStatus, ...customStatus};
-  const [color, message] = alert[status ?? 505] || [
-    'NEUTRAL',
-    'Ops... Algo inesperado aconteceu.',
-  ];
-
-  const $textColor = $alertStyle[color].text;
-  const $boxColor = $alertStyle[color].box;
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (typeof status === 'number') {
-      handleVisibility();
-    }
-  }, [status]);
-
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setIsVisible(false);
-    if (status === 200 || status === 201 || status == 204) {
-      if (successAction) successAction();
-    } else if (errorAction) errorAction();
+    if (isSuccess && successAction) successAction();
+    else if (isError && errorAction) errorAction();
   };
 
-  const handleVisibility = () => {
-    setIsVisible(true);
-    setTimeout(closeModal, 2000);
-  };
+  useEffect(() => {
+    if (isSuccess || isError) {
+      setIsVisible(true);
+
+      setTimeout(() => {
+        handleCloseModal();
+      }, MODAL_TIMEOUT);
+    }
+  }, [isSuccess, isError]);
+
+  const styleKey = isSuccess ? 'success' : 'error';
+
+  const {box: boxColor, text: textColor} = ALERT_STYLE[styleKey];
+  const message = {...ALERT_MESSAGE, ...customMessage};
 
   return (
     <Modal visible={isVisible} transparent={true} animationType="fade">
@@ -57,10 +59,10 @@ export function ModalStatus({
           backgroundColor: themeColors.primary,
           opacity: 0.8,
         }}
-        onPress={() => setIsVisible(false)}>
-        <Box padding="s20" borderRadius="s10" backgroundColor={$boxColor}>
-          <Text variant="paragraphSmall" textAlign="justify" color={$textColor}>
-            {message ?? 'Ops... Algo inesperado aconteceu.'}
+        onPress={handleCloseModal}>
+        <Box padding="s20" borderRadius="s10" backgroundColor={boxColor}>
+          <Text variant="paragraphSmall" textAlign="justify" color={textColor}>
+            {message[styleKey] ?? 'Ops... Algo inesperado aconteceu.'}
           </Text>
         </Box>
       </Pressable>
@@ -68,35 +70,14 @@ export function ModalStatus({
   );
 }
 
-const $alertStyle: AlertStyle = {
-  NEUTRAL: {
-    box: 'lightGray',
-    text: 'steelBlue',
-  },
-  DANGER: {
-    box: 'red',
-    text: 'white',
-  },
-  SUCCESS: {
-    box: 'lightGreen',
-    text: 'white',
-  },
+const ALERT_MESSAGE: AlertMessageType = {
+  success: 'Requisição bem-sucedida.',
+  error: 'Erro inesperado.',
 };
 
-const $alertStatus: AlertStatusType = {
-  200: ['SUCCESS', 'Requisição bem-sucedida.'],
-  201: ['SUCCESS', 'Criado com sucesso.'],
-  204: ['SUCCESS', 'Atualizado com sucesso.'],
-  401: ['DANGER', 'Credenciais inválidas.'],
-  403: ['DANGER', 'Acesso negado.'],
-  404: ['DANGER', 'Não encontrado.'],
-  405: ['DANGER', 'Não permitido.'],
-  413: ['DANGER', 'Requisição muito grande.'],
-  500: ['NEUTRAL', 'Erro interno do servidor.'],
-  503: ['NEUTRAL', 'Serviço indisponível.'],
-  505: ['NEUTRAL', 'Erro inesperado.'],
+const ALERT_STYLE: AlertStyleType = {
+  success: {box: 'lightGreen', text: 'white'},
+  error: {box: 'red', text: 'white'},
 };
 
-export type AlertStatusType = Record<number, [AlertName, string]>;
-type AlertName = 'NEUTRAL' | 'DANGER' | 'SUCCESS';
-type AlertStyle = Record<AlertName, {box: ThemeColors; text: ThemeColors}>;
+const MODAL_TIMEOUT = 2000;

@@ -5,14 +5,14 @@ import {
   Screen,
 } from '@components';
 import {WorkingHourResponse, workingHourUseCases} from '@domain';
-import {BusinessManagementStackProps} from '@routes';
+import {EmployeeStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
 export function EmployeeWorkingHourScreen({
   navigation,
   route,
-}: Readonly<BusinessManagementStackProps<'EmployeeWorkingHourScreen'>>) {
+}: Readonly<EmployeeStackProps<'EmployeeWorkingHourScreen'>>) {
   const {data, fetch, isLoading, isError} = workingHourUseCases.getAll();
 
   useEffect(() => {

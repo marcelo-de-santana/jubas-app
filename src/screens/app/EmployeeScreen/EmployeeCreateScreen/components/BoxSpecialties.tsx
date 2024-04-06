@@ -1,12 +1,10 @@
 import {BoxHeader} from './BoxHeader';
 import {Modal} from './Modal';
 import {useModalVisibility} from '@hooks';
-import {
-  EmployeeSelectSpecialtiesScreenProps,
-  SelectedSpecialtiesState,
-} from '@services';
+
 import {ListSeparator, Text} from '@components';
 import {EmployeeSelectSpecialtiesScreen} from '../../EmployeeSelectSpecialtiesScreen/EmployeeSelectSpecialtiesScreen';
+import { EmployeeSelectSpecialtiesScreenProps, SelectedSpecialtiesState } from './types';
 
 export function BoxSpecialties({
   selectedSpecialties,

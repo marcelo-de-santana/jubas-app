@@ -1,10 +1,10 @@
 import {useEffect} from 'react';
 import {FlatList} from '@components';
-import {EmployeeSelectProfileScreenProps} from '@services';
 import {profileUseCases} from '@domain';
 import {Separator} from '../EmployeeCreateScreen/components/Separator';
 import {ListHeaderComponent} from './components/ListHeaderComponent';
 import {ProfileListItem} from './components/ProfileListItem';
+import {EmployeeSelectProfileScreenProps} from '../EmployeeCreateScreen/components/types';
 
 export function EmployeeSelectProfileScreen({
   selectedProfile,

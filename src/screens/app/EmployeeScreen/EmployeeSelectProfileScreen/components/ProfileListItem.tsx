@@ -1,7 +1,6 @@
-import {TouchableOpacity} from '@components';
-import {ProfileListItemProps} from '@services';
-import {LineItens} from './LineItens';
+import {ProfileItems, TouchableOpacity} from '@components';
 import {mask} from '@utils';
+import {ProfileListItemProps} from '../../EmployeeCreateScreen/components/types';
 
 export function ProfileListItem({
   item: profile,
@@ -17,7 +16,7 @@ export function ProfileListItem({
       padding="s12"
       onPress={() => chooseProfile(profile)}
       disabled={isSelected}>
-      <LineItens
+      <ProfileItems
         textValues={[
           profile.name,
           mask.cpf(profile.cpf),

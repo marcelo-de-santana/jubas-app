@@ -1,11 +1,8 @@
 import {useFetch} from '@hooks';
 import {ProfileUserResponse} from './profileResponse';
-import {
-  ProfileCreateRequest,
-  ProfileUpdateRequest,
-  RecoveryPasswordRequest,
-} from './profileRequest';
+import {ProfileCreateRequest} from './profileRequest';
 import {profileApi} from './profileApi';
+import {useMutation} from '@tanstack/react-query';
 
 function getAll() {
   return useFetch<ProfileUserResponse[], boolean>(profileApi.getAll);
@@ -15,22 +12,19 @@ function create() {
   return useFetch<void, ProfileCreateRequest>(profileApi.create);
 }
 
-function recoveryPassword() {
-  return useFetch<void, RecoveryPasswordRequest>(profileApi.recoveryPassword);
+export function useProfileRecoveryPassword() {
+  return useMutation({mutationFn: profileApi.recoveryPassword});
 }
 
-function remove() {
-  return useFetch<void, string>(profileApi.remove);
+export function useProfileRemove() {
+  return useMutation({mutationFn: profileApi.remove});
 }
 
-function update() {
-  return useFetch<void, ProfileUpdateRequest>(profileApi.update);
+export function useProfileUpdate() {
+  return useMutation({mutationFn: profileApi.update});
 }
 
 export const profileUseCases = {
   getAll,
   create,
-  recoveryPassword,
-  remove,
-  update,
 };

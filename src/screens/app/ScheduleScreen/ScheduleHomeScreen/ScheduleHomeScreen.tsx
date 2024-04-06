@@ -11,25 +11,16 @@ import {
 import {
   CategorySpecialtiesResponse,
   SpecialtyResponse,
-  categoryUseCases,
+  useCategoryGetAll,
 } from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {mask} from '@utils';
-import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
 export function ScheduleHomeScreen({
   navigation,
 }: Readonly<ScheduleStackProps<'ScheduleHomeScreen'>>) {
-  const {data, fetch, isError, isLoading} = categoryUseCases.getAll();
-
-  const searchData = () => {
-    fetch(true);
-  };
-
-  useEffect(() => {
-    searchData();
-  }, []);
+  const {data, isError, isLoading, refetch} = useCategoryGetAll();
 
   const navigateToDaysScreen = (specialty: SpecialtyResponse) => {
     navigation.navigate('ScheduleDaysScreen', {specialty});
@@ -91,7 +82,7 @@ export function ScheduleHomeScreen({
         renderItem={renderItem}
         error={isError}
         loading={isLoading}
-        refetch={searchData}
+        refetch={refetch}
         isSeparator={false}
       />
     </Screen>

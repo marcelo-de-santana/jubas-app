@@ -1,5 +1,4 @@
-import {Text} from '@components';
-import {TouchableOpacity, View} from 'react-native';
+import {Box, Text, TouchableOpacity} from '@components';
 
 export function FooterBox({
   navigateToRecoveryPassword,
@@ -9,12 +8,7 @@ export function FooterBox({
   navigateToSignUp: () => void;
 }>) {
   return (
-    <View
-      style={{
-        height: 200,
-        marginVertical: 20,
-        justifyContent: 'space-between',
-      }}>
+    <Box height={150} justifyContent="space-between">
       <TouchableOpacity onPress={navigateToRecoveryPassword}>
         <Text>Esqueci minha senha</Text>
       </TouchableOpacity>
@@ -22,6 +16,6 @@ export function FooterBox({
       <TouchableOpacity onPress={navigateToSignUp}>
         <Text>Não possui uma conta? Cadastre-se</Text>
       </TouchableOpacity>
-    </View>
+    </Box>
   );
 }

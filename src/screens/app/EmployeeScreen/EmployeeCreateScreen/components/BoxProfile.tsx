@@ -4,8 +4,8 @@ import {Modal} from './Modal';
 import {useModalVisibility} from '@hooks';
 
 import {ProfileUserResponse} from '@domain';
-import {BoxProfileProps, SelectedProfileState} from '@services';
 import {EmployeeSelectProfileScreen} from '../../EmployeeSelectProfileScreen/EmployeeSelectProfileScreen';
+import {BoxProfileProps, SelectedProfileState} from './types';
 
 export function BoxProfile({
   selectedProfile,

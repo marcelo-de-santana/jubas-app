@@ -17,7 +17,7 @@ async function getAll({
 }
 
 async function getDaysOfAttendance() {
-  return await api.get(PATH + '/daysOfAttendance');
+  return await api.get(PATH + '/days-of-attendance');
 }
 
 async function create({

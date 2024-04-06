@@ -1,10 +1,9 @@
-import {Box} from '@components';
-import {LineItens} from './LineItens';
+import {Box, ProfileItems} from '@components';
 
 export function ListHeaderComponent() {
   return (
     <Box flexDirection="row" justifyContent="space-between" px="s12">
-      <LineItens
+      <ProfileItems
         textValues={['Nome', 'CPF', 'Status']}
         textProps={{variant: 'paragraphSmall'}}
       />

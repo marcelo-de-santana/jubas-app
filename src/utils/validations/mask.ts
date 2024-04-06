@@ -80,8 +80,12 @@ const timeToTimestamp = ({time = '00:00'}: {time?: string}) => {
   return timestamp;
 };
 
-const capitalizeFirstLetter = (text: string) => {
-  return text.charAt(0).toUpperCase() + text.slice(1);
+const capitalizeFirstLetter = (text?: string) => {
+  let textValue = text ?? '';
+  return (
+    textValue.toLocaleUpperCase().charAt(0) +
+    textValue.substring(1).toLocaleLowerCase()
+  );
 };
 
 function money(money: number | null) {
