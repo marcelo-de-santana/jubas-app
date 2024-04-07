@@ -1,4 +1,4 @@
-import {api} from '@api';
+import {api} from '@services';
 import {SpecialtyCreateRequest, SpecialtyRequest} from './specialtyRequest';
 
 const PATH = '/specialties';

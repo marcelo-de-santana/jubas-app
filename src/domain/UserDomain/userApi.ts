@@ -1,4 +1,4 @@
-import {api} from '@api';
+import {api} from '@services';
 import {CreateUserRequest, UpdateUserRequest} from './userRequest';
 import {UserProfileResponse} from './userResponse';
 

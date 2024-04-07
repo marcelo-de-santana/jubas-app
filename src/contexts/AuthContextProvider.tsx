@@ -1,7 +1,7 @@
 import {AuthResponse} from '@domain';
 import {createContext, useContext, useEffect, useState} from 'react';
 import {AuthContextType} from './authContextTypes';
-import {registerToken} from '@api';
+import {registerToken} from '@services';
 
 type AuthContextProviderProps = {
   children: React.ReactNode;

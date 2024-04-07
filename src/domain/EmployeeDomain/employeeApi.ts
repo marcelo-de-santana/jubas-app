@@ -1,4 +1,4 @@
-import {api} from '@api';
+import {api} from '@services';
 import {EmployeeCreateRequest, EmployeeUpdateRequest} from './employeeRequest';
 
 const PATH = '/employees';

@@ -1,4 +1,4 @@
-import {api} from '@api';
+import {api} from '@services';
 import {CategoryRequest} from './categoryRequest';
 import {CategorySpecialtiesResponse} from './categoryResponse';
 

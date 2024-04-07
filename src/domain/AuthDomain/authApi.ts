@@ -1,4 +1,4 @@
-import {api} from '@api';
+import {api} from '@services';
 import {AuthRequest} from './authRequest';
 import {AuthResponse} from './authResponse';
 
