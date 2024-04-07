@@ -29,7 +29,7 @@ export function FlatList<T = any>({
   refetch,
   ...props
 }: Readonly<FlatListPros<T>>) {
-  const SeparatorItem = isSeparator ? <ListSeparator variant="first" /> : null;
+  const SeparatorItem = isSeparator ? <ListSeparator /> : null;
   return (
     <RNFlatList
       contentContainerStyle={flatListStyle(props.data)}

@@ -1,21 +1,43 @@
-import {useFetch} from '@hooks';
-import {SpecialtyResponse} from './specialtyResponse';
-import {SpecialtyCreateRequest, SpecialtyRequest} from './specialtyRequest';
+import {QueryKeys, invalidateQueries} from '@hooks';
 import {specialtyApi} from './specialtyApi';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-function create() {
-  return useFetch<SpecialtyResponse, SpecialtyCreateRequest>(
-    specialtyApi.create,
-  );
+export function useSpecialtyCreate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: specialtyApi.create,
+    onSuccess: () => {
+      invalidateQueries({
+        queryClient,
+        queryKeys: [QueryKeys.CategoryGetAll],
+      });
+    },
+  });
 }
-function getAll() {
-  return useFetch<SpecialtyResponse[]>(specialtyApi.getAll);
+export function useSpecialtyGetAll() {
+  return useQuery({
+    queryKey: [QueryKeys.SpecialtyGetAll],
+    queryFn: specialtyApi.getAll,
+  });
 }
-function update() {
-  return useFetch<void, SpecialtyRequest>(specialtyApi.update);
+export function useSpecialtyUpdate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: specialtyApi.update,
+    onSuccess: () => {
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.CategoryGetAll]});
+    },
+  });
 }
-function remove() {
-  return useFetch<void, string>(specialtyApi.remove);
+export function useSpecialtyRemove() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: specialtyApi.remove,
+    onSuccess: () => {
+      invalidateQueries({
+        queryClient,
+        queryKeys: [QueryKeys.CategoryGetAll],
+      });
+    },
+  });
 }
-
-export const specialtyUseCases = {create, getAll, update, remove};

@@ -6,4 +6,5 @@ export * from './HomeScreen/HomeScreen';
 export * from './ScheduleScreen';
 export * from './UnderConstruction/UnderConstruction';
 export * from './UserScreen';
+export * from './ProfileScreen';
 export * from './WorkingHourScreen';

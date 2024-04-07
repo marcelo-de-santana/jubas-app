@@ -1,9 +1,4 @@
-import {
-  ButtonTwoOptions,
-  FormTextInput,
-  ModalStatus,
-  Screen,
-} from '@components';
+import {CategoryForm} from '@components';
 import {useCategoryCreate} from '@domain';
 import {useForm} from '@hooks';
 import {CatalogStackProps} from '@routes';
@@ -11,7 +6,7 @@ import {schemas} from '@utils';
 
 export function CategoryCreateScreen({
   navigation,
-}: Readonly<CatalogStackProps<'CategoryCreateScreen'>>) {
+}: CatalogStackProps<'CategoryCreateScreen'>) {
   const {mutate, isPending, isSuccess, isError} = useCategoryCreate();
 
   const formik = useForm({
@@ -23,24 +18,11 @@ export function CategoryCreateScreen({
   });
 
   return (
-    <Screen>
-      <ModalStatus
-        isSuccess={isSuccess}
-        isError={isError}
-        successAction={navigation.goBack}
-      />
-      <FormTextInput
-        formik={formik}
-        name="name"
-        placeholder="Nome da categoria"
-      />
-      <ButtonTwoOptions
-        cancelButtonProps={{loading: isPending, onPress: navigation.goBack}}
-        confirmButtonProps={{
-          loading: isPending,
-          onPress: formik.handleSubmit,
-        }}
-      />
-    </Screen>
+    <CategoryForm
+      formik={formik}
+      isError={isError}
+      isPending={isPending}
+      isSuccess={isSuccess}
+    />
   );
 }

@@ -1,4 +1,4 @@
-import {QueryKeys} from '@hooks';
+import {QueryKeys, invalidateQueries} from '@hooks';
 import {userApi} from './userApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
@@ -13,13 +13,18 @@ export function useUserGetAll({
 
 export function useUserGetById(userId: string) {
   return useQuery({
-    queryKey: ['userGetById'],
+    queryKey: [QueryKeys.UserGetById],
     queryFn: () => userApi.getById(userId),
   });
 }
 
 export function useUserCreate() {
-  return useMutation({mutationFn: userApi.create});
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: userApi.create,
+    onSuccess: () =>
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.UserGetAll]}),
+  });
 }
 
 export function useUserUpdate() {
@@ -27,7 +32,7 @@ export function useUserUpdate() {
   return useMutation({
     mutationFn: userApi.update,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: [QueryKeys.UserGetAll]});
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.UserGetAll]});
     },
   });
 }

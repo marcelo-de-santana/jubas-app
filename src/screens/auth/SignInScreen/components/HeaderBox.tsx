@@ -1,4 +1,4 @@
-import {Box, ImageLogo, Text} from '@components';
+import {ImageLogo, Text} from '@components';
 
 export function HeaderBox() {
   return (

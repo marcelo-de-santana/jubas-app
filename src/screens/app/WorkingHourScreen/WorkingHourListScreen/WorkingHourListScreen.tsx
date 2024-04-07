@@ -3,22 +3,25 @@ import {
   Screen,
   BoxFourTimes,
   BoxHeaderWorkingHour,
+  IconNavigation,
 } from '@components';
-import {WorkingHourResponse, workingHourUseCases} from '@domain';
+import {WorkingHourResponse, useWorkingHourGetAll} from '@domain';
 import {WorkingHourStackProps} from '@routes';
-import {useEffect} from 'react';
+import {useLayoutEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 
 export function WorkingHourListScreen({
   navigation,
 }: Readonly<WorkingHourStackProps<'WorkingHourListScreen'>>) {
-  const {data, fetch, isLoading, isError} = workingHourUseCases.getAll();
-
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-      fetch();
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconNavigation routeName={'WorkingHourCreateScreen'} />
+      ),
     });
-  }, [navigation]);
+  }, []);
+
+  const {data, isLoading, isError, refetch} = useWorkingHourGetAll();
 
   function renderItem({item}: ListRenderItemInfo<WorkingHourResponse>) {
     const navigateToUpdate = () =>
@@ -46,6 +49,7 @@ export function WorkingHourListScreen({
         data={data}
         loading={isLoading}
         error={isError}
+        refetch={refetch}
         renderItem={renderItem}
         ListHeaderComponent={data && BoxHeaderWorkingHour}
         listEmptyTitle="Nenhum horário cadastrado"

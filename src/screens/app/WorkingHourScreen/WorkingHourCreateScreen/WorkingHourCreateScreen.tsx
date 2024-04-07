@@ -1,12 +1,5 @@
-import {
-  Box,
-  ButtonTwoOptions,
-  ClockButton,
-  ModalStatus,
-  Screen,
-  BoxHeaderWorkingHour,
-} from '@components';
-import {workingHourUseCases} from '@domain';
+import {WorkingHourForm} from '@components';
+import {useWorkingHourCreate} from '@domain';
 import {WorkingHourStackProps} from '@routes';
 import {useWHClockFunctions} from '@hooks';
 
@@ -20,51 +13,17 @@ const initialValues = {
 export function WorkingHourCreateScreen({
   navigation,
 }: Readonly<WorkingHourStackProps<'WorkingHourCreateScreen'>>) {
-  const {fetch, isLoading, status} = workingHourUseCases.create();
+  const {mutate, isPending, isError, isSuccess} = useWorkingHourCreate();
   const {workingHour, handleWorkingHour} = useWHClockFunctions(initialValues);
 
-  const sendToCreate = () => {
-    fetch(workingHour);
-  };
-
   return (
-    <Screen flex={1}>
-      <ModalStatus status={status} successAction={navigation.goBack} />
-      <BoxHeaderWorkingHour />
-      <Box flexDirection="row" justifyContent="space-between">
-        <ClockButton
-          loading={isLoading}
-          timeState={workingHour['startTime']}
-          setTimeState={(time: string) =>
-            handleWorkingHour({key: 'startTime', value: time})
-          }
-        />
-        <ClockButton
-          loading={isLoading}
-          timeState={workingHour['startInterval']}
-          setTimeState={(time: string) =>
-            handleWorkingHour({key: 'startInterval', value: time})
-          }
-        />
-        <ClockButton
-          loading={isLoading}
-          timeState={workingHour['endInterval']}
-          setTimeState={(time: string) =>
-            handleWorkingHour({key: 'endInterval', value: time})
-          }
-        />
-        <ClockButton
-          loading={isLoading}
-          timeState={workingHour['endTime']}
-          setTimeState={(time: string) =>
-            handleWorkingHour({key: 'endTime', value: time})
-          }
-        />
-      </Box>
-      <ButtonTwoOptions
-        cancelButtonProps={{loading: isLoading, onPress: navigation.goBack}}
-        confirmButtonProps={{loading: isLoading, onPress: sendToCreate}}
-      />
-    </Screen>
+    <WorkingHourForm
+      isError={isError}
+      isPending={isPending}
+      isSuccess={isSuccess}
+      sendForm={() => mutate(workingHour)}
+      workingHour={workingHour}
+      handleWorkingHour={handleWorkingHour}
+    />
   );
 }

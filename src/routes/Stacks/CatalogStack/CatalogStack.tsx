@@ -9,7 +9,6 @@ import {
   SpecialtyUpdateScreen,
 } from '@screens';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HeaderRight} from './components/HeaderRight';
 import {defaultOptions} from '../../screenOptions';
 
 export interface CategoryParams {
@@ -53,7 +52,6 @@ export function CatalogStack() {
         component={CategoryListScreen}
         options={{
           headerTitle: 'Categorias',
-          headerRight: HeaderRight,
         }}
       />
       <NativeStack.Screen

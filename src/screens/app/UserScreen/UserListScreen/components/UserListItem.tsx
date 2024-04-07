@@ -8,8 +8,13 @@ type UserListItemProps = ListRenderItemInfo<UserProfileResponse> &
   Pick<UserStackProps<'UserListScreen'>, 'navigation'>;
 
 export function UserListItem({item: user, navigation}: UserListItemProps) {
-  const hasProfile = user.profiles && user.profiles?.length > 0;
   const hasOneProfile = user.profiles?.length === 1;
+
+  const navigateToProfileList = () =>
+    navigation.navigate('ProfileListScreen', {user});
+
+  const navigateToProfileCreate = () =>
+    navigation.navigate('ProfileCreateScreen', {userId: user.id});
 
   return (
     <CollapsibleBox
@@ -17,20 +22,22 @@ export function UserListItem({item: user, navigation}: UserListItemProps) {
         onLongPress: () => navigation.navigate('UserUpdateScreen', {user}),
       }}
       title={user.email}>
-      {hasProfile ? (
+      {user.profiles && user.profiles?.length > 0 ? (
         <Box bg="secondary" borderRadius="s6" padding="s12">
           <Text textAlign="justify" color="secondaryContrast">
             {hasOneProfile ? 'Perfil' : 'Perfis'}
           </Text>
-          <BoxProfiles profiles={user.profiles} />
+          <BoxProfiles
+            profiles={user.profiles}
+            navigateToProfileScreen={navigateToProfileList}
+          />
         </Box>
       ) : (
         <TouchableOpacity
           backgroundColor="secondary"
           borderRadius="s6"
           padding="s12"
-          onPress={()=> navigation.navigate("UserProfileUpdateScreen", {userId: '',profile: {}})}
-          >
+          onPress={navigateToProfileCreate}>
           <Text color="secondaryContrast">Nenhum perfil cadastrado</Text>
         </TouchableOpacity>
       )}

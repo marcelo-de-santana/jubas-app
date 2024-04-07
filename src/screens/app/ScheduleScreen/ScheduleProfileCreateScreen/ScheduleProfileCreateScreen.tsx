@@ -6,7 +6,7 @@ import {
   Screen,
 } from '@components';
 import {useAuthContext} from '@contexts';
-import {profileUseCases} from '@domain';
+import {useProfileCreate} from '@domain';
 import {useForm} from '@hooks';
 import {ScheduleStackProps} from '@routes';
 import {mask} from '@utils';
@@ -16,18 +16,18 @@ export function ScheduleProfileCreateScreen({
 }: Readonly<ScheduleStackProps<'ScheduleProfileCreateScreen'>>) {
   const {user} = useAuthContext();
 
-  const {fetch, isLoading, status} = profileUseCases.create();
+  const {mutate, isPending, isError, isSuccess} = useProfileCreate();
 
   const formik = useForm({
     initialValues: {
       name: '',
       cpf: '',
     },
-    onSubmit: () => {
+    onSubmit: values => {
       if (user) {
-        fetch({
-          cpf: mask.removeCpf(formik.values.cpf),
-          name: formik.values.name,
+        mutate({
+          cpf: mask.removeCpf(values.cpf),
+          name: values.name,
           statusProfile: true,
           userId: user.id,
         });
@@ -38,15 +38,16 @@ export function ScheduleProfileCreateScreen({
   return (
     <Screen>
       <ModalStatus
-        status={status}
+        isError={isError}
+        isSuccess={isSuccess}
         errorAction={navigation.goBack}
         successAction={navigation.goBack}
       />
       <FormTextInputName formik={formik} name="name" label="Nome" />
       <FormTextInputCpf formik={formik} name="cpf" label="CPF" />
       <ButtonTwoOptions
-        cancelButtonProps={{onPress: navigation.goBack, loading: isLoading}}
-        confirmButtonProps={{onPress: formik.handleSubmit, loading: isLoading}}
+        cancelButtonProps={{onPress: navigation.goBack, loading: isPending}}
+        confirmButtonProps={{onPress: formik.handleSubmit, loading: isPending}}
       />
     </Screen>
   );

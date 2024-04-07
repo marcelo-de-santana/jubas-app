@@ -24,6 +24,7 @@ export interface FormikExtractedParams {
       : (e: string | React.ChangeEvent<any>) => void;
   };
   handleChangeText: (key: string, value: string) => void;
+  handleChangeBoolean: (key: string) => void;
 }
 
 export type UseFormType = FormikConfig<FormikValues>;

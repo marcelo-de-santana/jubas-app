@@ -3,19 +3,20 @@ import {
   WorkingHourCreateRequest,
   WorkingHourUpdateRequest,
 } from './workingHourRequest';
+import {WorkingHourResponse} from './workingHourResponse';
 
 const PATH = '/working-hours';
 
-async function getList() {
-  return await api.get(PATH);
+async function getList(): Promise<WorkingHourResponse[]> {
+  return (await api.get(PATH)).data;
 }
 
-async function create(request: WorkingHourCreateRequest) {
-  return await api.post(PATH, request);
+async function create(request: WorkingHourCreateRequest): Promise<void> {
+  return (await api.post(PATH, request)).data;
 }
 
-async function update(request: WorkingHourUpdateRequest) {
-  return await api.put(PATH + '/' + request.id, request);
+async function update(request: WorkingHourUpdateRequest): Promise<void> {
+  return (await api.put(PATH + '/' + request.id, request)).data;
 }
 export const workingHourApi = {
   getList,

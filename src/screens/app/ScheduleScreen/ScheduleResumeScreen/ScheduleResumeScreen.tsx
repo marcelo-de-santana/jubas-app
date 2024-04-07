@@ -1,5 +1,5 @@
 import {
-  AlertStatusType,
+  AlertMessageType,
   AttendanceDescription,
   Box,
   ButtonDangerOutline,
@@ -11,17 +11,17 @@ import {
 } from '@components';
 import {ScheduleStackProps} from '@routes';
 import {ClientDescription} from './components/ClientDescription';
-import {appointmentUseCases} from '@domain';
+import {useAppointmentCreate} from '@domain';
 
 export function ScheduleResumeScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleResumeScreen'>>) {
-  const {fetch, status} = appointmentUseCases.create();
+  const {mutate, isError, isSuccess} = useAppointmentCreate();
 
   const registerNewAppointment = () => {
     const {day: date, time, employee, profile, specialty} = route.params;
-    fetch({
+    mutate({
       date,
       time,
       clientId: profile.id,
@@ -30,9 +30,9 @@ export function ScheduleResumeScreen({
     });
   };
 
-  const customStatus: AlertStatusType = {
-    201: ['SUCCESS', 'Agendamento realizado com sucesso.'],
-    409: ['DANGER', 'O cliente já possui agendamento para o serviço.'],
+  const customMessage: AlertMessageType = {
+    success: 'Agendamento realizado com sucesso.',
+    error: 'O cliente já possui agendamento para o serviço.',
   };
 
   const navigateToHomeScreen = () => {
@@ -43,8 +43,9 @@ export function ScheduleResumeScreen({
   return (
     <Screen flex={1}>
       <ModalStatus
-        customStatus={customStatus}
-        status={status}
+        customMessage={customMessage}
+        isSuccess={isSuccess}
+        isError={isError}
         errorAction={() => navigation.goBack()}
         successAction={() => navigateToHomeScreen()}
       />

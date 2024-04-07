@@ -45,7 +45,8 @@ export function ClockButton({
         borderRadius="s6"
         height={40}
         justifyContent="center"
-        textProps={{variant: 'paragraphMedium', color: 'primary'}}
+        backgroundColor="primary"
+        textProps={{variant: 'paragraphMedium', color: 'primaryContrast'}}
         title={timeState}
         onPress={() => setIsVisibleWatch(true)}
         {...props}

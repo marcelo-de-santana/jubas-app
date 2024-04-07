@@ -3,7 +3,7 @@ import {ButtonProps} from './Button';
 import {ButtonDangerOutline} from './ButtonDangerOutline';
 import {ButtonSuccess} from './ButtonSuccess';
 
-type ButtonTwoOptions = {
+export type ButtonTwoOptions = {
   cancelButtonProps?: ButtonProps;
   confirmButtonProps?: ButtonProps;
 };
@@ -14,8 +14,8 @@ export function ButtonTwoOptions({
 }: Readonly<ButtonTwoOptions>) {
   return (
     <Box flexDirection="row" marginTop="s32">
-      <ButtonDangerOutline mr="s10" title="Voltar" {...cancelButtonProps} />
-      <ButtonSuccess ml="s10" title="Salvar" {...confirmButtonProps} />
+      <ButtonDangerOutline flex={1} mr="s10" title="Voltar" {...cancelButtonProps} />
+      <ButtonSuccess flex={1} ml="s10" title="Salvar" {...confirmButtonProps} />
     </Box>
   );
 }

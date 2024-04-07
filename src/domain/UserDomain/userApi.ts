@@ -9,7 +9,7 @@ async function getAll(profiles?: boolean): Promise<UserProfileResponse[]> {
 }
 
 async function getById(userId: string): Promise<UserProfileResponse> {
-  return await api.get(PATH + '/' + userId);
+  return (await api.get(PATH + '/' + userId)).data;
 }
 
 async function create(request: CreateUserRequest) {
@@ -22,11 +22,13 @@ async function update({
   password,
   permission,
 }: UpdateUserRequest): Promise<void> {
-  return await api.patch(PATH + '/' + userId, {
-    email,
-    password,
-    permission,
-  });
+  return (
+    await api.patch(PATH + '/' + userId, {
+      email,
+      password,
+      permission,
+    })
+  ).data;
 }
 
 export const userApi = {

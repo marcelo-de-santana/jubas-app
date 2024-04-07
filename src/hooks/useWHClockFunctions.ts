@@ -1,6 +1,17 @@
 import {WorkingHourResponse} from '@domain';
 import {useState} from 'react';
 
+export type UseWHClockFunctionsType = {
+  workingHour: Omit<WorkingHourResponse, 'id'>;
+  handleWorkingHour: ({
+    key,
+    value,
+  }: Readonly<{
+    key: 'startTime' | 'startInterval' | 'endInterval' | 'endTime';
+    value: string;
+  }>) => void;
+};
+
 export function useWHClockFunctions(input: Omit<WorkingHourResponse, 'id'>) {
   const [workingHour, setWorkingHour] = useState(input);
   type HandleWorkingHourType = Readonly<{

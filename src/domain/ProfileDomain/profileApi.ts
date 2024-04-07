@@ -7,8 +7,8 @@ import {
 
 const PATH = '/profiles';
 
-async function getAll(user: boolean) {
-  return await api.get(PATH, {params: user});
+async function getAll(user?: boolean) {
+  return (await api.get(PATH, {params: {user}})).data;
 }
 
 async function create(request: ProfileCreateRequest) {
@@ -26,6 +26,7 @@ async function update(request: ProfileUpdateRequest) {
     name: request.name,
     cpf: request.cpf,
     statusProfile: request.statusProfile,
+    userId: request.userId,
   });
 }
 

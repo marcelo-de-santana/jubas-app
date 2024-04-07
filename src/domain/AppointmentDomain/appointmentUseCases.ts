@@ -1,10 +1,8 @@
 import {useFetch} from '@hooks';
 import {appointmentApi} from './appointmentApi';
-import {
-  AppointmentCreateRequest,
-  AppointmentGetAllRequest,
-} from './appointmentRequest';
+import {AppointmentGetAllRequest} from './appointmentRequest';
 import {AppointmentResponse, DayOfWeekResponse} from './appointmentResponse';
+import {useMutation} from '@tanstack/react-query';
 
 function getAll() {
   return useFetch<AppointmentResponse[], AppointmentGetAllRequest>(
@@ -16,12 +14,11 @@ function getDaysOfAttendance() {
   return useFetch<DayOfWeekResponse[]>(appointmentApi.getDaysOfAttendance);
 }
 
-function create() {
-  return useFetch<void, AppointmentCreateRequest>(appointmentApi.create);
+export function useAppointmentCreate() {
+  return useMutation({mutationFn: appointmentApi.create});
 }
 
 export const appointmentUseCases = {
   getAll,
   getDaysOfAttendance,
-  create,
 };

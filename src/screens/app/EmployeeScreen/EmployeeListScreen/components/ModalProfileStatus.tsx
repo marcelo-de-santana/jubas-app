@@ -5,7 +5,7 @@ import {
   Screen,
   Text,
 } from '@components';
-import {EmployeeResponse, profileUseCases} from '@domain';
+import {EmployeeResponse, useProfileUpdate} from '@domain';
 import {useModalVisibility} from '@hooks';
 import {Modal as RNModal} from 'react-native';
 
@@ -18,9 +18,9 @@ export function ModalProfileStatus({
 }: Readonly<ModalProfileStatusProps>) {
   const {id, statusProfile} = employee;
   const {isVisible, closeModal, openModal} = useModalVisibility();
-  const {fetch, status, isLoading} = profileUseCases.update();
-  const updateProfileStatus = () => {
-    fetch({id, statusProfile: !statusProfile});
+  const {mutate, isError, isSuccess, isPending} = useProfileUpdate();
+  const updateProfileStatus = (): void => {
+    mutate({id, statusProfile: !statusProfile});
   };
   return (
     <>
@@ -33,13 +33,14 @@ export function ModalProfileStatus({
       />
       <ModalConfirmUpdate
         isVisible={isVisible}
-        isLoading={isLoading}
+        isLoading={isPending}
         closeModal={closeModal}
         employee={employee}
         updateProfileStatus={updateProfileStatus}
       />
       <ModalStatus
-        status={status}
+        isError={isError}
+        isSuccess={isSuccess}
         errorAction={closeModal}
         successAction={closeModal}
       />

@@ -1,9 +1,8 @@
-import {Screen, FlatList} from '@components';
+import {Screen, FlatList, NavigationHeader, PermissionsMenu} from '@components';
 import {useUserGetAll} from '@domain';
 import {UserStackProps} from '@routes';
-import {useState} from 'react';
-import {PermissionsMenu} from './components/PermissionsMenu';
 import {UserListItem} from './components/UserListItem';
+import {useState} from 'react';
 
 export function UserListScreen({
   navigation,
@@ -21,21 +20,30 @@ export function UserListScreen({
   };
 
   return (
-    <Screen flex={1}>
-      <PermissionsMenu
-        filterPermission={filterPermission}
-        userPermission={userPermission}
+    <>
+      <NavigationHeader
+        headerTitleProps={{title: 'Usuários'}}
+        rightIconProps={{
+          onPress: () => navigation.navigate('UserCreateScreen'),
+        }}
       />
-      <FlatList
-        data={filteredUsers}
-        renderItem={props => (
-          <UserListItem navigation={navigation} {...props} />
-        )}
-        loading={isPending}
-        error={isError}
-        refetch={refetch}
-        isSeparator={false}
-      />
-    </Screen>
+
+      <Screen flex={1}>
+        <PermissionsMenu
+          filterPermission={filterPermission}
+          userPermission={userPermission}
+        />
+        <FlatList
+          data={filteredUsers}
+          renderItem={props => (
+            <UserListItem navigation={navigation} {...props} />
+          )}
+          loading={isPending}
+          error={isError}
+          refetch={refetch}
+          isSeparator={false}
+        />
+      </Screen>
+    </>
   );
 }

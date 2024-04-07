@@ -4,7 +4,6 @@ import {
   WorkingHourUpdateScreen,
 } from '@screens';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HeaderRight} from './components/HeaderRight';
 import {WorkingHourResponse} from '@domain';
 import {defaultOptions} from '../../screenOptions';
 
@@ -32,7 +31,6 @@ export function WorkingHourStack() {
         component={WorkingHourListScreen}
         options={{
           headerTitle: 'Horários',
-          headerRight: HeaderRight,
         }}
       />
       <NativeStack.Screen

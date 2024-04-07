@@ -1,15 +1,24 @@
 import {useNavigation} from '@react-navigation/native';
 import {Icon, IconProps} from './Icon';
 
-interface IconNavigationProps extends Omit<IconProps, 'onPress'> {
-  routeName: string;
+interface IconNavigationProps extends Partial<IconProps> {
+  routeName?: string;
+  params?: any;
 }
 
 export function IconNavigation({
   routeName,
+  params,
   ...props
-}: Readonly<IconNavigationProps>) {
+}: IconNavigationProps) {
   const {navigate} = useNavigation<any>();
 
-  return <Icon {...props} onPress={() => navigate(routeName)} />;
+  return (
+    <Icon
+      name={props.name ?? 'AddIcon'}
+      size={props.size ?? 30}
+      color={props.color ?? 'primaryContrast'}
+      onPress={() => props.onPress ?? navigate(routeName, params)}
+    />
+  );
 }

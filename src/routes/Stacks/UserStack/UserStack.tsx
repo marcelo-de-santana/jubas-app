@@ -1,28 +1,28 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProfileResponse, UserPermissionResponse} from '@domain';
+import {
+  ProfileResponse,
+  UserPermissionResponse,
+  UserProfileResponse,
+} from '@domain';
 import {
   UserCreateScreen,
   UserListScreen,
-  UserPermissionScreen,
-  UserProfileCreateScreen,
-  UserProfileScreen,
-  UserProfileUpdateScreen,
   UserUpdateScreen,
+  ProfileCreateScreen,
+  ProfileListScreen,
+  ProfileUpdateScreen,
+  ProfileDeleteScreen,
 } from '@screens';
 import {defaultOptions} from '../../screenOptions';
-import {mask} from '@utils';
 
 export type UserStackParamList = {
-  UserPermissionScreen: undefined;
-  UserListScreen: undefined;
   UserCreateScreen: undefined;
+  UserListScreen: undefined;
   UserUpdateScreen: {user: UserPermissionResponse};
-  UserProfileScreen: {userId: string};
-  UserProfileCreateScreen: {userId: string};
-  UserProfileUpdateScreen: {
-    userId: string;
-    profile: ProfileResponse;
-  };
+  ProfileListScreen: {user: UserProfileResponse};
+  ProfileCreateScreen: {userId: string};
+  ProfileUpdateScreen: {userId: string; profile: ProfileResponse};
+  ProfileDeleteScreen: {profile: ProfileResponse};
 };
 
 const NativeStack = createNativeStackNavigator<UserStackParamList>();
@@ -35,13 +35,9 @@ export function UserStack() {
       <NativeStack.Screen
         name="UserListScreen"
         component={UserListScreen}
-        options={{headerTitle: 'Usuários'}}
+        options={{headerShown: false}}
       />
-      <NativeStack.Screen
-        name="UserPermissionScreen"
-        component={UserPermissionScreen}
-        options={{headerTitle: 'Tipos de usuário'}}
-      />
+
       <NativeStack.Screen
         name="UserCreateScreen"
         component={UserCreateScreen}
@@ -53,27 +49,34 @@ export function UserStack() {
         name="UserUpdateScreen"
         component={UserUpdateScreen}
         options={{
-          title: 'Acesso de usuário',
+          title: 'Atualizar usuário',
         }}
       />
       <NativeStack.Screen
-        name="UserProfileScreen"
-        component={UserProfileScreen}
-        options={{
-          title: 'Detalhes',
-        }}
+        name="ProfileListScreen"
+        component={ProfileListScreen}
+        options={{headerShown: false}}
       />
       <NativeStack.Screen
-        name="UserProfileCreateScreen"
-        component={UserProfileCreateScreen}
+        name="ProfileCreateScreen"
+        component={ProfileCreateScreen}
         options={{
           title: 'Novo perfil',
         }}
       />
       <NativeStack.Screen
-        name="UserProfileUpdateScreen"
-        component={UserProfileUpdateScreen}
-        options={({route}) => ({headerTitle: route.params.profile.name})}
+        name="ProfileUpdateScreen"
+        component={ProfileUpdateScreen}
+        options={{
+          title: 'Atualizar perfil',
+        }}
+      />
+      <NativeStack.Screen
+        name="ProfileDeleteScreen"
+        component={ProfileDeleteScreen}
+        options={{
+          headerShown: false,
+        }}
       />
     </NativeStack.Navigator>
   );

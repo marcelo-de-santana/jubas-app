@@ -8,7 +8,7 @@ export function FooterBox({
   navigateToSignUp: () => void;
 }>) {
   return (
-    <Box height={150} justifyContent="space-between">
+    <Box height={200} justifyContent="space-between">
       <TouchableOpacity onPress={navigateToRecoveryPassword}>
         <Text>Esqueci minha senha</Text>
       </TouchableOpacity>

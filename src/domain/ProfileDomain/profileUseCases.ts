@@ -1,15 +1,26 @@
-import {useFetch} from '@hooks';
-import {ProfileUserResponse} from './profileResponse';
-import {ProfileCreateRequest} from './profileRequest';
 import {profileApi} from './profileApi';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {QueryKeys, invalidateQueries} from '@hooks';
 
-function getAll() {
-  return useFetch<ProfileUserResponse[], boolean>(profileApi.getAll);
+export function useProfileGetAll({
+  withUser = false,
+}: {withUser?: boolean} = {}) {
+  return useQuery({
+    queryKey: [QueryKeys.ProfileGetAll],
+    queryFn: () => profileApi.getAll(withUser),
+  });
 }
 
-function create() {
-  return useFetch<void, ProfileCreateRequest>(profileApi.create);
+export function useProfileCreate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: profileApi.create,
+    onSuccess: () =>
+      invalidateQueries({
+        queryClient,
+        queryKeys: ['UserGetAll', 'UserGetById', 'ProfileGetAll'],
+      }),
+  });
 }
 
 export function useProfileRecoveryPassword() {
@@ -17,14 +28,24 @@ export function useProfileRecoveryPassword() {
 }
 
 export function useProfileRemove() {
-  return useMutation({mutationFn: profileApi.remove});
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: profileApi.remove,
+    onSuccess: () => {
+      invalidateQueries({
+        queryClient,
+        queryKeys: ['UserGetAll', 'ProfileGetAll'],
+      });
+    },
+  });
 }
 
 export function useProfileUpdate() {
-  return useMutation({mutationFn: profileApi.update});
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: profileApi.update,
+    onSuccess: () => {
+      invalidateQueries({queryClient, queryKeys: ['UserGetAll']});
+    },
+  });
 }
-
-export const profileUseCases = {
-  getAll,
-  create,
-};

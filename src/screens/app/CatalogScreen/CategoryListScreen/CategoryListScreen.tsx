@@ -8,11 +8,17 @@ import {CatalogStackProps} from '@routes';
 import {ListRenderItemInfo} from 'react-native';
 import {BoxSpecialties} from './components/BoxSpecialties';
 import {BoxCategory} from './components/BoxCategory';
+import {useLayoutEffect} from 'react';
+import {AddButton} from './components/AddButton';
 
 export function CategoryListScreen({
   navigation,
 }: CatalogStackProps<'CategoryListScreen'>) {
-  const {data, isLoading, isError,refetch} = useCategoryGetAll();
+  useLayoutEffect(() => {
+    navigation.setOptions({headerRight: () => <AddButton />});
+  }, []);
+
+  const {data, isLoading, isError, refetch} = useCategoryGetAll();
 
   function renderItem({item}: ListRenderItemInfo<CategorySpecialtiesResponse>) {
     const navigateToSpecialtyCreate = () =>

@@ -3,6 +3,7 @@ export interface ProfileUpdateRequest {
   name?: string;
   cpf?: string;
   statusProfile?: boolean;
+  userId?: string;
 }
 export interface RecoveryPasswordRequest {
   email: string;

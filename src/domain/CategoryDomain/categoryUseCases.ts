@@ -1,4 +1,4 @@
-import {QueryKeys} from '@hooks';
+import {QueryKeys, invalidateQueries} from '@hooks';
 import {categoryApi} from './categoryApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
@@ -28,5 +28,11 @@ export function useCategoryRemove() {
 }
 
 export function useCategoryUpdate() {
-  return useMutation({mutationFn: categoryApi.update});
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: categoryApi.update,
+    onSuccess: () => {
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.CategoryGetAll]});
+    },
+  });
 }

@@ -9,11 +9,10 @@ export const api = axios.create({
   },
 });
 
-
 api.interceptors.request.use(values => {
-  console.log(values.url + JSON.stringify(values.params))
-  return values
-})
+  console.log(values.url + '/' + JSON.stringify(values.params));
+  return values;
+});
 
 export function registerToken({
   authCredentials,

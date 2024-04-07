@@ -1,5 +1,6 @@
 export * from './Box';
 export * from './BoxDaysOfWeek';
+export * from './BoxDelete';
 export * from './BoxDetails';
 export * from './BoxFourTimes';
 export * from './BoxMenu';
