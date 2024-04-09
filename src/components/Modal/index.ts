@@ -1,2 +1,2 @@
-export * from './ModalDelete';
+export * from './ModalItem';
 export * from './ModalStatus';

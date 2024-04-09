@@ -1,6 +1,12 @@
 import {Box, TouchableOpacityItem} from '@components';
 import {Separator} from './Separator';
-import {SpecialtyListProps} from '../../EmployeeCreateScreen/components/types';
+import {HandleSpecialtiesFunctions} from '../types';
+import {SpecialtyResponse} from '@domain';
+
+export type SpecialtyListProps = {
+  specialties?: SpecialtyResponse[];
+  isSelected: (specialty: SpecialtyResponse) => boolean | undefined;
+} & HandleSpecialtiesFunctions;
 
 export function SpecialtyList({
   specialties,

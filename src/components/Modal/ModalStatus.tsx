@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
-import {Modal, Pressable} from 'react-native';
+import {Modal} from 'react-native';
 import {Text} from '../Text/Text';
-import {useAppTheme} from '@hooks';
 import {ThemeColors} from '@styles';
 import {Box} from '../Box';
 
@@ -25,7 +24,6 @@ export function ModalStatus({
   errorAction,
   customMessage,
 }: ModalStatusProps) {
-  const {colors: themeColors} = useAppTheme();
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const handleCloseModal = () => {
@@ -51,21 +49,18 @@ export function ModalStatus({
 
   return (
     <Modal visible={isVisible} transparent={true} animationType="fade">
-      <Pressable
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: themeColors.primary,
-          opacity: 0.8,
-        }}
-        onPress={handleCloseModal}>
+      <Box
+        backgroundColor="primary"
+        flex={1}
+        justifyContent="center"
+        alignItems="center"
+        opacity={0.8}>
         <Box padding="s20" borderRadius="s10" backgroundColor={boxColor}>
           <Text variant="paragraphSmall" textAlign="justify" color={textColor}>
             {message[styleKey] ?? 'Ops... Algo inesperado aconteceu.'}
           </Text>
         </Box>
-      </Pressable>
+      </Box>
     </Modal>
   );
 }

@@ -1,10 +1,16 @@
-import {Screen, FlatList, CollapsibleBox, Box} from '@components';
-import {EmployeeResponse, employeeUseCases} from '@domain';
+import {
+  Screen,
+  FlatList,
+  CollapsibleBox,
+  Box,
+  IconNavigation,
+} from '@components';
+import {EmployeeResponse, useEmployeeGetAll} from '@domain';
 import {EmployeeStackProps} from '@routes';
-import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {BoxSpecialties} from './components/BoxSpecialties';
 import {BoxWorkingHour} from './components/BoxWorkingHour';
+import {useLayoutEffect} from 'react';
 
 export type EmployeeListScreenNavigation = Pick<
   EmployeeStackProps<'EmployeeListScreen'>,
@@ -14,15 +20,19 @@ export type EmployeeListScreenNavigation = Pick<
 export function EmployeeListScreen({
   navigation,
 }: Readonly<EmployeeStackProps<'EmployeeListScreen'>>) {
-  const {data, isLoading, isError, fetch} = employeeUseCases.getAll();
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconNavigation
+          name="AddIcon"
+          size={30}
+          routeName="EmployeeCreateScreen"
+        />
+      ),
+    });
+  });
 
-  const searchData = () => {
-    fetch();
-  };
-
-  useEffect(() => {
-    navigation.addListener('focus', searchData);
-  }, [navigation]);
+  const {data: employees, isLoading, isError, refetch} = useEmployeeGetAll();
 
   function renderItem({item: employee}: ListRenderItemInfo<EmployeeResponse>) {
     const {name: employeeName} = employee;
@@ -42,13 +52,13 @@ export function EmployeeListScreen({
   return (
     <Screen flex={1}>
       <FlatList
-        data={data}
+        data={employees}
         renderItem={renderItem}
         isSeparator={false}
         listEmptyTitle="Nenhum funcionário listado"
         loading={isLoading}
         error={isError}
-        refetch={searchData}
+        refetch={refetch}
       />
     </Screen>
   );

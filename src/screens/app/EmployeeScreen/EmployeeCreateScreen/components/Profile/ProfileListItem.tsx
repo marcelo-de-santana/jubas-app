@@ -1,6 +1,12 @@
 import {ProfileItems, TouchableOpacity} from '@components';
 import {mask} from '@utils';
-import {ProfileListItemProps} from '../../EmployeeCreateScreen/components/types';
+import {SelectedProfileState, ChooseProfileFunction} from '../types';
+import {ListRenderItemInfo} from 'react-native';
+import {ProfileUserResponse} from '@domain';
+
+export type ProfileListItemProps = ListRenderItemInfo<ProfileUserResponse> &
+  SelectedProfileState &
+  ChooseProfileFunction;
 
 export function ProfileListItem({
   item: profile,

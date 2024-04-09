@@ -5,15 +5,15 @@ import {
   AlertMessageType,
 } from '@components';
 import {EmployeeStackProps} from '@routes';
-import {BoxProfile} from './components/BoxProfile';
-import {BoxWorkingHour} from './components/BoxWorkingHour';
-import {BoxSpecialties} from './components/BoxSpecialties';
+import {BoxProfile} from './components/Profile/BoxProfile';
+import {BoxCatalog} from './components/Catalog/BoxCatalog';
 import {useEmployeeCreate} from '@domain';
-import {useEmployeeCreateService} from './components/functions';
+import {useEmployeeCreateService} from './components/useEmployeeCreateService';
+import {BoxWorkingHour} from './components/WorkingHour/BoxWorkingHour';
 
 export function EmployeeCreateScreen({
   navigation,
-}: Readonly<EmployeeStackProps<'EmployeeCreateScreen'>>) {
+}: EmployeeStackProps<'EmployeeCreateScreen'>) {
   const {
     employee,
     addSpecialty,
@@ -57,7 +57,7 @@ export function EmployeeCreateScreen({
         />
       )}
       {hasWorkingHour && (
-        <BoxSpecialties
+        <BoxCatalog
           addSpecialty={addSpecialty}
           removeSpecialty={removeSpecialty}
           selectedSpecialties={specialties}

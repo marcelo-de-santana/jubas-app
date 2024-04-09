@@ -2,11 +2,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   EmployeeCreateScreen,
   EmployeeListScreen,
+  EmployeeSpecialtiesConfirmScreen,
   EmployeeSpecialtiesScreen,
   EmployeeWorkingHourScreen,
 } from '@screens';
-import {HeaderRight} from './components/HeaderRight';
-import {EmployeeResponse} from '@domain';
+import {EmployeeResponse, SpecialtyResponse} from '@domain';
 import {defaultOptions} from '../../screenOptions';
 
 export type EmployeeStackParamList = {
@@ -14,7 +14,11 @@ export type EmployeeStackParamList = {
   EmployeeListScreen: undefined;
   EmployeeUpdateScreen: undefined;
   EmployeeSpecialtiesScreen: {employee: EmployeeResponse};
-  EmployeeWorkingHourScreen?: {workingHourId: string};
+  EmployeeSpecialtiesConfirmScreen: {
+    employee: EmployeeResponse;
+    assignedSpecialties: SpecialtyResponse[];
+  };
+  EmployeeWorkingHourScreen: {employeeId: string; workingHourId?: string};
 };
 
 export function EmployeeStack() {
@@ -36,13 +40,17 @@ export function EmployeeStack() {
         component={EmployeeListScreen}
         options={{
           headerTitle: 'Funcionários',
-          headerRight: HeaderRight,
         }}
       />
       <NativeStack.Screen
         name="EmployeeSpecialtiesScreen"
         component={EmployeeSpecialtiesScreen}
         options={{headerTitle: 'Especialidades'}}
+      />
+      <NativeStack.Screen
+        name="EmployeeSpecialtiesConfirmScreen"
+        component={EmployeeSpecialtiesConfirmScreen}
+        options={{headerShown: false, animation: 'fade_from_bottom'}}
       />
       <NativeStack.Screen
         name="EmployeeWorkingHourScreen"

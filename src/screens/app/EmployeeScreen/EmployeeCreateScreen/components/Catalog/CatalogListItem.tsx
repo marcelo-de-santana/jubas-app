@@ -1,14 +1,22 @@
-import { useEmployeeCreateService } from '../../EmployeeCreateScreen/components/functions';
-import { SpecialtyListItemProps } from '../../EmployeeCreateScreen/components/types';
+import {ListRenderItemInfo} from 'react-native';
+import {useEmployeeCreateService} from '../useEmployeeCreateService';
+import {HandleSpecialtiesFunctions, SelectedSpecialtiesState} from '../types';
+
 import {CategoryItem} from './CategoryItem';
 import {SpecialtyList} from './SpecialtyList';
+import {CategorySpecialtiesResponse} from '@domain';
 
-export function ServicesListItem({
+export type CatalogListItemProps =
+  ListRenderItemInfo<CategorySpecialtiesResponse> &
+    SelectedSpecialtiesState &
+    HandleSpecialtiesFunctions;
+
+export function CatalogListItem({
   item: category,
   addSpecialty,
   removeSpecialty,
   selectedSpecialties,
-}: Readonly<SpecialtyListItemProps>) {
+}: Readonly<CatalogListItemProps>) {
   const {useServicesListItemFunctions} = useEmployeeCreateService;
   const {name, specialties} = category;
 

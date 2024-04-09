@@ -1,5 +1,11 @@
 import {BoxFourTimes} from '@components';
-import {WorkingHourListItemProps} from '../../EmployeeCreateScreen/components/types';
+import {ChooseWorkingHourFunction, SelectedWorkingHourState} from '../types';
+import {ListRenderItemInfo} from 'react-native';
+import {WorkingHourResponse} from '@domain';
+
+type WorkingHourListItemProps = ListRenderItemInfo<WorkingHourResponse> &
+  ChooseWorkingHourFunction &
+  SelectedWorkingHourState;
 
 export function WorkingHourListItem({
   item: workingHour,

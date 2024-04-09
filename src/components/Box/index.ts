@@ -1,4 +1,5 @@
 export * from './Box';
+export * from './BoxConfirm';
 export * from './BoxDelete';
 export * from './BoxDetails';
 export * from './BoxFourTimes';

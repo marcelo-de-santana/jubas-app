@@ -1,11 +1,14 @@
 import {WorkingHourResponse} from '@domain';
-import {BoxHeader} from './BoxHeader';
+import {BoxHeader} from '../BoxHeader';
 import {BoxFourTimes, ListSeparator, Text} from '@components';
-import {Modal} from './Modal';
+import {Modal} from '../Modal';
 import {useModalVisibility} from '@hooks';
 
-import {EmployeeSelectWorkingHourScreen} from '../../EmployeeSelectWorkingHourScreen/EmployeeSelectWorkingHourScreen';
-import {BoxWorkingHourProps, SelectedWorkingHourState} from './types';
+import {WorkingHourList} from './WorkingHourList';
+import {SelectedWorkingHourState, SelectEmployeeParamsFunction} from '../types';
+
+type BoxWorkingHourProps = SelectedWorkingHourState &
+  SelectEmployeeParamsFunction;
 
 export function BoxWorkingHour({
   selectParams,
@@ -25,11 +28,11 @@ export function BoxWorkingHour({
       <BoxHeader title="Jornada de trabalho" />
 
       <Modal
+        {...modalVisibilityProps}
         OpenModalComponent={
           <OpenModalComponent selectedWorkingHour={selectedWorkingHour} />
-        }
-        {...modalVisibilityProps}>
-        <EmployeeSelectWorkingHourScreen
+        }>
+        <WorkingHourList
           chooseWorkingHour={chooseWorkingHour}
           selectedWorkingHour={selectedWorkingHour}
         />
@@ -44,6 +47,7 @@ function OpenModalComponent({
   if (selectedWorkingHour) {
     return (
       <BoxFourTimes
+        disabled
         textValues={[
           selectedWorkingHour.startTime,
           selectedWorkingHour.startInterval,

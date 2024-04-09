@@ -1,16 +1,18 @@
-import {BoxHeader} from './BoxHeader';
-import {Modal} from './Modal';
+import {BoxHeader} from '../BoxHeader';
+import {Modal} from '../Modal';
 import {useModalVisibility} from '@hooks';
 
 import {ListSeparator, Text} from '@components';
-import {EmployeeSelectSpecialtiesScreen} from '../../EmployeeSelectSpecialtiesScreen/EmployeeSelectSpecialtiesScreen';
-import { EmployeeSelectSpecialtiesScreenProps, SelectedSpecialtiesState } from './types';
+import {CatalogList} from './CatalogList';
+import {SelectedSpecialtiesState, HandleSpecialtiesFunctions} from '../types';
 
-export function BoxSpecialties({
+type BoxCatalogProps = SelectedSpecialtiesState & HandleSpecialtiesFunctions;
+
+export function BoxCatalog({
   selectedSpecialties,
   addSpecialty,
   removeSpecialty,
-}: Readonly<EmployeeSelectSpecialtiesScreenProps>) {
+}: Readonly<BoxCatalogProps>) {
   const modalVisibilityProps = useModalVisibility();
   const {closeModal} = modalVisibilityProps;
 
@@ -25,7 +27,7 @@ export function BoxSpecialties({
         }
         checkIconProps={{name: 'CheckIcon', size: 25, onPress: closeModal}}
         {...modalVisibilityProps}>
-        <EmployeeSelectSpecialtiesScreen
+        <CatalogList
           selectedSpecialties={selectedSpecialties}
           addSpecialty={addSpecialty}
           removeSpecialty={removeSpecialty}

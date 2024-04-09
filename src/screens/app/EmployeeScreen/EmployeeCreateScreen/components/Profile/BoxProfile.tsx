@@ -1,11 +1,13 @@
-import {BoxHeader} from './BoxHeader';
+import {BoxHeader} from '../BoxHeader';
 import {Text} from '@components';
-import {Modal} from './Modal';
+import {Modal} from '../Modal';
 import {useModalVisibility} from '@hooks';
 
 import {ProfileUserResponse} from '@domain';
-import {EmployeeSelectProfileScreen} from '../../EmployeeSelectProfileScreen/EmployeeSelectProfileScreen';
-import {BoxProfileProps, SelectedProfileState} from './types';
+import {ProfileList} from './ProfileList';
+import {SelectedProfileState, SelectEmployeeParamsFunction} from '../types';
+
+type BoxProfileProps = SelectedProfileState & SelectEmployeeParamsFunction;
 
 export function BoxProfile({
   selectedProfile,
@@ -27,7 +29,7 @@ export function BoxProfile({
         OpenModalComponent={
           <OpenModalComponent selectedProfile={selectedProfile} />
         }>
-        <EmployeeSelectProfileScreen
+        <ProfileList
           selectedProfile={selectedProfile}
           chooseProfile={chooseProfile}
         />

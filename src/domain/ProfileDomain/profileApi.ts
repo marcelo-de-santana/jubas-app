@@ -4,15 +4,16 @@ import {
   ProfileUpdateRequest,
   RecoveryPasswordRequest,
 } from './profileRequest';
+import {ProfileUserResponse} from './profileResponse';
 
 const PATH = '/profiles';
 
-async function getAll(user?: boolean) {
+async function getAll(user?: boolean): Promise<ProfileUserResponse[]> {
   return (await api.get(PATH, {params: {user}})).data;
 }
 
-async function create(request: ProfileCreateRequest) {
-  return await api.post(PATH, request);
+async function create(request: ProfileCreateRequest): Promise<void> {
+  return (await api.post(PATH, request)).data;
 }
 
 async function recoveryPassword(

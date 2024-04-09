@@ -45,7 +45,14 @@ export function useProfileUpdate() {
   return useMutation({
     mutationFn: profileApi.update,
     onSuccess: () => {
-      invalidateQueries({queryClient, queryKeys: ['UserGetAll']});
+      invalidateQueries({
+        queryClient,
+        queryKeys: [
+          QueryKeys.UserGetAll,
+          QueryKeys.ProfileGetAll,
+          QueryKeys.EmployeeGetAll,
+        ],
+      });
     },
   });
 }

@@ -1,10 +1,9 @@
-import {FlatList, Screen, Text} from '@components';
+import {ButtonSuccess, FlatList, Screen, Text} from '@components';
 import {SpecialtyResponse, useCategoryGetAll} from '@domain';
 import {EmployeeStackProps} from '@routes';
 import {useState} from 'react';
 import {BoxAssignedSpecialties} from './components/BoxAssignedSpecialties';
 import {BoxAvailableSpecialties} from './components/BoxAvailableSpecialties';
-import {ModalConfirmSend} from './components/ModalConfirmSend';
 
 export function EmployeeSpecialtiesScreen({
   navigation,
@@ -53,10 +52,23 @@ export function EmployeeSpecialtiesScreen({
           />
         }
       />
-      <ModalConfirmSend
-        employee={employee}
-        assignedSpecialties={assignedSpecialties}
-        navigation={navigation}
+      <ButtonSuccess
+        backgroundColor="secondaryContrast"
+        style={{
+          position: 'absolute',
+          elevation: 0.7,
+          bottom: 10,
+          right: 20,
+          left: 20,
+        }}
+        textProps={{variant: 'paragraphLarge', color: 'secondary'}}
+        title="Salvar"
+        onPress={() =>
+          navigation.navigate('EmployeeSpecialtiesConfirmScreen', {
+            employee,
+            assignedSpecialties,
+          })
+        }
       />
     </Screen>
   );

@@ -32,6 +32,7 @@ export function BoxWorkingHour({
       </Box>
       <WorkingHourItem
         navigation={navigation}
+        employeeId={employee.id}
         workingHour={employee.workingHour}
       />
     </>
@@ -39,11 +40,13 @@ export function BoxWorkingHour({
 }
 
 type WorkingHourItemProps = {
+  employeeId: string;
   workingHour: WorkingHourResponse;
 } & EmployeeListScreenNavigation;
 
 function WorkingHourItem({
   navigation,
+  employeeId,
   workingHour,
 }: Readonly<WorkingHourItemProps>) {
   return (
@@ -54,6 +57,7 @@ function WorkingHourItem({
       padding="s10"
       onPress={() =>
         navigation.navigate('EmployeeWorkingHourScreen', {
+          employeeId,
           workingHourId: workingHour.id,
         })
       }>

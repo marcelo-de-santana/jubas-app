@@ -1,11 +1,15 @@
-import {useFetch} from '@hooks';
+import {QueryKeys, invalidateQueries, useFetch} from '@hooks';
 import {EmployeeResponse} from './employeeResponse';
-import {EmployeeUpdateRequest} from './employeeRequest';
 import {employeeApi} from './employeeApi';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
-function getAll() {
-  return useFetch<EmployeeResponse[]>(employeeApi.getAll);
+export function useEmployeeGetAll({
+  available = true,
+}: {available?: boolean} = {}) {
+  return useQuery({
+    queryKey: [QueryKeys.EmployeeGetAll],
+    queryFn: () => employeeApi.getAll(available),
+  });
 }
 function getById() {
   return useFetch<EmployeeResponse, string>(employeeApi.getById);
@@ -14,15 +18,25 @@ function getAppointments() {
   return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
 }
 export function useEmployeeCreate() {
-  return useMutation({mutationFn: employeeApi.create});
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: employeeApi.create,
+    onSuccess: () => {
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.EmployeeGetAll]});
+    },
+  });
 }
-function update() {
-  return useFetch<void, EmployeeUpdateRequest>(employeeApi.update);
+export function useEmployeeUpdate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: employeeApi.update,
+    onSuccess: () => {
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.EmployeeGetAll]});
+    },
+  });
 }
 
 export const employeeUseCases = {
-  getAll,
   getById,
   getAppointments,
-  update,
 };
