@@ -11,6 +11,10 @@ export function DashboardScreen({
         onPress={() => navigation.navigate('AppointmentListScreen')}
       />
       <BoxMenu
+        title="Dias de atendimento"
+        onPress={() => navigation.navigate('DaysOfAttendanceScreen')}
+      />
+      <BoxMenu
         title="Gerenciar Usuários"
         onPress={() => navigation.navigate('UserStack')}
       />

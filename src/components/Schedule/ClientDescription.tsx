@@ -1,9 +1,7 @@
-import {Box, Text} from '@components';
-import {ScheduleStackProps} from '@routes';
+import {Box} from '../Box';
+import {Text} from '../Text/Text';
 
-export function ClientDescription({
-  route,
-}: Readonly<Pick<ScheduleStackProps<'ScheduleResumeScreen'>, 'route'>>) {
+export function ClientDescription({name}: {name?: string}) {
   return (
     <Box>
       <Text variant="paragraphMedium" textAlign="justify">
@@ -11,7 +9,7 @@ export function ClientDescription({
       </Text>
       <Box borderRadius="s6" padding="s12">
         <Text color="primaryContrast" textAlign="justify">
-          {`Nome: ${route.params.profile.name}`}
+          {`Nome: ${name}`}
         </Text>
       </Box>
     </Box>

@@ -4,13 +4,13 @@ import {
   Box,
   ButtonDangerOutline,
   ButtonSuccess,
+  ClientDescription,
   ListSeparator,
   ModalStatus,
   Screen,
   SpecialtyDescription,
 } from '@components';
 import {ScheduleStackProps} from '@routes';
-import {ClientDescription} from './components/ClientDescription';
 import {useAppointmentCreate} from '@domain';
 
 export function ScheduleResumeScreen({
@@ -57,7 +57,7 @@ export function ScheduleResumeScreen({
         time={route.params.time}
       />
       <ListSeparator mb="s12" />
-      <ClientDescription route={route} />
+      <ClientDescription name={route.params.profile.name} />
 
       <Box flexDirection="row" justifyContent="space-between" marginTop="s12">
         <ButtonDangerOutline

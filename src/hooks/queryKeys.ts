@@ -1,6 +1,9 @@
 import {QueryClient} from '@tanstack/react-query';
 
 export enum QueryKeys {
+  AppointmentGetAll = 'AppointmentGetAll',
+  AppointmentGetById = 'AppointmentGetById',
+  DaysOfAttendance = 'DaysOfAttendance',
   CategoryGetAll = 'CategoryGetAll',
   EmployeeGetAll = 'EmployeeGetAll',
   SpecialtyGetAll = 'SpecialtyGetAll',

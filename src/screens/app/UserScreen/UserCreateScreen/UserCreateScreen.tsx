@@ -7,7 +7,7 @@ export function UserCreateScreen() {
   const {mutate, isPending, isError, isSuccess} = useUserCreate();
 
   const formik = useForm({
-    validationSchema: schemas.userRequest,
+    validationSchema: schemas.userCreate,
     initialValues: {
       email: '',
       password: '',

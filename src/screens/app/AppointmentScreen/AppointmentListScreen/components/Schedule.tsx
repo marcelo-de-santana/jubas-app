@@ -1,68 +1,91 @@
 import {
+  ActivityIndicator,
   Box,
   BoxTimeAvailable,
   CollapsibleAccording,
-  FlatList,
 } from '@components';
-import {AppointmentResponse, appointmentUseCases} from '@domain';
+import {EmployeeScheduleResponse, useAppointmentGetAll} from '@domain';
 import {useEffect} from 'react';
-import {ListRenderItemInfo} from 'react-native';
+import {FlatList, ListRenderItemInfo} from 'react-native';
+import {navigateToAppointmentScreen} from '../appointmentListService';
+import {BusinessManagementStackProps} from '@routes';
 
-export function Schedule({date}: Readonly<{date?: string}>) {
-  const {data, fetch, isLoading} = appointmentUseCases.getAll();
+type NavigationParam = Pick<
+  BusinessManagementStackProps<'AppointmentListScreen'>,
+  'navigation'
+>;
 
-  const searchData = () => {
-    fetch({date});
-  };
+export function Schedule({
+  date,
+  navigation,
+}: Readonly<{date?: string} & NavigationParam>) {
+  const {data, mutate} = useAppointmentGetAll();
 
   useEffect(() => {
-    searchData();
-  }, []);
-
-  function renderItem({item}: ListRenderItemInfo<AppointmentResponse>) {
-    return (
-      <CollapsibleAccording
-        backgroundColor="primaryContrast"
-        borderBottomLeftRadius="s6"
-        borderBottomRightRadius="s6"
-        padding="s10"
-        buttonProps={{
-          backgroundColor: 'primaryContrast',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          paddingHorizontal: 's10',
-          height: 50,
-          borderTopLeftRadius: 's6',
-          borderTopRightRadius: 's6',
-          marginTop: 's4',
-        }}
-        textProps={{
-          variant: 'paragraphMedium',
-          color: 'primary',
-        }}
-        title={item.employeeName}>
-        <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
-          {item?.workingHours.map(availableTime => {
-            return (
-              <BoxTimeAvailable
-                key={availableTime.time}
-                scheduleTime={availableTime}
-              />
-            );
-          })}
-        </Box>
-      </CollapsibleAccording>
-    );
-  }
+    if (date) {
+      mutate({date});
+    }
+  }, [date]);
 
   return (
     <FlatList
       data={data}
-      renderItem={renderItem}
-      isSeparator={false}
-      listEmptyTitle="Nenhum funcionário disponível."
-      loading={isLoading}
-      refetch={searchData}
+      renderItem={prop => (
+        <ScheduleListItem navigation={navigation} {...prop} />
+      )}
+      ListEmptyComponent={ActivityIndicator}
     />
+  );
+}
+
+function ScheduleListItem({
+  item,
+  navigation,
+}: ListRenderItemInfo<EmployeeScheduleResponse> & NavigationParam) {
+  return (
+    <CollapsibleAccording
+      collapsed={false}
+      backgroundColor="primaryContrast"
+      borderBottomLeftRadius="s6"
+      borderBottomRightRadius="s6"
+      pb="s10"
+      buttonProps={{
+        activeOpacity: 1,
+        backgroundColor: 'primaryContrast',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        paddingHorizontal: 's10',
+        height: 50,
+        borderTopLeftRadius: 's6',
+        borderTopRightRadius: 's6',
+        marginTop: 's4',
+      }}
+      textProps={{
+        variant: 'paragraphMedium',
+        color: 'primary',
+      }}
+      title={item.name}>
+      <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
+        {item?.workingHours.map(availableTime => {
+          const {isAvailable, time, appointmentId} = availableTime;
+
+          const navigateToHandleScreen = () =>
+            navigateToAppointmentScreen({
+              navigation,
+              isAvailable,
+              appointmentId,
+            });
+
+          return (
+            <BoxTimeAvailable
+              onPress={navigateToHandleScreen}
+              key={time}
+              scheduleTime={availableTime}
+              disabled={false}
+            />
+          );
+        })}
+      </Box>
+    </CollapsibleAccording>
   );
 }

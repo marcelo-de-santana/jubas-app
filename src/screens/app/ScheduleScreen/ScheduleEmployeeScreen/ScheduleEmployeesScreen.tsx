@@ -1,5 +1,5 @@
 import {FlatList, Screen} from '@components';
-import {AppointmentResponse, appointmentUseCases} from '@domain';
+import {EmployeeScheduleResponse, useAppointmentGetAll} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
@@ -10,22 +10,23 @@ export function ScheduleEmployeesScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleEmployeesScreen'>>) {
-  const {data, fetch, isLoading} = appointmentUseCases.getAll();
+  const {data, mutate, isPending} = useAppointmentGetAll();
 
   const searchData = () => {
-    fetch({date: route.params.day, specialtyId: route.params.specialty.id});
+    mutate({
+      date: route.params.day,
+    });
   };
 
   useEffect(() => {
     searchData();
   }, []);
 
-  function renderItem({item}: ListRenderItemInfo<AppointmentResponse>) {
-    const oneEmployee = data ? data.length === 1 : false;
+  function renderItem({item}: ListRenderItemInfo<EmployeeScheduleResponse>) {
     return (
       <Collapsible
         appointment={item}
-        collapsed={!oneEmployee}
+        collapsed={false}
         navigation={navigation}
         route={route}
       />
@@ -40,7 +41,7 @@ export function ScheduleEmployeesScreen({
         isSeparator={false}
         ListHeaderComponent={<Header route={route} />}
         listEmptyTitle="Nenhum funcionário disponível."
-        loading={isLoading}
+        loading={isPending}
         refetch={searchData}
       />
     </Screen>

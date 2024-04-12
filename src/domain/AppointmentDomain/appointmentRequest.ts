@@ -1,17 +1,20 @@
+import {AppointmentStatus} from './appointmentResponse';
+
 export interface AppointmentRequest {
   appointmentId: string;
-  date: string;
-  time: string;
-  employeeId: string;
-  clientId: string;
-  specialtyId: string;
+  employeeId?: string;
+  clientId?: string;
+  specialtyId?: string;
+  date?: string;
+  time?: string;
+  appointmentStatus?: AppointmentStatus;
 }
 
-export type AppointmentGetAllRequest = Partial<
-  Pick<AppointmentRequest, 'date' | 'employeeId' | 'specialtyId'>
->;
+export type AppointmentGetAllRequest = {
+  date: string;
+};
 
 export type AppointmentCreateRequest = Omit<
   AppointmentRequest,
-  'appointmentId'
+  'appointmentId' | 'appointmentStatus'
 >;

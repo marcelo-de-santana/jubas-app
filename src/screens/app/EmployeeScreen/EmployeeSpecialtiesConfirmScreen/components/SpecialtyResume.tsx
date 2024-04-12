@@ -1,4 +1,4 @@
-import {Box, BoxItem} from '@components';
+import {Box, BoxItem, ListSeparator} from '@components';
 import {SpecialtyResponse} from '@domain';
 
 interface SpecialtyResumeProps {
@@ -30,19 +30,23 @@ export function SpecialtyResume({
               ? headerTitleOneElement
               : headerTitleManyElements
           }>
-          {specialties.map(specialty => (
-            <BoxItem
-              backgroundColor="secondary"
-              padding="s10"
-              borderRadius="s6"
-              key={specialty.id}
-              textProps={{
-                textAlign: 'justify',
-                color: 'primary',
-              }}
-              label={specialty.name}
-            />
-          ))}
+          <Box backgroundColor="secondary" borderRadius="s6">
+            {specialties.map((specialty, index, array) => (
+              <Box key={specialty.id}>
+                <BoxItem
+                  padding="s10"
+                  textProps={{
+                    textAlign: 'justify',
+                    color: 'primary',
+                  }}
+                  label={specialty.name}
+                />
+                {array.length - 1 !== index && (
+                  <ListSeparator borderColor="secondaryContrast" mx="s10" />
+                )}
+              </Box>
+            ))}
+          </Box>
         </BoxItem>
       )}
     </Box>

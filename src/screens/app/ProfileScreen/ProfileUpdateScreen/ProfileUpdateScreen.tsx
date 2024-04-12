@@ -31,7 +31,7 @@ export function ProfileUpdateScreen({
     validationSchema: schemas.profileRequest,
     initialValues: {
       name: profile.name,
-      cpf: profile.cpf,
+      cpf: mask.cpf(profile.cpf),
       statusProfile: profile.statusProfile,
     },
     onSubmit: values => {

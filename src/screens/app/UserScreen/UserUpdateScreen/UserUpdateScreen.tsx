@@ -11,7 +11,7 @@ export function UserUpdateScreen({
   const {mutate, isError, isPending, isSuccess} = useUserUpdate();
 
   const formik = useForm({
-    validationSchema: schemas.userRequest,
+    validationSchema: schemas.userUpdate,
     initialValues: {
       id: user.id,
       email: user.email,

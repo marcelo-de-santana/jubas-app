@@ -1,55 +1,66 @@
-import {Box, ListEmpty, TouchableOpacityItem} from '@components';
-import {appointmentUseCases} from '@domain';
+import {TouchableOpacityItem} from '@components';
+import {DayOfWeekResponse} from '@domain';
 import {mask} from '@utils';
-import {ReactNode, useEffect} from 'react';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
 interface BoxDaysOfWeekProps {
-  children?: ReactNode;
-
-  navigate: (day: string) => void;
+  daysOfWeek?: DayOfWeekResponse[];
+  selectedDay?: string;
+  chooseDay: (day: string) => void;
 }
 
 export function BoxDaysOfWeek({
-  navigate,
-  children,
-}: Readonly<BoxDaysOfWeekProps>) {
-  const {data, fetch, isLoading, isError} =
-    appointmentUseCases.getDaysOfAttendance();
-
-  useEffect(() => {
-    fetch();
-  }, []);
-
-  if (isLoading || isError || data?.length === 0) {
-    return <ListEmpty loading={isLoading} title="Nenhum dia disponível." />;
-  }
+  daysOfWeek,
+  chooseDay,
+  selectedDay,
+}: BoxDaysOfWeekProps) {
+  const lastIndex = daysOfWeek && daysOfWeek.length - 1;
 
   return (
-    <>
-      {children}
+    <FlatList
+      horizontal
+      data={daysOfWeek}
+      renderItem={props => (
+        <DayOfWeekListItem
+          lastIndex={lastIndex}
+          selectedDay={selectedDay}
+          chooseDay={chooseDay}
+          {...props}
+        />
+      )}
+    />
+  );
+}
 
-      <Box flexDirection="row" justifyContent="space-between" flexWrap="wrap">
-        {data?.map(item => {
-          const disabled = !item.isAvailable;
-          const opacity = disabled ? 0.5 : 1;
-
-          return (
-            <TouchableOpacityItem
-              key={item.date}
-              bg="primaryContrast"
-              padding="s10"
-              marginBottom="s10"
-              width={100}
-              borderRadius="s6"
-              disabled={disabled}
-              opacity={opacity}
-              textProps={{color: 'primary'}}
-              onPress={() => navigate(item.date)}
-              label={mask.dayOfWeek(new Date(item.date))}
-            />
-          );
-        })}
-      </Box>
-    </>
+function DayOfWeekListItem({
+  item,
+  index,
+  lastIndex,
+  selectedDay,
+  chooseDay,
+}: ListRenderItemInfo<DayOfWeekResponse> & {
+  lastIndex?: number;
+  selectedDay?: string;
+  chooseDay: (day: string) => void;
+}) {
+  const disabled = !item.available || item.date === selectedDay;
+  const opacity = disabled ? 0.5 : 1;
+  const isLast = lastIndex === index;
+  return (
+    <TouchableOpacityItem
+      activeOpacity={1}
+      key={item.date}
+      bg="primaryContrast"
+      p="s10"
+      mr={!isLast ? 's10' : undefined}
+      mb="s10"
+      borderRadius="s6"
+      width={100}
+      disabled={disabled}
+      opacity={opacity}
+      textProps={{color: 'primary'}}
+      onPress={() => chooseDay(item.date)}
+      label={mask.dayOfWeek(new Date(item.date))}
+    />
   );
 }

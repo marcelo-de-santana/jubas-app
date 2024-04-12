@@ -24,9 +24,14 @@ const profileRequest = object().shape({
   cpf: fields.cpf,
 });
 
-const userRequest = object().shape({
+const userCreate = object().shape({
   email: fields.email,
   password: fields.password,
+});
+
+const userUpdate = object().shape({
+  email: fields.email,
+  password: fields.optionalPassword,
 });
 
 const specialtyRequest = object().shape({
@@ -44,7 +49,8 @@ export const schemas = {
   signUp,
   recoveryPass,
   profileRequest,
-  userRequest,
+  userCreate,
+  userUpdate,
   specialtyRequest,
   categoryRequest,
 };
