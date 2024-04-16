@@ -1,8 +1,7 @@
 import {WorkingHourResponse} from '@domain';
 import {BoxHeader} from '../BoxHeader';
-import {BoxFourTimes, ListSeparator, Text} from '@components';
-import {Modal} from '../Modal';
-import {useModalVisibility} from '@hooks';
+import {BoxFourTimes, ListSeparator, Modal, Text} from '@components';
+import {useVisibility} from '@hooks';
 
 import {WorkingHourList} from './WorkingHourList';
 import {SelectedWorkingHourState, SelectEmployeeParamsFunction} from '../types';
@@ -13,13 +12,13 @@ type BoxWorkingHourProps = SelectedWorkingHourState &
 export function BoxWorkingHour({
   selectParams,
   selectedWorkingHour,
-}: Readonly<BoxWorkingHourProps>) {
-  const modalVisibilityProps = useModalVisibility();
-  const {closeModal} = modalVisibilityProps;
+}: BoxWorkingHourProps) {
+  const modalVisibilityProps = useVisibility();
+  const {close} = modalVisibilityProps;
 
   const chooseWorkingHour = (workingHour: WorkingHourResponse) => {
     selectParams({workingHour});
-    closeModal();
+    close();
   };
 
   return (
@@ -41,9 +40,7 @@ export function BoxWorkingHour({
   );
 }
 
-function OpenModalComponent({
-  selectedWorkingHour,
-}: Readonly<SelectedWorkingHourState>) {
+function OpenModalComponent({selectedWorkingHour}: SelectedWorkingHourState) {
   if (selectedWorkingHour) {
     return (
       <BoxFourTimes

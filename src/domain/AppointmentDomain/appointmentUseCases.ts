@@ -50,7 +50,7 @@ export function useAppointmentUpdate() {
     onSuccess: () => {
       invalidateQueries({
         queryClient,
-        queryKeys: [QueryKeys.AppointmentGetById],
+        queryKeys: [QueryKeys.AppointmentGetById, QueryKeys.AppointmentGetAll],
       });
     },
   });

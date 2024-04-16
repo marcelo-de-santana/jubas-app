@@ -1,7 +1,9 @@
-import {BoxDaysOfWeek, Screen} from '@components';
+import {ActivityIndicator, BoxDaysOfWeek, Screen} from '@components';
 import {BusinessManagementStackProps} from '@routes';
-import {Schedule} from './components/Schedule';
-import {useAppointmentGetDaysOfAttendance} from '@domain';
+import {ScheduleListItem} from './components/ScheduleListItem';
+import {useAppointmentGetAll, useAppointmentGetDaysOfAttendance} from '@domain';
+import {useEffect} from 'react';
+import {FlatList} from 'react-native';
 
 export function AppointmentListScreen({
   navigation,
@@ -9,14 +11,35 @@ export function AppointmentListScreen({
   const {daysOfWeek, chooseDay, dayOfWeek} =
     useAppointmentGetDaysOfAttendance();
 
+  const {data, mutate} = useAppointmentGetAll();
+
+  useEffect(() => {
+    if (dayOfWeek) {
+      mutate({date: dayOfWeek});
+    }
+  }, [dayOfWeek]);
+
+  
   return (
-    <Screen>
-      <BoxDaysOfWeek
-        daysOfWeek={daysOfWeek}
-        chooseDay={chooseDay}
-        selectedDay={dayOfWeek}
+    <Screen flex={1}>
+      <FlatList
+        ListHeaderComponent={
+          <BoxDaysOfWeek
+            daysOfWeek={daysOfWeek}
+            chooseDay={chooseDay}
+            selectedDay={dayOfWeek}
+          />
+        }
+        data={data}
+        renderItem={prop => (
+          <ScheduleListItem
+            navigation={navigation}
+            date={dayOfWeek}
+            {...prop}
+          />
+        )}
+        ListEmptyComponent={ActivityIndicator}
       />
-      <Schedule date={dayOfWeek} navigation={navigation} />
     </Screen>
   );
 }

@@ -1,8 +1,7 @@
 import {BoxHeader} from '../BoxHeader';
-import {Modal} from '../Modal';
-import {useModalVisibility} from '@hooks';
+import {useVisibility} from '@hooks';
 
-import {ListSeparator, Text} from '@components';
+import {ListSeparator, Modal, Text} from '@components';
 import {CatalogList} from './CatalogList';
 import {SelectedSpecialtiesState, HandleSpecialtiesFunctions} from '../types';
 
@@ -13,8 +12,8 @@ export function BoxCatalog({
   addSpecialty,
   removeSpecialty,
 }: Readonly<BoxCatalogProps>) {
-  const modalVisibilityProps = useModalVisibility();
-  const {closeModal} = modalVisibilityProps;
+  const modalVisibilityProps = useVisibility();
+  const {close} = modalVisibilityProps;
 
   return (
     <>
@@ -25,7 +24,7 @@ export function BoxCatalog({
         OpenModalComponent={
           <OpenModalComponent selectedSpecialties={selectedSpecialties} />
         }
-        checkIconProps={{name: 'CheckIcon', size: 25, onPress: closeModal}}
+        checkIconProps={{name: 'CheckIcon', size: 25, onPress: close}}
         {...modalVisibilityProps}>
         <CatalogList
           selectedSpecialties={selectedSpecialties}

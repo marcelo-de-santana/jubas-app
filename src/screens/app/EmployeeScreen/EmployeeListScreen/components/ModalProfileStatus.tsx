@@ -6,7 +6,7 @@ import {
   Text,
 } from '@components';
 import {EmployeeResponse, useProfileUpdate} from '@domain';
-import {useModalVisibility} from '@hooks';
+import {useVisibility} from '@hooks';
 import {Modal as RNModal} from 'react-native';
 
 export type ModalProfileStatusProps = {
@@ -17,7 +17,7 @@ export function ModalProfileStatus({
   employee,
 }: Readonly<ModalProfileStatusProps>) {
   const {id, statusProfile} = employee;
-  const {isVisible, closeModal, openModal} = useModalVisibility();
+  const {isVisible, close, open} = useVisibility();
   const {mutate, isError, isSuccess, isPending} = useProfileUpdate();
   const updateProfileStatus = (): void => {
     mutate({id, statusProfile: !statusProfile});
@@ -29,20 +29,20 @@ export function ModalProfileStatus({
         textProps={{color: 'primary'}}
         iconProps={{color: statusProfile ? 'lightGreen' : 'red'}}
         value={statusProfile}
-        onPress={openModal}
+        onPress={open}
       />
       <ModalConfirmUpdate
         isVisible={isVisible}
         isLoading={isPending}
-        closeModal={closeModal}
+        closeModal={close}
         employee={employee}
         updateProfileStatus={updateProfileStatus}
       />
       <ModalStatus
         isError={isError}
         isSuccess={isSuccess}
-        errorAction={closeModal}
-        successAction={closeModal}
+        errorAction={close}
+        successAction={close}
       />
     </>
   );

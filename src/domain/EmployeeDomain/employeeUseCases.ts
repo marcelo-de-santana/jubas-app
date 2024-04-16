@@ -36,6 +36,21 @@ export function useEmployeeUpdate() {
   });
 }
 
+export function useEmployeeGetAvailableSpecialties({
+  employeeId,
+  date,
+  time,
+}: {
+  employeeId: string;
+  date: string;
+  time: string;
+}) {
+  return useQuery({
+    queryKey: [QueryKeys.EmployeeGetAvailableSpecialties],
+    queryFn: () => employeeApi.getAvailableSpecialties(employeeId, date, time),
+  });
+}
+
 export const employeeUseCases = {
   getById,
   getAppointments,

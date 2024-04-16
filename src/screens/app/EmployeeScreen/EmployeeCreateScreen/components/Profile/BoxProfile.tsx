@@ -1,7 +1,6 @@
 import {BoxHeader} from '../BoxHeader';
-import {Text} from '@components';
-import {Modal} from '../Modal';
-import {useModalVisibility} from '@hooks';
+import {Modal, Text} from '@components';
+import {useVisibility} from '@hooks';
 
 import {ProfileUserResponse} from '@domain';
 import {ProfileList} from './ProfileList';
@@ -9,16 +8,13 @@ import {SelectedProfileState, SelectEmployeeParamsFunction} from '../types';
 
 type BoxProfileProps = SelectedProfileState & SelectEmployeeParamsFunction;
 
-export function BoxProfile({
-  selectedProfile,
-  selectParams,
-}: Readonly<BoxProfileProps>) {
-  const modalVisibilityProps = useModalVisibility();
-  const {closeModal} = modalVisibilityProps;
+export function BoxProfile({selectedProfile, selectParams}: BoxProfileProps) {
+  const modalVisibilityProps = useVisibility();
+  const {close} = modalVisibilityProps;
 
   const chooseProfile = (profile: ProfileUserResponse) => {
     selectParams({profile});
-    closeModal();
+    close();
   };
 
   return (
@@ -38,7 +34,7 @@ export function BoxProfile({
   );
 }
 
-function OpenModalComponent({selectedProfile}: Readonly<SelectedProfileState>) {
+function OpenModalComponent({selectedProfile}: SelectedProfileState) {
   if (selectedProfile) {
     return (
       <Text color="primaryContrast" textAlign="justify">

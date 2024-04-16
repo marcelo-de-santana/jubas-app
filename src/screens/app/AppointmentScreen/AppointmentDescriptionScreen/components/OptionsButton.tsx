@@ -6,7 +6,7 @@ import {
   ModalStatus,
 } from '@components';
 import {useAppointmentUpdate} from '@domain';
-import {useModalVisibility} from '@hooks';
+import {useVisibility} from '@hooks';
 import {BusinessManagementStackProps} from '@routes';
 import {useState} from 'react';
 
@@ -60,7 +60,7 @@ export function OptionsButton({
       : StatusValues.EM_ATENDIMENTO,
   );
 
-  const {isVisible, handleVisibility} = useModalVisibility({
+  const {isVisible, handleVisibility} = useVisibility({
     initialValue: true,
   });
 

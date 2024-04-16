@@ -1,46 +1,19 @@
-import {
-  ActivityIndicator,
-  Box,
-  BoxTimeAvailable,
-  CollapsibleAccording,
-} from '@components';
-import {EmployeeScheduleResponse, useAppointmentGetAll} from '@domain';
-import {useEffect} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
-import {navigateToAppointmentScreen} from '../appointmentListService';
+import {Box, BoxTimeAvailable, CollapsibleAccording} from '@components';
+import {EmployeeScheduleResponse} from '@domain';
+import {Alert, ListRenderItemInfo} from 'react-native';
 import {BusinessManagementStackProps} from '@routes';
 
 type NavigationParam = Pick<
   BusinessManagementStackProps<'AppointmentListScreen'>,
   'navigation'
->;
+> & {
+  date?: string;
+};
 
-export function Schedule({
+export function ScheduleListItem({
+  item: employee,
+  navigation,
   date,
-  navigation,
-}: Readonly<{date?: string} & NavigationParam>) {
-  const {data, mutate} = useAppointmentGetAll();
-
-  useEffect(() => {
-    if (date) {
-      mutate({date});
-    }
-  }, [date]);
-
-  return (
-    <FlatList
-      data={data}
-      renderItem={prop => (
-        <ScheduleListItem navigation={navigation} {...prop} />
-      )}
-      ListEmptyComponent={ActivityIndicator}
-    />
-  );
-}
-
-function ScheduleListItem({
-  item,
-  navigation,
 }: ListRenderItemInfo<EmployeeScheduleResponse> & NavigationParam) {
   return (
     <CollapsibleAccording
@@ -64,17 +37,28 @@ function ScheduleListItem({
         variant: 'paragraphMedium',
         color: 'primary',
       }}
-      title={item.name}>
+      title={employee.name}>
       <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
-        {item?.workingHours.map(availableTime => {
+        {employee?.workingHours.map(availableTime => {
           const {isAvailable, time, appointmentId} = availableTime;
 
-          const navigateToHandleScreen = () =>
-            navigateToAppointmentScreen({
-              navigation,
-              isAvailable,
-              appointmentId,
-            });
+          const navigateToHandleScreen = () => {
+            if (!isAvailable && appointmentId) {
+              return navigation.navigate('AppointmentDescriptionScreen', {
+                appointmentId,
+              });
+            }
+            if (!isAvailable) {
+              return Alert.alert('Horário de intervalo');
+            }
+            if (date) {
+              return navigation.navigate('AppointmentCreateScreen', {
+                date,
+                time,
+                employee: {id: employee.id, name: employee.name},
+              });
+            }
+          };
 
           return (
             <BoxTimeAvailable

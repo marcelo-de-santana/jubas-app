@@ -14,7 +14,11 @@ import {UserStack} from '../UserStack/UserStack';
 
 export type BusinessManagementParamList = {
   AppointmentListScreen: undefined;
-  AppointmentCreateScreen: {date: string; time: string};
+  AppointmentCreateScreen: {
+    date: string;
+    time: string;
+    employee: {id: string; name: string};
+  };
   AppointmentDescriptionScreen: {appointmentId: string};
   DaysOfAttendanceScreen: undefined;
   CatalogStack: undefined;

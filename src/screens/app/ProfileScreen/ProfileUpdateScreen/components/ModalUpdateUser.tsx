@@ -1,5 +1,5 @@
 import {NavigationHeader, Screen, TouchableOpacityItem} from '@components';
-import {useModalVisibility} from '@hooks';
+import {useVisibility} from '@hooks';
 import {useState} from 'react';
 import {Modal} from 'react-native';
 import {ButtonUpdate} from './ButtonUpdate';
@@ -8,7 +8,7 @@ import {UserList} from './UserList';
 type ModalUpdateUserProps = {userId: string; profileId: string};
 
 export function ModalUpdateUser({userId, profileId}: ModalUpdateUserProps) {
-  const {isVisible, handleVisibility} = useModalVisibility({
+  const {isVisible, handleVisibility} = useVisibility({
     initialValue: false,
   });
 

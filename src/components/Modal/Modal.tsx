@@ -5,35 +5,32 @@ import {
   TouchableOpacity,
 } from '@components';
 import {Modal as RNModal} from 'react-native';
-import {ModalVisibilityResponse} from '@hooks';
+import {VisibilityResponse} from '@hooks';
 import {ReactNode} from 'react';
 
 type ModalProps = {
   children?: ReactNode;
   OpenModalComponent?: ReactNode;
   checkIconProps?: IconProps;
-} & ModalVisibilityResponse;
+} & VisibilityResponse;
 
 export function Modal({
   children,
   OpenModalComponent,
   checkIconProps,
-  openModal,
-  closeModal,
+  open,
+  close,
   isVisible,
-}: Readonly<ModalProps>) {
+}: ModalProps) {
   return (
     <>
-      <TouchableOpacity padding="s12" onPress={openModal}>
+      <TouchableOpacity p="s12" onPress={open}>
         {OpenModalComponent}
       </TouchableOpacity>
 
-      <RNModal
-        visible={isVisible}
-        animationType="fade"
-        onRequestClose={closeModal}>
+      <RNModal visible={isVisible} animationType="fade" onRequestClose={close}>
         <NavigationHeader
-          leftIconProps={{onPress: closeModal}}
+          leftIconProps={{onPress: close}}
           rightIconProps={checkIconProps ?? {}}
         />
         <Screen flex={1}>{children}</Screen>
