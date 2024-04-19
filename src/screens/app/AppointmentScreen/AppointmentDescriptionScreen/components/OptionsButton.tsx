@@ -7,7 +7,7 @@ import {
 } from '@components';
 import {useAppointmentUpdate} from '@domain';
 import {useVisibility} from '@hooks';
-import {BusinessManagementStackProps} from '@routes';
+import {AppointmentStackProps} from '@routes';
 import {useState} from 'react';
 
 type AppointmentStatus =
@@ -27,10 +27,7 @@ enum StatusValues {
 type OptionsButtonProps = {
   appointmentStatus: AppointmentStatus;
   appointmentId: string;
-} & Pick<
-  BusinessManagementStackProps<'AppointmentDescriptionScreen'>,
-  'navigation'
->;
+} & Pick<AppointmentStackProps<'AppointmentDescriptionScreen'>, 'navigation'>;
 
 export function OptionsButton({
   appointmentId,

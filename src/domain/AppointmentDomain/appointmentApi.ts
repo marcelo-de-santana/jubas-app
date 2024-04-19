@@ -1,20 +1,13 @@
 import {api} from '@services';
 import {
   AppointmentCreateRequest,
-  AppointmentGetAllRequest,
   AppointmentRequest,
 } from './appointmentRequest';
-import {
-  EmployeeScheduleResponse,
-  DayOfWeekResponse,
-  AppointmentResponse,
-} from './appointmentResponse';
+import {AppointmentResponse} from './appointmentResponse';
 
 const PATH = '/appointments';
 
-async function getAll({
-  date,
-}: AppointmentGetAllRequest): Promise<EmployeeScheduleResponse[]> {
+async function getAll({date}: {date: string}): Promise<AppointmentResponse[]> {
   const response = await api.get(PATH, {
     params: {date},
   });
@@ -25,10 +18,9 @@ async function getById(appointmentId: string): Promise<AppointmentResponse> {
   return (await api.get(PATH + '/' + appointmentId)).data;
 }
 
-async function getDaysOfAttendance(): Promise<DayOfWeekResponse[]> {
-  return (await api.get(PATH + '/days-of-attendance')).data;
+async function getByUserId(userId: string): Promise<AppointmentResponse[]> {
+  return (await api.get(PATH + '/by-user/' + userId)).data;
 }
-
 async function create({
   date,
   time,
@@ -66,7 +58,7 @@ async function update({
 export const appointmentApi = {
   getAll,
   getById,
-  getDaysOfAttendance,
+  getByUserId,
   create,
   update,
 };

@@ -3,17 +3,17 @@ import {
   TouchableOpacityItem,
   TouchableOpacityItemPros,
 } from '../TouchableOpacity';
-import {ScheduleTimeAvailableResponse} from '@domain';
+import {ScheduleTimeResponse} from '@domain';
 
 interface BoxTimeAvailableProps extends TouchableOpacityItemPros {
-  scheduleTime: ScheduleTimeAvailableResponse;
+  scheduleTime: ScheduleTimeResponse;
 }
 
 export function BoxTimeAvailable({
-  scheduleTime: {isAvailable, time},
+  scheduleTime: {available, time},
   ...props
 }: Readonly<BoxTimeAvailableProps>) {
-  const $textColor: ThemeColors = isAvailable ? 'secondaryContrast' : 'red';
+  const $textColor: ThemeColors = available ? 'secondaryContrast' : 'red';
   return (
     <TouchableOpacityItem
       key={time}
@@ -29,7 +29,7 @@ export function BoxTimeAvailable({
         color: $textColor,
       }}
       label={time}
-      disabled={!isAvailable}
+      disabled={!available}
       {...props}
     />
   );

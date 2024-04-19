@@ -10,10 +10,6 @@ export interface AppointmentRequest {
   appointmentStatus?: AppointmentStatus;
 }
 
-export type AppointmentGetAllRequest = {
-  date: string;
-};
-
 export type AppointmentCreateRequest = Omit<
   AppointmentRequest,
   'appointmentId' | 'appointmentStatus'

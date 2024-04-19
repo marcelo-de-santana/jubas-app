@@ -1,7 +1,6 @@
 import {QueryKeys, invalidateQueries} from '@hooks';
 import {appointmentApi} from './appointmentApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {useState} from 'react';
 
 export function useAppointmentGetAll() {
   return useMutation({
@@ -17,26 +16,11 @@ export function useAppointmentGetById(appointmentId: string) {
   });
 }
 
-export function useAppointmentGetDaysOfAttendance() {
-  const {data: daysOfWeek} = useQuery({
-    queryKey: [QueryKeys.DaysOfAttendance],
-    queryFn: appointmentApi.getDaysOfAttendance,
+export function useAppointmentGetByUserId(userId: string) {
+  return useQuery({
+    queryKey: [QueryKeys.AppointmentGetByUserId],
+    queryFn: () => appointmentApi.getByUserId(userId),
   });
-
-  const chooseDay = (day: string) => {
-    setDayOfWeek(day);
-  };
-  const hasDayOfWeek = daysOfWeek && daysOfWeek.length > 0;
-
-  const [dayOfWeek, setDayOfWeek] = useState<string | undefined>(
-    hasDayOfWeek ? daysOfWeek[0].date : undefined,
-  );
-
-  return {
-    daysOfWeek,
-    dayOfWeek,
-    chooseDay,
-  };
 }
 
 export function useAppointmentCreate() {

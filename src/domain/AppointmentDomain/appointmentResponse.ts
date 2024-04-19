@@ -1,11 +1,5 @@
 import {SpecialtyResponse} from '../SpecialtyDomain/specialtyResponse';
 
-export interface EmployeeScheduleResponse {
-  id: string;
-  name: string;
-  workingHours: ScheduleTimeAvailableResponse[];
-}
-
 type GenericDto = {
   id: string;
   name: string;
@@ -30,15 +24,4 @@ export interface AppointmentResponse {
   };
   createdAt: string;
   updatedAt: string | null;
-}
-
-export interface ScheduleTimeAvailableResponse {
-  time: string;
-  isAvailable: boolean;
-  appointmentId?: string;
-}
-
-export interface DayOfWeekResponse {
-  date: string;
-  available: boolean;
 }

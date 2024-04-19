@@ -1,8 +1,6 @@
 import {
   AlertMessageType,
   AttendanceDescription,
-  Box,
-  ButtonDangerOutline,
   ButtonSuccess,
   ClientDescription,
   ListSeparator,
@@ -59,19 +57,19 @@ export function ScheduleResumeScreen({
       <ListSeparator mb="s12" />
       <ClientDescription name={route.params.profile.name} />
 
-      <Box flexDirection="row" justifyContent="space-between" marginTop="s12">
-        <ButtonDangerOutline
+      {/* <ButtonDangerOutline
           mr="s4"
           onPress={() => navigation.goBack()}
           title="Voltar"
-        />
+        /> */}
 
-        <ButtonSuccess
-          ml="s4"
-          title="Confirmar"
-          onPress={registerNewAppointment}
-        />
-      </Box>
+      <ButtonSuccess
+        style={{position: 'absolute', left: 20, bottom: 10, right: 20}}
+        backgroundColor="secondaryContrast"
+        textProps={{variant: 'paragraphLarge', color: 'secondary'}}
+        title="Confirmar"
+        onPress={registerNewAppointment}
+      />
     </Screen>
   );
 }

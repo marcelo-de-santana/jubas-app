@@ -8,14 +8,14 @@ import {
 } from '@components';
 import {SpecialtyResponse, useEmployeeGetAvailableSpecialties} from '@domain';
 import {useVisibility} from '@hooks';
-import {BusinessManagementStackProps} from '@routes';
+import {AppointmentStackProps} from '@routes';
 import {mask} from '@utils';
 import {ListRenderItemInfo} from 'react-native';
 
 type BoxSpecialtyProps = {
   selectedSpecialty?: SpecialtyResponse;
   handleSpecialty: (specialty: SpecialtyResponse) => void;
-} & Pick<BusinessManagementStackProps<'AppointmentCreateScreen'>, 'route'>;
+} & Pick<AppointmentStackProps<'AppointmentCreateScreen'>, 'route'>;
 
 export function BoxSpecialty({
   selectedSpecialty,

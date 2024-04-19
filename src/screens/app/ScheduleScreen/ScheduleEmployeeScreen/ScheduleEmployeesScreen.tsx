@@ -1,5 +1,5 @@
 import {FlatList, Screen} from '@components';
-import {EmployeeScheduleResponse, useAppointmentGetAll} from '@domain';
+import {EmployeeScheduleTimeResponse, useScheduleGetAllByDate} from '@domain';
 import {ScheduleStackProps} from '@routes';
 import {useEffect} from 'react';
 import {ListRenderItemInfo} from 'react-native';
@@ -10,7 +10,7 @@ export function ScheduleEmployeesScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleEmployeesScreen'>>) {
-  const {data, mutate, isPending} = useAppointmentGetAll();
+  const {data, mutate, isPending} = useScheduleGetAllByDate();
 
   const searchData = () => {
     mutate({
@@ -22,7 +22,9 @@ export function ScheduleEmployeesScreen({
     searchData();
   }, []);
 
-  function renderItem({item}: ListRenderItemInfo<EmployeeScheduleResponse>) {
+  function renderItem({
+    item,
+  }: ListRenderItemInfo<EmployeeScheduleTimeResponse>) {
     return (
       <Collapsible
         appointment={item}

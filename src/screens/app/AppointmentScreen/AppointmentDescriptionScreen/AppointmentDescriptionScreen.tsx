@@ -9,13 +9,13 @@ import {
   Text,
 } from '@components';
 import {useAppointmentGetById} from '@domain';
-import {BusinessManagementStackProps} from '@routes';
+import {AppointmentStackProps} from '@routes';
 import {OptionsButton} from './components/OptionsButton';
 
 export function AppointmentDescriptionScreen({
   navigation,
   route,
-}: BusinessManagementStackProps<'AppointmentDescriptionScreen'>) {
+}: AppointmentStackProps<'AppointmentDescriptionScreen'>) {
   const {
     data: appointment,
     isError,

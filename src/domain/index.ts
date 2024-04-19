@@ -15,6 +15,9 @@ export * from './PermissionDomain/permissionUseCases';
 export * from './ProfileDomain/profileUseCases';
 export * from './ProfileDomain/profileResponse';
 
+export * from './ScheduleDomain/scheduleUseCases';
+export * from './ScheduleDomain/scheduleResponse';
+
 export * from './SpecialtyDomain/specialtyResponse';
 export * from './SpecialtyDomain/specialtyUseCases';
 

@@ -1,4 +1,4 @@
-import {TouchableOpacityItem} from '@components';
+import {Box, TouchableOpacityItem} from '@components';
 import {DayOfWeekResponse} from '@domain';
 import {mask} from '@utils';
 import {FlatList, ListRenderItemInfo} from 'react-native';
@@ -17,18 +17,20 @@ export function BoxDaysOfWeek({
   const lastIndex = daysOfWeek && daysOfWeek.length - 1;
 
   return (
-    <FlatList
-      horizontal
-      data={daysOfWeek}
-      renderItem={props => (
-        <DayOfWeekListItem
-          lastIndex={lastIndex}
-          selectedDay={selectedDay}
-          chooseDay={chooseDay}
-          {...props}
-        />
-      )}
-    />
+    <Box height={50}>
+      <FlatList
+        horizontal
+        data={daysOfWeek}
+        renderItem={props => (
+          <DayOfWeekListItem
+            lastIndex={lastIndex}
+            selectedDay={selectedDay}
+            chooseDay={chooseDay}
+            {...props}
+          />
+        )}
+      />
+    </Box>
   );
 }
 

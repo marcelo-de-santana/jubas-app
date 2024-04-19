@@ -1,25 +1,14 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {
-  DashboardScreen,
-  AppointmentListScreen,
-  DaysOfAttendanceScreen,
-  AppointmentDescriptionScreen,
-  AppointmentCreateScreen,
-} from '@screens';
+import {DashboardScreen, DaysOfAttendanceScreen} from '@screens';
 import {defaultOptions} from '../../screenOptions';
 import {EmployeeStack} from '../EmployeeStack/EmployeeStack';
 import {CatalogStack} from '../CatalogStack/CatalogStack';
 import {WorkingHourStack} from '../WorkingHourStack/WorkingHourStack';
 import {UserStack} from '../UserStack/UserStack';
+import {AppointmentStack} from '../AppointmentStack/AppointmentStack';
 
 export type BusinessManagementParamList = {
-  AppointmentListScreen: undefined;
-  AppointmentCreateScreen: {
-    date: string;
-    time: string;
-    employee: {id: string; name: string};
-  };
-  AppointmentDescriptionScreen: {appointmentId: string};
+  AppointmentStack: undefined;
   DaysOfAttendanceScreen: undefined;
   CatalogStack: undefined;
   DashboardScreen: undefined;
@@ -46,20 +35,8 @@ export function BusinessManagementStack() {
         }}
       />
       <NativeStack.Screen
-        name="AppointmentListScreen"
-        component={AppointmentListScreen}
-        options={{headerTitle: 'Agenda', headerShown: true}}
-      />
-
-      <NativeStack.Screen
-        name="AppointmentCreateScreen"
-        component={AppointmentCreateScreen}
-        options={{headerTitle: 'Novo agendamento', headerShown: true}}
-      />
-      <NativeStack.Screen
-        name="AppointmentDescriptionScreen"
-        component={AppointmentDescriptionScreen}
-        options={{headerTitle: 'Agendamento', headerShown: true}}
+        name="AppointmentStack"
+        component={AppointmentStack}
       />
       <NativeStack.Screen
         name="DaysOfAttendanceScreen"

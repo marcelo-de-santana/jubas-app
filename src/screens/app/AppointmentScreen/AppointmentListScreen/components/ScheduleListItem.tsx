@@ -1,20 +1,20 @@
 import {Box, BoxTimeAvailable, CollapsibleAccording} from '@components';
-import {EmployeeScheduleResponse} from '@domain';
+import {EmployeeScheduleTimeResponse} from '@domain';
 import {Alert, ListRenderItemInfo} from 'react-native';
-import {BusinessManagementStackProps} from '@routes';
+import {AppointmentStackProps} from '@routes';
 
 type NavigationParam = Pick<
-  BusinessManagementStackProps<'AppointmentListScreen'>,
+  AppointmentStackProps<'AppointmentListScreen'>,
   'navigation'
 > & {
   date?: string;
 };
 
 export function ScheduleListItem({
-  item: employee,
+  item,
   navigation,
   date,
-}: ListRenderItemInfo<EmployeeScheduleResponse> & NavigationParam) {
+}: ListRenderItemInfo<EmployeeScheduleTimeResponse> & NavigationParam) {
   return (
     <CollapsibleAccording
       collapsed={false}
@@ -37,25 +37,25 @@ export function ScheduleListItem({
         variant: 'paragraphMedium',
         color: 'primary',
       }}
-      title={employee.name}>
+      title={item.employeeName}>
       <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
-        {employee?.workingHours.map(availableTime => {
-          const {isAvailable, time, appointmentId} = availableTime;
+        {item?.workingHours.map(availableTime => {
+          const {available, time, appointmentId} = availableTime;
 
           const navigateToHandleScreen = () => {
-            if (!isAvailable && appointmentId) {
+            if (!available && appointmentId) {
               return navigation.navigate('AppointmentDescriptionScreen', {
                 appointmentId,
               });
             }
-            if (!isAvailable) {
+            if (!available) {
               return Alert.alert('Horário de intervalo');
             }
             if (date) {
               return navigation.navigate('AppointmentCreateScreen', {
                 date,
                 time,
-                employee: {id: employee.id, name: employee.name},
+                employee: {id: item.employeeId, name: item.employeeName},
               });
             }
           };

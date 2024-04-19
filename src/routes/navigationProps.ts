@@ -7,6 +7,7 @@ import {BusinessManagementParamList} from './Stacks/BusinessManagementStack/Busi
 import {CatalogStackParamList} from './Stacks/CatalogStack/CatalogStack';
 import {WorkingHourStackParamList} from './Stacks/WorkingHourStack/WorkingHourStack';
 import {EmployeeStackParamList} from './Stacks/EmployeeStack/EmployeeStack';
+import {AppointmentStackParamList} from './Stacks/AppointmentStack/AppointmentStack';
 
 export type AuthStackProps<RouteName extends keyof AuthStackParamList> =
   NativeStackScreenProps<AuthStackParamList, RouteName>;
@@ -16,6 +17,10 @@ export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
 export type BusinessManagementStackProps<
   RouteName extends keyof BusinessManagementParamList,
 > = NativeStackScreenProps<BusinessManagementParamList, RouteName>;
+
+export type AppointmentStackProps<
+  RouteName extends keyof AppointmentStackParamList,
+> = NativeStackScreenProps<AppointmentStackParamList, RouteName>;
 
 export type UserStackProps<RouteName extends keyof UserStackParamList> =
   NativeStackScreenProps<UserStackParamList, RouteName>;

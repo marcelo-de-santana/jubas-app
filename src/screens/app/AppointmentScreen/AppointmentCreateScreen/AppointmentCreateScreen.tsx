@@ -10,7 +10,7 @@ import {
   SpecialtyResponse,
   useAppointmentCreate,
 } from '@domain';
-import {BusinessManagementStackProps} from '@routes';
+import {AppointmentStackProps} from '@routes';
 import {useState} from 'react';
 import {BoxSpecialty} from './components/BoxSpecialty';
 import {BoxClient} from './components/BoxClient';
@@ -18,7 +18,7 @@ import {BoxClient} from './components/BoxClient';
 export function AppointmentCreateScreen({
   navigation,
   route,
-}: BusinessManagementStackProps<'AppointmentCreateScreen'>) {
+}: AppointmentStackProps<'AppointmentCreateScreen'>) {
   const {date, employee, time} = route.params;
 
   const [specialty, setSpecialty] = useState<SpecialtyResponse>();

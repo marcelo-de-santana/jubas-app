@@ -5,12 +5,12 @@ import {
   CollapsibleAccording,
   TextProps,
 } from '@components';
-import {EmployeeScheduleResponse} from '@domain';
+import {EmployeeScheduleTimeResponse} from '@domain';
 import {ScheduleStackProps} from '@routes';
 
 interface CollapsibleProps
   extends ScheduleStackProps<'ScheduleEmployeesScreen'> {
-  appointment: EmployeeScheduleResponse;
+  appointment: EmployeeScheduleTimeResponse;
   collapsed?: boolean;
 }
 
@@ -23,7 +23,7 @@ export function Collapsible({
   const navigateToProfileScreen = (time: string) => {
     navigation.navigate('ScheduleProfilesScreen', {
       ...route.params,
-      employee: {id: appointment.id, name: appointment.name},
+      employee: {id: appointment.employeeId, name: appointment.employeeName},
       time,
     });
   };
@@ -37,8 +37,8 @@ export function Collapsible({
       borderBottomRightRadius="s6"
       buttonProps={$buttonProps}
       textProps={$textProps}
-      title={appointment.name}>
-      <Box flexDirection="row" flexWrap="wrap" justifyContent='center'>
+      title={appointment.employeeName}>
+      <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
         {appointment?.workingHours.map(availableTime => {
           return (
             <BoxTimeAvailable

@@ -8,7 +8,7 @@ export function DashboardScreen({
     <Screen paddingHorizontal="s10" scrollable>
       <BoxMenu
         title="Gerenciar Agenda"
-        onPress={() => navigation.navigate('AppointmentListScreen')}
+        onPress={() => navigation.navigate('AppointmentStack')}
       />
       <BoxMenu
         title="Dias de atendimento"
