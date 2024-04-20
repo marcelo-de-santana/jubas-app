@@ -15,7 +15,7 @@ export function ScheduleResumeScreen({
   navigation,
   route,
 }: Readonly<ScheduleStackProps<'ScheduleResumeScreen'>>) {
-  const {mutate, isError, isSuccess} = useAppointmentCreate();
+  const {mutate, isError, isSuccess, isPending} = useAppointmentCreate();
 
   const registerNewAppointment = () => {
     const {day: date, time, employee, profile, specialty} = route.params;
@@ -64,6 +64,7 @@ export function ScheduleResumeScreen({
         /> */}
 
       <ButtonSuccess
+        loading={isPending}
         style={{position: 'absolute', left: 20, bottom: 10, right: 20}}
         backgroundColor="secondaryContrast"
         textProps={{variant: 'paragraphLarge', color: 'secondary'}}

@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeScreen, UnderConstruction} from '@screens';
+import {HomeScreen, MyAccountScreen, UnderConstruction} from '@screens';
 import {ScheduleStack} from '../ScheduleStack/ScheduleStack';
 import {UserStack} from '../UserStack/UserStack';
 import {BusinessManagementStack} from '../BusinessManagementStack/BusinessManagementStack';
@@ -11,10 +11,7 @@ export type AppStackParamList = {
   UnderConstruction: undefined;
   ScheduleStack: undefined;
   UserStack: undefined;
-  // MyAccount: undefined;
-  // ScheduleManagement: undefined;
-  // ServiceBookScreens: undefined;
-  // ServiceCatalogScreens: undefined;
+  MyAccountScreen: undefined;
 };
 
 const NativeStack = createNativeStackNavigator<AppStackParamList>();
@@ -32,6 +29,14 @@ export function AppStack() {
         component={HomeScreen}
         options={{
           title: 'Jubas Barber',
+          headerShown: true,
+        }}
+      />
+      <NativeStack.Screen
+        name="MyAccountScreen"
+        component={MyAccountScreen}
+        options={{
+          title: 'Minha conta',
           headerShown: true,
         }}
       />

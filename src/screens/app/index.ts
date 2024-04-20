@@ -3,6 +3,7 @@ export * from './CatalogScreen';
 export * from './DashboardScreen/DashboardScreen';
 export * from './EmployeeScreen';
 export * from './HomeScreen/HomeScreen';
+export * from './MyAccountScreen/MyAccountScreen';
 export * from './ScheduleScreen';
 export * from './UnderConstruction/UnderConstruction';
 export * from './UserScreen';

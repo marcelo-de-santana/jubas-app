@@ -24,7 +24,7 @@ export function Modal({
 }: ModalProps) {
   return (
     <>
-      <TouchableOpacity p="s12" onPress={open}>
+      <TouchableOpacity p="s12" activeOpacity={0.8} onPress={open}>
         {OpenModalComponent}
       </TouchableOpacity>
 

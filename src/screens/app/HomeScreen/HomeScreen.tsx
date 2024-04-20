@@ -2,7 +2,7 @@ import {Box, BoxMenu, Screen} from '@components';
 import {AppStackProps} from '@routes';
 import {useAuthContext} from '@contexts';
 
-export function HomeScreen({navigation}: Readonly<AppStackProps>) {
+export function HomeScreen({navigation}: AppStackProps) {
   const {user} = useAuthContext();
 
   const navigateToUnderConstruction = () => {
@@ -16,8 +16,14 @@ export function HomeScreen({navigation}: Readonly<AppStackProps>) {
           title="Ver agenda"
           onPress={() => navigation.navigate('ScheduleStack')}
         />
-        <BoxMenu title="Minhas compras" onPress={navigateToUnderConstruction} />
-        <BoxMenu title="Minha conta" onPress={navigateToUnderConstruction} />
+        <BoxMenu
+          title="Meus atendimentos"
+          onPress={navigateToUnderConstruction}
+        />
+        <BoxMenu
+          title="Minha conta"
+          onPress={() => navigation.navigate('MyAccountScreen')}
+        />
 
         {user?.permission === 'ADMIN' && (
           <BoxMenu

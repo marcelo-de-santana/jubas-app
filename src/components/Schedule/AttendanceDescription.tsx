@@ -17,7 +17,6 @@ export function AttendanceDescription({
     <BoxItem
       textProps={{
         variant: 'paragraphMedium',
-        color: 'primaryContrast',
         textAlign: 'justify',
       }}
       label="Descrição do atendimento">
@@ -26,7 +25,6 @@ export function AttendanceDescription({
         borderRadius="s6"
         padding="s12"
         textProps={{
-          color: 'primaryContrast',
           textAlign: 'justify',
         }}
         textFields={[

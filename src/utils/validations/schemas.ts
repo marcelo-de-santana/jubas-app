@@ -34,6 +34,11 @@ const userUpdate = object().shape({
   password: fields.optionalPassword,
 });
 
+const newPassword = object().shape({
+  password: fields.password,
+  checkPass: fields.checkPass,
+});
+
 const specialtyRequest = object().shape({
   name: fields.name,
   price: fields.price,
@@ -51,6 +56,7 @@ export const schemas = {
   profileRequest,
   userCreate,
   userUpdate,
+  newPassword,
   specialtyRequest,
   categoryRequest,
 };

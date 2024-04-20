@@ -49,6 +49,7 @@ export function useProfileUpdate() {
         queryClient,
         queryKeys: [
           QueryKeys.UserGetAll,
+          QueryKeys.UserGetById,
           QueryKeys.ProfileGetAll,
           QueryKeys.EmployeeGetAll,
         ],
