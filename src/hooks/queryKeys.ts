@@ -5,6 +5,7 @@ export enum QueryKeys {
   AppointmentGetAll = 'AppointmentGetAll',
   AppointmentGetById = 'AppointmentGetById',
   AppointmentGetByUserId = 'AppointmentGetByUserId',
+  FeedbackGetById = 'FeedbackGetById',
   DaysOfAttendance = 'DaysOfAttendance',
   CategoryGetAll = 'CategoryGetAll',
   EmployeeGetAll = 'EmployeeGetAll',

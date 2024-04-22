@@ -1,7 +1,6 @@
 import {
   Box,
   BoxDaysOfWeek,
-  BoxItem,
   BoxTimeAvailable,
   ButtonProps,
   CollapsibleAccording,
@@ -49,7 +48,7 @@ export function ScheduleDaysScreen({
 
   const employees = schedules
     ?.filter(schedule => schedule.date === dayOfWeek)
-    .flatMap(filteredSchedule => filteredSchedule.employees);
+    .flatMap(filteredSchedule => filteredSchedule.employees ?? []);
 
   return (
     <Screen flex={1}>
@@ -88,7 +87,7 @@ type EmployeeListItemProps =
   };
 
 function EmployeeListItem({
-  item: schedule,
+  item: employee,
   index,
   specialty,
   day,
@@ -98,7 +97,7 @@ function EmployeeListItem({
   const navigateToProfileScreen = (time: string) => {
     navigate('ScheduleProfilesScreen', {
       specialty,
-      employee: {id: schedule.employeeId, name: schedule.employeeName},
+      employee: {id: employee.id, name: employee.name},
       day,
       time,
     });
@@ -114,21 +113,11 @@ function EmployeeListItem({
       borderBottomRightRadius="s6"
       buttonProps={$buttonProps}
       textProps={$textProps}
-      title={schedule.employeeName}>
-      {schedule && schedule.workingHours.length > 0 ? (
-        <WorkingHourList
-          workingHours={schedule.workingHours}
-          navigateToProfileScreen={navigateToProfileScreen}
-        />
-      ) : (
-        <BoxItem
-          p="s12"
-          bg="secondary"
-          borderRadius="s6"
-          textProps={{color: 'primary'}}
-          label="Nenhum horário disponível"
-        />
-      )}
+      title={employee?.name}>
+      <WorkingHourList
+        workingHours={employee.workingHours}
+        navigateToProfileScreen={navigateToProfileScreen}
+      />
     </CollapsibleAccording>
   );
 }

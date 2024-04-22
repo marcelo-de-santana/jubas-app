@@ -1,4 +1,5 @@
 export * from './ActivityIndicator';
+export * from './Appointment/AppointmentDescription';
 export * from './Schedule';
 export * from './Box';
 export * from './Buttons';

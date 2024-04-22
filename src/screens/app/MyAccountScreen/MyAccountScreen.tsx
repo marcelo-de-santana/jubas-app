@@ -1,46 +1,43 @@
-import {Box, ListSeparator, Screen, Text, TouchableOpacity} from '@components';
-import {useAuthContext} from '@contexts';
-import {ProfileResponse, useProfileUpdate, useUserGetById} from '@domain';
-import {mask} from '@utils';
+import {ListSeparator, Screen, Text} from '@components';
+import {useUserGetById} from '@domain';
 import {ModalUser} from './components/ModalUser';
-import {ModalProfile} from './components/ModalProfile';
-import {ReactNode} from 'react';
 import {ProfileList} from './components/ProfileLIst';
 import {ProfileAdd} from './components/ProfileAdd';
+import {AppStackProps} from '@routes';
 
-export function MyAccountScreen() {
-  const {user: userCredentials} = useAuthContext();
+export function MyAccountScreen({
+  route: {
+    params: {user: userCredentials},
+  },
+}: AppStackProps<'MyAccountScreen'>) {
+  const {data: user} = useUserGetById(userCredentials?.id);
 
-  if (userCredentials) {
-    const {data: user} = useUserGetById(userCredentials?.id);
+  return (
+    <Screen>
+      <Text variant="paragraphMedium" textAlign="justify">
+        Usuário
+      </Text>
 
-    return (
-      <Screen>
-        <Text variant="paragraphMedium" textAlign="justify">
-          Usuário
-        </Text>
+      {user && (
+        <ModalUser user={user}>
+          <Text textAlign="justify">{'E-mail: ' + user.email}</Text>
+          <Text textAlign="justify">Senha: ********</Text>
+        </ModalUser>
+      )}
 
-        {user && (
-          <ModalUser user={user}>
-            <Text textAlign="justify">{'E-mail: ' + user.email}</Text>
-            <Text textAlign="justify">Senha: ********</Text>
-          </ModalUser>
-        )}
+      <ListSeparator mb="s12" />
 
-        <ListSeparator mb="s12" />
+      <Text variant="paragraphMedium" textAlign="justify">
+        {user?.profiles && user.profiles.length > 1 ? 'Perfis' : 'Perfil'}
+      </Text>
 
-        <Text variant="paragraphMedium" textAlign="justify">
-          {user?.profiles && user.profiles.length > 1 ? 'Perfis' : 'Perfil'}
-        </Text>
+      {user?.profiles && (
+        <>
+          <ProfileList profiles={user?.profiles} />
 
-        {user?.profiles && (
-          <>
-            <ProfileList profiles={user?.profiles} />
-
-            <ProfileAdd userId={user.id} />
-          </>
-        )}
-      </Screen>
-    );
-  }
+          <ProfileAdd userId={user.id} />
+        </>
+      )}
+    </Screen>
+  );
 }

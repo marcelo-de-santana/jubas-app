@@ -37,7 +37,7 @@ export function ScheduleListItem({
         variant: 'paragraphMedium',
         color: 'primary',
       }}
-      title={item.employeeName}>
+      title={item.name}>
       <Box flexDirection="row" flexWrap="wrap" justifyContent="center">
         {item?.workingHours.map(availableTime => {
           const {available, time, appointmentId} = availableTime;
@@ -55,7 +55,7 @@ export function ScheduleListItem({
               return navigation.navigate('AppointmentCreateScreen', {
                 date,
                 time,
-                employee: {id: item.employeeId, name: item.employeeName},
+                employee: {id: item.id, name: item.name},
               });
             }
           };

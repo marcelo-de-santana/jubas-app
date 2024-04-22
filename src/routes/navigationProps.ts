@@ -12,7 +12,8 @@ import {AppointmentStackParamList} from './Stacks/AppointmentStack/AppointmentSt
 export type AuthStackProps<RouteName extends keyof AuthStackParamList> =
   NativeStackScreenProps<AuthStackParamList, RouteName>;
 
-export type AppStackProps = NativeStackScreenProps<AppStackParamList>;
+export type AppStackProps<RouteName extends keyof AppStackParamList> =
+  NativeStackScreenProps<AppStackParamList, RouteName>;
 
 export type BusinessManagementStackProps<
   RouteName extends keyof BusinessManagementParamList,

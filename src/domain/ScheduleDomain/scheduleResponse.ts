@@ -6,7 +6,7 @@ export interface DayOfWeekResponse {
 export interface ScheduleResponse {
   date: string;
   available: boolean;
-  employees: EmployeeScheduleTimeResponse[];
+  employees?: EmployeeScheduleTimeResponse[];
 }
 
 export interface ScheduleTimeResponse {
@@ -16,7 +16,7 @@ export interface ScheduleTimeResponse {
 }
 
 export interface EmployeeScheduleTimeResponse {
-  employeeId: string;
-  employeeName: string;
+  id: string;
+  name: string;
   workingHours: ScheduleTimeResponse[];
 }

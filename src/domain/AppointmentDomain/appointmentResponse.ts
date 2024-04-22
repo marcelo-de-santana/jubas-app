@@ -9,7 +9,8 @@ export type AppointmentStatus =
   | 'MARCADO'
   | 'EM_ATENDIMENTO'
   | 'FINALIZADO'
-  | 'CANCELADO';
+  | 'CANCELADO'
+  | 'AVALIADO';
 
 export interface AppointmentResponse {
   id: string;

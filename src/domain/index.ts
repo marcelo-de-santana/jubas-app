@@ -10,6 +10,9 @@ export * from './CategoryDomain/categoryResponse';
 export * from './EmployeeDomain/employeeUseCases';
 export * from './EmployeeDomain/employeeResponse';
 
+export * from './FeedbackDomain/feedbackUseCases';
+export * from './FeedbackDomain/feedbackResponse';
+
 export * from './PermissionDomain/permissionUseCases';
 
 export * from './ProfileDomain/profileUseCases';
