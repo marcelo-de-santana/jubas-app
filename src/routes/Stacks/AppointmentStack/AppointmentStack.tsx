@@ -14,7 +14,6 @@ export type AppointmentStackParamList = {
     employee: {id: string; name: string};
   };
   AppointmentDescriptionScreen: {appointmentId: string};
-  DaysOfAttendanceScreen: undefined;
 };
 
 export function AppointmentStack() {
@@ -27,17 +26,17 @@ export function AppointmentStack() {
       <NativeStack.Screen
         name="AppointmentListScreen"
         component={AppointmentListScreen}
-        options={{headerTitle: 'Agenda', headerShown: true}}
+        options={{headerTitle: 'Atendimentos', headerShown: true}}
       />
       <NativeStack.Screen
         name="AppointmentCreateScreen"
         component={AppointmentCreateScreen}
-        options={{headerTitle: 'Novo agendamento', headerShown: true}}
+        options={{headerTitle: 'Novo atendimento', headerShown: true}}
       />
       <NativeStack.Screen
         name="AppointmentDescriptionScreen"
         component={AppointmentDescriptionScreen}
-        options={{headerTitle: 'Agendamento', headerShown: true}}
+        options={{headerTitle: 'Atendimento', headerShown: true}}
       />
     </NativeStack.Navigator>
   );

@@ -15,6 +15,8 @@ export enum QueryKeys {
   UserGetAll = 'UserGetAll',
   UserGetById = 'UserGetById',
   WorkingHourGetAll = 'WorkingHourGetAll',
+  GetRangeOfAttendanceDays = 'GetRangeOfAttendanceDays',
+  DaysWithoutAttendance = 'DaysWithoutAttendance',
 }
 
 export function invalidateQueries({

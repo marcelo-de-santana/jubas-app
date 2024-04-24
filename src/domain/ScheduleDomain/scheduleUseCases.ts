@@ -1,5 +1,5 @@
-import {QueryKeys} from '@hooks';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {QueryKeys, invalidateQueries} from '@hooks';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
 import {scheduleApi} from './scheduleApi';
 
@@ -40,5 +40,58 @@ export function useAppointmentGetSchedule({
   return useQuery({
     queryKey: [QueryKeys.AppointmentGetSchedule],
     queryFn: () => scheduleApi.getSchedule(specialtyId),
+  });
+}
+
+export function useScheduleGetRangeOfAttendanceDays() {
+  return useQuery({
+    queryKey: [QueryKeys.GetRangeOfAttendanceDays],
+    queryFn: () => scheduleApi.getRangeOfAttendanceDays(),
+  });
+}
+
+export function useScheduleUpdateRangeOfAttendanceDays() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: scheduleApi.updateRangeOfAttendanceDays,
+    onSuccess: () => {
+      invalidateQueries({
+        queryClient,
+        queryKeys: [QueryKeys.GetRangeOfAttendanceDays],
+      });
+    },
+  });
+}
+
+export function useScheduleGetDaysWithoutAttendance() {
+  return useQuery({
+    queryKey: [QueryKeys.DaysWithoutAttendance],
+    queryFn: () => scheduleApi.getDaysWithoutAttendance(),
+  });
+}
+
+export function useScheduleAddDaysWithoutAttendance() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: scheduleApi.addDaysWithoutAttendance,
+    onSuccess: () => {
+      invalidateQueries({
+        queryClient,
+        queryKeys: [QueryKeys.DaysWithoutAttendance],
+      });
+    },
+  });
+}
+
+export function useScheduleRemoveDaysWithoutAttendance() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: scheduleApi.removeDaysWithoutAttendance,
+    onSuccess: () => {
+      invalidateQueries({
+        queryClient,
+        queryKeys: [QueryKeys.DaysWithoutAttendance],
+      });
+    },
   });
 }

@@ -3,31 +3,31 @@ import {BusinessManagementStackProps} from '@routes';
 
 export function DashboardScreen({
   navigation,
-}: Readonly<BusinessManagementStackProps<'DashboardScreen'>>) {
+}: BusinessManagementStackProps<'DashboardScreen'>) {
   return (
     <Screen paddingHorizontal="s10" scrollable>
       <BoxMenu
-        title="Gerenciar Agenda"
+        title="Atendimentos"
         onPress={() => navigation.navigate('AppointmentStack')}
       />
       <BoxMenu
-        title="Dias de atendimento"
+        title="Agenda"
         onPress={() => navigation.navigate('DaysOfAttendanceScreen')}
       />
       <BoxMenu
-        title="Gerenciar Usuários"
+        title="Usuários"
         onPress={() => navigation.navigate('UserStack')}
       />
       <BoxMenu
-        title="Gerenciar Funcionários"
+        title="Funcionários"
         onPress={() => navigation.navigate('EmployeeStack')}
       />
       <BoxMenu
-        title="Gerenciar Horários"
+        title="Horários"
         onPress={() => navigation.navigate('WorkingHourStack')}
       />
       <BoxMenu
-        title="Gerenciar Catálogo"
+        title="Catálogo"
         onPress={() => navigation.navigate('CatalogStack')}
       />
     </Screen>

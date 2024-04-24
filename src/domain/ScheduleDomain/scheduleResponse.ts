@@ -20,3 +20,8 @@ export interface EmployeeScheduleTimeResponse {
   name: string;
   workingHours: ScheduleTimeResponse[];
 }
+
+export type DaysAvailability = {
+  id: number;
+  quantity: number;
+};
