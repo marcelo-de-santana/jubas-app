@@ -1,25 +1,21 @@
 import {authApi} from './authApi';
 import {useMutation} from '@tanstack/react-query';
-import {useAuthContext} from '@contexts';
 import {AuthRequest} from './authRequest';
-import {useEffect} from 'react';
+import {registerToken, useAuthStore} from '@services';
 
 export function useAuthSignIn() {
-  const {saveCredentials} = useAuthContext();
+  const {saveCredentials} = useAuthStore();
 
   const mutation = useMutation({
     mutationFn: authApi.auth,
+    onSuccess: data => {
+      saveCredentials(data);
+      registerToken({authCredentials: data});
+    },
   });
 
-  useEffect(() => {
-    if (mutation.isSuccess) {
-      saveCredentials(mutation.data);
-    }
-  }, [mutation.data]);
-
   return {
-    isError: mutation.isError,
-    isPending: mutation.isPending,
+    ...mutation,
     signIn: (variables: AuthRequest) => mutation.mutate(variables),
   };
 }

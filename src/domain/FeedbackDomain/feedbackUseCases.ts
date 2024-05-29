@@ -1,4 +1,4 @@
-import {QueryKeys} from '@hooks';
+import {QueryKeys} from '@services';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {feedbackApi} from './feedbackApi';
 

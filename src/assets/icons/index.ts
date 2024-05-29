@@ -6,6 +6,7 @@ export * from './CheckBoxChecked';
 export * from './CheckIcon';
 export * from './CloseIcon';
 export * from './EditIcon';
+export * from './ExitIcon';
 export * from './LockIcon';
 export * from './PersonIcon';
 export * from './TrashIcon';

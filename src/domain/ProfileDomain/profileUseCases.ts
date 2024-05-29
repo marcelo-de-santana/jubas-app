@@ -1,6 +1,6 @@
 import {profileApi} from './profileApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {QueryKeys, invalidateQueries} from '@hooks';
+import {QueryKeys, invalidateQueries} from '@services';
 
 export function useProfileGetAll({
   withUser = false,

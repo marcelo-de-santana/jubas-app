@@ -7,7 +7,7 @@ import {
   ModalStatus,
   Text,
 } from '@components';
-import {FormikExtractedParams, useCollapsible} from '@hooks';
+import {FormikExtractedParams, useVisibility} from '@hooks';
 import {mask} from '@utils';
 import {useNavigation} from '@react-navigation/native';
 
@@ -86,17 +86,17 @@ function PermissionOptions({
 }: ButtonOptionsProps) {
   const permissions = ['ADMIN', 'BARBEIRO', 'CLIENTE'];
 
-  const {isCollapsed, handleCollapsible} = useCollapsible({initialState: true});
+  const {isVisible, handleVisibility} = useVisibility({initialValue: true});
 
   const changeOption = (permission: string) => {
     handleChangeText('permission', permission);
-    handleCollapsible();
+    handleVisibility();
   };
 
   return (
     <ButtonOptions
-      isCollapsed={isCollapsed}
-      onPress={handleCollapsible}
+      isCollapsed={isVisible}
+      onPress={handleVisibility}
       title={
         mask.capitalizeFirstLetter(userPermission) ?? 'Selecione uma opção'
       }>

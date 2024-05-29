@@ -24,8 +24,7 @@ export function SignInScreen({
       email: '',
       password: '',
     },
-    onSubmit: values =>
-      signIn({email: values.email, password: values.password}),
+    onSubmit: ({email, password}) => signIn({email, password}),
   });
 
   return (

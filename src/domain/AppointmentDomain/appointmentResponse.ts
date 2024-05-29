@@ -5,12 +5,15 @@ type GenericDto = {
   name: string;
 };
 
-export type AppointmentStatus =
-  | 'MARCADO'
-  | 'EM_ATENDIMENTO'
-  | 'FINALIZADO'
-  | 'CANCELADO'
-  | 'AVALIADO';
+export enum AppointmentStatusEnum {
+  MARCADO = 'MARCADO',
+  EM_ATENDIMENTO = 'EM_ATENDIMENTO',
+  FINALIZADO = 'FINALIZADO',
+  CANCELADO = 'CANCELADO',
+  AVALIADO = 'AVALIADO',
+}
+
+export type AppointmentStatus = keyof typeof AppointmentStatusEnum;
 
 export interface AppointmentResponse {
   id: string;

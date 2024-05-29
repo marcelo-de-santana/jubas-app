@@ -1,12 +1,13 @@
-import {QueryKeys, invalidateQueries} from '@hooks';
+import {QueryKeys, invalidateQueries} from '@services';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
 import {scheduleApi} from './scheduleApi';
+import {mask} from '@utils';
 
-export function useScheduleGetAllByDate() {
-  return useMutation({
-    mutationFn: scheduleApi.getScheduleByDate,
-    mutationKey: [QueryKeys.AppointmentGetAll],
+export function useScheduleGetAllByDate(date = mask.formatDate(new Date())) {
+  return useQuery({
+    queryFn: () => scheduleApi.getScheduleByDate({date}),
+    queryKey: [QueryKeys.AppointmentGetAll, date],
   });
 }
 

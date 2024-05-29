@@ -1,14 +1,25 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {AuthStack} from './Stacks/AuthStack/AuthStack';
-import {AppStack} from './Stacks/AppStack/AppStack';
-import {useAuthContext} from '@contexts';
+import {ClientStack} from './Stacks/ClientStack/ClientStack';
+import {useAuthStore} from '@services';
+import {AdminStack} from './Stacks/AdminStack/AdminStack';
 
 export function Routes() {
-  const {authCredentials} = useAuthContext();
-
   return (
     <NavigationContainer>
-      {authCredentials ? <AppStack /> : <AuthStack />}
+      <Stacks />
     </NavigationContainer>
   );
+}
+
+function Stacks() {
+  const {user} = useAuthStore();
+
+  if (user?.permission === 'ADMIN') {
+    return <AdminStack />;
+  }
+  if (user) {
+    return <ClientStack />;
+  }
+  return <AuthStack />;
 }

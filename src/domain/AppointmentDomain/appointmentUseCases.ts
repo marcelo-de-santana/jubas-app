@@ -1,4 +1,4 @@
-import {QueryKeys, invalidateQueries} from '@hooks';
+import {QueryKeys, invalidateQueries} from '@services';
 import {appointmentApi} from './appointmentApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 

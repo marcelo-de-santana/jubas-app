@@ -1,5 +1,4 @@
-import {QueryKeys, invalidateQueries, useFetch} from '@hooks';
-import {EmployeeResponse} from './employeeResponse';
+import {QueryKeys, invalidateQueries} from '@services';
 import {employeeApi} from './employeeApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
@@ -11,12 +10,12 @@ export function useEmployeeGetAll({
     queryFn: () => employeeApi.getAll(available),
   });
 }
-function getById() {
-  return useFetch<EmployeeResponse, string>(employeeApi.getById);
-}
-function getAppointments() {
-  return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
-}
+// function getById() {
+//   return useFetch<EmployeeResponse, string>(employeeApi.getById);
+// }
+// function getAppointments() {
+//   return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
+// }
 export function useEmployeeCreate() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -50,8 +49,3 @@ export function useEmployeeGetAvailableSpecialties({
     queryFn: () => employeeApi.getAvailableSpecialties(employeeId, date, time),
   });
 }
-
-export const employeeUseCases = {
-  getById,
-  getAppointments,
-};

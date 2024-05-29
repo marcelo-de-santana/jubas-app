@@ -1,4 +1,4 @@
-import {QueryKeys, invalidateQueries} from '@hooks';
+import {QueryKeys, invalidateQueries} from '@services';
 import {categoryApi} from './categoryApi';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 
@@ -7,7 +7,7 @@ export function useCategoryCreate() {
   return useMutation({
     mutationFn: categoryApi.create,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: [QueryKeys.CategoryGetAll]});
+      invalidateQueries({queryClient, queryKeys: [QueryKeys.CategoryGetAll]});
     },
   });
 }
