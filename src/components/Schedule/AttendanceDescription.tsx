@@ -12,7 +12,13 @@ export function AttendanceDescription({
   day,
   time,
   employee,
-}: Readonly<AttendanceDescriptionProps>) {
+}: AttendanceDescriptionProps) {
+  const getDate = (day: string) => {
+    const newDate = new Date(day);
+    newDate.setHours(newDate.getHours() + 3);
+    return mask.date(newDate);
+  };
+
   return (
     <BoxItem
       textProps={{
@@ -28,7 +34,7 @@ export function AttendanceDescription({
           textAlign: 'justify',
         }}
         textFields={[
-          day && mask.date(new Date(day)),
+          day && getDate(day),
           `Horário: ${time}`,
           `Nome do barbeiro: ${employee?.name}`,
         ]}

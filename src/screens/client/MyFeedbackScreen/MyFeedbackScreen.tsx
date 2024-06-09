@@ -9,14 +9,14 @@ import {
 } from '@components';
 import {useFeedbackCreate, useFeedbackGetById} from '@domain';
 import {useForm} from '@hooks';
-import {AppStackProps} from '@routes';
+import {ClientStackProps} from '@routes';
 
 export function MyFeedbackScreen({
   navigation: {goBack},
   route: {
     params: {appointmentId, status},
   },
-}: AppStackProps<'MyFeedbackScreen'>) {
+}: ClientStackProps<'MyFeedbackScreen'>) {
   return (
     <Screen flex={1}>
       {status === 'AVALIADO' ? (

@@ -64,6 +64,12 @@ function ListDayItem({
 }: ListRenderItemInfo<string> & {
   requestToRemove: (date: string) => void;
 }) {
+  const getDate = (day: string) => {
+    const newDate = new Date(day);
+    newDate.setHours(newDate.getHours() + 3);
+    return mask.date(newDate);
+  };
+
   return (
     <TouchableOpacity
       p="s12"
@@ -71,7 +77,7 @@ function ListDayItem({
       alignItems="center"
       onPress={() => requestToRemove(date)}>
       <Text variant="paragraphMedium" textAlign="justify">
-        {mask.date(new Date(date))}
+        {getDate(date)}
       </Text>
     </TouchableOpacity>
   );

@@ -6,10 +6,11 @@ type GenericDto = {
 };
 
 export enum AppointmentStatusEnum {
+  CANCELADO = 'CANCELADO',
   MARCADO = 'MARCADO',
   EM_ATENDIMENTO = 'EM_ATENDIMENTO',
   FINALIZADO = 'FINALIZADO',
-  CANCELADO = 'CANCELADO',
+  PAGO = 'PAGO',
   AVALIADO = 'AVALIADO',
 }
 

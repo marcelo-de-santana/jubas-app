@@ -7,10 +7,13 @@ import {
   CheckBoxChecked,
   CheckIcon,
   CloseIcon,
+  CreditCardIcon,
+  DebitCardIcon,
   EditIcon,
   ExitIcon,
   LockIcon,
   PersonIcon,
+  PixIcon,
   TrashIcon,
 } from '@assets';
 import {ThemeColors} from '@styles';
@@ -56,10 +59,13 @@ const iconRegistry = {
   CheckBoxChecked: CheckBoxChecked,
   CheckIcon: CheckIcon,
   CloseIcon: CloseIcon,
+  CreditCardIcon: CreditCardIcon,
+  DebitCardIcon: DebitCardIcon,
   EditIcon: EditIcon,
   ExitIcon: ExitIcon,
   LockIcon: LockIcon,
   PersonIcon: PersonIcon,
+  PixIcon: PixIcon,
   TrashIcon: TrashIcon,
 };
 

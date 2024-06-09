@@ -25,7 +25,10 @@ export function DashboardScreen({
       <BoxMenu title="Funcionários" onPress={() => navigate('EmployeeStack')} />
       <BoxMenu title="Horários" onPress={() => navigate('WorkingHourStack')} />
       <BoxMenu title="Catálogo" onPress={() => navigate('CatalogStack')} />
-      <BoxMenu title="Pagamentos" onPress={() => navigate('PaymentScreen')} />
+      <BoxMenu
+        title="Pagamentos"
+        onPress={() => navigate('UnderConstruction')}
+      />
     </Screen>
   );
 }

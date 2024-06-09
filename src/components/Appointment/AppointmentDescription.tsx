@@ -16,7 +16,9 @@ export function AppointmentDescription({
       <Text textAlign="justify">Cliente: {appointment.client.name}</Text>
       <Text textAlign="justify">Funcionário: {appointment.employee.name}</Text>
       <Text textAlign="justify">Serviço: {appointment.specialty.name}</Text>
-      <Text textAlign="justify">Status: {appointment.status}</Text>
+      <Text textAlign="justify">
+        Status: {mask.capitalizeFirstLetter(appointment.status).replace('_'," ")}
+      </Text>
     </>
   );
 }

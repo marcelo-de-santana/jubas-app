@@ -10,6 +10,7 @@ import {
   AppointmentStatus,
   AppointmentStatusEnum,
   useAppointmentUpdate,
+  usePaymentCreate,
 } from '@domain';
 import {useVisibility} from '@hooks';
 import {AppointmentStackProps} from '@routes';
@@ -91,7 +92,8 @@ function ButtonSendOption({
 }: ButtonSendOptionProps) {
   const isDisabled =
     (appointmentStatus !== AppointmentStatusEnum.MARCADO &&
-      appointmentStatus !== AppointmentStatusEnum.EM_ATENDIMENTO) ||
+      appointmentStatus !== AppointmentStatusEnum.EM_ATENDIMENTO &&
+      appointmentStatus !== AppointmentStatusEnum.FINALIZADO) ||
     !status;
 
   return (
@@ -111,17 +113,23 @@ export const useOptionsButton = (
   appointmentId: string,
   appointmentStatus: AppointmentStatus,
 ) => {
-  const {mutate, isError, isSuccess, isPending} = useAppointmentUpdate();
+  const appointmentUpdate = useAppointmentUpdate();
+  const paymentCreate = usePaymentCreate();
+
   const [status, setStatus] = useState<AppointmentStatus | null>(null);
   const {isVisible, handleVisibility} = useVisibility({initialValue: true});
 
   const canContinue =
     appointmentStatus === AppointmentStatusEnum.MARCADO ||
-    appointmentStatus === AppointmentStatusEnum.EM_ATENDIMENTO;
+    appointmentStatus === AppointmentStatusEnum.EM_ATENDIMENTO ||
+    appointmentStatus === AppointmentStatusEnum.FINALIZADO;
 
   const handleSendData = () => {
+    if (status === 'FINALIZADO') {
+      paymentCreate.mutate({appointmentId, paymentMethod: 'DINHEIRO'});
+    }
     if (status) {
-      mutate({appointmentId, appointmentStatus: status});
+      appointmentUpdate.mutate({appointmentId, appointmentStatus: status});
     }
   };
 
@@ -138,6 +146,8 @@ export const useOptionsButton = (
         return buttonTitleMap.EM_ATENDIMENTO;
       case AppointmentStatusEnum.FINALIZADO:
         return buttonTitleMap.FINALIZADO;
+      case AppointmentStatusEnum.PAGO:
+        return buttonTitleMap.PAGO;
       default:
         return 'Selecionar';
     }
@@ -167,6 +177,13 @@ export const useOptionsButton = (
             value: AppointmentStatusEnum.FINALIZADO,
           },
         ];
+      case AppointmentStatusEnum.FINALIZADO:
+        return [
+          {
+            title: buttonTitleMap.PAGO,
+            value: AppointmentStatusEnum.PAGO,
+          },
+        ];
       default:
         return [];
     }
@@ -175,9 +192,9 @@ export const useOptionsButton = (
   return {
     status,
     isVisible,
-    isError,
-    isSuccess,
-    isPending,
+    isError: appointmentUpdate.isError || paymentCreate.isError,
+    isSuccess: appointmentUpdate.isSuccess || paymentCreate.isSuccess,
+    isPending: appointmentUpdate.isPending,
     canContinue,
     getButtonTitle,
     getButtonOptions,
@@ -194,4 +211,5 @@ const buttonTitleMap: Record<
   CANCELADO: 'Cancelar',
   EM_ATENDIMENTO: 'Iniciar atendimento',
   FINALIZADO: 'Finalizar atendimento',
+  PAGO: 'Registrar pagamento',
 };

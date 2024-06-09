@@ -3,7 +3,7 @@ import {
   DashboardScreen,
   DaysOfAttendanceScreen,
   MonthlyScheduleScreen,
-  PaymentScreen,
+  UnderConstruction,
   WeeklyScheduleScreen,
 } from '@screens';
 import {defaultOptions} from '../../screenOptions';
@@ -19,11 +19,14 @@ export type AdminParamList = {
   WeeklyScheduleScreen: undefined;
   MonthlyScheduleScreen: undefined;
   CatalogStack: undefined;
-  PaymentScreen: undefined;
   DashboardScreen: undefined;
   EmployeeStack: undefined;
   WorkingHourStack: undefined;
   UserStack: undefined;
+  UnderConstruction: undefined;
+
+  // TODO: FAZER LISTAGEM DE PAGAMENTOS
+  PaymentsScreen: undefined;
 };
 
 export function AdminStack() {
@@ -64,12 +67,15 @@ export function AdminStack() {
       />
       <NativeStack.Screen name="EmployeeStack" component={EmployeeStack} />
       <NativeStack.Screen name="CatalogStack" component={CatalogStack} />
-      <NativeStack.Screen name="PaymentScreen" component={PaymentScreen} />
       <NativeStack.Screen
         name="WorkingHourStack"
         component={WorkingHourStack}
       />
       <NativeStack.Screen name="UserStack" component={UserStack} />
+      <NativeStack.Screen
+        name="UnderConstruction"
+        component={UnderConstruction}
+      />
     </NativeStack.Navigator>
   );
 }

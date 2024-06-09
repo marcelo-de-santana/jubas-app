@@ -20,7 +20,6 @@ const name = (value: string) => {
 
 function date(date: Date) {
   let formattedDate = date.toLocaleDateString('pt-BR', {
-    timeZone: 'UTC',
     weekday: 'long',
   });
   return formattedDate.charAt(0).toUpperCase() + formattedDate.substring(1);
@@ -139,12 +138,47 @@ function dayOfWeek(date: Date) {
   }
 }
 
+const formatCardNumber = (cardNumber: string) => {
+  const cleaned = cardNumber.replace(/\D/g, '');
+  return cleaned.replace(/(\d{4})(?=\d)/g, '$1 ');
+};
+
+const removeSpaces = (cardNumber: string) => {
+  return cardNumber.replace(/\s/g, '');
+};
+
+const formatCNPJ = (cnpj: string) => {
+  cnpj = cnpj.replace(/[^\d]/g, '');
+  cnpj = cnpj.replace(/^(\d{2})(\d)/, '$1.$2');
+  cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+  cnpj = cnpj.replace(/\.(\d{3})(\d)/, '.$1/$2');
+  return cnpj.replace(/(\d{4})(\d)/, '$1-$2');
+};
+
+const removeMaskOfCpfOrCnpj = (document: string) => {
+  return document.replace(/[^\d]/g, '');
+};
+
+const formatName = (name: string) => {
+  return name.replace(/[^a-zA-Z\s]/g, '');
+};
+
+const formatExpirationDate = (date: string) => {
+  const cleaned = date.replace(/\D/g, '');
+  return cleaned.replace(/(\d{2})(\d{2})/, '$1/$2');
+};
+
+const formatNumber = (number: string) => {
+  return number.replace(/\D/g, '');
+};
+
 export const mask = {
   capitalizeFirstLetter,
   cpf,
   date,
   dayOfWeek,
   formatDate,
+  formatCardNumber,
   fullTime,
   name,
   phone,
@@ -157,4 +191,10 @@ export const mask = {
   currencyFormatUSD,
   cleanCurrency,
   formatToFloat,
+  removeSpaces,
+  formatCNPJ,
+  removeMaskOfCpfOrCnpj,
+  formatName,
+  formatExpirationDate,
+  formatNumber,
 };

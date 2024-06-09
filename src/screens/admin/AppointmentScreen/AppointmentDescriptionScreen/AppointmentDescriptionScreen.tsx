@@ -21,6 +21,7 @@ export function AppointmentDescriptionScreen({
     CANCELADO: 'Cancelado',
     EM_ATENDIMENTO: 'Em atendimento',
     FINALIZADO: 'Finalizado',
+    PAGO: 'Pago',
     AVALIADO: 'Avaliado',
   };
 

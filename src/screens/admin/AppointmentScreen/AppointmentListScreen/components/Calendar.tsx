@@ -9,7 +9,7 @@ import {
 import {useVisibility} from '@hooks';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {mask} from '@utils';
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 
 type CalendarProps = {
   selectedDate: Date;

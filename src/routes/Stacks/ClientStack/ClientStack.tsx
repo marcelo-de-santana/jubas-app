@@ -4,6 +4,7 @@ import {
   MyAccountScreen,
   MyAttendancesScreen,
   MyFeedbackScreen,
+  PaymentScreen,
   UnderConstruction,
 } from '@screens';
 import {ScheduleStack} from '../ScheduleStack/ScheduleStack';
@@ -19,6 +20,7 @@ export type ClientStackParamList = {
   MyAccountScreen: {user: UserResponse};
   MyAttendancesScreen: {userId: string};
   MyFeedbackScreen: {appointmentId: string; status: string};
+  PaymentScreen: {appointmentId: string};
 };
 
 const NativeStack = createNativeStackNavigator<ClientStackParamList>();
@@ -59,7 +61,16 @@ export function ClientStack() {
         name="MyFeedbackScreen"
         component={MyFeedbackScreen}
         options={{
-          title: 'Feedback',
+          title: 'Avaliar atendimento',
+          headerShown: true,
+          animation: 'slide_from_right',
+        }}
+      />
+      <NativeStack.Screen
+        name="PaymentScreen"
+        component={PaymentScreen}
+        options={{
+          title: 'Pagamento',
           headerShown: true,
           animation: 'slide_from_right',
         }}

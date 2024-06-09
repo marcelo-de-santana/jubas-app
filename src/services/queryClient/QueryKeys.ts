@@ -16,6 +16,7 @@ export enum QueryKeys {
   GetRangeOfAttendanceDays = 'GetRangeOfAttendanceDays',
   DaysWithoutAttendance = 'DaysWithoutAttendance',
   PaymentAccessToken = 'PaymentAccessToken',
+  PaymentGetMethods = 'PaymentGetMethods',
 }
 
 export type QueryKeysType = keyof typeof QueryKeys;

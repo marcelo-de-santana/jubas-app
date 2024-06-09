@@ -14,6 +14,7 @@ import {AppointmentStackProps} from '@routes';
 import {useState} from 'react';
 import {BoxSpecialty} from './components/BoxSpecialty';
 import {BoxClient} from './components/BoxClient';
+import {mask} from '@utils';
 
 export function AppointmentCreateScreen({
   navigation,

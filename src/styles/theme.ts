@@ -65,6 +65,7 @@ const defaults = {
     s56: 56,
   },
   borderRadii: {
+    s0: 0,
     s6: 6,
     s10: 10,
   },
