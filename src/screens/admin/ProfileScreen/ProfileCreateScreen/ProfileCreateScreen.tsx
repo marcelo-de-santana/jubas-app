@@ -17,11 +17,11 @@ export function ProfileCreateScreen({
       cpf: '',
       statusProfile: true,
     },
-    onSubmit: values => {
+    onSubmit: ({cpf, name, statusProfile}) => {
       mutation.mutate({
-        cpf: mask.removeCpf(values.cpf),
-        name: values.name,
-        statusProfile: true,
+        cpf: mask.removeCpf(cpf),
+        name,
+        statusProfile,
         userId,
       });
     },

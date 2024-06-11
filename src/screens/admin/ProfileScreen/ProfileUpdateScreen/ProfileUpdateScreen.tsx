@@ -34,12 +34,12 @@ export function ProfileUpdateScreen({
       cpf: mask.cpf(profile.cpf),
       statusProfile: profile.statusProfile,
     },
-    onSubmit: values => {
+    onSubmit: ({cpf, name, statusProfile}) => {
       mutation.mutate({
         id: profile.id,
-        cpf: mask.removeCpf(values.cpf),
-        name: values.name,
-        statusProfile: true,
+        cpf: mask.removeCpf(cpf),
+        name,
+        statusProfile,
       });
     },
   });
