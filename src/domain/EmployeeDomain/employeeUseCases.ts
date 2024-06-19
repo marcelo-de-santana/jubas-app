@@ -10,12 +10,7 @@ export function useEmployeeGetAll({
     queryFn: () => employeeApi.getAll(available),
   });
 }
-// function getById() {
-//   return useFetch<EmployeeResponse, string>(employeeApi.getById);
-// }
-// function getAppointments() {
-//   return useFetch<EmployeeResponse, string>(employeeApi.getAppointments);
-// }
+
 export function useEmployeeCreate() {
   const queryClient = useQueryClient();
   return useMutation({

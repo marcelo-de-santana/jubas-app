@@ -6,7 +6,17 @@ import {AdminStack} from './Stacks/AdminStack/AdminStack';
 
 export function Routes() {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      linking={{
+        prefixes: ['jubas://'],
+        config: {
+          screens: {
+            PaymentSuccess: {
+              path: 'payment-success/:preference_id',
+            },
+          },
+        },
+      }}>
       <Stacks />
     </NavigationContainer>
   );

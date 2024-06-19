@@ -15,8 +15,6 @@ export * from './FeedbackDomain/feedbackResponse';
 
 export * from './PaymentDomain/paymentUseCases';
 
-export * from './PermissionDomain/permissionUseCases';
-
 export * from './ProfileDomain/profileUseCases';
 export * from './ProfileDomain/profileResponse';
 

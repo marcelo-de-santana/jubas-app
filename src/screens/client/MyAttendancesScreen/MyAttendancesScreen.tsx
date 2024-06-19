@@ -5,14 +5,21 @@ import {
   Screen,
   TouchableOpacity,
 } from '@components';
-import {AppointmentResponse, useAppointmentGetByUserId} from '@domain';
+import {
+  AppointmentResponse,
+  useAppointmentGetByUserId,
+  useMercadoPagoGetAccessToken,
+} from '@domain';
 import {ClientStackProps} from '@routes';
-import {api, apiMercadoPago, useAuthStore} from '@services';
+import {
+  api,
+  apiMercadoPago,
+  registerMercadoPagoToken,
+  useAuthStore,
+} from '@services';
 import {useMutation} from '@tanstack/react-query';
 import {mask} from '@utils';
-import axios from 'axios';
 import {Linking, ListRenderItemInfo} from 'react-native';
-import {string} from 'yup';
 
 export function MyAttendancesScreen({
   navigation,
@@ -50,33 +57,22 @@ function AppointmentListItem({
 }: ListRenderItemInfo<AppointmentResponse> &
   Pick<ClientStackProps<'MyAttendancesScreen'>, 'navigation'>) {
   const {user} = useAuthStore();
-  const createPreference = useMercadoPagoCreatePreference();
-  const paymentUpdate = usePaymentUpdateStatus();
+
+  const {mutate: createPreferenceMutate} = useMercadoPagoCreatePreference();
+  const {mutate: updatePaymentMutate} = usePaymentUpdateStatus();
+  const {mutate: getAccessTokenMutate} = useMercadoPagoGetAccessToken();
 
   const onPress = () => {
     if (appointment.status === 'FINALIZADO') {
-      paymentUpdate.mutate(
-        {appointmentId: appointment.id},
-        {
-          onSuccess: () => {
-            createPreferenceMutate();
-          },
-        },
-      );
-      // return navigate('PaymentScreen', {appointmentId: appointment.id});
-      // return openLink();
-      const createPreferenceMutate = () => {
-        const description =
-          appointment.specialty.name +
-          ' com ' +
-          appointment.employee.name +
-          ' em ' +
-          mask.date(new Date(appointment.scheduling.date)) +
-          ' às ' +
-          appointment.scheduling.startTime +
-          'h';
+      // Função para criar a preferência de pagamento
+      const createPreference = async () => {
+        const description = `${appointment.specialty.name} com ${
+          appointment.employee.name
+        } em ${mask.date(new Date(appointment.scheduling.date))} às ${
+          appointment.scheduling.startTime
+        }h`;
 
-        createPreference.mutate({
+        createPreferenceMutate({
           item: {
             id: appointment.id,
             title: appointment.specialty.name,
@@ -84,9 +80,32 @@ function AppointmentListItem({
             quantity: 1,
             unit_price: appointment.specialty.price,
           },
-          payer: {name: appointment.client.name, email: user?.email},
+          payer: {
+            name: appointment.client.name,
+            email: user?.email,
+          },
         });
       };
+
+      // Função para solicitar o ID do agendamento e atualizar o pagamento
+      const requestAppointmentId = async () => {
+        updatePaymentMutate(
+          {appointmentId: appointment.id},
+          {
+            onSuccess: () => {
+              createPreference();
+            },
+          },
+        );
+      };
+
+      // Solicitação de token de acesso do MercadoPago
+      getAccessTokenMutate(undefined, {
+        onSuccess: ({accessToken}) => {
+          registerMercadoPagoToken(accessToken);
+          requestAppointmentId();
+        },
+      });
     }
     if (appointment.status === 'PAGO' || appointment.status === 'AVALIADO') {
       return navigate('MyFeedbackScreen', {
@@ -119,6 +138,7 @@ type PreferenceRequest = {
     unit_price: number;
   };
   payer?: {name: string; email?: string};
+  auto_return?: 'all' | 'approved';
 };
 
 async function updatePaymentStatus({appointmentId}: {appointmentId: string}) {
@@ -138,18 +158,14 @@ async function createPreference(request: PreferenceRequest) {
         },
       ],
     },
-    // notification_url: "http://192.168.1.16:8080/payments_by_checkout_pro"
-    // auto_return: 'approved',
-    // back_url: {
-    //   success: 'https://google.com',
-    //   pending: 'https://google.com',
-    //   failure: 'https://google.com',
-    // },
+    auto_return: 'approved',
+    back_urls: {
+      success: 'jubas://payment-success',
+    },
   });
   return data;
 }
-// 5031 4332 1540 6351
-// 4235 6477 2802 5682
+
 const mercadoPagoApi = {createPreference};
 
 function usePaymentUpdateStatus() {

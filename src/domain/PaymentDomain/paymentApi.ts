@@ -8,8 +8,8 @@ interface PaymentRequest {
 }
 
 async function getAccessToken(): Promise<{accessToken: string}> {
-  const {data} = await api.get('payment/token');
-  return data.accessToken;
+  const {data} = await api.get(PATH + '/token');
+  return data;
 }
 
 async function create(request: PaymentRequest) {

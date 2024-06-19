@@ -2,6 +2,7 @@ import {Box, BoxMenu, Icon, IconExit, Screen} from '@components';
 import {ClientStackProps} from '@routes';
 import {useLayoutEffect} from 'react';
 import {useAuthStore} from '@services';
+import { Linking } from 'react-native';
 
 export function HomeScreen({
   navigation: {navigate, setOptions},
@@ -29,6 +30,10 @@ export function HomeScreen({
             <BoxMenu
               title="Minha conta"
               onPress={() => navigate('MyAccountScreen', {user})}
+            />
+            <BoxMenu
+              title="Google"
+              onPress={() => Linking.openURL('jubas://payment-success/123')}
             />
           </>
         )}
